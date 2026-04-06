@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Skipi — Maritime Document Management</title>
+    <meta name="description" content="Skipi is a local-first document management platform for shipping companies, vessels, and seafarers. Shareable document packages, SOLAS frameworks, certificate tracking.">
+    <meta name="keywords" content="maritime document management, ship documents, SOLAS, certificate tracking, document packages, seafarer documents, ship management software">
+    <meta property="og:title" content="Skipi — Maritime Document Management">
+    <meta property="og:description" content="Local-first document management for shipping companies, vessels, and seafarers. Share document packages with one link.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://skipi.app">
+    <link rel="canonical" href="https://skipi.app">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --navy: #0f2b46;
+            --blue: #1a73e8;
+            --light: #f0f4f8;
+            --white: #ffffff;
+            --gray: #64748b;
+            --dark: #1e293b;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 100%);
+            color: var(--white);
+            padding: 3rem 1.5rem 4rem;
+            text-align: center;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        .hero .tagline {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        .hero .highlight {
+            color: #60a5fa;
+        }
+
+        /* CTA */
+        .cta-box {
+            max-width: 440px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        .cta-box p {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            margin-bottom: 1rem;
+        }
+        .cta-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .cta-form input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 1rem;
+        }
+        .cta-form input::placeholder { color: rgba(255,255,255,0.5); }
+        .cta-form input:focus { outline: none; border-color: #60a5fa; }
+        .cta-form button {
+            padding: 0.75rem 1.5rem;
+            background: var(--blue);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .cta-form button:hover { background: #1557b0; }
+        .cta-note {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            margin-top: 0.75rem;
+        }
+
+        /* Features */
+        .features {
+            padding: 4rem 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .features h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .feature-card {
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: var(--light);
+        }
+        .feature-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .feature-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+        }
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* How it works */
+        .how {
+            background: var(--light);
+            padding: 4rem 1.5rem;
+        }
+        .how-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .how h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .step {
+            display: flex;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+        .step-num {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            background: var(--blue);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .step h3 { font-size: 1.05rem; margin-bottom: 0.25rem; }
+        .step p { color: var(--gray); font-size: 0.95rem; }
+
+        /* Pricing */
+        .pricing {
+            padding: 4rem 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .pricing h2 { font-size: 2rem; margin-bottom: 2rem; }
+        .price-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+        .price-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+        .price-card.featured {
+            border-color: var(--blue);
+            background: #f0f7ff;
+        }
+        .price-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .price-card .price {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        .price-card .price small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--gray);
+        }
+        .price-card ul {
+            list-style: none;
+            text-align: left;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .price-card ul li {
+            padding: 0.3rem 0;
+            color: var(--gray);
+        }
+        .price-card ul li::before {
+            content: "✓ ";
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy);
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            padding: 2rem 1.5rem;
+            font-size: 0.85rem;
+        }
+        footer a { color: #60a5fa; }
+
+        /* Submitted state */
+        .submitted { display: none; color: #22c55e; font-weight: 600; margin-top: 1rem; }
+
+        @media (max-width: 600px) {
+            .cta-form { flex-direction: column; }
+            .cta-form button { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <h1>Skipi</h1>
+    <p class="tagline">
+        Maritime document management.<br>
+        <span class="highlight">Share ship documents with one link.</span>
+    </p>
+
+    <div class="cta-box">
+        <p>Join the waitlist — launching soon</p>
+        <form class="cta-form" id="waitlist-form" action="https://formspree.io/f/placeholder" method="POST">
+            <input type="email" name="email" placeholder="your@email.com" required>
+            <button type="submit">Join Waitlist</button>
+        </form>
+        <div class="submitted" id="submitted-msg">Thank you! We'll notify you at launch.</div>
+        <p class="cta-note">Free for seafarers. No spam, ever.</p>
+    </div>
+</section>
+
+<section class="features">
+    <h2>Built for the maritime industry</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="icon">📦</div>
+            <h3>Document Packages</h3>
+            <p>Select documents, generate a link, send to anyone. No accounts needed for the recipient. Vetting, PSC, charterer requests — solved in seconds.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🏗️</div>
+            <h3>SOLAS Frameworks</h3>
+            <p>Rigid document structures per vessel type. Add a Bulk Carrier — get 50+ mandatory documents pre-created. Nothing is missed.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">📅</div>
+            <h3>Certificate Tracker</h3>
+            <p>Expiry monitoring for every certificate. Color-coded dashboard: red, orange, green. Never miss a renewal.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">💾</div>
+            <h3>Local-First</h3>
+            <p>Your files stay on your device. Sync only when you want to. Like Obsidian, but for ship documents.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">👤</div>
+            <h3>Seafarer Personal</h3>
+            <p>Free personal document management by rank. Track your CoC, STCW certificates, medical — share with employers in one click.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🤖</div>
+            <h3>AI Document Analysis</h3>
+            <p>Coming soon: AI reads your PDFs, extracts expiry dates, detects anomalies, and shares collective industry experience.</p>
+        </div>
+    </div>
+</section>
+
+<section class="how">
+    <div class="how-inner">
+        <h2>How Packages work</h2>
+        <div class="step">
+            <div class="step-num">1</div>
+            <div>
+                <h3>Select documents</h3>
+                <p>Pick the files you need from your ship's document library — certificates, class docs, crew records.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div>
+                <h3>Generate a package</h3>
+                <p>Set expiry date and download limit. Skipi creates a secure ZIP bundle with a unique link.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div>
+                <h3>Share the link</h3>
+                <p>Send the link by email, WhatsApp, anywhere. Recipient downloads instantly — no account, no login, no friction.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pricing">
+    <h2>Simple pricing</h2>
+    <div class="price-cards">
+        <div class="price-card">
+            <h3>Seafarer</h3>
+            <div class="price">Free</div>
+            <ul>
+                <li>Personal document framework</li>
+                <li>Certificate expiry tracking</li>
+                <li>Share packages with employers</li>
+                <li>STCW rank-based templates</li>
+            </ul>
+        </div>
+        <div class="price-card featured">
+            <h3>Vessel / Company</h3>
+            <div class="price">$10 <small>/ vessel / month</small></div>
+            <ul>
+                <li>SOLAS document frameworks</li>
+                <li>Unlimited document packages</li>
+                <li>Certificate dashboard</li>
+                <li>Multi-user access & roles</li>
+                <li>Fleet management</li>
+                <li>AI analysis (coming soon)</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 Skipi. Maritime document management platform.</p>
+    <p style="margin-top:.5rem;">
+        <a href="mailto:hello@skipi.app">hello@skipi.app</a>
+    </p>
+</footer>
+
+<script>
+document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // For now, just show the thank-you message
+    // Replace formspree URL with actual endpoint later
+    this.style.display = 'none';
+    document.getElementById('submitted-msg').style.display = 'block';
+});
+</script>
+</body>
+</html>
