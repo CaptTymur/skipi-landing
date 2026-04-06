@@ -5,12 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Skipi — Maritime Document Management</title>
     <meta name="description" content="Skipi is a local-first document management platform for shipping companies, vessels, and seafarers. Shareable document packages, SOLAS frameworks, certificate tracking.">
-    <meta name="keywords" content="maritime document management, ship documents, SOLAS, certificate tracking, document packages, seafarer documents, ship management software">
-    <meta property="og:title" content="Skipi — Maritime Document Management">
-    <meta property="og:description" content="Local-first document management for shipping companies, vessels, and seafarers. Share document packages with one link.">
+    <meta name="keywords" content="maritime document management, ship documents, SOLAS, certificate tracking, document packages, seafarer documents, ship management software, vessel compliance, ISM code, STCW, maritime ERP, ship certificate expiry, document sharing maritime, PSC inspection documents, vetting documents, crew document management">
+    <meta name="author" content="Tymur Rudov">
+    <meta property="og:title" content="Skipi — Maritime Document Management Platform">
+    <meta property="og:description" content="Local-first document management for shipping companies, vessels, and seafarers. Share document packages with one link. SOLAS frameworks, certificate tracking, AI analysis.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://skipi.app">
+    <meta property="og:site_name" content="Skipi">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Skipi — Maritime Document Management">
+    <meta name="twitter:description" content="Share ship documents with one link. SOLAS frameworks, certificate tracking, free for seafarers.">
     <link rel="canonical" href="https://skipi.app">
+
+    <!-- Structured Data for SEO + Legal prior art publication -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Skipi",
+        "alternateName": "Skipi Maritime Obsidian",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web, iOS, Android",
+        "url": "https://skipi.app",
+        "author": {
+            "@type": "Person",
+            "name": "Tymur Rudov"
+        },
+        "copyrightYear": 2026,
+        "copyrightHolder": {
+            "@type": "Person",
+            "name": "Tymur Rudov"
+        },
+        "datePublished": "2026-04-06",
+        "description": "Skipi is a local-first maritime document management platform. Key innovation: shareable document packages via unique URL — select ship documents, generate a secure ZIP bundle with configurable expiry and download limits, share via link without requiring recipient authentication. Includes SOLAS-based document frameworks auto-populated per vessel type, certificate validity tracking with expiry dashboard, and personal seafarer document management by STCW rank. Architecture follows Obsidian-like local-first principles where files remain on the user's device with optional synchronization.",
+        "featureList": [
+            "Shareable document packages via unique URL without recipient account",
+            "SOLAS-based document framework templates per vessel type (Bulk Carrier, Tanker, Container, General Cargo, Passenger, Offshore)",
+            "Certificate and survey expiry tracking with color-coded dashboard",
+            "Local-first architecture — files remain on user device, optional sync",
+            "Personal seafarer document management by STCW rank (free)",
+            "Multi-tenant company/fleet/vessel hierarchy with role-based access control",
+            "Package templates for recurring document requests (vetting, PSC, charterer)",
+            "AI-powered document analysis for certificate verification and anomaly detection"
+        ],
+        "offers": [
+            {
+                "@type": "Offer",
+                "name": "Seafarer Personal",
+                "price": "0",
+                "priceCurrency": "USD",
+                "description": "Free personal document management for individual seafarers"
+            },
+            {
+                "@type": "Offer",
+                "name": "Vessel / Company",
+                "price": "10",
+                "priceCurrency": "USD",
+                "priceSpecification": {
+                    "@type": "UnitPriceSpecification",
+                    "price": "10",
+                    "priceCurrency": "USD",
+                    "billingDuration": "P1M",
+                    "unitText": "per vessel"
+                }
+            }
+        ]
+    }
+    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -351,11 +412,74 @@
     </div>
 </section>
 
+<!-- Prior Art / Technology Description (SEO + legal) -->
+<section class="features" id="technology">
+    <h2>The technology behind Skipi</h2>
+    <div style="max-width:700px; margin:0 auto; color: var(--gray); font-size: 0.95rem;">
+        <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Document Package Sharing</h3>
+        <p style="margin-bottom:1rem;">
+            Skipi introduces a novel approach to maritime document exchange: users select documents from a vessel's structured library, and the system generates a secure ZIP bundle with a unique URL. The package has configurable expiry (1-90 days) and download limits (1-100). Recipients access the package via the URL without creating an account or authenticating — eliminating the friction that plagues existing maritime document workflows. Each download is tracked, and expired packages are automatically removed. This mechanism is purpose-built for the maritime industry's document exchange patterns: vetting inspections, Port State Control preparations, charterer due diligence, class society surveys, and inter-company compliance requests.
+        </p>
+
+        <h3 style="color: var(--dark); margin-bottom: 0.5rem;">SOLAS Document Frameworks</h3>
+        <p style="margin-bottom:1rem;">
+            When a vessel is registered in Skipi, the system automatically generates a complete document structure based on the vessel type and applicable international conventions. A Bulk Carrier receives 50+ pre-defined document slots across categories: Statutory Certificates (SMC, ISSC, IOPP, MLC, CLC), Class Certificates, Crew Documents (STCW CoCs, medical certificates), Safety Equipment (liferaft, EPIRB, fire extinguisher certificates), Operations & Logs (Oil Record Book, SOPEP, SEEMP), Insurance & P&I, and type-specific documents (ESP reports, hatch cover test certificates, grain loading authorization). Each document slot carries metadata: expected validity period, survey cycle, and regulatory reference. This rigid framework ensures no required document is overlooked — a structured approach not found in existing maritime ERP systems at accessible price points.
+        </p>
+
+        <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Local-First Architecture</h3>
+        <p style="margin-bottom:1rem;">
+            Skipi follows an Obsidian-like local-first philosophy: all documents and metadata are stored on the user's device in a lightweight SQLite database. The system operates fully offline. Synchronization with cloud storage is optional and user-initiated — addressing the maritime industry's unique connectivity constraints (satellite bandwidth limitations, intermittent connections at sea) and the trust barrier that prevents adoption of cloud-only solutions. This architectural choice differentiates Skipi from every existing maritime document management system, all of which require persistent cloud connectivity or legacy client-server infrastructure.
+        </p>
+
+        <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Seafarer Personal Documents</h3>
+        <p>
+            Individual seafarers receive a free personal document framework based on their STCW rank. A Master receives 25+ document slots (Passport, Seafarer's Identity Document, Certificate of Competency, GMDSS GOC, ECDIS training, Bridge Team Management, Medical First Aid, Advanced Fire Fighting, Ship Security Officer certificate, and more). Each document tracks validity and provides expiry reminders. Seafarers can create shareable packages of their personal documents for employers, manning agencies, or flag state authorities — using the same one-link mechanism as vessel packages.
+        </p>
+    </div>
+</section>
+
+<section class="how" id="use-cases">
+    <div class="how-inner">
+        <h2>Who uses Skipi</h2>
+        <div class="step">
+            <div class="step-num" style="background: var(--navy);">1</div>
+            <div>
+                <h3>Ship Management Companies</h3>
+                <p>Manage document compliance across your fleet. SOLAS frameworks ensure nothing is missed. Share document packages with charterers, class societies, and port authorities in seconds.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num" style="background: var(--navy);">2</div>
+            <div>
+                <h3>Individual Vessels</h3>
+                <p>Single-ship operators get the same SOLAS framework and certificate tracking as large fleets. Prepare for PSC inspections and vetting with pre-built package templates.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num" style="background: var(--navy);">3</div>
+            <div>
+                <h3>Seafarers</h3>
+                <p>Free personal document management. Track your CoC, STCW certificates, medical fitness, and endorsements. Share a complete document package with your next employer — one link, no attachments.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <footer>
-    <p>&copy; 2026 Skipi. Maritime document management platform.</p>
-    <p style="margin-top:.5rem;">
-        <a href="mailto:hello@skipi.app">hello@skipi.app</a>
-    </p>
+    <div style="max-width:700px; margin:0 auto;">
+        <p><strong>Skipi</strong> — Maritime Document Management Platform</p>
+        <p style="margin-top:.5rem;">&copy; 2026 Tymur Rudov. All rights reserved.</p>
+        <p style="margin-top:.3rem; font-size:.8rem; opacity:.6;">
+            The Skipi name, logo, product concept, document package sharing mechanism, SOLAS framework engine,
+            and local-first maritime document architecture are proprietary intellectual property.
+            First published April 6, 2026. Source code registered and timestamped.
+        </p>
+        <p style="margin-top:.75rem;">
+            <a href="mailto:hello@skipi.app">hello@skipi.app</a>
+            &nbsp;&middot;&nbsp;
+            <a href="/ip-notice.html">IP Notice</a>
+        </p>
+    </div>
 </footer>
 
 <script>
