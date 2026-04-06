@@ -312,7 +312,7 @@
 
     <div class="cta-box">
         <p>Join the waitlist — launching soon</p>
-        <form class="cta-form" id="waitlist-form" action="https://formspree.io/f/placeholder" method="POST">
+        <form class="cta-form" id="waitlist-form" action="https://formspree.io/f/mpqokvvb" method="POST">
             <input type="email" name="email" placeholder="your@email.com" required>
             <button type="submit">Join Waitlist</button>
         </form>
@@ -485,10 +485,28 @@
 <script>
 document.getElementById('waitlist-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    // For now, just show the thank-you message
-    // Replace formspree URL with actual endpoint later
-    this.style.display = 'none';
-    document.getElementById('submitted-msg').style.display = 'block';
+    var form = this;
+    var btn = form.querySelector('button');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {'Accept': 'application/json'}
+    }).then(function(r) {
+        if (r.ok) {
+            form.style.display = 'none';
+            document.getElementById('submitted-msg').style.display = 'block';
+        } else {
+            btn.disabled = false;
+            btn.textContent = 'Join Waitlist';
+            alert('Something went wrong. Please try again.');
+        }
+    }).catch(function() {
+        btn.disabled = false;
+        btn.textContent = 'Join Waitlist';
+        alert('Network error. Please try again.');
+    });
 });
 </script>
 </body>
