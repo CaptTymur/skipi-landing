@@ -47,6 +47,10 @@
             "Multi-tenant company/fleet/vessel hierarchy with role-based access control",
             "Package templates for recurring document requests (vetting, PSC, charterer)",
             "Mobile scan-and-recognize: photograph a certificate, AI extracts expiry date, number, issuing authority, auto-generates PDF and files into correct framework category",
+            "Dual-mode package delivery: offline ZIP with email client integration and online cloud-hosted shareable links",
+            "Crewing company document viewer: structured seafarer credential presentation with filtering by rank, certificate type, and validity",
+            "Seafarer-to-employer digital pipeline: direct document package delivery from seafarer vault to registered manning agencies",
+            "Two-sided maritime recruitment marketplace: free seafarer document management driving paid crewing company subscriptions",
             "AI-powered document analysis for certificate verification and anomaly detection"
         ],
         "offers": [
@@ -56,6 +60,19 @@
                 "price": "0",
                 "priceCurrency": "USD",
                 "description": "Free personal document management for individual seafarers"
+            },
+            {
+                "@type": "Offer",
+                "name": "Crewing Company",
+                "price": "5",
+                "priceCurrency": "USD",
+                "priceSpecification": {
+                    "@type": "UnitPriceSpecification",
+                    "price": "5",
+                    "priceCurrency": "USD",
+                    "billingDuration": "P1M"
+                },
+                "description": "Structured seafarer document viewer, AI recognition, candidate filtering by rank and certificate validity"
             },
             {
                 "@type": "Offer",
@@ -360,6 +377,21 @@
             <h3>AI Document Analysis</h3>
             <p>AI reads your PDFs, extracts metadata, detects anomalies and signs of forgery, and shares collective industry experience.</p>
         </div>
+        <div class="feature-card">
+            <div class="icon">📧</div>
+            <h3>Two-Mode Packages</h3>
+            <p>Offline: create a ZIP and attach to email directly from the app. Online: generate a shareable link with expiry and download tracking. Works with or without internet.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🏢</div>
+            <h3>Crewing Company Module</h3>
+            <p>Manning agencies get a structured viewer for seafarer documents — no more digging through email attachments. Filter by rank, certificate type, validity. Seafarers send packages directly to crewing companies on the platform.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🔄</div>
+            <h3>Seafarer-to-Crewing Pipeline</h3>
+            <p>Seafarers manage documents for free. Crewing companies subscribe to receive structured document packages. One click from seafarer to employer — complete CV with all certificates, verified and organized.</p>
+        </div>
     </div>
 </section>
 
@@ -397,22 +429,36 @@
             <h3>Seafarer</h3>
             <div class="price">Free</div>
             <ul>
-                <li>Personal document framework</li>
+                <li>Personal document framework by rank</li>
                 <li>Certificate expiry tracking</li>
-                <li>Share packages with employers</li>
+                <li>Create offline packages (ZIP + email)</li>
                 <li>STCW rank-based templates</li>
+                <li>Manual data entry</li>
+                <li>Works fully offline</li>
             </ul>
         </div>
         <div class="price-card featured">
+            <h3>Crewing Company</h3>
+            <div class="price">$5 <small>/ month</small></div>
+            <ul>
+                <li>Structured seafarer document viewer</li>
+                <li>Receive packages from seafarers</li>
+                <li>Filter by rank, certificates, validity</li>
+                <li>AI-powered document recognition</li>
+                <li>Bulk CV processing</li>
+                <li>No more digging through emails</li>
+            </ul>
+        </div>
+        <div class="price-card">
             <h3>Vessel / Company</h3>
             <div class="price">$10 <small>/ vessel / month</small></div>
             <ul>
                 <li>SOLAS document frameworks</li>
-                <li>Unlimited document packages</li>
-                <li>Certificate dashboard</li>
+                <li>Cloud packages with shareable links</li>
+                <li>Certificate dashboard for fleet</li>
+                <li>AI document recognition</li>
                 <li>Multi-user access & roles</li>
                 <li>Fleet management</li>
-                <li>AI analysis (coming soon)</li>
             </ul>
         </div>
     </div>
@@ -438,8 +484,23 @@
         </p>
 
         <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Seafarer Personal Documents</h3>
-        <p>
+        <p style="margin-bottom:1rem;">
             Individual seafarers receive a free personal document framework based on their STCW rank. A Master receives 25+ document slots (Passport, Seafarer's Identity Document, Certificate of Competency, GMDSS GOC, ECDIS training, Bridge Team Management, Medical First Aid, Advanced Fire Fighting, Ship Security Officer certificate, and more). Each document tracks validity and provides expiry reminders. Seafarers can create shareable packages of their personal documents for employers, manning agencies, or flag state authorities — using the same one-link mechanism as vessel packages.
+        </p>
+
+        <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Dual-Mode Package Delivery</h3>
+        <p style="margin-bottom:1rem;">
+            Skipi implements two distinct package delivery mechanisms. In offline mode, the application creates a local ZIP archive from selected documents and opens the user's default email client with the archive pre-attached — enabling document sharing without any cloud infrastructure or internet connectivity. In online mode (paid tier), packages are uploaded to a cloud server and a unique URL with configurable expiry and download tracking is generated. This dual-mode approach is unique in maritime software: no competitor offers both local email-attachment workflow and cloud-hosted shareable links within the same application.
+        </p>
+
+        <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Crewing Company Document Viewer</h3>
+        <p style="margin-bottom:1rem;">
+            Manning and crewing agencies receive a specialized document viewer that presents seafarer credentials in a structured, searchable interface. When a seafarer sends a document package to a crewing company through Skipi, the receiving agency sees certificates organized by type (identity, medical, STCW training, competency, endorsements) with validity status, expiry dates, and document numbers extracted and displayed — instead of browsing through unstructured email attachments in a file explorer. The crewing module supports filtering candidates by rank, certificate type, and validity window, enabling batch processing of seafarer applications. This creates a two-sided marketplace: seafarers use Skipi for free to manage and send documents, crewing companies subscribe to receive and process them efficiently.
+        </p>
+
+        <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Seafarer-to-Employer Pipeline</h3>
+        <p>
+            Skipi establishes a direct digital pipeline between individual seafarers and maritime employers (crewing agencies, ship management companies). The seafarer maintains a personal document vault with STCW-compliant structure, creates a package of required documents, and sends it to registered employers on the platform. The employer receives a pre-structured, machine-readable document set with extracted metadata (expiry dates, certificate numbers, issuing authorities) — replacing the current industry workflow of emailing scattered PDF attachments. This pipeline is free for seafarers and paid for employers, creating a natural growth flywheel where seafarer adoption drives employer subscriptions.
         </p>
     </div>
 </section>
@@ -466,6 +527,13 @@
             <div>
                 <h3>Seafarers</h3>
                 <p>Free personal document management. Track your CoC, STCW certificates, medical fitness, and endorsements. Share a complete document package with your next employer — one link, no attachments.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num" style="background: var(--navy);">4</div>
+            <div>
+                <h3>Crewing / Manning Agencies</h3>
+                <p>Receive structured document packages from seafarers. View certificates in an organized interface — no more browsing through email attachments in file explorer. Filter candidates by rank, certificate type, validity dates.</p>
             </div>
         </div>
     </div>
