@@ -1,51 +1,51 @@
 {
-  "version": "0.4.3",
-  "notes": "## Skipi v0.4.3\n\nMaritime Document Management for Seafarers.\n\n### Download\n\n| Platform | File |\n|----------|------|\n| macOS (Apple Silicon + Intel) | `.dmg` |\n| Windows | `.msi` |\n| Linux (Debian/Ubuntu) | `.deb` |\n| Linux (universal) | `.AppImage` |\n\n### What's new\n\nSee [CHANGELOG](https://github.com/CaptTymur/skipi-app/blob/main/CHANGELOG.md) for details.\n\n---\n\n> **Beta build.** This is a pre-release version for invited testers.\n> All data stays on your computer \u2014 Skipi does not have a server yet.\n>\n> **Auto-update:** Existing Skipi installations will be notified about this update automatically.",
-  "pub_date": "2026-04-13T16:53:16.723Z",
+  "version": "0.4.4",
+  "notes": "## Skipi v0.4.4\n\nMaritime Document Management for Seafarers.\n\n### Download\n\n| Platform | File |\n|----------|------|\n| macOS (Apple Silicon + Intel) | `.dmg` |\n| Windows | `.msi` |\n| Linux (Debian/Ubuntu) | `.deb` |\n| Linux (universal) | `.AppImage` |\n\n### What's new\n\nSee [CHANGELOG](https://github.com/CaptTymur/skipi-app/blob/main/CHANGELOG.md) for details.\n\n---\n\n> **Beta build.** This is a pre-release version for invited testers.\n> All data stays on your computer \u2014 Skipi does not have a server yet.\n>\n> **Auto-update:** Existing Skipi installations will be notified about this update automatically.",
+  "pub_date": "2026-04-13T17:36:01.645Z",
   "platforms": {
     "darwin-aarch64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWWs3bUlDa1l3eUxHU1lvZEJSWFZReVdnU2VqbmhRU2hCZ1htUDhObklzRGFMeVVQT3VvenNjeEJZUHhGT2Rlam9mR0F1ZnBjRVVXUFN5YU5UaE9zSUE4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MDk2Mzk3CWZpbGU6U2tpcGkuYXBwLnRhci5negpmQ09WRFRIZnZRSUxyUVVtU252bUdpTjdIN1JTUS9jS0dzWGVmV1BKUHpQTmxTSXd4R3dDVGd4NXI5ZzdacXpEeTZZYzdRTXl0cjk1Y0R0ZTBWVkVCZz09Cg==",
-      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.3/Skipi_universal.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWXVVd3NsaElHcXNNZVcxTVlYSzRoNmZXZ04rbGNVSTZTZzQzb2txU3p5ZDBIZ3FobHN1ZWR3OVNyZHpxL3FML2hzRE1hLzhnbDMzdFF3aU1RQlp6VGdjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MTAxMjQ0CWZpbGU6U2tpcGkuYXBwLnRhci5negpYeUJUOWYwU3JXZ3FhZVBBR3NOVUR6TWdqd3FGTStubWV5RHNCdHNHdmZFQlIvbWIyVC9zUHVOcU5FTHFaVkE4ajhueWp2RXlDVlVCWHROY1lFL2JDdz09Cg==",
+      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.4/Skipi_universal.app.tar.gz"
     },
     "darwin-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWWs3bUlDa1l3eUxHU1lvZEJSWFZReVdnU2VqbmhRU2hCZ1htUDhObklzRGFMeVVQT3VvenNjeEJZUHhGT2Rlam9mR0F1ZnBjRVVXUFN5YU5UaE9zSUE4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MDk2Mzk3CWZpbGU6U2tpcGkuYXBwLnRhci5negpmQ09WRFRIZnZRSUxyUVVtU252bUdpTjdIN1JTUS9jS0dzWGVmV1BKUHpQTmxTSXd4R3dDVGd4NXI5ZzdacXpEeTZZYzdRTXl0cjk1Y0R0ZTBWVkVCZz09Cg==",
-      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.3/Skipi_universal.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWXVVd3NsaElHcXNNZVcxTVlYSzRoNmZXZ04rbGNVSTZTZzQzb2txU3p5ZDBIZ3FobHN1ZWR3OVNyZHpxL3FML2hzRE1hLzhnbDMzdFF3aU1RQlp6VGdjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MTAxMjQ0CWZpbGU6U2tpcGkuYXBwLnRhci5negpYeUJUOWYwU3JXZ3FhZVBBR3NOVUR6TWdqd3FGTStubWV5RHNCdHNHdmZFQlIvbWIyVC9zUHVOcU5FTHFaVkE4ajhueWp2RXlDVlVCWHROY1lFL2JDdz09Cg==",
+      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.4/Skipi_universal.app.tar.gz"
     },
     "darwin-aarch64-app": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWWs3bUlDa1l3eUxHU1lvZEJSWFZReVdnU2VqbmhRU2hCZ1htUDhObklzRGFMeVVQT3VvenNjeEJZUHhGT2Rlam9mR0F1ZnBjRVVXUFN5YU5UaE9zSUE4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MDk2Mzk3CWZpbGU6U2tpcGkuYXBwLnRhci5negpmQ09WRFRIZnZRSUxyUVVtU252bUdpTjdIN1JTUS9jS0dzWGVmV1BKUHpQTmxTSXd4R3dDVGd4NXI5ZzdacXpEeTZZYzdRTXl0cjk1Y0R0ZTBWVkVCZz09Cg==",
-      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.3/Skipi_universal.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWXVVd3NsaElHcXNNZVcxTVlYSzRoNmZXZ04rbGNVSTZTZzQzb2txU3p5ZDBIZ3FobHN1ZWR3OVNyZHpxL3FML2hzRE1hLzhnbDMzdFF3aU1RQlp6VGdjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MTAxMjQ0CWZpbGU6U2tpcGkuYXBwLnRhci5negpYeUJUOWYwU3JXZ3FhZVBBR3NOVUR6TWdqd3FGTStubWV5RHNCdHNHdmZFQlIvbWIyVC9zUHVOcU5FTHFaVkE4ajhueWp2RXlDVlVCWHROY1lFL2JDdz09Cg==",
+      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.4/Skipi_universal.app.tar.gz"
     },
     "darwin-x86_64-app": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWWs3bUlDa1l3eUxHU1lvZEJSWFZReVdnU2VqbmhRU2hCZ1htUDhObklzRGFMeVVQT3VvenNjeEJZUHhGT2Rlam9mR0F1ZnBjRVVXUFN5YU5UaE9zSUE4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MDk2Mzk3CWZpbGU6U2tpcGkuYXBwLnRhci5negpmQ09WRFRIZnZRSUxyUVVtU252bUdpTjdIN1JTUS9jS0dzWGVmV1BKUHpQTmxTSXd4R3dDVGd4NXI5ZzdacXpEeTZZYzdRTXl0cjk1Y0R0ZTBWVkVCZz09Cg==",
-      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.3/Skipi_universal.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWXVVd3NsaElHcXNNZVcxTVlYSzRoNmZXZ04rbGNVSTZTZzQzb2txU3p5ZDBIZ3FobHN1ZWR3OVNyZHpxL3FML2hzRE1hLzhnbDMzdFF3aU1RQlp6VGdjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MTAxMjQ0CWZpbGU6U2tpcGkuYXBwLnRhci5negpYeUJUOWYwU3JXZ3FhZVBBR3NOVUR6TWdqd3FGTStubWV5RHNCdHNHdmZFQlIvbWIyVC9zUHVOcU5FTHFaVkE4ajhueWp2RXlDVlVCWHROY1lFL2JDdz09Cg==",
+      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.4/Skipi_universal.app.tar.gz"
     },
     "linux-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWXUwRHVLNTdRM2ZmYUdwazk0QnlKRVJ6aHQxeXVtSXlYWnNYcDRFQjNESDFDa1VOdU5FWDZFT21EWWxpSWN4Q3pmQ3hZejdzTjNVTTZyNndidjlETVFNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MDk4MTkzCWZpbGU6U2tpcGlfMC40LjNfYW1kNjQuQXBwSW1hZ2UKcUlxK2VCL3VRWGdzVDFwbXgrZXVOUVRNTFh5T2U2bEVxNVBxclNXaCtQS1VpdllJUjJ3bElTR1lDSzVweG9PT1Y3MFVWc1pzajdCUVBwSjR1dXZyQVE9PQo=",
-      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.3/Skipi_0.4.3_amd64.AppImage"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWXRBSU5uU3ArNGJtWDJRZWJhRmtkZzhMOHJGcUE2TW1tTGJjVUlHRURFNVZvUGtOeGdTU3F5ZlVwWG5QZ2VIZW0rekUzWXBreWtuRVlBdTdnOUJrL2dVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MTAxMzk0CWZpbGU6U2tpcGlfMC40LjRfYW1kNjQuQXBwSW1hZ2UKRTdGQjVMUHN6dkFJZkpTZE50VDZURUIrREJVU2taTlBaOWppd2ZVYjlZL1YxUEozY01lczN4TW9pVW8xTUtKaCtJUE9XNlBwMmYxcklYbVJuMURTRGc9PQo=",
+      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.4/Skipi_0.4.4_amd64.AppImage"
     },
     "linux-x86_64-appimage": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWXUwRHVLNTdRM2ZmYUdwazk0QnlKRVJ6aHQxeXVtSXlYWnNYcDRFQjNESDFDa1VOdU5FWDZFT21EWWxpSWN4Q3pmQ3hZejdzTjNVTTZyNndidjlETVFNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MDk4MTkzCWZpbGU6U2tpcGlfMC40LjNfYW1kNjQuQXBwSW1hZ2UKcUlxK2VCL3VRWGdzVDFwbXgrZXVOUVRNTFh5T2U2bEVxNVBxclNXaCtQS1VpdllJUjJ3bElTR1lDSzVweG9PT1Y3MFVWc1pzajdCUVBwSjR1dXZyQVE9PQo=",
-      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.3/Skipi_0.4.3_amd64.AppImage"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWXRBSU5uU3ArNGJtWDJRZWJhRmtkZzhMOHJGcUE2TW1tTGJjVUlHRURFNVZvUGtOeGdTU3F5ZlVwWG5QZ2VIZW0rekUzWXBreWtuRVlBdTdnOUJrL2dVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MTAxMzk0CWZpbGU6U2tpcGlfMC40LjRfYW1kNjQuQXBwSW1hZ2UKRTdGQjVMUHN6dkFJZkpTZE50VDZURUIrREJVU2taTlBaOWppd2ZVYjlZL1YxUEozY01lczN4TW9pVW8xTUtKaCtJUE9XNlBwMmYxcklYbVJuMURTRGc9PQo=",
+      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.4/Skipi_0.4.4_amd64.AppImage"
     },
     "linux-x86_64-deb": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWW9mQ1JkV1M5T21IYk5WVTFFWXczN3BkMW9YMFYwY01VaitYVGFJT0NSWDc3SFpEdU0wMG52UHd0RkhOK0N1TElmRjVmR1VwazZORVViSDRuWTdmWGdrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MDk4MTkzCWZpbGU6U2tpcGlfMC40LjNfYW1kNjQuZGViCjJKNytuRWZQNllLRXNZV1VLbWlqWlRINDB6Nlg5R0pxOGs4d0kvNlFzVGZ2VGp1ZXBQQWd3bHNUbUIrcFpTM0dodnp3Z1E2MTNKNXhyWFE5THdpYkJRPT0K",
-      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.3/Skipi_0.4.3_amd64.deb"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWWpHbVFWZk1uUWNMeVpJYmtSb3BGek10UmNoZERnbEt1SVhTR2xFeEJDa3VUVlR1UUFhRVZuaDZCS05DOXV2T3M1YWxQeGxCWk1XMnFwSWJxWjhXZXd3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MTAxMzk0CWZpbGU6U2tpcGlfMC40LjRfYW1kNjQuZGViCkE1THFEcXZIRGVYRVB1dElMWS90R1lkeGZaa0hTenJhSzliT1hqZmRLWU96aWhuUEN1MllNdzh1Q28va0pKVXpKWmxFaEs3bE55N1BlNWpmRm1QTEFRPT0K",
+      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.4/Skipi_0.4.4_amd64.deb"
     },
     "linux-x86_64-rpm": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWWwyS3VsN3crcGRDTlJBckcrTHg4emtKRWYwTzVmZUVBZ3ViV01SNVZHYlhyVlpqRENLZ2k1VExhd0JvZWpaUTlzYjBkRGYyNjdNUkZHYlh3dlhURUFFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MDk4MTkzCWZpbGU6U2tpcGktMC40LjMtMS54ODZfNjQucnBtCmY5Y096dzZvcHBPTDVnQnNEbDN1QUdFdnFZSnZCSVR2MEVSQUdwcHNabC95Z3Bzbk40STFuUTdrK0lqQmxnUU5kaTR5MzYzVXozK2ZMV1NvcVkzVUR3PT0K",
-      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.3/Skipi-0.4.3-1.x86_64.rpm"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWWpNdUxFWUNlR2NGZjdDL3UxNGkzOHBBVUNKV1JTU2FVWDIzL2tDTFJmdHMzOERxWTF5Y2FuejZTRG9NTkYwTW9sZUs1RWxEWWhLVDFHYWg0OTBxWWc4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MTAxMzk0CWZpbGU6U2tpcGktMC40LjQtMS54ODZfNjQucnBtCnd5emhIZit4WGRPYWNPMFlmUjZNT2pjREdRYWgxM3lGaU5EVTlzaWZvK0ZkWlhlM0JjTWhubHJLcmlkaHhkZWlBMjQwdWVNaitsRFZ0WGJueG02a0NnPT0K",
+      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.4/Skipi-0.4.4-1.x86_64.rpm"
     },
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWWkzZXhWYU9CNmNVaWFYdkpVN3dMQnZmaGlJaHBlVEZjSmw3M0xvTExOV0xOZFR6VWtXenVwbWxDTVQ2U3c5b21kSzMxLzg2NnVxM0UrZVovamNub3dZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MDk5MTkzCWZpbGU6U2tpcGlfMC40LjNfeDY0X2VuLVVTLm1zaQpCZDM0VmJoRCtNVG50WmpuZjQ4QnpFTTEwaGdCZ0lHTjdQWjlKNDFsM1FMM2RqWnkySTdHOXZmbVZ3U1JOS0RxU0JCME5haGUycXphVjY0R09VcWZEdz09Cg==",
-      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.3/Skipi_0.4.3_x64_en-US.msi"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWXB2Q1NmRlAzOThQU2poZk5GSG9aTTZaY1p4cmRGeDRqcCtubVhRUVZ5cnl2SnM1aTdWaVZyTm5ySU03V08wMkNQdjRVRW0wV3g0cXBsNkFodVJjNmc0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MTAxNzU2CWZpbGU6U2tpcGlfMC40LjRfeDY0X2VuLVVTLm1zaQpLMG5NL3h2cW5NZlNJaDUycTk2ODNCVU1teUs2cmVNRTNqRVJPOGE0aDlqNU1CU1ZnbVVod2trM1VYS3A1VkN1b1cvWW1XQ09sNHFjU001N0drWVZBUT09Cg==",
+      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.4/Skipi_0.4.4_x64_en-US.msi"
     },
     "windows-x86_64-msi": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWWkzZXhWYU9CNmNVaWFYdkpVN3dMQnZmaGlJaHBlVEZjSmw3M0xvTExOV0xOZFR6VWtXenVwbWxDTVQ2U3c5b21kSzMxLzg2NnVxM0UrZVovamNub3dZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MDk5MTkzCWZpbGU6U2tpcGlfMC40LjNfeDY0X2VuLVVTLm1zaQpCZDM0VmJoRCtNVG50WmpuZjQ4QnpFTTEwaGdCZ0lHTjdQWjlKNDFsM1FMM2RqWnkySTdHOXZmbVZ3U1JOS0RxU0JCME5haGUycXphVjY0R09VcWZEdz09Cg==",
-      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.3/Skipi_0.4.3_x64_en-US.msi"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWXB2Q1NmRlAzOThQU2poZk5GSG9aTTZaY1p4cmRGeDRqcCtubVhRUVZ5cnl2SnM1aTdWaVZyTm5ySU03V08wMkNQdjRVRW0wV3g0cXBsNkFodVJjNmc0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MTAxNzU2CWZpbGU6U2tpcGlfMC40LjRfeDY0X2VuLVVTLm1zaQpLMG5NL3h2cW5NZlNJaDUycTk2ODNCVU1teUs2cmVNRTNqRVJPOGE0aDlqNU1CU1ZnbVVod2trM1VYS3A1VkN1b1cvWW1XQ09sNHFjU001N0drWVZBUT09Cg==",
+      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.4/Skipi_0.4.4_x64_en-US.msi"
     },
     "windows-x86_64-nsis": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWW9hajVpTzRqTE1UWUtrdXNSZDRGeVJRZHc4SXhjWEg5UFhPWGgrUklXVjgxMG1WM1V2WUU2ZldFWjdmZHZlZzQzTGExTFBGVFlqa0RkNStJTThQZWdRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MDk5MTkzCWZpbGU6U2tpcGlfMC40LjNfeDY0LXNldHVwLmV4ZQp3cFBBclVDZ1BEUUFyMmJoK3R1dmk2Q05UTzhGSFUrUlo0aVIySzIyMG1xZjA0Rk5mWlJuRjdyWU5vdklIYS9QcElwbXdNdTlQbkV6ZHBzUkNwbWtBQT09Cg==",
-      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.3/Skipi_0.4.3_x64-setup.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTNHdraFhHLzJnWWpCMUdCVk9sRUNyak5uZUF1Ums3bjdicENBM0lydzBrdG9yaVFaNjE4eThPQkRrOVFxRmZubURoNnJjME1IRTJnTExHUHlKVU9Jd0llbE9wOHNHOXdJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MTAxNzU2CWZpbGU6U2tpcGlfMC40LjRfeDY0LXNldHVwLmV4ZQpybi9kZHl0bmpGaS9neVdjNXZqaTlRZWdSbFRhT0JmV09TUDlDc3dHVGV1dER3Smpla05MTHZBak03cXVqQzN3d01YU2Rlc0hxeUJGcVRIMG1JeFJEZz09Cg==",
+      "url": "https://github.com/CaptTymur/skipi-landing/releases/download/v0.4.4/Skipi_0.4.4_x64-setup.exe"
     }
   }
 }
