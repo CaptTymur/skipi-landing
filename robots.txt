@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /download.html
 Sitemap: https://skipi.app/sitemap.xml
