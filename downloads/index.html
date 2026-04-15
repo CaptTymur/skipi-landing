@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Download Skipi — Maritime Document Management</title>
+    <meta name="description" content="Download Skipi for macOS, Windows, or Linux. Local-first maritime document management for seafarers and shipping companies.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://skipi.app/downloads">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --navy: #0f2b46;
+            --blue: #1a73e8;
+            --light: #f0f4f8;
+            --white: #ffffff;
+            --gray: #64748b;
+            --dark: #1e293b;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background: var(--light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: var(--navy);
+            padding: 1rem 1.5rem;
+            text-align: center;
+        }
+        .header a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        /* Main */
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+        }
+        .container {
+            max-width: 640px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+            text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .version {
+            text-align: center;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Platform cards */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .card-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .card-icon {
+            font-size: 2rem;
+        }
+        .card-label h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.15rem;
+        }
+        .card-label p {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.25rem;
+            background: var(--blue);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: background 0.15s;
+        }
+        .btn:hover { background: #1557b0; }
+        .btn-alt {
+            display: inline-block;
+            padding: 0.5rem 0.75rem;
+            background: transparent;
+            color: var(--blue);
+            text-decoration: none;
+            border: 1.5px solid var(--blue);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: background 0.15s;
+        }
+        .btn-alt:hover { background: #f0f7ff; }
+
+        /* Linux sub-options */
+        .linux-extra {
+            margin-top: 0.5rem;
+            padding: 0 1.5rem 1rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .linux-extra a {
+            font-size: 0.85rem;
+            color: var(--blue);
+            text-decoration: none;
+        }
+        .linux-extra a:hover { text-decoration: underline; }
+        .linux-extra span {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* Footer note */
+        .note {
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-top: 1.5rem;
+            line-height: 1.7;
+        }
+        .note a { color: var(--blue); text-decoration: none; }
+        .note a:hover { text-decoration: underline; }
+
+        /* Footer */
+        footer {
+            background: var(--navy);
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.85rem;
+        }
+        footer a { color: #60a5fa; text-decoration: none; }
+
+        @media (max-width: 500px) {
+            .card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .card-actions { width: 100%; }
+            .btn { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <a href="/">Skipi</a>
+</div>
+
+<div class="main">
+    <div class="container">
+        <h1>Download Skipi</h1>
+        <p class="subtitle">Maritime document management for your desktop</p>
+        <p class="version">v0.4.12 &mdash; Early Access</p>
+
+        <!-- macOS -->
+        <div class="card">
+            <div class="card-info">
+                <div class="card-icon">&#127823;</div>
+                <div class="card-label">
+                    <h3>macOS</h3>
+                    <p>Universal (Apple Silicon + Intel) &middot; .dmg &middot; 17 MB</p>
+                </div>
+            </div>
+            <a class="btn" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.12/Skipi_0.4.12_universal.dmg">Download</a>
+        </div>
+
+        <!-- Windows -->
+        <div class="card">
+            <div class="card-info">
+                <div class="card-icon">&#128187;</div>
+                <div class="card-label">
+                    <h3>Windows</h3>
+                    <p>64-bit installer &middot; .exe &middot; 5.6 MB</p>
+                </div>
+            </div>
+            <div class="card-actions">
+                <a class="btn" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.12/Skipi_0.4.12_x64-setup.exe">Download</a>
+                <a class="btn-alt" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.12/Skipi_0.4.12_x64_en-US.msi">.msi</a>
+            </div>
+        </div>
+
+        <!-- Linux -->
+        <div class="card">
+            <div class="card-info">
+                <div class="card-icon">&#128039;</div>
+                <div class="card-label">
+                    <h3>Linux</h3>
+                    <p>Debian / Ubuntu &middot; .deb &middot; 8.7 MB</p>
+                </div>
+            </div>
+            <a class="btn" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.12/Skipi_0.4.12_amd64.deb">Download</a>
+        </div>
+        <div class="linux-extra">
+            <span>Also available:</span>
+            <a href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.12/Skipi_0.4.12_amd64.AppImage">AppImage (88 MB)</a>
+            <a href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.12/Skipi-0.4.12-1.x86_64.rpm">RPM (8.7 MB)</a>
+        </div>
+
+        <p class="note">
+            All data stays on your computer. No account required.<br>
+            <a href="https://github.com/CaptTymur/skipi.app/releases/tag/v0.4.12">Release notes on GitHub</a>
+            &nbsp;&middot;&nbsp;
+            <a href="/">Back to skipi.app</a>
+        </p>
+    </div>
+</div>
+
+<footer>
+    &copy; 2026 Skipi &nbsp;&middot;&nbsp;
+    <a href="/terms.html">Terms</a> &nbsp;&middot;&nbsp;
+    <a href="/privacy.html">Privacy</a> &nbsp;&middot;&nbsp;
+    <a href="mailto:beta@skipi.app">beta@skipi.app</a>
+</footer>
+
+</body>
+</html>
