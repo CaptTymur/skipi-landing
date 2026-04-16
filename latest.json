@@ -1,7 +1,7 @@
 {
-  "version": "0.4.12",
-  "pub_date": "2026-04-14T20:28:54Z",
-  "notes": "Skipi 0.4.12",
+  "version": "0.4.15",
+  "pub_date": "2026-04-15T10:23:19Z",
+  "notes": "Skipi 0.4.15",
   "platforms": {
     "darwin-aarch64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZnhOYmdBQWsyMnY4VzVGV1FWa0F1SlZDRTV4RVVxVDlMbWR0TnhIVzN5Rmh5NzRKemtjU2tOc3ZLV1hGN1FTeGRVUmF6N2xSMEl5MjRMSVQ2K2RlUFE4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MTk4NTA0CWZpbGU6U2tpcGkuYXBwLnRhci5negpqQVB6SHZjSFNQeXkvaU43U3ZUQzU3Y3gveEVyWmFhd05TMWJydlRVdGxBQU5Lbk01eUNhdWI2eDdyTXJJYW9hSHh4Z2VjQ3EvVHM2WTlUZm95TGVDQT09Cg==",
@@ -32,20 +32,12 @@
       "url": "https://github.com/CaptTymur/skipi.app/releases/download/v0.4.12/Skipi_0.4.12_x64_en-US.msi"
     },
     "linux-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjhPTlQzMm93c2p3WUVnMWRFcEVxOGRLMzl0TVVOK2lJUlJUVEtjd0ZQZElzRWhHeHZXTFVkQkJCUlExdk94MDF1SnB5dVRHaFNsZEp6TEdoOHZ4S2dJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MTk4Mzg3CWZpbGU6U2tpcGlfMC40LjEyX2FtZDY0LkFwcEltYWdlCmcvQTBsM3lUc0JSaFNRYU9aeUhQN0lFNVh4ajZValhVQ0NUWGVCbWMwTUJtdkVoYTgxR1lGSHVXcWN6Y3ZwbzNlQUp1aVp3dG9xUlpOTkxLTys3bUNBPT0K",
-      "url": "https://github.com/CaptTymur/skipi.app/releases/download/v0.4.12/Skipi_0.4.12_amd64.AppImage"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjVLSW9nMmg0Vk9mbHJHNENhY1pjNGV4S3d1SXlCUWNxQ1J2R3phNlJjM0J0T2p5RWs1QWtibEhHTm9rOUNNN2RBZW9oNE9rREY1OFhFVGNOajRSUXdRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MjQ4NTczCWZpbGU6U2tpcGlfMC40LjE1X2FtZDY0LkFwcEltYWdlCmQwTUZzRkxpaXh1WkRqcVZ4QnJ5Vy9UUHRaUzB3VkJKclB5NXlOQnBQTWNOUjNmVWN1eUpnUW5KOVN4bkxCRkJvSm02bTVpVWJydFlUb0JPRWM4VURBPT0K",
+      "url": "https://github.com/CaptTymur/skipi.app/releases/download/v0.4.15/Skipi_0.4.15_amd64.AppImage"
     },
     "linux-x86_64-appimage": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjhPTlQzMm93c2p3WUVnMWRFcEVxOGRLMzl0TVVOK2lJUlJUVEtjd0ZQZElzRWhHeHZXTFVkQkJCUlExdk94MDF1SnB5dVRHaFNsZEp6TEdoOHZ4S2dJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MTk4Mzg3CWZpbGU6U2tpcGlfMC40LjEyX2FtZDY0LkFwcEltYWdlCmcvQTBsM3lUc0JSaFNRYU9aeUhQN0lFNVh4ajZValhVQ0NUWGVCbWMwTUJtdkVoYTgxR1lGSHVXcWN6Y3ZwbzNlQUp1aVp3dG9xUlpOTkxLTys3bUNBPT0K",
-      "url": "https://github.com/CaptTymur/skipi.app/releases/download/v0.4.12/Skipi_0.4.12_amd64.AppImage"
-    },
-    "linux-x86_64-deb": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjhPTlQzMm93c2p3WUVnMWRFcEVxOGRLMzl0TVVOK2lJUlJUVEtjd0ZQZElzRWhHeHZXTFVkQkJCUlExdk94MDF1SnB5dVRHaFNsZEp6TEdoOHZ4S2dJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MTk4Mzg3CWZpbGU6U2tpcGlfMC40LjEyX2FtZDY0LkFwcEltYWdlCmcvQTBsM3lUc0JSaFNRYU9aeUhQN0lFNVh4ajZValhVQ0NUWGVCbWMwTUJtdkVoYTgxR1lGSHVXcWN6Y3ZwbzNlQUp1aVp3dG9xUlpOTkxLTys3bUNBPT0K",
-      "url": "https://github.com/CaptTymur/skipi.app/releases/download/v0.4.12/Skipi_0.4.12_amd64.deb"
-    },
-    "linux-x86_64-rpm": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjhPTlQzMm93c2p3WUVnMWRFcEVxOGRLMzl0TVVOK2lJUlJUVEtjd0ZQZElzRWhHeHZXTFVkQkJCUlExdk94MDF1SnB5dVRHaFNsZEp6TEdoOHZ4S2dJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MTk4Mzg3CWZpbGU6U2tpcGlfMC40LjEyX2FtZDY0LkFwcEltYWdlCmcvQTBsM3lUc0JSaFNRYU9aeUhQN0lFNVh4ajZValhVQ0NUWGVCbWMwTUJtdkVoYTgxR1lGSHVXcWN6Y3ZwbzNlQUp1aVp3dG9xUlpOTkxLTys3bUNBPT0K",
-      "url": "https://github.com/CaptTymur/skipi.app/releases/download/v0.4.12/Skipi-0.4.12-1.x86_64.rpm"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjVLSW9nMmg0Vk9mbHJHNENhY1pjNGV4S3d1SXlCUWNxQ1J2R3phNlJjM0J0T2p5RWs1QWtibEhHTm9rOUNNN2RBZW9oNE9rREY1OFhFVGNOajRSUXdRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MjQ4NTczCWZpbGU6U2tpcGlfMC40LjE1X2FtZDY0LkFwcEltYWdlCmQwTUZzRkxpaXh1WkRqcVZ4QnJ5Vy9UUHRaUzB3VkJKclB5NXlOQnBQTWNOUjNmVWN1eUpnUW5KOVN4bkxCRkJvSm02bTVpVWJydFlUb0JPRWM4VURBPT0K",
+      "url": "https://github.com/CaptTymur/skipi.app/releases/download/v0.4.15/Skipi_0.4.15_amd64.AppImage"
     }
   }
 }
