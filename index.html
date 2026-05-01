@@ -48,10 +48,10 @@
             "Package templates for recurring document requests (vetting, PSC, charterer)",
             "Mobile scan-and-recognize: photograph a certificate, AI extracts expiry date, number, issuing authority, auto-generates PDF and files into correct framework category",
             "Dual-mode package delivery: offline ZIP with email client integration and online cloud-hosted shareable links",
-            "Crewing company document viewer: structured seafarer credential presentation with filtering by rank, certificate type, and validity",
+            "Crewing company document viewer: structured seafarer credential presentation with document filtering by rank, certificate type, and validity",
             "Seafarer-to-employer digital pipeline: direct document package delivery from seafarer vault to registered manning agencies",
-            "Two-sided maritime recruitment marketplace: free seafarer document management driving paid crewing company subscriptions",
-            "AI-powered document analysis for certificate verification and anomaly detection"
+            "Two-sided maritime communication workflow: free seafarer document management driving paid employer-side tools",
+            "AI-assisted document analysis for metadata extraction and anomaly indicators"
         ],
         "offers": [
             {
@@ -72,7 +72,7 @@
                     "priceCurrency": "USD",
                     "billingDuration": "P1M"
                 },
-                "description": "Structured seafarer document viewer, AI recognition, candidate filtering by rank and certificate validity"
+                "description": "Structured seafarer document viewer, AI recognition, and document filtering by rank and certificate validity"
             },
             {
                 "@type": "Offer",
@@ -110,7 +110,7 @@
         .hero {
             background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 100%);
             color: var(--white);
-            padding: 3rem 1.5rem 4rem;
+            padding: 3rem 1.5rem 3.5rem;
             text-align: center;
             min-height: 90vh;
             display: flex;
@@ -131,6 +131,86 @@
         }
         .hero .highlight {
             color: #60a5fa;
+        }
+        .role-grid {
+            width: min(980px, 100%);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            text-align: left;
+        }
+        .role-card {
+            min-height: 270px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+        }
+        .role-kicker {
+            color: #93c5fd;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.65rem;
+        }
+        .role-card h2 {
+            font-size: clamp(1.45rem, 3vw, 2rem);
+            line-height: 1.15;
+            margin-bottom: 0.7rem;
+        }
+        .role-card p {
+            color: rgba(255,255,255,0.84);
+            font-size: 0.98rem;
+            margin-bottom: 1rem;
+        }
+        .role-card ul {
+            list-style: none;
+            display: grid;
+            gap: 0.42rem;
+            color: rgba(255,255,255,0.78);
+            font-size: 0.9rem;
+            margin-bottom: 1.3rem;
+        }
+        .role-card li::before {
+            content: "";
+            width: 0.42rem;
+            height: 0.42rem;
+            display: inline-block;
+            border-radius: 999px;
+            background: #60a5fa;
+            margin-right: 0.55rem;
+            vertical-align: 0.08rem;
+        }
+        .role-actions {
+            margin-top: auto;
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+        .role-btn {
+            display: inline-block;
+            padding: 0.72rem 1rem;
+            border-radius: 8px;
+            background: var(--blue);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.92rem;
+        }
+        .role-btn.secondary {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.35);
+        }
+        .hero-note {
+            margin: 1.2rem auto 0;
+            color: rgba(255,255,255,0.65);
+            font-size: 0.85rem;
+            max-width: 720px;
         }
 
         /* CTA */
@@ -314,6 +394,8 @@
         .submitted { display: none; color: #22c55e; font-weight: 600; margin-top: 1rem; }
 
         @media (max-width: 600px) {
+            .hero { min-height: auto; }
+            .role-grid { grid-template-columns: 1fr; }
             .cta-form { flex-direction: column; }
             .cta-form button { width: 100%; }
         }
@@ -324,23 +406,48 @@
 <section class="hero">
     <h1>Skipi</h1>
     <p class="tagline">
-        Maritime document management.<br>
-        <span class="highlight">Share ship documents with one link.</span>
+        Maritime work tools for both sides of crewing.<br>
+        <span class="highlight">Crewing workflow on the left. Seafarer vault on the right.</span>
     </p>
 
-    <div class="cta-box">
-        <p>Join the waitlist — launching soon</p>
-        <form class="cta-form" id="waitlist-form" action="https://formspree.io/f/mpqokvvb" method="POST">
-            <input type="email" name="email" placeholder="your@email.com" required>
-            <button type="submit">Join Waitlist</button>
-        </form>
-        <div class="submitted" id="submitted-msg">Thank you! We'll notify you at launch.</div>
-        <p class="cta-note">Free for seafarers. No spam, ever.</p>
-        <p style="margin-top: 1.25rem;"><a href="/downloads" style="color: #60a5fa; font-size: 0.95rem; text-decoration: none; border-bottom: 1px solid rgba(96,165,250,0.4);">Download desktop app (v0.4.40)</a></p>
+    <div class="role-grid">
+        <article class="role-card">
+            <div class="role-kicker">For Crewing</div>
+            <h2>Skipi Crewing</h2>
+            <p>Employer-side desktop app for vacancy posting, incoming applications, document review, and follow-up communication.</p>
+            <ul>
+                <li>Post vacancies to the Skipi jobs board</li>
+                <li>Receive structured applications from seafarers</li>
+                <li>Review CVs and certificates without digging through email</li>
+                <li>Keep a local vault for company-side workflow</li>
+            </ul>
+            <div class="role-actions">
+                <a class="role-btn" href="/downloads#crewing">Download Crewing</a>
+                <a class="role-btn secondary" href="mailto:beta@skipi.app">Request access</a>
+            </div>
+        </article>
+
+        <article class="role-card">
+            <div class="role-kicker">For Seafarers</div>
+            <h2>Skipi Seafarer</h2>
+            <p>Personal document vault for seafarers: catalog certificates, build a CV, track expiry dates, and send organized packages.</p>
+            <ul>
+                <li>Create a named local vault for maritime documents</li>
+                <li>Track certificate expiry dates and missing items</li>
+                <li>Prepare CV and document packages for employers</li>
+                <li>Apply to jobs while keeping data on your computer</li>
+            </ul>
+            <div class="role-actions">
+                <a class="role-btn" href="/downloads#seafarer">Download Seafarer</a>
+                <a class="role-btn secondary" href="#features">See features</a>
+            </div>
+        </article>
     </div>
+
+    <p class="hero-note">Early beta. Skipi Crewing is for invited testers; the seafarer app is public early access.</p>
 </section>
 
-<section class="features">
+<section class="features" id="features">
     <h2>Built for the maritime industry</h2>
     <div class="feature-grid">
         <div class="feature-card">
@@ -376,7 +483,7 @@
         <div class="feature-card">
             <div class="icon">🤖</div>
             <h3>AI Document Analysis</h3>
-            <p>AI reads your PDFs, extracts metadata, detects anomalies and signs of forgery, and shares collective industry experience.</p>
+            <p>AI reads your PDFs, extracts metadata, and highlights anomaly indicators for manual review.</p>
         </div>
         <div class="feature-card">
             <div class="icon">📧</div>
@@ -391,7 +498,7 @@
         <div class="feature-card">
             <div class="icon">🔄</div>
             <h3>Seafarer-to-Crewing Pipeline</h3>
-            <p>Seafarers manage documents for free. Crewing companies subscribe to receive structured document packages. One click from seafarer to employer — complete CV with all certificates, verified and organized.</p>
+            <p>Seafarers manage documents for free. Crewing companies subscribe to receive structured document packages. One click from seafarer to employer — complete CV with certificates organized for human review.</p>
         </div>
     </div>
 </section>
@@ -496,7 +603,7 @@
 
         <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Crewing Company Document Viewer</h3>
         <p style="margin-bottom:1rem;">
-            Manning and crewing agencies receive a specialized document viewer that presents seafarer credentials in a structured, searchable interface. When a seafarer sends a document package to a crewing company through Skipi, the receiving agency sees certificates organized by type (identity, medical, STCW training, competency, endorsements) with validity status, expiry dates, and document numbers extracted and displayed — instead of browsing through unstructured email attachments in a file explorer. The crewing module supports filtering candidates by rank, certificate type, and validity window, enabling batch processing of seafarer applications. This creates a two-sided marketplace: seafarers use Skipi for free to manage and send documents, crewing companies subscribe to receive and process them efficiently.
+            Manning and crewing agencies receive a specialized document viewer that presents seafarer credentials in a structured, searchable interface. When a seafarer sends a document package to a crewing company through Skipi, the receiving agency sees certificates organized by type (identity, medical, STCW training, competency, endorsements) with validity status, expiry dates, and document numbers extracted and displayed — instead of browsing through unstructured email attachments in a file explorer. The crewing module supports document filtering by rank, certificate type, and validity window, helping the company-side user review communications from seafarers. This creates a two-sided communication workflow: seafarers use Skipi for free to manage and send documents, while company-side users subscribe to receive and process them efficiently.
         </p>
 
         <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Seafarer-to-Employer Pipeline</h3>
@@ -534,7 +641,7 @@
             <div class="step-num" style="background: var(--navy);">4</div>
             <div>
                 <h3>Crewing / Manning Agencies</h3>
-                <p>Receive structured document packages from seafarers. View certificates in an organized interface — no more browsing through email attachments in file explorer. Filter candidates by rank, certificate type, validity dates.</p>
+                <p>Receive structured document packages from seafarers. View certificates in an organized interface — no more browsing through email attachments in file explorer. Filter documents by rank, certificate type, and validity dates.</p>
             </div>
         </div>
     </div>
@@ -545,9 +652,10 @@
         <p><strong>Skipi</strong> — Maritime Document Management Platform</p>
         <p style="margin-top:.5rem;">&copy; 2026 Skipi. All rights reserved.</p>
         <p style="margin-top:.3rem; font-size:.8rem; opacity:.6;">
-            The Skipi name, logo, product concept, document package sharing mechanism, SOLAS framework engine,
-            and local-first maritime document architecture are proprietary intellectual property.
-            First published April 6, 2026. Source code registered and timestamped.
+            The Skipi name, logo, hosted services, product concept, document package sharing mechanism,
+            SOLAS framework engine, and local-first maritime document architecture are protected intellectual property.
+            The public seafarer desktop client may be released under MIT; proprietary services and trademarks are not.
+            First published April 6, 2026.
         </p>
         <p style="margin-top:.75rem;">
             <a href="mailto:info@tymur.org">info@tymur.org</a>

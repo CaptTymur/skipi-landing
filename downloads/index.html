@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Download Skipi — Maritime Document Management</title>
-    <meta name="description" content="Download Skipi for macOS, Windows, or Linux. Local-first maritime document management for seafarers and shipping companies.">
+    <meta name="description" content="Download Skipi Crewing and Skipi Seafarer for Windows or Linux. Local-first maritime workflow tools.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://skipi.app/downloads">
     <style>
@@ -50,7 +50,7 @@
             padding: 3rem 1.5rem;
         }
         .container {
-            max-width: 640px;
+            max-width: 980px;
             width: 100%;
         }
         h1 {
@@ -71,17 +71,38 @@
             margin-bottom: 2rem;
             font-size: 0.9rem;
         }
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.25rem;
+            align-items: start;
+        }
+        .product-panel {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .product-panel h2 {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+        .product-panel .product-desc {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
 
         /* Platform cards */
         .card {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 1.5rem;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1rem;
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
         }
         .card-info {
             display: flex;
@@ -173,6 +194,7 @@
         footer a { color: #60a5fa; text-decoration: none; }
 
         @media (max-width: 500px) {
+            .download-grid { grid-template-columns: 1fr; }
             .card {
                 flex-direction: column;
                 align-items: flex-start;
@@ -192,45 +214,84 @@
 <div class="main">
     <div class="container">
         <h1>Download Skipi</h1>
-        <p class="subtitle">Maritime document management for your desktop</p>
-        <p class="version">v0.4.40 &mdash; Early Access</p>
+        <p class="subtitle">Two desktop apps for the crewing workflow</p>
+        <p class="version">Early Access</p>
 
-        <!-- Linux -->
-        <div class="card">
-            <div class="card-info">
-                <div class="card-icon">&#128039;</div>
-                <div class="card-label">
-                    <h3>Linux</h3>
-                    <p>Debian / Ubuntu &middot; .deb &middot; 8.9 MB</p>
-                </div>
-            </div>
-            <a class="btn" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.40/Skipi_0.4.40_amd64.deb">Download</a>
-        </div>
-        <div class="linux-extra">
-            <span>Also available:</span>
-            <a href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.40/Skipi_0.4.40_amd64.AppImage">AppImage (84 MB, auto-updates)</a>
-            <a href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.40/Skipi-0.4.40-1.x86_64.rpm">RPM (8.9 MB)</a>
-        </div>
+        <div class="download-grid">
+            <section class="product-panel" id="crewing">
+                <h2>Skipi Crewing</h2>
+                <p class="product-desc">For crewing managers: post vacancies, receive applications, review documents, and keep a local crewing vault.</p>
 
-        <!-- Windows -->
-        <div class="card">
-            <div class="card-info">
-                <div class="card-icon">&#128187;</div>
-                <div class="card-label">
-                    <h3>Windows</h3>
-                    <p>64-bit installer &middot; .exe &middot; 5.5 MB</p>
+                <div class="card">
+                    <div class="card-info">
+                        <div class="card-icon">&#128187;</div>
+                        <div class="card-label">
+                            <h3>Windows</h3>
+                            <p>64-bit installer &middot; .exe</p>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a class="btn" href="https://github.com/CaptTymur/skipi-landing/releases/download/crewing-v0.4.77/Skipi.Crewing_0.4.77_x64-setup.exe">Download</a>
+                        <a class="btn-alt" href="https://github.com/CaptTymur/skipi-landing/releases/download/crewing-v0.4.77/Skipi.Crewing_0.4.77_x64_en-US.msi">.msi</a>
+                    </div>
                 </div>
-            </div>
-            <div class="card-actions">
-                <a class="btn" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.40/Skipi_0.4.40_x64-setup.exe">Download</a>
-                <a class="btn-alt" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.40/Skipi_0.4.40_x64_en-US.msi">.msi</a>
-            </div>
+
+                <div class="card">
+                    <div class="card-info">
+                        <div class="card-icon">&#128039;</div>
+                        <div class="card-label">
+                            <h3>Linux</h3>
+                            <p>Debian / Ubuntu &middot; .deb</p>
+                        </div>
+                    </div>
+                    <a class="btn" href="https://github.com/CaptTymur/skipi-landing/releases/download/crewing-v0.4.77/Skipi.Crewing_0.4.77_amd64.deb">Download</a>
+                </div>
+                <div class="linux-extra">
+                    <span>Also:</span>
+                    <a href="https://github.com/CaptTymur/skipi-landing/releases/download/crewing-v0.4.77/Skipi.Crewing_0.4.77_amd64.AppImage">AppImage</a>
+                </div>
+            </section>
+
+            <section class="product-panel" id="seafarer">
+                <h2>Skipi Seafarer</h2>
+                <p class="product-desc">For seafarers: personal document vault, expiry tracking, CV builder, and organized document packages.</p>
+
+                <div class="card">
+                    <div class="card-info">
+                        <div class="card-icon">&#128187;</div>
+                        <div class="card-label">
+                            <h3>Windows</h3>
+                            <p>64-bit installer &middot; .exe</p>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a class="btn" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.78/Skipi_0.4.78_x64-setup.exe">Download</a>
+                        <a class="btn-alt" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.78/Skipi_0.4.78_x64_en-US.msi">.msi</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-info">
+                        <div class="card-icon">&#128039;</div>
+                        <div class="card-label">
+                            <h3>Linux</h3>
+                            <p>Debian / Ubuntu &middot; .deb</p>
+                        </div>
+                    </div>
+                    <a class="btn" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.78/Skipi_0.4.78_amd64.deb">Download</a>
+                </div>
+                <div class="linux-extra">
+                    <span>Also:</span>
+                    <a href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.78/Skipi_0.4.78_amd64.AppImage">AppImage</a>
+                    <a href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.78/Skipi-0.4.78-1.x86_64.rpm">RPM</a>
+                </div>
+            </section>
         </div>
 
         <p class="note">
-            All data stays on your computer. No account required.<br>
-            macOS version coming soon.<br>
-            <a href="https://github.com/CaptTymur/skipi.app/releases">All releases on GitHub</a>
+            Early beta builds. Windows installers are unsigned for now, so Windows may show a SmartScreen warning.<br>
+            All data stays on your computer. macOS builds are paused for now.<br>
+            <a href="https://github.com/CaptTymur/skipi.app/releases">Seafarer releases on GitHub</a>
             &nbsp;&middot;&nbsp;
             <a href="/">Back to skipi.app</a>
         </p>
