@@ -1,5 +1,5 @@
 # Skipi installer SHA256 checksums
-# Generated from GitHub Release asset digests on 2026-05-02.
+# Generated from published release assets on 2026-05-06.
 
 ## Skipi Crewing v0.4.77
 
@@ -8,10 +8,12 @@ fc1d4fd44cc122383a4a87908550cb03aac46d622cb8fd39598ec6ae5b7a7cb3  Skipi.Crewing_
 47100d7a8ad4ec586e561e5df5e35983829299202399dd4ac47d0cbd40eb3ec8  Skipi.Crewing_0.4.77_amd64.deb
 78e6d089f69282f96538cc7d42ec9a1e47079e9d3a62fea567ed027942b74552  Skipi.Crewing_0.4.77_amd64.AppImage
 
-## Skipi Seafarer v0.4.78
+## Skipi Seafarer v0.4.108
 
-14230ad7c4f39ae974b2ef3af2f5d25b3eb0c255aeec4badd9ceadaaffa9adf9  Skipi_0.4.78_x64-setup.exe
-b91a18e13f40bfb62665a1624213bc695ec647e61ad9a94512cd5b5aa6c760b9  Skipi_0.4.78_x64_en-US.msi
-f5cdb150b9f0a773022c9818ab8bea78ad2a13ecc12d4a7453c3f13ebb9c9c16  Skipi_0.4.78_amd64.deb
-b2dd50d34bdece733bfb99993a13797277348c30b3e5c2c25e81fb569c5ec6f8  Skipi_0.4.78_amd64.AppImage
-77583ae2bab6a107491e446d4772cbdfacecf69f0c86b9220e991587d81b8bbb  Skipi-0.4.78-1.x86_64.rpm
+b3a803e6b827f2c3d262d54754278989cccf3d2471f5382129115ea5016c7a77  Skipi_0.4.108_x64-setup.exe
+60d0601302182629097df093a88db034026e081c14ce011024981c27149fa7df  Skipi_0.4.108_x64_en-US.msi
+232cc06705f0e31bb2a0eb13c45120bbebe71e691e52ab5ddfb751893b630222  Skipi_0.4.108_x64.dmg
+be43c5c5f52c89b58dccf6bf98c311f1f672b0292b981dbb59d7c320d2acbfa1  Skipi_x64.app.tar.gz
+8fab2431f04e80b64eddb165c963deecbbac241d45c4949a38b4ea1d2a537e6e  Skipi_0.4.108_amd64.deb
+a15d05b38410ef4d4382aa5b5974c072fd4d9ba3ce164cf7deab13c660a587c8  Skipi_0.4.108_amd64.AppImage
+882ea53c01c7015982659d0fc53076b8d0f2798c24e408fb4f9d329a8cc02baa  Skipi-0.4.108-1.x86_64.rpm
