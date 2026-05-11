@@ -1,22 +1,22 @@
 # Skipi installer SHA256 checksums
-# Generated from published release assets on 2026-05-08.
+# Generated from published release assets on 2026-05-11.
 
-## Skipi Crewing v0.4.103
+## Skipi Crewing v0.4.106
 
-04ae0c4da78c8bc2389263c30981509154761f73c86486b090be453e382c273f  Skipi.Crewing_0.4.103_x64-setup.exe
-d3c5b689f8d0f2a446bf4b68210687ea0c2cc1bd2f8c82ea9a5dbaf114dbad8b  Skipi.Crewing_0.4.103_x64_en-US.msi
-74235d2d942d0415e6688c6ee9b84127aae1118a79ec7f46a501910886b12b56  Skipi.Crewing_0.4.103_x64.dmg
-b8aec425e589cfd7a00aafa0ee4e38f7da71925bd0ef9e7ff4c7a115907bf9f4  Skipi.Crewing_x64.app.tar.gz
-f46a11fcaf05edfdde884bfee143a9936739a67b66cdf9bb7dd6c3d57eb64f78  Skipi.Crewing_0.4.103_amd64.deb
-7eed4c06493f14a3fb6afc0f06c91ca2d844bec17ebee629c1cb361d0d0fbab4  Skipi.Crewing_0.4.103_amd64.AppImage
-254ac5e829a635defb252fa37a1bb9b63729c2a2c18c2b4b236f997ab38d6650  Skipi.Crewing-0.4.103-1.x86_64.rpm
+1a548c780298ba5c6bbf5b7f7c1f44d7d1f45ba0ae1f6e8406a8215f9ac686d7  Skipi.Crewing_0.4.106_x64-setup.exe
+a371b571325f728e5b91120860b1be29c9475b7ffedea2329c4ba493201e496d  Skipi.Crewing_0.4.106_x64_en-US.msi
+a231c1d764139e49f6e4c184cca2de89d7dda4968e33d61a162d66d0c0f52e6d  Skipi.Crewing_0.4.106_x64.dmg
+ccefb8c18e36095df6e3d05d01efec21fc3599b002fc34ac93e0604439bc7c84  Skipi.Crewing_x64.app.tar.gz
+b5de0e7f9efdeac40cce5a81c022ea4cc8cb8536fe23690bf3c15e6a08e89368  Skipi.Crewing_0.4.106_amd64.deb
+f1028f96faa0c27dafa293639984ddd7536a94d3696e002982419ac2e28d6ae3  Skipi.Crewing_0.4.106_amd64.AppImage
+c15c37c37ff576db19a55d4cb8176af20815b7a4b13121240fc0f493d3e396e9  Skipi.Crewing-0.4.106-1.x86_64.rpm
 
-## Skipi Seafarer v0.4.113
+## Skipi Seafarer v0.4.117
 
-b77da2a596dbbbf9a9e0781fafcaed5714f3307c57c4adbb7c302aeac37c8aff  Skipi_0.4.113_x64-setup.exe
-b30904b06eea46624ebc4727db0a19ec57dcf49d43b582f520e43bcffed4ca0c  Skipi_0.4.113_x64_en-US.msi
-6e0f656e5bed79184b5e6c499a4dd00b4250017466d98107762623a8ce1fa062  Skipi_0.4.113_x64.dmg
-8b0c357352d81058ed49e5eeb41686a91a05519c4fac69ceba71dec908336952  Skipi_x64.app.tar.gz
-be9a645d8555bdc4961c796d742f5bacf28923812d94c478c7ac14abc00a8b97  Skipi_0.4.113_amd64.deb
-b86d69c6623c8dd0f5a9c9409b0e01c86b697f1b10c0c727b832146b60c667e0  Skipi_0.4.113_amd64.AppImage
-972b2e40b1a005523742194a37fc9d14c3a745a6f8268ebdf2fa24d149ce93cd  Skipi-0.4.113-1.x86_64.rpm
+92eed6ba642018289c218f83d6c36c64cb5094257258e6ad36c4d78297f1061e  Skipi_0.4.117_x64-setup.exe
+e61f11fa8c1636ec8517471e52406717c4c3cbb8576e53a19c5ac788a8062877  Skipi_0.4.117_x64_en-US.msi
+092443001ce26b703a099e287e46e782b0177103cc01849303f6c916415b6227  Skipi_0.4.117_x64.dmg
+385a65ef35e6b4447c6eb11496ef5eb7c8e54898752dadb0c70b8f72c98965f9  Skipi_x64.app.tar.gz
+dc93e9b6965a142a4a476dc0bd267233fd4bee9dfa3d818710f25f48fe4cb279  Skipi_0.4.117_amd64.deb
+6201efe4bbc04d28dd6acc232e3cf323aeb2364e282781aed0baf6e2b343b75d  Skipi_0.4.117_amd64.AppImage
+5ff8d0d6c71b7593c14c356f57040b94feb28cb7f8a8d960d201b4db364de798  Skipi-0.4.117-1.x86_64.rpm
