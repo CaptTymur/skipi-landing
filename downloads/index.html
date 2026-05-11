@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Download Skipi — Maritime Document Management</title>
-    <meta name="description" content="Download Skipi Crewing and Skipi Seafarer for Windows, macOS, or Linux. Local-first maritime workflow tools.">
+    <title>Скачать Skipi — морские документы, CV и рассылка</title>
+    <meta name="description" content="Скачать Skipi Seafarer и Skipi Crewing для Windows, macOS или Linux. Локальные инструменты для моряков и крюинга.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://skipi.app/downloads">
     <style>
@@ -29,6 +29,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
         /* Header */
@@ -155,6 +156,7 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            min-width: 0;
         }
         .card-icon {
             font-size: 2rem;
@@ -163,6 +165,7 @@
             font-size: 1.05rem;
             margin-bottom: 0.15rem;
         }
+        .card-label { min-width: 0; }
         .card-label p {
             font-size: 0.85rem;
             color: var(--gray);
@@ -297,17 +300,30 @@
         footer a { color: #60a5fa; text-decoration: none; }
 
         @media (max-width: 500px) {
+            .main { padding: 2rem 1.25rem; }
             .release-strip,
             .download-grid { grid-template-columns: 1fr; }
             .trust-grid { grid-template-columns: 1fr; }
             .trust-list li { grid-template-columns: 1fr; gap: 0.25rem; }
+            .release-strip span,
+            .warning-panel,
+            .product-desc,
+            .note { overflow-wrap: anywhere; }
             .card {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1rem;
             }
-            .card-actions { width: 100%; }
-            .btn { width: 100%; text-align: center; }
+            .card-actions {
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .btn,
+            .btn-alt {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -319,56 +335,56 @@
 
 <div class="main">
     <div class="container">
-        <h1>Download Skipi</h1>
-        <p class="subtitle">Two desktop apps for the crewing workflow</p>
-        <p class="version">Early Access</p>
+        <h1>Скачать Skipi</h1>
+        <p class="subtitle">Два настольных приложения для моряков и крюинга</p>
+        <p class="version">Ранний доступ</p>
 
         <div class="release-strip">
             <div>
                 <strong>Skipi Crewing v0.4.106</strong>
-                <span>Published May 9, 2026 &middot; <a href="https://github.com/CaptTymur/skipi-landing/releases/tag/crewing-v0.4.106">GitHub release mirror</a></span>
+                <span>Опубликовано 9 мая 2026 &middot; <a href="https://github.com/CaptTymur/skipi-landing/releases/tag/crewing-v0.4.106">зеркало релиза GitHub</a></span>
             </div>
             <div>
                 <strong>Skipi Seafarer v0.4.118</strong>
-                <span>Published May 11, 2026 &middot; <a href="https://github.com/CaptTymur/skipi.app">GitHub repository</a> &middot; <a href="https://github.com/CaptTymur/skipi.app/releases/tag/v0.4.118">Release</a></span>
+                <span>Опубликовано 11 мая 2026 &middot; <a href="https://github.com/CaptTymur/skipi.app">репозиторий GitHub</a> &middot; <a href="https://github.com/CaptTymur/skipi.app/releases/tag/v0.4.118">релиз</a></span>
             </div>
         </div>
 
         <div class="warning-panel">
-            <strong>Operating system notice</strong>
-            Skipi is an early beta. Windows, Microsoft Defender, a browser, macOS Gatekeeper, or a company security policy may ask for confirmation before running a new installer. Linux may ask to allow AppImage execution. Download only from skipi.app or the GitHub releases linked on this page.
+            <strong>Важное предупреждение перед установкой</strong>
+            Skipi сейчас в ранней beta. Windows, Microsoft Defender, браузер, macOS Gatekeeper или корпоративная политика безопасности могут попросить подтверждение перед запуском нового установщика. На Linux может понадобиться разрешить запуск AppImage. Скачивайте только с skipi.app или из GitHub Releases по ссылкам на этой странице.
         </div>
 
         <div class="download-grid">
             <section class="product-panel" id="crewing">
                 <h2>Skipi Crewing</h2>
-                <p class="product-desc">For crewing managers: post vacancies, receive applications, review documents, and keep a local crewing vault.</p>
+                <p class="product-desc">Для крюинг-менеджеров: публиковать вакансии, получать отклики, смотреть документы и вести локальный vault крюинга.</p>
 
                 <div class="card">
                     <div class="card-info">
                         <div class="card-icon">&#128187;</div>
                         <div class="card-label">
                             <h3>Windows</h3>
-                            <p>64-bit installer &middot; .exe</p>
+                            <p>64-bit установщик &middot; .exe</p>
                         </div>
                     </div>
                     <div class="card-actions">
-                        <a class="btn" href="https://github.com/CaptTymur/skipi-landing/releases/download/crewing-v0.4.106/Skipi.Crewing_0.4.106_x64-setup.exe">Download</a>
+                        <a class="btn" href="https://github.com/CaptTymur/skipi-landing/releases/download/crewing-v0.4.106/Skipi.Crewing_0.4.106_x64-setup.exe">Скачать</a>
                         <a class="btn-alt" href="https://github.com/CaptTymur/skipi-landing/releases/download/crewing-v0.4.106/Skipi.Crewing_0.4.106_x64_en-US.msi">.msi</a>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-info">
-                        <div class="card-icon">&#63743;</div>
+                        <div class="card-icon">&#8984;</div>
                         <div class="card-label">
                             <h3>macOS</h3>
-                            <p>Intel test build &middot; .dmg</p>
+                            <p>Тестовая Intel-сборка &middot; .dmg</p>
                         </div>
                     </div>
                     <div class="card-actions">
-                        <a class="btn" href="https://github.com/CaptTymur/skipi-landing/releases/download/crewing-v0.4.106/Skipi.Crewing_0.4.106_x64.dmg">Download</a>
-                        <a class="btn-alt" href="https://github.com/CaptTymur/skipi-landing/releases/download/crewing-v0.4.106/Skipi.Crewing_x64.app.tar.gz">Updater bundle</a>
+                        <a class="btn" href="https://github.com/CaptTymur/skipi-landing/releases/download/crewing-v0.4.106/Skipi.Crewing_0.4.106_x64.dmg">Скачать</a>
+                        <a class="btn-alt" href="https://github.com/CaptTymur/skipi-landing/releases/download/crewing-v0.4.106/Skipi.Crewing_x64.app.tar.gz">Пакет обновления</a>
                     </div>
                 </div>
 
@@ -380,10 +396,10 @@
                             <p>Debian / Ubuntu &middot; .deb</p>
                         </div>
                     </div>
-                    <a class="btn" href="https://github.com/CaptTymur/skipi-landing/releases/download/crewing-v0.4.106/Skipi.Crewing_0.4.106_amd64.deb">Download</a>
+                    <a class="btn" href="https://github.com/CaptTymur/skipi-landing/releases/download/crewing-v0.4.106/Skipi.Crewing_0.4.106_amd64.deb">Скачать</a>
                 </div>
                 <div class="linux-extra">
-                    <span>Also:</span>
+                    <span>Также:</span>
                     <a href="https://github.com/CaptTymur/skipi-landing/releases/download/crewing-v0.4.106/Skipi.Crewing_0.4.106_amd64.AppImage">AppImage</a>
                     <a href="https://github.com/CaptTymur/skipi-landing/releases/download/crewing-v0.4.106/Skipi.Crewing-0.4.106-1.x86_64.rpm">RPM</a>
                 </div>
@@ -391,33 +407,33 @@
 
             <section class="product-panel" id="seafarer">
                 <h2>Skipi Seafarer</h2>
-                <p class="product-desc">For seafarers: personal document vault, expiry tracking, CV builder, document packages, vessel lookup, and vessel reviews.</p>
+                <p class="product-desc">Для моряков: личный vault документов, контроль сроков, CV, пакеты документов, поиск судов и отзывы по судам.</p>
 
                 <div class="card">
                     <div class="card-info">
                         <div class="card-icon">&#128187;</div>
                         <div class="card-label">
                             <h3>Windows</h3>
-                            <p>64-bit installer &middot; .exe</p>
+                            <p>64-bit установщик &middot; .exe</p>
                         </div>
                     </div>
                     <div class="card-actions">
-                        <a class="btn" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.118/Skipi_0.4.118_x64-setup.exe">Download</a>
+                        <a class="btn" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.118/Skipi_0.4.118_x64-setup.exe">Скачать</a>
                         <a class="btn-alt" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.118/Skipi_0.4.118_x64_en-US.msi">.msi</a>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-info">
-                        <div class="card-icon">&#63743;</div>
+                        <div class="card-icon">&#8984;</div>
                         <div class="card-label">
                             <h3>macOS</h3>
-                            <p>Intel test build &middot; .dmg</p>
+                            <p>Тестовая Intel-сборка &middot; .dmg</p>
                         </div>
                     </div>
                     <div class="card-actions">
-                        <a class="btn" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.118/Skipi_0.4.118_x64.dmg">Download</a>
-                        <a class="btn-alt" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.118/Skipi_x64.app.tar.gz">Updater bundle</a>
+                        <a class="btn" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.118/Skipi_0.4.118_x64.dmg">Скачать</a>
+                        <a class="btn-alt" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.118/Skipi_x64.app.tar.gz">Пакет обновления</a>
                     </div>
                 </div>
 
@@ -429,10 +445,10 @@
                             <p>Debian / Ubuntu &middot; .deb</p>
                         </div>
                     </div>
-                    <a class="btn" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.118/Skipi_0.4.118_amd64.deb">Download</a>
+                    <a class="btn" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.118/Skipi_0.4.118_amd64.deb">Скачать</a>
                 </div>
                 <div class="linux-extra">
-                    <span>Also:</span>
+                    <span>Также:</span>
                     <a href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.118/Skipi_0.4.118_amd64.AppImage">AppImage</a>
                     <a href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.118/Skipi-0.4.118-1.x86_64.rpm">RPM</a>
                 </div>
@@ -440,8 +456,8 @@
         </div>
 
         <section class="trust-panel" id="verification">
-            <h2>Verify the download</h2>
-            <p>Installers are served from GitHub Releases. SHA256 checksums below identify the exact files linked on this page. Full list: <a href="/downloads/checksums.txt">SHA256SUMS.txt</a>.</p>
+            <h2>Проверка скачанного файла</h2>
+            <p>Установщики отдаются через GitHub Releases. Контрольные суммы SHA256 ниже соответствуют файлам, на которые ведут ссылки на этой странице. Полный список: <a href="/downloads/checksums.txt">SHA256SUMS.txt</a>.</p>
 
             <div class="trust-grid">
                 <div>
@@ -450,7 +466,7 @@
                         <li><span class="file">Windows .exe</span><code>1a548c780298ba5c6bbf5b7f7c1f44d7d1f45ba0ae1f6e8406a8215f9ac686d7</code></li>
                         <li><span class="file">Windows .msi</span><code>a371b571325f728e5b91120860b1be29c9475b7ffedea2329c4ba493201e496d</code></li>
                         <li><span class="file">macOS .dmg</span><code>a231c1d764139e49f6e4c184cca2de89d7dda4968e33d61a162d66d0c0f52e6d</code></li>
-                        <li><span class="file">macOS updater</span><code>ccefb8c18e36095df6e3d05d01efec21fc3599b002fc34ac93e0604439bc7c84</code></li>
+                        <li><span class="file">macOS обновление</span><code>ccefb8c18e36095df6e3d05d01efec21fc3599b002fc34ac93e0604439bc7c84</code></li>
                         <li><span class="file">Linux .deb</span><code>b5de0e7f9efdeac40cce5a81c022ea4cc8cb8536fe23690bf3c15e6a08e89368</code></li>
                         <li><span class="file">AppImage</span><code>f1028f96faa0c27dafa293639984ddd7536a94d3696e002982419ac2e28d6ae3</code></li>
                         <li><span class="file">RPM</span><code>c15c37c37ff576db19a55d4cb8176af20815b7a4b13121240fc0f493d3e396e9</code></li>
@@ -462,7 +478,7 @@
                         <li><span class="file">Windows .exe</span><code>c6fd8331dbfb619ea073d8c17bdeb062eaf256a1f1d4e6c49244f321e8633d24</code></li>
                         <li><span class="file">Windows .msi</span><code>b154d487aa43c6357908f436d094942d511e0f8a2b0cfda89c6ffefd14bad284</code></li>
                         <li><span class="file">macOS .dmg</span><code>f321dcef7e9332ad6cab527fe022c3c33e2503aaf6401b3096a14b8ce9555e68</code></li>
-                        <li><span class="file">macOS updater</span><code>9b37cdb3bc0b863639c7901fc0617ff04007114328ffd1c685b1011731c0dbf5</code></li>
+                        <li><span class="file">macOS обновление</span><code>9b37cdb3bc0b863639c7901fc0617ff04007114328ffd1c685b1011731c0dbf5</code></li>
                         <li><span class="file">Linux .deb</span><code>7028a7ba13b3a36165e9dbe7c2ff8635dfd3d11042ff268076a2ca3ab15978ad</code></li>
                         <li><span class="file">AppImage</span><code>26a8c970f7fce255cf5e5764c454468be84ba7a25c728be18d31fa069932cc8a</code></li>
                         <li><span class="file">RPM</span><code>9812adbc70f5dc69722c40dbde034095d270f314b65673c4741e0bb56cc32c23</code></li>
@@ -471,26 +487,26 @@
             </div>
 
             <div class="signing-status">
-                Windows Authenticode signing and Apple notarization are being enabled for future public releases. Current beta installers may still show "Unknown publisher" or Gatekeeper warnings.
+                Подпись Windows Authenticode и Apple notarization будут включены для будущих публичных релизов. Текущие beta-установщики могут показывать предупреждения "Unknown publisher" или Gatekeeper.
             </div>
         </section>
 
         <p class="note">
-            Early beta builds. If Windows or security software blocks installation, send the exact message or screenshot to <a href="mailto:beta@skipi.app">beta@skipi.app</a>.<br>
-            All data stays on your computer. macOS is currently an unsigned Intel test build.<br>
-            <a href="https://github.com/CaptTymur/skipi.app">Seafarer GitHub repository</a>
+            Это ранние beta-сборки. Если Windows или защитная программа блокирует установку, пришлите точный текст сообщения или скриншот на <a href="mailto:beta@skipi.app">beta@skipi.app</a>.<br>
+            Все данные остаются на вашем компьютере. macOS сейчас распространяется как неподписанная тестовая Intel-сборка.<br>
+            <a href="https://github.com/CaptTymur/skipi.app">GitHub репозиторий Seafarer</a>
             &nbsp;&middot;&nbsp;
-            <a href="https://github.com/CaptTymur/skipi-landing/releases/tag/crewing-v0.4.106">Crewing GitHub release mirror</a>
+            <a href="https://github.com/CaptTymur/skipi-landing/releases/tag/crewing-v0.4.106">зеркало релиза Crewing</a>
             &nbsp;&middot;&nbsp;
-            <a href="/">Back to skipi.app</a>
+            <a href="/">назад на skipi.app</a>
         </p>
     </div>
 </div>
 
 <footer>
     &copy; 2026 Skipi &nbsp;&middot;&nbsp;
-    <a href="/terms.html">Terms</a> &nbsp;&middot;&nbsp;
-    <a href="/privacy.html">Privacy</a> &nbsp;&middot;&nbsp;
+    <a href="/terms.html">Условия</a> &nbsp;&middot;&nbsp;
+    <a href="/privacy.html">Конфиденциальность</a> &nbsp;&middot;&nbsp;
     <a href="mailto:beta@skipi.app">beta@skipi.app</a>
 </footer>
 
