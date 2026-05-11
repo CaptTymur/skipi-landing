@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Privacy Policy — Skipi</title>
-    <meta name="description" content="Privacy Policy for Skipi maritime document management platform. How we collect, use, and protect your data.">
+    <title>Privacy Policy - Skipi</title>
+    <meta name="description" content="Privacy Policy for Skipi local-first maritime document and communication tools.">
     <link rel="canonical" href="https://skipi.app/privacy.html">
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1e293b; line-height: 1.7; max-width: 700px; margin: 0 auto; padding: 2rem 1.5rem; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1e293b; line-height: 1.7; max-width: 740px; margin: 0 auto; padding: 2rem 1.5rem; }
         h1 { font-size: 1.8rem; margin-bottom: 0.3rem; }
         h2 { font-size: 1.15rem; margin-top: 2rem; margin-bottom: 0.5rem; }
         h3 { font-size: 1rem; margin-top: 1.5rem; margin-bottom: 0.3rem; }
@@ -17,148 +17,117 @@
         .date { color: #64748b; font-size: 0.9rem; margin-bottom: 2rem; }
         ul { padding-left: 1.5rem; margin-bottom: 1rem; }
         table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
-        th, td { border: 1px solid #e2e8f0; padding: 0.5rem 0.75rem; text-align: left; }
+        th, td { border: 1px solid #e2e8f0; padding: 0.5rem 0.75rem; text-align: left; vertical-align: top; }
         th { background: #f0f4f8; }
+        strong { color: #334155; }
     </style>
 </head>
 <body>
 <p class="back"><a href="/">&larr; Back to skipi.app</a></p>
 
 <h1>Privacy Policy</h1>
-<p class="date">Effective date: April 6, 2026 &nbsp;|&nbsp; Last updated: April 6, 2026</p>
+<p class="date">Effective date: April 27, 2026 &nbsp;|&nbsp; Last updated: April 27, 2026</p>
 
-<p>This Privacy Policy describes how Skipi, operated by Tymur Rudov ("we", "us"), collects, uses, and protects your personal data. We are committed to protecting your privacy and handling your data transparently.</p>
+<p>This Privacy Policy explains how Skipi handles personal data in the Skipi desktop application, Skipi Crewing, skipi.app, and related online services. Skipi is operated by Tymur Rudov ("we", "us").</p>
 
-<h2>1. Data Controller</h2>
+<h2>1. Controller</h2>
 <p>
     <strong>Tymur Rudov</strong><br>
     Tbilisi, Georgia<br>
     Email: <a href="mailto:info@tymur.org">info@tymur.org</a>
 </p>
 
-<h2>2. Local-First Principle</h2>
-<p>Skipi is designed as a <strong>local-first</strong> application. This means:</p>
+<h2>2. Product Stage and Target Markets</h2>
+<p>At this stage, Skipi is developed primarily for maritime users and companies in Ukraine, Russia, India, the Philippines, Indonesia, Sri Lanka, and comparable non-EEA markets. The current online services are not intentionally marketed as a public EU/UK recruitment or job-placement service.</p>
+<p>If data-protection laws such as GDPR or UK GDPR apply to a specific processing operation, we will handle applicable requests through the contact email above. Company-side users remain responsible for their own legal basis and compliance when they receive, store, or use seafarer data.</p>
+
+<h2>3. Local-First Principle</h2>
+<p>Skipi's core desktop features are local-first:</p>
 <ul>
-    <li>By default, your documents and data are stored <strong>only on your device</strong></li>
-    <li>No data is transmitted to our servers unless you explicitly use cloud features (sync, document packages)</li>
-    <li>You can use core features of Skipi without any internet connection</li>
-    <li>You control when and whether your data leaves your device</li>
+    <li>your vault, documents, CVs, contract evidence, and metadata are stored in a folder on your device;</li>
+    <li>core document management does not require a Skipi account;</li>
+    <li>we do not receive your local vault contents unless you explicitly use an online feature that sends data;</li>
+    <li>you control backups, deletion, and device security for local files.</li>
 </ul>
-<p>This architecture minimizes data collection by design.</p>
 
-<h2>3. What Data We Collect</h2>
-
-<h3>3.1 Account Data (when you register)</h3>
+<h2>4. Data We May Process</h2>
 <table>
-    <tr><th>Data</th><th>Purpose</th><th>Legal Basis (GDPR)</th></tr>
-    <tr><td>Email address</td><td>Authentication, notifications</td><td>Contract performance</td></tr>
-    <tr><td>Name</td><td>Display in application</td><td>Contract performance</td></tr>
-    <tr><td>Account type (seafarer/manager/vessel)</td><td>Provide appropriate features</td><td>Contract performance</td></tr>
-    <tr><td>Rank (seafarers)</td><td>Generate document framework</td><td>Contract performance</td></tr>
-    <tr><td>Company name (managers)</td><td>Multi-tenant organization</td><td>Contract performance</td></tr>
-    <tr><td>Password (hashed)</td><td>Authentication</td><td>Contract performance</td></tr>
+    <tr><th>Feature</th><th>Data</th><th>Purpose</th></tr>
+    <tr><td>Website / waitlist</td><td>Email address if you submit it; basic technical logs from hosting or form providers</td><td>Respond to requests, notify about launch, protect the site</td></tr>
+    <tr><td>Auto-update</td><td>Version check requests handled by update hosting providers</td><td>Deliver signed application updates</td></tr>
+    <tr><td>Job alerts / vacancy polling</td><td>Broad filters such as rank or vessel type if sent by the app; IP address visible at transport level; no seafarer account profile</td><td>Return public vacancies and protect the service</td></tr>
+    <tr><td>Anonymous engagement counters</td><td>Vacancy ID plus an action such as apply-click or hide</td><td>Show aggregate employer-side interest without identifying a seafarer</td></tr>
+    <tr><td>Encrypted messaging</td><td>Public user ID, public key, role, thread ID, sender/recipient IDs, timestamps, message size, ciphertext</td><td>Route end-to-end encrypted messages</td></tr>
+    <tr><td>Contact initiation / relay</td><td>Redacted CV, optional documents, message text, contact-for-reply, summary fields chosen by the seafarer</td><td>Deliver the seafarer's chosen communication to the employer</td></tr>
+    <tr><td>Employer / crewing verification</td><td>Company name, legal name, jurisdiction, registration number, corporate email, phone, MLC or licence information, admin review notes</td><td>Verify company-side users and reduce fraud risk</td></tr>
+    <tr><td>Vessel reviews, where available</td><td>IMO number, ratings, review text, rank at the time, contract period, pseudonymous author hash, proof metadata if submitted</td><td>Display community vessel information and reduce duplicate or fraudulent reviews</td></tr>
+    <tr><td>Support / security</td><td>Information you send us, logs needed to investigate abuse, security incidents, or delivery failures</td><td>Provide support and protect users</td></tr>
 </table>
 
-<h3>3.2 Vessel Data (when you add a ship)</h3>
-<table>
-    <tr><th>Data</th><th>Purpose</th><th>Legal Basis</th></tr>
-    <tr><td>Vessel name, IMO number, type, flag</td><td>Vessel identification, SOLAS framework</td><td>Contract performance</td></tr>
-    <tr><td>Document metadata (titles, expiry dates)</td><td>Certificate tracking</td><td>Contract performance</td></tr>
-</table>
-
-<h3>3.3 Uploaded Files (when you use cloud features)</h3>
-<table>
-    <tr><th>Data</th><th>Purpose</th><th>Legal Basis</th></tr>
-    <tr><td>Document files (PDF, images, etc.)</td><td>Storage, package generation</td><td>Consent (you initiate the upload)</td></tr>
-    <tr><td>File metadata (name, size, upload date)</td><td>File management</td><td>Contract performance</td></tr>
-</table>
-
-<h3>3.4 Usage Data (automatic)</h3>
-<table>
-    <tr><th>Data</th><th>Purpose</th><th>Legal Basis</th></tr>
-    <tr><td>IP address</td><td>Security, abuse prevention</td><td>Legitimate interest</td></tr>
-    <tr><td>Browser type, device info</td><td>Service compatibility</td><td>Legitimate interest</td></tr>
-    <tr><td>Package download counts</td><td>Feature functionality</td><td>Contract performance</td></tr>
-</table>
-
-<h3>3.5 Waitlist Data (landing page)</h3>
-<p>If you join our waitlist, we collect your email address via Formspree.io to notify you about the launch. You can request removal at any time.</p>
-
-<h2>4. What We Do NOT Collect</h2>
+<h2>5. What We Do Not Do</h2>
 <ul>
-    <li>We do not read or analyze the contents of your uploaded documents (unless you opt in to AI analysis features)</li>
-    <li>We do not use tracking cookies for advertising</li>
-    <li>We do not sell or share your personal data with third parties for marketing</li>
-    <li>We do not build advertising profiles from your data</li>
-    <li>We do not collect data from your device beyond what you explicitly upload</li>
+    <li>We do not sell personal data.</li>
+    <li>We do not use third-party advertising trackers in the desktop app.</li>
+    <li>We do not build a permanent server-side seafarer profile database for matching.</li>
+    <li>We do not perform server-side candidate ranking or hiring decisions.</li>
+    <li>We do not read end-to-end encrypted message content.</li>
+    <li>We do not upload your local vault documents unless you explicitly initiate a feature that sends them.</li>
 </ul>
 
-<h2>5. How We Use Your Data</h2>
+<h2>6. Legal Bases Where Required</h2>
+<p>Where a data-protection law requires a legal basis, we generally rely on:</p>
 <ul>
-    <li><strong>Provide the Service</strong> — account management, document storage, package generation, certificate tracking</li>
-    <li><strong>Security</strong> — protect against unauthorized access, fraud, and abuse</li>
-    <li><strong>Service improvement</strong> — anonymized, aggregated statistics (e.g., total number of packages created, not their contents)</li>
-    <li><strong>Communication</strong> — service-related notifications (expiry reminders, account updates). No marketing without your consent.</li>
+    <li><strong>user request or contract</strong> to provide the feature you use;</li>
+    <li><strong>consent</strong> where you explicitly enable an optional feature or send documents;</li>
+    <li><strong>legitimate interests</strong> for fraud prevention, security, service integrity, and basic operational logs;</li>
+    <li><strong>legal obligation</strong> where we must keep or disclose information under applicable law.</li>
 </ul>
 
-<h2>6. Data Sharing</h2>
-<p>We share your data only in these limited circumstances:</p>
+<h2>7. Retention</h2>
 <ul>
-    <li><strong>Document packages</strong> — when you create a package, the included files are accessible to anyone with the package URL. This is initiated by you.</li>
-    <li><strong>Service providers</strong> — we may use infrastructure providers (hosting, storage) who process data on our behalf under data processing agreements.</li>
-    <li><strong>Legal requirements</strong> — if required by law, court order, or governmental authority.</li>
-</ul>
-<p>We do not sell your data. We do not share your data with advertisers.</p>
-
-<h2>7. Data Storage and Security</h2>
-<ul>
-    <li>Local data is stored on your device and protected by your device's security</li>
-    <li>Cloud data is encrypted in transit (TLS/HTTPS)</li>
-    <li>Passwords are hashed using bcrypt with salt</li>
-    <li>Session tokens are cryptographically signed with expiry</li>
-    <li>Document packages are automatically deleted upon expiry or download limit</li>
+    <li><strong>Local vault data:</strong> stays on your device until you delete it.</li>
+    <li><strong>Hosted attachments or package files:</strong> intended to be temporary and deleted after expiry or delivery window.</li>
+    <li><strong>Vacancies:</strong> may remain active until expiry or closure, then may be retained for audit, abuse prevention, and company history.</li>
+    <li><strong>Encrypted messages:</strong> retained while needed to provide the thread unless deleted or expired under product rules.</li>
+    <li><strong>Verification and billing records:</strong> retained as needed for fraud prevention, accounting, and legal reasons.</li>
+    <li><strong>Security logs:</strong> kept only as long as reasonably needed for security, debugging, and abuse prevention.</li>
 </ul>
 
-<h2>8. Data Retention</h2>
+<h2>8. Sharing</h2>
+<p>We share data only as needed to operate Skipi:</p>
 <ul>
-    <li><strong>Account data:</strong> retained while your account is active, deleted within 30 days of account deletion</li>
-    <li><strong>Uploaded files:</strong> retained while your account is active, deleted within 30 days of account deletion or individual file deletion</li>
-    <li><strong>Document packages:</strong> automatically deleted upon expiry or when download limit is reached</li>
-    <li><strong>Anonymized statistics:</strong> retained indefinitely (cannot identify you)</li>
+    <li>with the recipient you choose when you send a CV, package, message, or contact request;</li>
+    <li>with infrastructure, hosting, email, update, storage, payment, form, or security providers acting for operational purposes;</li>
+    <li>with authorities or other parties if required by law or needed to protect users, security, or legal rights.</li>
+</ul>
+<p>Once an employer, crewing company, or other recipient receives your CV, documents, contact details, or message, that recipient is independently responsible for how it handles the data.</p>
+
+<h2>9. International Processing</h2>
+<p>Skipi is operated from Georgia and may use providers in other countries. Your data may be processed outside your country of residence. Where legally required, we will use appropriate safeguards for international transfers.</p>
+
+<h2>10. Security</h2>
+<p>We use technical and organizational measures appropriate to the product stage, including TLS for network transport, signed desktop updates, local-first storage, and end-to-end encryption for supported message content. No system is perfectly secure. Local vault security depends on your device, operating system account, vault folder permissions, and backups.</p>
+
+<h2>11. AI and OCR Features</h2>
+<p>AI or OCR features are optional document-assistance tools. Local OCR or local model use may keep processing on your device. If you configure a cloud AI provider or API key, document content may be sent to that provider under its own terms. Skipi does not use your documents to train AI models unless you explicitly agree to a future feature that says so.</p>
+
+<h2>12. Your Choices and Rights</h2>
+<ul>
+    <li>You can keep using local vault features without enabling job alerts or online messaging.</li>
+    <li>You can turn job alerts off to stop vacancy polling.</li>
+    <li>You can choose redacted CVs and avoid sending full personal details until you decide.</li>
+    <li>You can request deletion of platform-held data by contacting us.</li>
+    <li>We cannot guarantee deletion of copies already delivered to or downloaded by recipients.</li>
 </ul>
 
-<h2>9. Your Rights (GDPR)</h2>
-<p>If you are in the European Economic Area (EEA), United Kingdom, or a jurisdiction with similar data protection laws, you have the right to:</p>
-<ul>
-    <li><strong>Access</strong> — request a copy of your personal data</li>
-    <li><strong>Rectification</strong> — correct inaccurate personal data</li>
-    <li><strong>Erasure</strong> — request deletion of your personal data ("right to be forgotten")</li>
-    <li><strong>Portability</strong> — receive your data in a structured, machine-readable format</li>
-    <li><strong>Restriction</strong> — request restriction of processing</li>
-    <li><strong>Objection</strong> — object to processing based on legitimate interest</li>
-    <li><strong>Withdraw consent</strong> — where processing is based on consent</li>
-</ul>
-<p>To exercise these rights, contact us at <a href="mailto:info@tymur.org">info@tymur.org</a>. We will respond within 30 days.</p>
+<h2>13. Children</h2>
+<p>Skipi is intended for professional maritime users and is not intended for persons under 18.</p>
 
-<h2>10. International Transfers</h2>
-<p>Your data may be processed in countries outside your country of residence. When transferring data outside the EEA, we ensure appropriate safeguards are in place in accordance with GDPR requirements.</p>
+<h2>14. Changes</h2>
+<p>We may update this Privacy Policy as Skipi changes. The "Last updated" date shows the current version.</p>
 
-<h2>11. Children</h2>
-<p>Skipi is not intended for use by persons under 18 years of age. We do not knowingly collect data from minors.</p>
-
-<h2>12. AI Features</h2>
-<p>Skipi may offer optional AI-powered document analysis features. These features:</p>
-<ul>
-    <li>Are <strong>opt-in only</strong> — your documents are not analyzed unless you explicitly request it</li>
-    <li>Process documents solely to provide analysis results to you</li>
-    <li>Do not use your documents to train AI models without your explicit consent</li>
-</ul>
-
-<h2>13. Changes to This Policy</h2>
-<p>We may update this Privacy Policy from time to time. We will notify registered users of material changes via email at least 14 days before the changes take effect. The "Last updated" date at the top of this page indicates when the policy was last revised.</p>
-
-<h2>14. Contact</h2>
-<p>For privacy-related questions or to exercise your rights:<br>
+<h2>15. Contact</h2>
+<p>For privacy questions or requests:<br>
 <strong>Tymur Rudov</strong><br>
 Email: <a href="mailto:info@tymur.org">info@tymur.org</a><br>
 Website: <a href="https://skipi.app">skipi.app</a></p>
