@@ -1,19 +1,15 @@
 {
-  "version": "0.4.123",
-  "pub_date": "2026-05-12T13:11:01.746Z",
-  "notes": "Skipi 0.4.123",
+  "version": "0.4.124",
+  "pub_date": "2026-05-12T20:30:33Z",
+  "notes": "Skipi 0.4.124",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjVGZEtLdHFSdWlqT1I3RWhOQlVtRVA1dHEwTE5rN0QzTVc1NGxYbThXSThDMytMakppV3J5R2tla3BJaXYvOTJ3TzliNXI2QnFERm5jSTl1NjNjTGdNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4NTkxNDU2CWZpbGU6U2tpcGlfMC40LjEyM194NjQtc2V0dXAuZXhlCm1CRkVwWnJubzY2cVdnSGJmVUc4a3JJY1RVQmliRWwwdVprelFmYUdpanFGaGJYU3U0ZDBPV3VxZlZ2U0ZvMzZCczE2OFVvWnJ3ckRoRG0rTkdkQkNnPT0K",
-      "url": "https://api-ru.skipi.app/downloads/seafarer/0.4.123/Skipi_0.4.123_x64-setup.exe"
-    },
-    "darwin-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjluWHI4aG5hVGhRQ1hRb2FMRU9mNEpRd05mcWFwTmk4MzBOdUZWU2E2Q25IMStSL1l5MjZzRnpZdGQ2cUJUZFU1RlpvazAzSWZ3azZZUU9xU3dGTndzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4NTkxNDE2CWZpbGU6U2tpcGkuYXBwLnRhci5nego3QWw3VGtOK1FzT2YzTlYyZDBEb0trR3U1YU1JQnF0WDBkdlpCSDh1U0pwL2FIeDFuZ0RwRUtrU0F3ZDhLRG1EUEJOOGZqL255emNzQzAyQUJyNUNDUT09Cg==",
-      "url": "https://api-ru.skipi.app/downloads/seafarer/0.4.123/Skipi_x64.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjJuQW40aHR5UmZheFl6OFl3cnNPQWVNR2xFWXhWZmh0akF4V0w2Nk1kc1hiSlJKd3Awa1R3OUpIa2s5YVIyZWczekFBZVFJeWp1bE80RDc5Rnp4ZVFvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4NjE3NzgwCWZpbGU6U2tpcGlfMC40LjEyNF94NjQtc2V0dXAuZXhlCmcvQ0hMbUlBc2RIVWRMTlJvYWxQTVplNjVWeHNJMCtGV01VT2RZbjZCL256UlozOFVTdGhoUHI1Z25VMjR4TWxERlYxMjd2cXZqdWhqOE5ZS25KUUFnPT0K",
+      "url": "https://api-ru.skipi.app/downloads/seafarer/0.4.124/Skipi_0.4.124_x64-setup.exe"
     },
     "linux-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjRTZXc5dGUxcnYyUE9UU2s4U0pURjRhSTVTOXVnOXNWbDdkb1lraE50Vkh1L2dXMUdOK3M4OFF4cWRaOW9rSm9mcUluUnpzUEZjdGU1R01IRThhM1FJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4NTkxNDUxCWZpbGU6U2tpcGlfMC40LjEyM19hbWQ2NC5BcHBJbWFnZQpPdnZ1UjdTMWZYZTBEM2ZuLzNxeXJ1aWVVbSsrR1hyUlZ0SUJGMUE1R3l2Tm1oZ0xmaHRLb2JVbFBSRWozV2ZLQ3R4T1lKbndIczg1Z0E0MFM1SWREdz09Cg==",
-      "url": "https://api-ru.skipi.app/downloads/seafarer/0.4.123/Skipi_0.4.123_amd64.AppImage"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjU1NzdubjlOdFVJaElHUEc3QXJlbDNZb3hlR3hEY1ZUTEhhTXRjV0VTZjVod3duWW5PNGVCRjBYWWhhbVF0MnJ2VVZtVTdzSWpKc0VXalc5MUFRa0FNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4NjE3Njk1CWZpbGU6U2tpcGlfMC40LjEyNF9hbWQ2NC5BcHBJbWFnZQpTRjRNQVhPVnpTYm05T2R5WGJLMnZOa1JhWjJVUldkSUpUYWlXa2ZsQjdwOTBocmRZTVoyM09BcmlPRGxPSllKdmRwZzl3dEdESENGQm1vRGNOWVNEUT09Cg==",
+      "url": "https://api-ru.skipi.app/downloads/seafarer/0.4.124/Skipi_0.4.124_amd64.AppImage"
     }
   }
 }
