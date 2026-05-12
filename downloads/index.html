@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Скачать Skipi — морские документы, CV и рассылка</title>
-    <meta name="description" content="Скачать Skipi Seafarer и Skipi Crewing для Windows, macOS или Linux. Локальные инструменты для моряков и крюинга.">
+    <meta name="description" content="Скачать Skipi Seafarer, Skipi Crewing и Skipi Broker для Windows или Linux. RF-доступные beta-загрузки с сайта skipi.app.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://skipi.app/downloads">
     <style>
@@ -83,7 +83,7 @@
             padding: 0.9rem 1rem;
             margin-bottom: 1rem;
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 0.75rem;
             font-size: 0.88rem;
         }
@@ -121,7 +121,7 @@
         }
         .download-grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 1.25rem;
             align-items: start;
         }
@@ -299,6 +299,11 @@
         }
         footer a { color: #60a5fa; text-decoration: none; }
 
+        @media (max-width: 900px) {
+            .release-strip,
+            .download-grid { grid-template-columns: 1fr; }
+        }
+
         @media (max-width: 500px) {
             .main { padding: 2rem 1.25rem; }
             .release-strip,
@@ -336,28 +341,32 @@
 <div class="main">
     <div class="container">
         <h1>Скачать Skipi</h1>
-        <p class="subtitle">Два настольных приложения для моряков и крюинга</p>
+        <p class="subtitle">Загрузка с сайта через RF-доступный маршрут Timeweb</p>
         <p class="version">Ранний доступ</p>
 
         <div class="release-strip">
             <div>
-                <strong>Skipi Crewing v0.4.109</strong>
-                <span>Опубликовано 12 мая 2026 &middot; <a href="https://github.com/CaptTymur/skipi-crewing/releases/tag/v0.4.109">релиз GitHub</a></span>
+                <strong>Skipi Crewing v0.4.112</strong>
+                <span>Опубликовано 12 мая 2026 &middot; <a href="https://api-ru.skipi.app/crewing/latest.json">RF manifest</a></span>
             </div>
             <div>
-                <strong>Skipi Seafarer v0.4.121</strong>
-                <span>Опубликовано 12 мая 2026 &middot; <a href="https://github.com/CaptTymur/skipi.app">репозиторий GitHub</a> &middot; <a href="https://github.com/CaptTymur/skipi.app/releases/tag/v0.4.121">релиз</a></span>
+                <strong>Skipi Seafarer v0.4.123</strong>
+                <span>Опубликовано 12 мая 2026 &middot; <a href="https://api-ru.skipi.app/latest.json">RF manifest</a></span>
+            </div>
+            <div>
+                <strong>Skipi Broker v0.1.15</strong>
+                <span>Опубликовано 12 мая 2026 &middot; <a href="https://api-ru.skipi.app/broker/latest.json">RF manifest</a></span>
             </div>
         </div>
 
         <div class="warning-panel">
             <strong>Важное предупреждение перед установкой</strong>
-            Skipi сейчас в ранней beta. Windows, Microsoft Defender, браузер, macOS Gatekeeper или корпоративная политика безопасности могут попросить подтверждение перед запуском нового установщика. На Linux может понадобиться разрешить запуск AppImage. Основные ссылки на этой странице ведут на зеркало Timeweb; GitHub Releases остаётся запасным каналом.
+            Skipi сейчас в ранней beta. Windows, Microsoft Defender, браузер или корпоративная политика безопасности могут попросить подтверждение перед запуском нового установщика. На Linux может понадобиться разрешить запуск AppImage. Основные кнопки скачивания на этой странице ведут через Timeweb/RF route.
         </div>
 
         <div class="warning-panel">
             <strong>Зеркало для пользователей из РФ</strong>
-            По умолчанию загрузка идёт через Timeweb: <a href="https://api-ru.skipi.app/downloads/">api-ru.skipi.app/downloads</a>. Если зеркало недоступно, используйте запасные ссылки GitHub Releases внизу страницы.
+            Telegram используется только как канал объявления. Скачивание идёт с сайта: по умолчанию через <a href="https://api-ru.skipi.app/downloads/">api-ru.skipi.app/downloads</a>, чтобы пользователям из России не требовался VPN только для загрузки приложения.
         </div>
 
         <div class="download-grid">
@@ -374,22 +383,8 @@
                         </div>
                     </div>
                     <div class="card-actions">
-                        <a class="btn" href="https://api-ru.skipi.app/downloads/crewing/0.4.109/Skipi.Crewing_0.4.109_x64-setup.exe">Скачать</a>
-                        <a class="btn-alt" href="https://api-ru.skipi.app/downloads/crewing/0.4.109/Skipi.Crewing_0.4.109_x64_en-US.msi">.msi</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-info">
-                        <div class="card-icon">&#8984;</div>
-                        <div class="card-label">
-                            <h3>macOS</h3>
-                            <p>Тестовая Intel-сборка &middot; .dmg</p>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <a class="btn" href="https://api-ru.skipi.app/downloads/crewing/0.4.109/Skipi.Crewing_0.4.109_x64.dmg">Скачать</a>
-                        <a class="btn-alt" href="https://api-ru.skipi.app/downloads/crewing/0.4.109/Skipi.Crewing_x64.app.tar.gz">Пакет обновления</a>
+                        <a class="btn" href="https://api-ru.skipi.app/downloads/crewing/0.4.112/Skipi.Crewing_0.4.112_x64-setup.exe">Скачать</a>
+                        <a class="btn-alt" href="https://api-ru.skipi.app/downloads/crewing/0.4.112/Skipi.Crewing_0.4.112_x64_en-US.msi">.msi</a>
                     </div>
                 </div>
 
@@ -401,12 +396,12 @@
                             <p>Debian / Ubuntu &middot; .deb</p>
                         </div>
                     </div>
-                    <a class="btn" href="https://api-ru.skipi.app/downloads/crewing/0.4.109/Skipi.Crewing_0.4.109_amd64.deb">Скачать</a>
+                    <a class="btn" href="https://api-ru.skipi.app/downloads/crewing/0.4.112/Skipi.Crewing_0.4.112_amd64.deb">Скачать</a>
                 </div>
                 <div class="linux-extra">
                     <span>Также:</span>
-                    <a href="https://api-ru.skipi.app/downloads/crewing/0.4.109/Skipi.Crewing_0.4.109_amd64.AppImage">AppImage</a>
-                    <a href="https://api-ru.skipi.app/downloads/crewing/0.4.109/Skipi.Crewing-0.4.109-1.x86_64.rpm">RPM</a>
+                    <a href="https://api-ru.skipi.app/downloads/crewing/0.4.112/Skipi.Crewing_0.4.112_amd64.AppImage">AppImage</a>
+                    <a href="https://api-ru.skipi.app/downloads/crewing/0.4.112/Skipi.Crewing-0.4.112-1.x86_64.rpm">RPM</a>
                 </div>
             </section>
 
@@ -423,22 +418,8 @@
                         </div>
                     </div>
                     <div class="card-actions">
-                        <a class="btn" href="https://api-ru.skipi.app/downloads/seafarer/0.4.121/Skipi_0.4.121_x64-setup.exe">Скачать</a>
-                        <a class="btn-alt" href="https://api-ru.skipi.app/downloads/seafarer/0.4.121/Skipi_0.4.121_x64_en-US.msi">.msi</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-info">
-                        <div class="card-icon">&#8984;</div>
-                        <div class="card-label">
-                            <h3>macOS</h3>
-                            <p>Тестовая Intel-сборка &middot; .dmg</p>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <a class="btn" href="https://api-ru.skipi.app/downloads/seafarer/0.4.121/Skipi_0.4.121_x64.dmg">Скачать</a>
-                        <a class="btn-alt" href="https://api-ru.skipi.app/downloads/seafarer/0.4.121/Skipi_x64.app.tar.gz">Пакет обновления</a>
+                        <a class="btn" href="https://api-ru.skipi.app/downloads/seafarer/0.4.123/Skipi_0.4.123_x64-setup.exe">Скачать</a>
+                        <a class="btn-alt" href="https://api-ru.skipi.app/downloads/seafarer/0.4.123/Skipi_0.4.123_x64_en-US.msi">.msi</a>
                     </div>
                 </div>
 
@@ -450,60 +431,64 @@
                             <p>Debian / Ubuntu &middot; .deb</p>
                         </div>
                     </div>
-                    <a class="btn" href="https://api-ru.skipi.app/downloads/seafarer/0.4.121/Skipi_0.4.121_amd64.deb">Скачать</a>
+                    <a class="btn" href="https://api-ru.skipi.app/downloads/seafarer/0.4.123/Skipi_0.4.123_amd64.deb">Скачать</a>
                 </div>
                 <div class="linux-extra">
                     <span>Также:</span>
-                    <a href="https://api-ru.skipi.app/downloads/seafarer/0.4.121/Skipi_0.4.121_amd64.AppImage">AppImage</a>
-                    <a href="https://api-ru.skipi.app/downloads/seafarer/0.4.121/Skipi-0.4.121-1.x86_64.rpm">RPM</a>
+                    <a href="https://api-ru.skipi.app/downloads/seafarer/0.4.123/Skipi_0.4.123_amd64.AppImage">AppImage</a>
+                    <a href="https://api-ru.skipi.app/downloads/seafarer/0.4.123/Skipi-0.4.123-1.x86_64.rpm">RPM</a>
+                </div>
+            </section>
+
+            <section class="product-panel" id="broker">
+                <h2>Skipi Broker</h2>
+                <p class="product-desc">Для брокеров и chartering desk: доступ к trade desk, мониторинг циркуляций и рабочий инструмент брокера.</p>
+
+                <div class="card">
+                    <div class="card-info">
+                        <div class="card-icon">&#128187;</div>
+                        <div class="card-label">
+                            <h3>Windows</h3>
+                            <p>64-bit установщик &middot; .exe</p>
+                        </div>
+                    </div>
+                    <a class="btn" href="https://api-ru.skipi.app/downloads/broker/0.1.15/Skipi-Broker_0.1.15_x64-setup.exe">Скачать</a>
+                </div>
+
+                <div class="card">
+                    <div class="card-info">
+                        <div class="card-icon">&#128039;</div>
+                        <div class="card-label">
+                            <h3>Linux</h3>
+                            <p>Debian / Ubuntu &middot; .deb</p>
+                        </div>
+                    </div>
+                    <a class="btn" href="https://api-ru.skipi.app/downloads/broker/0.1.15/Skipi-Broker_0.1.15_amd64.deb">Скачать</a>
+                </div>
+                <div class="linux-extra">
+                    <span>Также:</span>
+                    <a href="https://api-ru.skipi.app/downloads/broker/0.1.15/Skipi-Broker_0.1.15_amd64.AppImage">AppImage</a>
                 </div>
             </section>
         </div>
 
         <section class="trust-panel" id="verification">
             <h2>Проверка скачанного файла</h2>
-            <p>Установщики отдаются через зеркало Timeweb и GitHub Releases. Контрольные суммы SHA256 ниже соответствуют файлам, на которые ведут ссылки на этой странице. Полный список: <a href="/downloads/checksums.txt">SHA256SUMS.txt</a>.</p>
-
-            <div class="trust-grid">
-                <div>
-                    <h3>Skipi Crewing</h3>
-                    <ul class="trust-list">
-                        <li><span class="file">Windows .exe</span><code>628297f93fd9da4f1dbdd8424a339fa0787e4d6f0333f33d2bee4f6c9f9761f5</code></li>
-                        <li><span class="file">Windows .msi</span><code>f8e1c98879d6c317da1f1ae175d96e68b98b3b4f9e7f95f7db91490e3eb3f0b3</code></li>
-                        <li><span class="file">macOS .dmg</span><code>f9f9a7fb0f54d058425c7fe05080d239b41e1c681afa4fb99ff51dc53f044315</code></li>
-                        <li><span class="file">macOS обновление</span><code>6bd64efcbea0ac81480de59bb0bfb898eaf99e7888d229362ce77bbe33146540</code></li>
-                        <li><span class="file">Linux .deb</span><code>facb716e3e9e35bf072149019bca13082a45635e31e100abe27bee429e266b15</code></li>
-                        <li><span class="file">AppImage</span><code>9259ea8011d954b7c93b48f9c0da018d1437096f6e80f4953a8cd0fce5914da1</code></li>
-                        <li><span class="file">RPM</span><code>e4891ab3e5663992ce98616412c2a4d69c49786acca5a2e88f62d180fe05bc42</code></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Skipi Seafarer</h3>
-                    <ul class="trust-list">
-                        <li><span class="file">Windows .exe</span><code>566783bdb6d163619037d66676b058449b88cf6243b965b02c7e5123df58aa3d</code></li>
-                        <li><span class="file">Windows .msi</span><code>8bd5fdc14f10d9bf3c9aa51ac2a161ab413e9843a0e44f004c6ef554cfd546bb</code></li>
-                        <li><span class="file">macOS .dmg</span><code>eafb2f071c9507f7e8a5b23529772098959980229170d306f470b84f5399afe1</code></li>
-                        <li><span class="file">macOS обновление</span><code>e9c03a92cbff679bb62d67871b86d23143b4a38b35bb0a2c8f3c3f23a2305007</code></li>
-                        <li><span class="file">Linux .deb</span><code>12be9fa1d7a1d1562a21b2667389bb6dda6671bcedd2028aff0aaaea145b9090</code></li>
-                        <li><span class="file">AppImage</span><code>e60a15ec455f56f8c26a54de5323b684d37d79e0309e8fac88df9783bc77db7b</code></li>
-                        <li><span class="file">RPM</span><code>5f2d08381f987692fac81bbf180d1ece8f37f1fa6d834ec0687774dd94e0346a</code></li>
-                    </ul>
-                </div>
-            </div>
+            <p>Основные установщики отдаются через RF-доступный маршрут Skipi. Текущие manifests: <a href="https://api-ru.skipi.app/latest.json">Seafarer</a>, <a href="https://api-ru.skipi.app/crewing/latest.json">Crewing</a> и <a href="https://api-ru.skipi.app/broker/latest.json">Broker</a>.</p>
 
             <div class="signing-status">
-                Подпись Windows Authenticode и Apple notarization будут включены для будущих публичных релизов. Текущие beta-установщики могут показывать предупреждения "Unknown publisher" или Gatekeeper.
+                Подпись Windows Authenticode будет включена для будущих публичных релизов. Текущие beta-установщики могут показывать предупреждение "Unknown publisher". Распространение macOS-сборок на этом этапе приостановлено.
             </div>
         </section>
 
         <p class="note">
             Это ранние beta-сборки. Если Windows или защитная программа блокирует установку, пришлите точный текст сообщения или скриншот на <a href="mailto:beta@skipi.app">beta@skipi.app</a>.<br>
-            Все данные остаются на вашем компьютере. macOS сейчас распространяется как неподписанная тестовая Intel-сборка.<br>
+            Все данные остаются на вашем компьютере. macOS-сборки на этом этапе не публикуются.<br>
             <a href="https://github.com/CaptTymur/skipi.app">GitHub репозиторий Seafarer</a>
             &nbsp;&middot;&nbsp;
-            <a href="https://github.com/CaptTymur/skipi.app/releases/tag/v0.4.121">запасной релиз Seafarer</a>
+            <a href="https://github.com/CaptTymur/skipi-crewing">GitHub репозиторий Crewing</a>
             &nbsp;&middot;&nbsp;
-            <a href="https://github.com/CaptTymur/skipi-crewing/releases/tag/v0.4.109">релиз Crewing</a>
+            <a href="https://github.com/CaptTymur/skipi-broker">GitHub репозиторий Broker</a>
             &nbsp;&middot;&nbsp;
             <a href="/">назад на skipi.app</a>
         </p>
