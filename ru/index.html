@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Skipi — Платформа для моряков и крюинга</title>
+    <meta name="description" content="Skipi — локальная maritime-платформа для моряков и крюинга: профиль, вакансии, CV-пайплайн, документный vault и контроль сроков сертификатов.">
+    <meta name="keywords" content="морские документы, крюинг, моряк, сертификаты STCW, вакансии морякам, судовые документы, maritime workflow, контроль сроков сертификатов, CV моряка">
+    <meta name="author" content="Skipi">
+    <meta property="og:title" content="Skipi — Платформа для моряков и крюинга">
+    <meta property="og:description" content="Локальная maritime-платформа для моряков и крюинга: вакансии, CV-пайплайн, документный vault, пакеты документов и контроль сроков сертификатов.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://skipi.app/ru/">
+    <meta property="og:site_name" content="Skipi">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Skipi — Платформа для моряков и крюинга">
+    <meta name="twitter:description" content="Вакансии, CV-пайплайн, document vault и контроль сертификатов для моряков и крюинга.">
+    <link rel="canonical" href="https://skipi.app/ru/">
+    <link rel="alternate" hreflang="en" href="https://skipi.app/">
+    <link rel="alternate" hreflang="ru" href="https://skipi.app/ru/">
+    <link rel="alternate" hreflang="x-default" href="https://skipi.app/">
+
+    <!-- Structured Data for SEO + Legal prior art publication -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Skipi",
+        "alternateName": "Skipi Maritime Obsidian",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web, iOS, Android",
+        "url": "https://skipi.app/ru/",
+        "author": {
+            "@type": "Organization",
+            "name": "Skipi"
+        },
+        "copyrightYear": 2026,
+        "copyrightHolder": {
+            "@type": "Organization",
+            "name": "Skipi"
+        },
+        "datePublished": "2026-04-06",
+        "description": "Skipi — локальная maritime-платформа для моряков и крюинга: документный vault, контроль сроков сертификатов, CV-пайплайн и обмен пакетами документов по ссылке.",
+        "featureList": [
+            "Пакеты документов по уникальной ссылке без аккаунта получателя",
+            "SOLAS-шаблоны документов по типу судна",
+            "Контроль сроков сертификатов и освидетельствований",
+            "Local-first архитектура: файлы остаются на устройстве пользователя",
+            "Личный vault моряка по должности и STCW",
+            "Шаблоны пакетов для повторяющихся запросов",
+            "Сканирование и распознавание сертификатов",
+            "Два режима отправки пакетов: локальный ZIP и облачная ссылка",
+            "Структурированный просмотр документов на стороне крюинга",
+            "Цифровой pipeline от моряка к работодателю",
+            "AI-анализ документов и извлечение метаданных"
+        ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --navy: #0f2b46;
+            --blue: #1a73e8;
+            --light: #f0f4f8;
+            --white: #ffffff;
+            --gray: #64748b;
+            --dark: #1e293b;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 100%);
+            color: var(--white);
+            padding: 3rem 1.5rem 3.5rem;
+            text-align: center;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        .hero .tagline {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        .hero .highlight {
+            color: #60a5fa;
+        }
+        .lang-switch {
+            width: min(980px, 100%);
+            margin: 0 auto 1rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+        .lang-link {
+            display: inline-block;
+            padding: 0.35rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.92);
+        }
+        .lang-link.active {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.6);
+        }
+        .role-grid {
+            width: min(980px, 100%);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            text-align: left;
+        }
+        .role-card {
+            min-height: 270px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+        }
+        .role-kicker {
+            color: #93c5fd;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.65rem;
+        }
+        .role-card h2 {
+            font-size: clamp(1.45rem, 3vw, 2rem);
+            line-height: 1.15;
+            margin-bottom: 0.7rem;
+        }
+        .role-card p {
+            color: rgba(255,255,255,0.84);
+            font-size: 0.98rem;
+            margin-bottom: 1rem;
+        }
+        .role-card ul {
+            list-style: none;
+            display: grid;
+            gap: 0.42rem;
+            color: rgba(255,255,255,0.78);
+            font-size: 0.9rem;
+            margin-bottom: 1.3rem;
+        }
+        .role-card li::before {
+            content: "";
+            width: 0.42rem;
+            height: 0.42rem;
+            display: inline-block;
+            border-radius: 999px;
+            background: #60a5fa;
+            margin-right: 0.55rem;
+            vertical-align: 0.08rem;
+        }
+        .role-actions {
+            margin-top: auto;
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+        .role-btn {
+            display: inline-block;
+            padding: 0.72rem 1rem;
+            border-radius: 8px;
+            background: var(--blue);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.92rem;
+        }
+        .role-btn.secondary {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.35);
+        }
+        .hero-note {
+            margin: 1.2rem auto 0;
+            color: rgba(255,255,255,0.65);
+            font-size: 0.85rem;
+            max-width: 720px;
+        }
+
+        /* CTA */
+        .cta-box {
+            max-width: 440px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        .cta-box p {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            margin-bottom: 1rem;
+        }
+        .cta-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .cta-form input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 1rem;
+        }
+        .cta-form input::placeholder { color: rgba(255,255,255,0.5); }
+        .cta-form input:focus { outline: none; border-color: #60a5fa; }
+        .cta-form button {
+            padding: 0.75rem 1.5rem;
+            background: var(--blue);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .cta-form button:hover { background: #1557b0; }
+        .cta-note {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            margin-top: 0.75rem;
+        }
+
+        /* Features */
+        .features {
+            padding: 4rem 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .features h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .feature-card {
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: var(--light);
+        }
+        .feature-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .feature-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+        }
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* How it works */
+        .how {
+            background: var(--light);
+            padding: 4rem 1.5rem;
+        }
+        .how-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .how h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .step {
+            display: flex;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+        .step-num {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            background: var(--blue);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .step h3 { font-size: 1.05rem; margin-bottom: 0.25rem; }
+        .step p { color: var(--gray); font-size: 0.95rem; }
+
+        /* Footer */
+        footer {
+            background: var(--navy);
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            padding: 2rem 1.5rem;
+            font-size: 0.85rem;
+        }
+        footer a { color: #60a5fa; }
+
+        /* Submitted state */
+        .submitted { display: none; color: #22c55e; font-weight: 600; margin-top: 1rem; }
+
+        @media (max-width: 600px) {
+            .hero { min-height: auto; }
+            .role-grid { grid-template-columns: 1fr; }
+            .cta-form { flex-direction: column; }
+            .cta-form button { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <div class="lang-switch" aria-label="Переключатель языка">
+        <a class="lang-link" href="/" lang="en">EN</a>
+        <a class="lang-link active" href="/ru/" lang="ru">RU</a>
+    </div>
+    <h1>Skipi</h1>
+    <p class="tagline">
+        Практические инструменты для обеих сторон крюинга.<br>
+        <span class="highlight">Слева — процесс крюинга, справа — vault моряка.</span>
+    </p>
+
+    <div class="role-grid">
+        <article class="role-card">
+            <div class="role-kicker">Для Крюинга</div>
+            <h2>Skipi Crewing</h2>
+            <p>Десктоп-приложение для работодателя: публикация вакансий, прием откликов, просмотр документов и рабочая коммуникация.</p>
+            <ul>
+                <li>Публикация вакансий в Skipi jobs board</li>
+                <li>Структурированные отклики от моряков</li>
+                <li>Просмотр CV и сертификатов без хаоса в почте</li>
+                <li>Локальный vault для работы команды</li>
+            </ul>
+            <div class="role-actions">
+                <a class="role-btn" href="/downloads#crewing">Скачать Crewing</a>
+                <a class="role-btn secondary" href="mailto:info@tymur.org">Запросить доступ</a>
+            </div>
+        </article>
+
+        <article class="role-card">
+            <div class="role-kicker">Для Моряков</div>
+            <h2>Skipi Seafarer</h2>
+            <p>Личный документный vault моряка: сертификаты, CV, сроки действия и отправка структурированных пакетов.</p>
+            <ul>
+                <li>Создание именного локального vault</li>
+                <li>Контроль сроков и недостающих документов</li>
+                <li>Подготовка CV и пакетов для работодателей</li>
+                <li>Отклики на вакансии с хранением данных на вашем ПК</li>
+            </ul>
+            <div class="role-actions">
+                <a class="role-btn" href="/downloads#seafarer">Скачать Seafarer</a>
+                <a class="role-btn secondary" href="#features">Возможности</a>
+            </div>
+        </article>
+    </div>
+
+    <p class="hero-note">Ранняя beta. Skipi Crewing доступен по инвайту; Seafarer — публичный ранний доступ.</p>
+</section>
+
+<section class="how" id="overview">
+    <div class="how-inner">
+        <h2>Что Skipi делает уже сейчас</h2>
+        <div class="step">
+            <div class="step-num">1</div>
+            <div>
+                <h3>Проверка готовности профиля моряка</h3>
+                <p>Перед полным доступом к вакансиям приложение проверяет заполненность профиля, обязательные документы и морской опыт.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div>
+                <h3>Обработка на стороне крюинга</h3>
+                <p>Крюинг-команды получают структурированные отклики с CV и контекстом документов вместо разрозненных вложений в почте.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div>
+                <h3>RF-доступный маршрут загрузки</h3>
+                <p>Публичные установщики отдаются через RF-доступный маршрут, чтобы пользователи могли скачать приложение с сайта без лишних действий.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features" id="features">
+    <h2>Сделано под морскую индустрию</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="icon">📦</div>
+            <h3>Пакеты документов</h3>
+            <p>Выберите документы, сформируйте ссылку и отправьте. Получателю не нужен аккаунт. Vetting, PSC и запросы фрахтователя закрываются за минуты.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🏗️</div>
+            <h3>SOLAS-шаблоны</h3>
+            <p>Структурированный набор документов по типу судна. Для Bulk Carrier заранее создаются обязательные разделы, чтобы ничего не упустить.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">📅</div>
+            <h3>Контроль сертификатов</h3>
+            <p>Отслеживание сроков действия каждого сертификата. Цветовые статусы помогают не пропускать продления.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">💾</div>
+            <h3>Local-First</h3>
+            <p>Ваши файлы остаются на вашем устройстве. Синхронизация только при необходимости.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">👤</div>
+            <h3>Личный vault моряка</h3>
+            <p>Управление документами по должности. CoC, STCW, медкомиссия и другие документы можно быстро отправлять работодателям.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">📸</div>
+            <h3>Скан и распознавание</h3>
+            <p>Сфотографируйте сертификат — AI извлечет срок, номер и орган выдачи и сохранит документ в нужную категорию.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🤖</div>
+            <h3>AI-анализ документов</h3>
+            <p>AI читает PDF, извлекает метаданные и подсвечивает аномалии для ручной проверки.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">📧</div>
+            <h3>Два режима отправки</h3>
+            <p>Оффлайн: ZIP и письмо прямо из приложения. Онлайн: ссылка с ограничением по сроку и контролем скачиваний.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🏢</div>
+            <h3>Модуль для крюинга</h3>
+            <p>Крюинг получает структурированный просмотр документов моряка: фильтрация по должности, типу сертификата и срокам действия.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🔄</div>
+            <h3>Pipeline моряк → крюинг</h3>
+            <p>Моряк ведет документы в личном vault, а крюинг получает готовый структурированный пакет с CV и сертификатами.</p>
+        </div>
+    </div>
+</section>
+
+<section class="how">
+    <div class="how-inner">
+        <h2>Как работают пакеты</h2>
+        <div class="step">
+            <div class="step-num">1</div>
+            <div>
+                <h3>Выберите документы</h3>
+                <p>Выберите нужные файлы: сертификаты, class-документы и другие материалы по судну или моряку.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div>
+                <h3>Сформируйте пакет</h3>
+                <p>Задайте срок действия и лимит скачиваний. Skipi создаст защищенный пакет с уникальной ссылкой.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div>
+                <h3>Отправьте ссылку</h3>
+                <p>Отправьте ссылку по email или в мессенджер. Получателю не нужен аккаунт.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Prior Art / Technology Description (SEO + legal) -->
+<section class="features" id="technology">
+    <h2>Технологическая основа Skipi</h2>
+    <div style="max-width:700px; margin:0 auto; color: var(--gray); font-size: 0.95rem;">
+        <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Пакеты документов по ссылке</h3>
+        <p style="margin-bottom:1rem;">
+            Skipi реализует практичный сценарий обмена документами: пользователь выбирает файлы, система формирует пакет и выдает ссылку. Для ссылки задаются срок действия и лимит скачиваний. Получатель открывает пакет без регистрации, что убирает лишние шаги в рабочих процессах vetting, PSC и проверок фрахтователя.
+        </p>
+
+        <h3 style="color: var(--dark); margin-bottom: 0.5rem;">SOLAS-структуры документов</h3>
+        <p style="margin-bottom:1rem;">
+            При регистрации судна Skipi автоматически создает структуру документов по типу судна и базовым конвенционным требованиям. Это помогает держать единый стандарт хранения и не терять обязательные позиции при подготовке к проверкам.
+        </p>
+
+        <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Local-First архитектура</h3>
+        <p style="margin-bottom:1rem;">
+            Skipi следует local-first подходу: документы и метаданные хранятся локально, приложение может работать офлайн, а синхронизация выполняется только при необходимости.
+        </p>
+
+        <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Документы моряка</h3>
+        <p style="margin-bottom:1rem;">
+            У моряка есть личная структура документов по должности и STCW. Сроки действия отслеживаются, а нужный пакет можно отправить работодателю или в агентство по ссылке.
+        </p>
+
+        <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Два режима отправки</h3>
+        <p style="margin-bottom:1rem;">
+            В офлайн-режиме приложение формирует локальный ZIP для отправки через почту. В онлайн-режиме создается ссылка с параметрами доступа. Оба режима доступны в одном рабочем процессе.
+        </p>
+
+        <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Просмотр документов для крюинга</h3>
+        <p style="margin-bottom:1rem;">
+            Крюинг-команды получают структурированный интерфейс просмотра документов моряка с фильтрацией по типу сертификата, должности и срокам действия.
+        </p>
+
+        <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Pipeline моряк → работодатель</h3>
+        <p>
+            Skipi строит прямой цифровой pipeline между моряком и работодателем: от личного vault до структурированного пакета документов и CV для проверки на стороне крюинга.
+        </p>
+    </div>
+</section>
+
+<section class="how" id="use-cases">
+    <div class="how-inner">
+        <h2>Кому подходит Skipi</h2>
+        <div class="step">
+            <div class="step-num" style="background: var(--navy);">1</div>
+            <div>
+                <h3>Судовладельцы и ship management</h3>
+                <p>Управление документным контуром флота, подготовка к проверкам и быстрый обмен пакетами документов.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num" style="background: var(--navy);">2</div>
+            <div>
+                <h3>Отдельные суда</h3>
+                <p>Стандартизированная структура документов и контроль сроков даже для одиночного судна.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num" style="background: var(--navy);">3</div>
+            <div>
+                <h3>Моряки</h3>
+                <p>Личный документный vault, CV, контроль сроков и отправка пакета работодателю по ссылке.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num" style="background: var(--navy);">4</div>
+            <div>
+                <h3>Крюинг и manning агентства</h3>
+                <p>Получение структурированных пакетов от моряков и быстрый просмотр документов без ручной сортировки вложений.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div style="max-width:700px; margin:0 auto;">
+        <p><strong>Skipi</strong> — платформа для моряков и крюинга</p>
+        <p style="margin-top:.5rem;">&copy; 2026 Skipi. Все права защищены.</p>
+        <p style="margin-top:.3rem; font-size:.8rem; opacity:.6;">
+            Название Skipi, логотип, сервисы, архитектура и продуктовые механики защищены как интеллектуальная собственность.
+            Публичный desktop-клиент моряка может распространяться по MIT, а сервисная часть и товарные знаки — нет.
+            Первая публикация: 6 апреля 2026.
+        </p>
+        <p style="margin-top:.75rem;">
+            <a href="mailto:info@tymur.org">info@tymur.org</a>
+            &nbsp;&middot;&nbsp;
+            <a href="/terms.html">Условия использования</a>
+            &nbsp;&middot;&nbsp;
+            <a href="/privacy.html">Политика конфиденциальности</a>
+            &nbsp;&middot;&nbsp;
+            <a href="/ip-notice.html">IP-уведомление</a>
+        </p>
+    </div>
+</footer>
+
+<script>
+var waitlistForm = document.getElementById('waitlist-form');
+if (waitlistForm) waitlistForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form = this;
+    var btn = form.querySelector('button');
+    btn.disabled = true;
+    btn.textContent = 'Отправка...';
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {'Accept': 'application/json'}
+    }).then(function(r) {
+        if (r.ok) {
+            form.style.display = 'none';
+            document.getElementById('submitted-msg').style.display = 'block';
+        } else {
+            btn.disabled = false;
+            btn.textContent = 'Отправить';
+            alert('Произошла ошибка. Попробуйте ещё раз.');
+        }
+    }).catch(function() {
+        btn.disabled = false;
+        btn.textContent = 'Отправить';
+        alert('Ошибка сети. Попробуйте ещё раз.');
+    });
+});
+</script>
+</body>
+</html>

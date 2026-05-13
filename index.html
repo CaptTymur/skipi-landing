@@ -16,6 +16,9 @@
     <meta name="twitter:title" content="Skipi — Maritime Document Management">
     <meta name="twitter:description" content="Maritime workflow for crewing teams and seafarers: CV pipeline, document vaults, package sharing, and certificate tracking.">
     <link rel="canonical" href="https://skipi.app">
+    <link rel="alternate" hreflang="en" href="https://skipi.app/">
+    <link rel="alternate" hreflang="ru" href="https://skipi.app/ru/">
+    <link rel="alternate" hreflang="x-default" href="https://skipi.app/">
 
     <!-- Structured Data for SEO + Legal prior art publication -->
     <script type="application/ld+json">
@@ -96,6 +99,27 @@
         }
         .hero .highlight {
             color: #60a5fa;
+        }
+        .lang-switch {
+            width: min(980px, 100%);
+            margin: 0 auto 1rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+        .lang-link {
+            display: inline-block;
+            padding: 0.35rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.92);
+        }
+        .lang-link.active {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.6);
         }
         .role-grid {
             width: min(980px, 100%);
@@ -319,6 +343,10 @@
 <body>
 
 <section class="hero">
+    <div class="lang-switch" aria-label="Language switcher">
+        <a class="lang-link active" href="/" lang="en">EN</a>
+        <a class="lang-link" href="/ru/" lang="ru">RU</a>
+    </div>
     <h1>Skipi</h1>
     <p class="tagline">
         Maritime work tools for both sides of crewing.<br>
@@ -570,7 +598,8 @@
 </footer>
 
 <script>
-document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+var waitlistForm = document.getElementById('waitlist-form');
+if (waitlistForm) waitlistForm.addEventListener('submit', function(e) {
     e.preventDefault();
     var form = this;
     var btn = form.querySelector('button');
