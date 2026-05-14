@@ -12,7 +12,7 @@
       "url": "https://api-ru.skipi.app/downloads/seafarer/0.4.130/Skipi_0.4.130_amd64.AppImage"
     },
     "linux-x86_64-deb": {
-      "signature": "",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjdEWERubHpRRTdtVW84RU9GVDNKVmJPOXJEMGZYalhpSm83TzRMYjVLQzdkd0EzZDVzUFY0VVBXWmF5V0tVK0NUK0dNVUp6Rk5lN0VjNjRTME40dWdVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4NzgwMzg2CWZpbGU6U2tpcGlfMC40LjEzMF9hbWQ2NC5kZWIKdnRLaHhaNGxMYTcvR1FlUllvcGoxbFpSaVlYaTl0Y09JZER5S0ZpOVlIQjFpd0RBUk4vTHd2MkVMZWkwSDQ4QTVJWVhad2UyMjdVK1A1dzlBZGs3QWc9PQo=",
       "url": "https://api-ru.skipi.app/downloads/seafarer/0.4.130/Skipi_0.4.130_amd64.deb"
     }
   }
