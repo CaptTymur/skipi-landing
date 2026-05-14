@@ -221,6 +221,28 @@
             font-size: 0.85rem;
             color: var(--gray);
         }
+        /* Gatekeeper workaround note under macOS card. */
+        .mac-note {
+            margin-top: 0.5rem;
+            padding: 0 1.5rem 1rem;
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+        .mac-note p { margin: 0 0 0.5rem; }
+        .mac-note code {
+            display: block;
+            background: #0f1f33;
+            color: #e2eaf2;
+            padding: 0.55rem 0.75rem;
+            border-radius: 6px;
+            font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+            font-size: 0.78rem;
+            user-select: all;
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+        .mac-note .why { font-size: 0.75rem; color: #93a2b2; margin-top: 0.35rem; }
         .trust-panel {
             background: var(--white);
             border: 1px solid #dbe4ee;
@@ -430,6 +452,11 @@
                     <div class="card-actions">
                         <a class="btn" href="https://api-ru.skipi.app/downloads/seafarer/0.4.128/Skipi_0.4.128_x64.dmg">Скачать</a>
                     </div>
+                </div>
+                <div class="mac-note">
+                    <p><strong>После установки на macOS:</strong> перетащите Skipi.app в папку <em>Applications</em>, затем откройте <em>Терминал</em> (⌘+Space → «Terminal» → Enter) и выполните одну команду:</p>
+                    <code>xattr -dr com.apple.quarantine /Applications/Skipi.app</code>
+                    <p class="why">Это снимает карантинный флаг, который macOS навешивает на любое приложение, скачанное вне App Store. Один раз — и Skipi запустится. Без неё система покажет «Apple не удалось подтвердить, что приложение не содержит вредоносного ПО».</p>
                 </div>
 
                 <div class="card">
