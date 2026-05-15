@@ -1,19 +1,19 @@
 {
-  "version": "0.4.131",
-  "pub_date": "2026-05-14T18:49:54Z",
-  "notes": "Skipi 0.4.131",
+  "version": "0.4.132",
+  "pub_date": "2026-05-15T04:56:31Z",
+  "notes": "Skipi 0.4.132",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjhCNDMyWGs0SjhuSEVTR0NwSHg1NFgreFlkZ296VEJIcFdCdHdORXFzNVlpaFNGeG5HOXZLVUFXb3RRMDUrbnZSa2lyWjRkWFhlZXltaTMyNlhSR0F3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4Nzg0NTY5CWZpbGU6U2tpcGlfMC40LjEzMV94NjQtc2V0dXAuZXhlCjUrc01KMmFISWZVak1ZYTZRSHE1ZGlZQjRZbEVVSTdQVHR2Nldub3lUY0U5ZjhDUjc3RUUwUkg2T1R5QzkzSXozSFBEekJCcDYxZG5wcmJMcktGZENnPT0K",
-      "url": "https://api-ru.skipi.app/downloads/seafarer/0.4.131/Skipi_0.4.131_x64-setup.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjNsUTRaUkNFWXA2bWc4RHV4VDVGVE1oWG5zSWRtZ3NnRjZwK25aTGtSdmFvRUlqT3ZmTmJxc2lKSFZVREU1RERqSmJjRzMwZCtaTExZVEJOb0xPQnd3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4ODIwOTY1CWZpbGU6U2tpcGlfMC40LjEzMl94NjQtc2V0dXAuZXhlCk1sdnRxZ3dvMlZxR1Zxc2JsaWRqdjVFZE5uWHVPbWRuQ3JQR1dBSUROeTc4a3krR3hCcEVrTUM3ZkdMS0lKK2RQR0RVd0NDQWZpRVFHZ3BXbU5MTENBPT0K",
+      "url": "https://api-ru.skipi.app/downloads/seafarer/0.4.132/Skipi_0.4.132_x64-setup.exe"
     },
     "linux-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjA1aFplOHlNbWdaV1l2Z3dOejhxVExSUmlNRVJuY2pGcExjT2dza09UZTNIcWFKbUVCREhVN2hRalVOZ3RZbzk0WllFQk9NMWRCSjgrNFJVaThpRlFNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4Nzg0NDQ1CWZpbGU6U2tpcGlfMC40LjEzMV9hbWQ2NC5BcHBJbWFnZQpEZHM4MGZHOU8vOGVVcWJuWGR4WXdZSlJlbFVoWlN5RkVaMk9zQzFiYU1veUhuc3JGZHFOY1dFWGQrakZRMnVQdkpUSjFpYlc0Wm1PTm0vQmRuck5BUT09Cg==",
-      "url": "https://api-ru.skipi.app/downloads/seafarer/0.4.131/Skipi_0.4.131_amd64.AppImage"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjlwbEd2SDFYU0pRdEl3bVBBNi8rQXcwYktLbkgyQ2pEdUI2ZnNzNHhML2FueXdQQ2Zqa3NaS0VGMm5Pc3RSc0NrUmlOZ3RCaWZsOUI1SUYwWkNYUkFFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4ODIwOTYyCWZpbGU6U2tpcGlfMC40LjEzMl9hbWQ2NC5BcHBJbWFnZQpkVy9MT1J6cXlKdUF1cmpTZDF0c3BCTVZjWTBDNzRHUUFUOTBtVndqYW1QSnZaWWp0N1g4NnlDMEh3MmRLYmJjZ0RPT1lNZVZkSXFscFloOFFaMEFEZz09Cg==",
+      "url": "https://api-ru.skipi.app/downloads/seafarer/0.4.132/Skipi_0.4.132_amd64.AppImage"
     },
     "linux-x86_64-deb": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZnh4aU1MMS9XVFN0Yi9GbmNtOEtSV2FUcExKaUdUT2pLaWJ6TzJheEdBRFhlYytpM0pKVm5HVVdWc3o3ejFxZjhyQ0IyNlB3TTBsendJYVFYaTh4cHdFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4Nzg0NDQ1CWZpbGU6U2tpcGlfMC40LjEzMV9hbWQ2NC5kZWIKYmRIZ2Z4MEVWN3hvN2Y5N3g4SjZwL1A4eEdsNWQrT1dtNlQ4VjlLWFlLY3E0d0orN1NEaFBTektXekcyM2VoNjllNW0wT3l6SitRQjI4Nk5KZFFrRHc9PQo=",
-      "url": "https://api-ru.skipi.app/downloads/seafarer/0.4.131/Skipi_0.4.131_amd64.deb"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZnlnTllabTZrcWVOSkJyQ1FIQUJMVFZEZTdoVHZtWU5rWVhnNHl0U0hSS3NkaXdJN3NVZm0rNk53UjFCUHlVWEZjWGZBMWRGTGhIUkhveTM5QUhseGcwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc4ODIwOTYxCWZpbGU6U2tpcGlfMC40LjEzMl9hbWQ2NC5kZWIKWjhLNHJXdXdvYmdQb0kvRWpJcDVwRnVnM1VIOXN4T0F5TTlPeXRrMEVzMEJPMjk5NW9zdHhzd2VoNWJzTkZFamxTSEVrSkw1OTRVUitFNEFCNEllQ2c9PQo=",
+      "url": "https://api-ru.skipi.app/downloads/seafarer/0.4.132/Skipi_0.4.132_amd64.deb"
     }
   }
 }
