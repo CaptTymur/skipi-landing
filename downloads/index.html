@@ -148,18 +148,19 @@
             border-radius: 10px;
             padding: 1rem;
             margin-bottom: 1rem;
-            display: flex;
+            display: grid;
+            grid-template-columns: 2.5rem minmax(0, 1fr);
+            gap: 0.75rem 1rem;
             align-items: center;
-            justify-content: space-between;
         }
         .card-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            min-width: 0;
+            display: contents;
         }
         .card-icon {
             font-size: 2rem;
+            line-height: 1;
+            text-align: center;
+            width: 2.5rem;
         }
         .card-label h3 {
             font-size: 1.05rem;
@@ -169,11 +170,19 @@
         .card-label p {
             font-size: 0.85rem;
             color: var(--gray);
+            overflow-wrap: anywhere;
         }
         .card-actions {
             display: flex;
             gap: 0.5rem;
             align-items: center;
+            flex-wrap: wrap;
+            grid-column: 2;
+            justify-content: flex-start;
+        }
+        .card > .btn {
+            grid-column: 2;
+            justify-self: start;
         }
         .btn {
             display: inline-block;
@@ -337,14 +346,16 @@
             .product-desc,
             .note { overflow-wrap: anywhere; }
             .card {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
+                grid-template-columns: 2.5rem minmax(0, 1fr);
             }
             .card-actions {
                 width: 100%;
-                flex-direction: column;
+                grid-column: 1 / -1;
                 align-items: stretch;
+            }
+            .card > .btn {
+                grid-column: 1 / -1;
+                justify-self: stretch;
             }
             .btn,
             .btn-alt {
