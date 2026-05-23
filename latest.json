@@ -1,19 +1,15 @@
 {
-  "version": "0.4.133",
-  "pub_date": "2026-05-19T06:50:27Z",
-  "notes": "Skipi 0.4.133",
+  "version": "0.4.136",
+  "pub_date": "2026-05-23T10:31:48Z",
+  "notes": "Skipi 0.4.136",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjF0M0FyWjdQWDhIMWdHdWZZU0dLZlFXZWFDVm5LRVlRMWNtVUg1OTJqUnJFQTZhbit1bU1iU2lHNHBPaklhK09wVktrZmtTelRiY012aTJyZ2g0RmdFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5MTczMzk1CWZpbGU6U2tpcGlfMC40LjEzM194NjQtc2V0dXAuZXhlCnh3OW5pN2pGd05IVUVxbVB3Ym5XL25qTUxaYmZJV1VrMlJFQlhYSldSYlhuMWM3ajVmVDU3RzFsdzl3a280RXdiTzNlWkRzeThYcDdJc3F3bVRFRUFnPT0K",
-      "url": "https://api-ru.skipi.app/downloads/seafarer/0.4.133/Skipi_0.4.133_x64-setup.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZnkxaEthUHNiYzEzRHBDQUpJa3lrb3Jnc1MwZmNLR3JvbnhQTkh1SWxIajRNaHl4bXBYR3JZUVowQ24rYUJ6cWN1Sm43WUpnS2Y2VUlSbFdZK3FORHdNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5NTMyMjc4CWZpbGU6U2tpcGlfMC40LjEzNl94NjQtc2V0dXAuZXhlCjV5UklQYm1jVHB5THI1bjRsZGRmOFVMNndJeHh6UncwMWxQL215UzNTanV2REYyTExMOCtaZEpOWGIwZjNTdnBJczhVK3AwYkNZUlNuT2pWcmZtakF3PT0K",
+      "url": "https://github.com/CaptTymur/skipi.app/releases/download/v0.4.136/Skipi_0.4.136_x64-setup.exe"
     },
     "linux-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZjAwWE5lUzE5b2lsdndycFFvUHBoZ0xLZ2RBUWNKU3NxSWx6azF6czk5ZUl5eHZ1R2pENGlhUUNHNTJJeVdJTE1oeGd3cEpZbzAweERPY3FWQkRVOHdJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5MTczMzc1CWZpbGU6U2tpcGlfMC40LjEzM19hbWQ2NC5BcHBJbWFnZQp3UTNwa3JraW9pa0lkRzVnNUdiZEpEVGdUNXprejNmZVVpNnY5TmQ0ZEcrejUySUlReWZ4K0FySk9VVVRPTmxKQ1gwVDdUOGNFZFpXMnVNSlFpZEpCQT09Cg==",
-      "url": "https://api-ru.skipi.app/downloads/seafarer/0.4.133/Skipi_0.4.133_amd64.AppImage"
-    },
-    "linux-x86_64-deb": {
-      "signature": "",
-      "url": "https://api-ru.skipi.app/downloads/seafarer/0.4.133/Skipi_0.4.133_amd64.deb"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVzFCNUZOTVdwZnpHKzdwVnd2d3JuM1hLeEVScmtvZHMvUnBsVGViWnhsZUxBY1IyU25HUmw5QXdzYnNCUC9FTU9odVNCLzRxd0hneDBUMUFDQjdGQllmTDM1VC9YM3dBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc5NTMyMTU4CWZpbGU6U2tpcGlfMC40LjEzNl9hbWQ2NC5BcHBJbWFnZQp4RXpWRTNFRlFpR1FSalRML2ZuM2dEd0lxbVp6eThScUxFYXJRWi8zOC81WW9YMFNLNThReG9sRDZWV3VYVUdRcDQ3ZmQ4TnJNRmUyZFBmMElyMVREZz09Cg==",
+      "url": "https://github.com/CaptTymur/skipi.app/releases/download/v0.4.136/Skipi_0.4.136_amd64.AppImage"
     }
   }
 }
