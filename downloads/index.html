@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Скачать Skipi — морские документы, CV и рассылка</title>
-    <meta name="description" content="Скачать Skipi Seafarer и Skipi Crewing для Windows или Linux. RF-доступные beta-загрузки с сайта skipi.app.">
+    <meta name="description" content="Скачать Skipi Seafarer и запросить авторизационный токен для Skipi Crewing. RF-доступные beta-загрузки с сайта skipi.app.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://skipi.app/downloads">
     <style>
@@ -83,7 +83,7 @@
             padding: 0.9rem 1rem;
             margin-bottom: 1rem;
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 0.75rem;
             font-size: 0.88rem;
         }
@@ -119,9 +119,32 @@
             color: #7c2d12;
             margin-bottom: 0.25rem;
         }
+        .token-panel {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-left: 4px solid var(--blue);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        .token-panel strong {
+            display: block;
+            color: var(--navy);
+            margin-bottom: 0.3rem;
+        }
+        .token-panel p {
+            color: var(--gray);
+            margin-bottom: 0.85rem;
+        }
+        .token-panel p a {
+            color: var(--blue);
+            text-decoration: none;
+        }
+        .token-panel p a:hover { text-decoration: underline; }
         .download-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 1.25rem;
             align-items: start;
         }
@@ -380,7 +403,7 @@
         <div class="release-strip">
             <div>
                 <strong>Skipi Crewing v0.4.113</strong>
-                <span>Опубликовано 15 мая 2026 &middot; <a href="https://api-ru.skipi.app/crewing/latest.json">RF manifest</a></span>
+                <span>Опубликовано 15 мая 2026 &middot; доступ по токену через <a href="mailto:info@tymur.org?subject=Skipi%20Crewing%20authorization%20token%20request">info@tymur.org</a></span>
             </div>
             <div>
                 <strong>Skipi Seafarer v0.4.138</strong>
@@ -395,13 +418,24 @@
 
         <div class="warning-panel">
             <strong>Зеркало для пользователей из РФ</strong>
-            Telegram используется только как канал объявления. Скачивание идёт с сайта: по умолчанию через <a href="https://api-ru.skipi.app/downloads/">api-ru.skipi.app/downloads</a>, чтобы пользователям из России не требовался VPN только для загрузки приложения.
+            Публичные ссылки Skipi Seafarer на этой странице ведут на зеркало Timeweb. Если зеркало недоступно, используйте запасные ссылки GitHub Releases внизу страницы. Для Skipi Crewing сначала запросите токен авторизации.
+        </div>
+
+        <div class="warning-panel">
+            <strong>Skipi Crewing требует авторизационный токен</strong>
+            Crewing-версия предназначена для крюинг-компаний и приглашённых тестеров. Перед скачиванием и входом в приложение запросите токен авторизации Skipi по адресу <a href="mailto:info@tymur.org?subject=Skipi%20Crewing%20authorization%20token%20request">info@tymur.org</a>.
         </div>
 
         <div class="download-grid">
             <section class="product-panel" id="crewing">
                 <h2>Skipi Crewing</h2>
-                <p class="product-desc">Для крюинг-менеджеров: публиковать вакансии, получать отклики, смотреть документы и вести локальный vault крюинга.</p>
+                <p class="product-desc">Для крюинг-менеджеров: публиковать вакансии, получать отклики, смотреть документы и вести локальный vault крюинга. Установка и работа с Crewing выполняются по авторизационному токену.</p>
+
+                <div class="token-panel">
+                    <strong>Запросите токен авторизации</strong>
+                    <p>Напишите на <a href="mailto:info@tymur.org?subject=Skipi%20Crewing%20authorization%20token%20request">info@tymur.org</a>, укажите компанию, контактное лицо, рабочий email и нужную платформу: Windows или Linux.</p>
+                    <a class="btn" href="mailto:info@tymur.org?subject=Skipi%20Crewing%20authorization%20token%20request&body=Hello%2C%0A%0APlease%20send%20me%20a%20Skipi%20Crewing%20authorization%20token.%0ACompany%3A%0AContact%20person%3A%0AEmail%3A%0APlatform%3A%0A%0AThank%20you.">Запросить токен</a>
+                </div>
 
                 <div class="card">
                     <div class="card-info">
@@ -412,8 +446,7 @@
                         </div>
                     </div>
                     <div class="card-actions">
-                        <a class="btn" href="https://api-ru.skipi.app/downloads/crewing/0.4.113/Skipi.Crewing_0.4.113_x64-setup.exe">Скачать</a>
-                        <a class="btn-alt" href="https://api-ru.skipi.app/downloads/crewing/0.4.113/Skipi.Crewing_0.4.113_x64_en-US.msi">.msi</a>
+                        <a class="btn" href="mailto:info@tymur.org?subject=Skipi%20Crewing%20authorization%20token%20request%20-%20Windows">Запросить токен</a>
                     </div>
                 </div>
 
@@ -425,12 +458,10 @@
                             <p>Debian / Ubuntu &middot; .deb</p>
                         </div>
                     </div>
-                    <a class="btn" href="https://api-ru.skipi.app/downloads/crewing/0.4.113/Skipi.Crewing_0.4.113_amd64.deb">Скачать</a>
+                    <a class="btn" href="mailto:info@tymur.org?subject=Skipi%20Crewing%20authorization%20token%20request%20-%20Linux">Запросить токен</a>
                 </div>
                 <div class="linux-extra">
-                    <span>Также:</span>
-                    <a href="https://api-ru.skipi.app/downloads/crewing/0.4.113/Skipi.Crewing_0.4.113_amd64.AppImage">AppImage</a>
-                    <a href="https://api-ru.skipi.app/downloads/crewing/0.4.113/Skipi.Crewing-0.4.113-1.x86_64.rpm">RPM</a>
+                    <span>AppImage и RPM выдаются по запросу вместе с токеном авторизации.</span>
                 </div>
             </section>
 
@@ -491,7 +522,7 @@
 
         <section class="trust-panel" id="verification">
             <h2>Проверка скачанного файла</h2>
-            <p>Seafarer и Crewing публикуются через RF-маршрут. Текущие manifests: <a href="https://api-ru.skipi.app/latest.json">Seafarer</a> и <a href="https://api-ru.skipi.app/crewing/latest.json">Crewing</a>.</p>
+            <p>Seafarer публикуется через RF-маршрут: <a href="https://api-ru.skipi.app/latest.json">Seafarer manifest</a>. Для Crewing ссылка на установщик и токен авторизации выдаются после запроса на <a href="mailto:info@tymur.org?subject=Skipi%20Crewing%20authorization%20token%20request">info@tymur.org</a>.</p>
 
             <div class="signing-status">
                 Подпись Windows Authenticode будет включена для будущих публичных релизов. Текущие beta-установщики могут показывать предупреждение "Unknown publisher".
@@ -503,7 +534,7 @@
             Все данные остаются на вашем компьютере.<br>
             <a href="https://github.com/CaptTymur/skipi.app">GitHub репозиторий Seafarer</a>
             &nbsp;&middot;&nbsp;
-            <a href="https://github.com/CaptTymur/skipi-crewing">GitHub репозиторий Crewing</a>
+            <a href="mailto:info@tymur.org?subject=Skipi%20Crewing%20authorization%20token%20request">запросить токен Crewing</a>
             &nbsp;&middot;&nbsp;
             <a href="/">назад на skipi.app</a>
         </p>
