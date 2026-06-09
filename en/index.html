@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Skipi — Maritime Document Management</title>
-    <meta name="description" content="Skipi is a local-first maritime workflow platform for crewing teams and seafarers: vacancy flow, salary indices by rank and vessel type, CV pipeline, document vaults, and certificate tracking.">
-    <meta name="keywords" content="maritime document management, ship documents, SOLAS, certificate tracking, document packages, seafarer documents, ship management software, vessel compliance, ISM code, STCW, maritime ERP, ship certificate expiry, document sharing maritime, PSC inspection documents, vetting documents, crew document management, maritime salary index, seafarer salaries, VLCC master salary, chief engineer wages">
+    <title>Skipi — Maritime Intelligence powered by direct seafarer signals</title>
+    <meta name="description" content="Skipi is a maritime intelligence system powered by direct seafarer signals: structured reviews of vessels and companies, decision support for seafarers, crewing teams, ship managers, charterers and brokers.">
+    <meta name="keywords" content="vessel reviews, ship reviews by crew, crewing company reviews, vetting pressure, maritime intelligence, vessel decision support, pre-fixture vetting, seafarer intelligence, ship reputation, crew experience database, vessel due diligence, anti-fraud crewing, ship management reviews, maritime risk signals">
     <meta name="author" content="Skipi">
-    <meta property="og:title" content="Skipi — Maritime Document Management Platform">
-    <meta property="og:description" content="Local-first maritime workflow platform for crewing teams and seafarers. Vacancy flow, CV pipeline, document vaults, certificate tracking, and package sharing.">
+    <meta property="og:title" content="Skipi — Maritime Intelligence powered by direct seafarer signals">
+    <meta property="og:description" content="Structured reviews of vessels and companies from those who've worked there. Decision support for seafarers, crewing teams, ship managers, charterers and brokers.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://skipi.app/en/">
     <meta property="og:site_name" content="Skipi">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Skipi — Maritime Document Management">
-    <meta name="twitter:description" content="Maritime workflow for crewing teams and seafarers: CV pipeline, document vaults, package sharing, and certificate tracking.">
+    <meta name="twitter:title" content="Skipi — Maritime Intelligence powered by direct seafarer signals">
+    <meta name="twitter:description" content="Vessel and company reviews from crews who've been onboard. Decision support before signing or fixing.">
     <link rel="canonical" href="https://skipi.app/en/">
     <link rel="alternate" hreflang="en" href="https://skipi.app/en/">
     <link rel="alternate" hreflang="ru" href="https://skipi.app/">
@@ -29,30 +29,28 @@
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Skipi",
-        "alternateName": "Skipi Maritime Obsidian",
+        "alternateName": "Skipi Maritime Intelligence",
         "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web, iOS, Android",
+        "operatingSystem": "Web, Windows, macOS, Linux",
         "url": "https://skipi.app/en/",
         "author": { "@type": "Organization", "name": "Skipi" },
         "copyrightYear": 2026,
         "copyrightHolder": { "@type": "Organization", "name": "Skipi" },
         "datePublished": "2026-04-06",
-        "description": "Skipi is a local-first maritime document management platform. Key innovation: shareable document packages via unique URL — select ship documents, generate a secure ZIP bundle with configurable expiry and download limits, share via link without requiring recipient authentication. Includes SOLAS-based document frameworks auto-populated per vessel type, certificate validity tracking with expiry dashboard, and personal seafarer document management by STCW rank. Architecture follows Obsidian-like local-first principles where files remain on the user's device with optional synchronization.",
+        "description": "Skipi is a maritime intelligence system powered by direct seafarer signals. Structured crew reviews of vessels and companies are aggregated into a decision-support layer: vessel score, warning flags, vetting pressure, company profile. Used by seafarers to choose employers, by crewing teams and ship managers for due diligence, by charterers and brokers to assess a vessel before fixing.",
         "featureList": [
-            "Shareable document packages via unique URL without recipient account",
-            "SOLAS-based document framework templates per vessel type (Bulk Carrier, Tanker, Container, General Cargo, Passenger, Offshore)",
-            "Certificate and survey expiry tracking with color-coded dashboard",
-            "Local-first architecture — files remain on user device, optional sync",
-            "Personal seafarer document management by STCW rank",
-            "Multi-tenant company/fleet/vessel hierarchy with role-based access control",
-            "Package templates for recurring document requests (vetting, PSC, charterer)",
-            "Mobile scan-and-recognize: photograph a certificate, AI extracts expiry date, number, issuing authority, auto-generates PDF and files into correct framework category",
-            "Dual-mode package delivery: offline ZIP with email client integration and online cloud-hosted shareable links",
-            "Crewing company document viewer: structured seafarer credential presentation with document filtering by rank, certificate type, and validity",
-            "Seafarer-to-employer digital pipeline: direct document package delivery from seafarer vault to registered manning agencies",
-            "Two-sided maritime communication workflow between seafarers and employers",
-            "AI-assisted document analysis for metadata extraction and anomaly indicators",
-            "Aggregated maritime salary indices by rank and vessel type, derived from open vacancy postings across multiple sources"
+            "Structured 16-section seafarer reviews of vessels they have worked on",
+            "Composite vessel score derived from aggregated crew signals",
+            "Warning flags: vetting pressure, payment reliability, management response",
+            "Crewing company and ship manager profile built from crew reviews",
+            "Privacy-preserving architecture: server-side HMAC hashes, seafarer identity is not exposed",
+            "50k+ vessel database, enrichable from Equasis and RightShip",
+            "Per-epoch review breakdown — visible shifts when management or owner changes",
+            "Decision support for seafarers, crewing teams, ship managers, charterers and brokers",
+            "Local-first architecture: seafarer vault and documents remain on the device",
+            "Structured CV pipeline and document packages as supporting infrastructure",
+            "Certificate expiry control and SOLAS templates per vessel type",
+            "Salary indices by rank and vessel type aggregated from open vacancies"
         ]
     }
     </script>
@@ -172,6 +170,41 @@
             line-height: 1.55;
         }
         .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .hero-platforms-label {
+            font-size: 0.84rem;
+            color: var(--ink-soft);
+            margin-top: 1.4rem;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+        .hero-platforms {
+            display: flex;
+            gap: 0.55rem;
+            flex-wrap: wrap;
+        }
+        .hero-platform {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 0.95rem;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            background: var(--bg-soft);
+            color: var(--ink);
+            font-size: 0.86rem;
+            font-weight: 600;
+            transition: background 0.15s, border-color 0.15s, color 0.15s;
+        }
+        .hero-platform:hover {
+            background: var(--bg-deep);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .hero-platform .os-glyph {
+            font-size: 0.95rem;
+            line-height: 1;
+        }
         .hero-visual {
             background: linear-gradient(155deg, #f6f8fa 0%, #e6eef4 100%);
             border-radius: 14px;
@@ -207,6 +240,20 @@
         .hv-tag.ok  { background: #e2f4e8; color: #1f7a3a; }
         .hv-tag.warn{ background: #fff2dd; color: #a05000; }
         .hv-tag.err { background: #fde2e4; color: #a31621; }
+        .hv-score {
+            font-size: 1.6rem; font-weight: 800; color: var(--ink);
+            letter-spacing: -0.02em;
+        }
+        .hv-score-row {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 0.6rem;
+        }
+        .hv-vessel-name {
+            font-size: 0.92rem; font-weight: 700; color: var(--ink);
+        }
+        .hv-vessel-meta {
+            font-size: 0.74rem; color: var(--muted);
+        }
 
         @media (max-width: 820px) {
             .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -539,29 +586,42 @@
     <div class="container">
         <div class="hero-grid">
             <div>
-                <span class="kicker">Maritime Platform</span>
-                <h1>A platform built around <em>seafarer documents and crewing flow</em></h1>
+                <span class="kicker">Maritime Intelligence</span>
+                <h1>Decisions about vessels and companies — built on <em>direct signals</em> from those who've worked there</h1>
                 <p class="lead">
-                    Skipi connects seafarers and crewing teams in a single digital loop: a personal document vault, certificate expiry control, structured vacancy responses, and salary indices derived from the open market.
+                    Skipi collects structured seafarer reviews of the vessels and companies they have served on. Those signals aggregate into a decision-support layer: a seafarer sees the real profile of an employer before signing; a crewing team, ship manager, charterer or broker sees the real state of a vessel before hiring or fixing.
                 </p>
                 <div class="hero-actions">
                     <a href="/downloads" class="btn btn-primary">Get Skipi <span class="arrow">→</span></a>
-                    <a href="#platform" class="btn btn-ghost">Explore the platform</a>
+                    <a href="#platform" class="btn btn-ghost">How the intelligence works</a>
+                </div>
+                <p class="hero-platforms-label">Desktop app. Not web-only. Works locally on your computer.</p>
+                <div class="hero-platforms">
+                    <a class="hero-platform" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.140/Skipi_0.4.140_x64-setup.exe"><span class="os-glyph">⊞</span> Windows</a>
+                    <a class="hero-platform" href="/downloads#seafarer"><span class="os-glyph">🍎</span> macOS</a>
+                    <a class="hero-platform" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.140/Skipi_0.4.140_amd64.deb"><span class="os-glyph">🐧</span> Linux</a>
                 </div>
             </div>
             <div class="hero-visual" aria-hidden="true">
                 <div class="hv-window">
                     <div class="hv-bar"><span></span><span></span><span></span></div>
-                    <div class="hv-row"><span>STCW II/2 — Master &lt;3000 GT</span><span class="hv-tag ok">valid</span></div>
-                    <div class="hv-row"><span>GMDSS GOC</span><span class="hv-tag warn">31 d</span></div>
-                    <div class="hv-row"><span>Yellow Fever Certificate</span><span class="hv-tag ok">valid</span></div>
-                    <div class="hv-row"><span>Tanker Familiarization</span><span class="hv-tag err">expired</span></div>
-                    <div class="hv-row"><span>Passport, international</span><span class="hv-tag ok">valid</span></div>
+                    <div class="hv-score-row">
+                        <div>
+                            <div class="hv-vessel-name">M/V Black Sea Pioneer</div>
+                            <div class="hv-vessel-meta">Bulker · IMO 9523xxx · 17 reviews</div>
+                        </div>
+                        <div class="hv-score">7.4</div>
+                    </div>
+                    <div class="hv-row"><span>Safety culture</span><span class="hv-tag ok">8.1</span></div>
+                    <div class="hv-row"><span>Maintenance &amp; equipment</span><span class="hv-tag warn">6.0</span></div>
+                    <div class="hv-row"><span>Vetting pressure</span><span class="hv-tag warn">high</span></div>
+                    <div class="hv-row"><span>Payment reliability</span><span class="hv-tag ok">stable</span></div>
+                    <div class="hv-row"><span>Management response</span><span class="hv-tag err">weak</span></div>
                 </div>
                 <div class="hv-window">
                     <div class="hv-bar"><span></span><span></span><span></span></div>
-                    <div class="hv-row"><span>Package → Acme Crewing</span><span class="hv-tag ok">2/3 downloads</span></div>
-                    <div class="hv-row"><span>Job: 2/O Suezmax</span><span class="hv-tag ok">application sent</span></div>
+                    <div class="hv-row"><span>Crewing «Acme» · company profile</span><span class="hv-tag ok">5 vessels</span></div>
+                    <div class="hv-row"><span>Repeat employment rate</span><span class="hv-tag ok">62%</span></div>
                 </div>
             </div>
         </div>
@@ -571,10 +631,10 @@
 <!-- ─── Metrics ──────────────────────────────────────────── -->
 <section class="metrics" aria-label="Key metrics">
     <div class="container metrics-grid">
-        <div class="metric"><div class="n">50K+</div><div class="lbl">vessels in Skipi vessel database</div></div>
-        <div class="metric"><div class="n">12</div><div class="lbl">ranks with requirements matrix</div></div>
-        <div class="metric"><div class="n">&lt; 2s</div><div class="lbl">to assemble a document package</div></div>
-        <div class="metric"><div class="n">Local-first</div><div class="lbl">documents stay with the seafarer</div></div>
+        <div class="metric"><div class="n">50K+</div><div class="lbl">vessels in the Skipi database</div></div>
+        <div class="metric"><div class="n">16</div><div class="lbl">sections in a structured review</div></div>
+        <div class="metric"><div class="n">HMAC</div><div class="lbl">seafarer identity is not exposed</div></div>
+        <div class="metric"><div class="n">Local-first</div><div class="lbl">vault and documents stay with the seafarer</div></div>
     </div>
 </section>
 
@@ -583,50 +643,50 @@
     <div class="container">
         <div class="block-head">
             <span class="kicker">Platform</span>
-            <h2>One loop — three clients</h2>
-            <p>Skipi works on both sides of recruitment. The seafarer maintains their vault, the crewing company receives structured data, and the open jobs board and salary index strip the market noise.</p>
+            <h2>Three intelligence layers on one infrastructure</h2>
+            <p>Skipi is not a social network or a jobs board with likes. It is a structured decision-support layer powered by direct signals from those who have been on board.</p>
         </div>
         <div class="pillars-grid">
             <article class="pillar">
                 <div class="icon">⚓</div>
-                <h3>Skipi Seafarer</h3>
-                <p>The seafarer's personal document vault with expiry tracking and a package-delivery pipeline.</p>
+                <h3>Vessel Reviews</h3>
+                <p>A structured 16-section seafarer review of the vessel: safety culture, maintenance, food, rest, vetting pressure, management response.</p>
                 <ul>
-                    <li>Profile organised by rank and STCW</li>
-                    <li>Colour-coded status for every certificate</li>
-                    <li>Package as ZIP or shareable link</li>
-                    <li>One-click vacancy application</li>
+                    <li>Composite score 0–10 across sections</li>
+                    <li>Warning flags on critical areas</li>
+                    <li>Per-epoch breakdown — visible management shifts</li>
+                    <li>50k+ vessel database pre-loaded</li>
                 </ul>
                 <div class="pillar-cta">
-                    <a class="pillar-link" href="/downloads#seafarer">Download the Seafarer client →</a>
+                    <a class="pillar-link" href="/downloads">Download the Seafarer client →</a>
                 </div>
             </article>
             <article class="pillar">
                 <div class="icon">🏢</div>
-                <h3>Skipi Crewing</h3>
-                <p>The employer's desktop client: vacancies, applications, and document viewing without email chaos.</p>
+                <h3>Company Profile</h3>
+                <p>The crewing company, ship manager and owner profile is assembled from crew reviews: payment reliability, repeat employment, attitude to crew.</p>
                 <ul>
-                    <li>Publish vacancies to the jobs board</li>
-                    <li>Structured applications from seafarers</li>
-                    <li>Filter candidates by requirements</li>
-                    <li>Operational communication, no vendor lock-in</li>
+                    <li>Vetting pressure across the fleet</li>
+                    <li>Warning flags at organisation level</li>
+                    <li>Repeat employment rate as a reputation marker</li>
+                    <li>History of management changes on vessels</li>
                 </ul>
                 <div class="pillar-cta">
-                    <a class="pillar-link" href="mailto:info@tymur.org?subject=Skipi%20Crewing%20authorization%20token%20request">Request a Crewing token →</a>
+                    <a class="pillar-link" href="#how">How the profile is built →</a>
                 </div>
             </article>
             <article class="pillar">
-                <div class="icon">📊</div>
-                <h3>Skipi Jobs &amp; Index</h3>
-                <p>Open jobs board with salary indices by rank and vessel type, aggregated from the live market.</p>
+                <div class="icon">🎯</div>
+                <h3>Decision Support</h3>
+                <p>A layer for those who make decisions: seafarers choose employers, crewing teams and ship managers do due diligence, charterers and brokers assess a vessel before fixing.</p>
                 <ul>
-                    <li>Thousands of active vacancies</li>
-                    <li>Indices for Master / C/O / 2/O / CE / 2E</li>
-                    <li>Breakdown by vessel type and flag</li>
-                    <li>Monthly rate history</li>
+                    <li>Seafarers — employer profile before the contract</li>
+                    <li>Crewing teams — due diligence on counterparties</li>
+                    <li>Charterers — pre-fixture vetting from crew signal</li>
+                    <li>Brokers — read the real state of a vessel</li>
                 </ul>
                 <div class="pillar-cta">
-                    <a class="pillar-link" href="https://index.skipi.app">Open the index →</a>
+                    <a class="pillar-link" href="mailto:info@tymur.org?subject=Skipi%20Intelligence%20access%20request">Request access →</a>
                 </div>
             </article>
         </div>
@@ -639,45 +699,45 @@
 
         <div class="feature-row">
             <div class="feature-text">
-                <span class="kicker">Document packages</span>
-                <h2>Send a package in seconds — no account on the receiving side</h2>
+                <span class="kicker">Direct signal, not marketing</span>
+                <h2>16 review sections — written by those who were actually on board</h2>
                 <p>
-                    Scan, CV, certificates — pick what you need, generate a package, share the link. The recipient doesn't need to register. Vetting, PSC, and charterer requests close in minutes, not days.
+                    Skipi does not aggregate opinions from social media and does not buy register data. Every review is a structured form filled in by a seafarer who has actually worked on that vessel. 16 sections cover safety, maintenance, vetting pressure, management response, food, rest, payments — exactly what Equasis and RightShip do not show.
                 </p>
                 <ul class="checklist">
-                    <li>Expiry and download limits attached to every link</li>
-                    <li>Offline mode: ZIP + email straight from the app</li>
-                    <li>Cloud mode: controlled link with revocation</li>
-                    <li>SOLAS template per vessel type — nothing missed</li>
+                    <li>Structured form, not free text</li>
+                    <li>Quick / Detailed / N/A modes — 5 to 15 minutes</li>
+                    <li>Local experience hash — repeat contracts are counted</li>
+                    <li>Moderation gate filters obvious anomalies</li>
                 </ul>
             </div>
             <div class="feature-visual">
                 <div class="doc-card">
-                    <div class="doc-icon">📄</div>
+                    <div class="doc-icon">⚓</div>
                     <div class="doc-body">
-                        <div class="doc-title">Vetting package — Bulker A</div>
-                        <div class="doc-meta">12 documents · link expires in 7 days</div>
+                        <div class="doc-title">Safety culture · 8 items</div>
+                        <div class="doc-meta">Drill realism · PPE compliance · reporting culture</div>
                     </div>
                 </div>
                 <div class="doc-card">
-                    <div class="doc-icon">⚓</div>
+                    <div class="doc-icon">🔧</div>
                     <div class="doc-body">
-                        <div class="doc-title">CV — Master, Bulk Carrier</div>
-                        <div class="doc-meta">CoC, STCW, medical included</div>
+                        <div class="doc-title">Maintenance &amp; equipment · 7 items</div>
+                        <div class="doc-meta">PMS execution · spares availability · breakdowns</div>
                     </div>
                 </div>
                 <div class="doc-card">
                     <div class="doc-icon">🛡</div>
                     <div class="doc-body">
-                        <div class="doc-title">PSC — Port State request Tuzla</div>
-                        <div class="doc-meta">Class &amp; Statutory documents · 18 files</div>
+                        <div class="doc-title">Vetting pressure · 5 items</div>
+                        <div class="doc-meta">SIRE/CDI cycles · PSC hits · charterer pressure</div>
                     </div>
                 </div>
                 <div class="doc-card">
-                    <div class="doc-icon">📷</div>
+                    <div class="doc-icon">💰</div>
                     <div class="doc-body">
-                        <div class="doc-title">Scan + AI recognition</div>
-                        <div class="doc-meta">Number, issuer, expiry — extracted automatically</div>
+                        <div class="doc-title">Payment reliability · 4 items</div>
+                        <div class="doc-meta">Delays · overtime · contract honour</div>
                     </div>
                 </div>
             </div>
@@ -685,45 +745,45 @@
 
         <div class="feature-row reverse">
             <div class="feature-text">
-                <span class="kicker">Certificate control</span>
-                <h2>Expiry under control — no spreadsheets, no calendar reminders</h2>
+                <span class="kicker">Privacy-preserving</span>
+                <h2>HMAC privacy — seafarer identity is not exposed, retaliation is impossible</h2>
                 <p>
-                    Every document knows its issue date, expiry, and issuing authority. The colour system warns you 30 days ahead. Skipi builds your renewal calendar; the package to crewing pulls only valid documents.
+                    Skipi stores every review with a server-side HMAC hash — linking a review to a specific seafarer is technically impossible, even with admin rights. The crewing company sees the vessel and company profile, but not who wrote the review. This removes the fear of retaliation and keeps the signal honest.
                 </p>
                 <ul class="checklist">
-                    <li>Traffic-light: valid / expiring / expired</li>
-                    <li>Renewal calendar by priority</li>
-                    <li>Automatic check before any package is sent</li>
-                    <li>Personal seafarer vault — structured by rank</li>
+                    <li>Server-side HMAC — identity is not reversible</li>
+                    <li>Separate review_pubkey — vault and review are independent</li>
+                    <li>Local experience hash — anti-spam without exposing identity</li>
+                    <li>Pending moderation gate before publication</li>
                 </ul>
             </div>
             <div class="feature-visual">
                 <div class="doc-card">
-                    <div class="doc-icon">✓</div>
+                    <div class="doc-icon">🔒</div>
                     <div class="doc-body">
-                        <div class="doc-title">Master CoC — STCW II/2</div>
-                        <div class="doc-meta">Until 14 Mar 2028 · valid</div>
+                        <div class="doc-title">Review submitted</div>
+                        <div class="doc-meta">M/V Pioneer · HMAC(uid, vessel) — identity hidden</div>
                     </div>
                 </div>
                 <div class="doc-card">
-                    <div class="doc-icon">!</div>
+                    <div class="doc-icon">🛡</div>
                     <div class="doc-body">
-                        <div class="doc-title">GMDSS GOC</div>
-                        <div class="doc-meta">Until 30 Jun 2026 · expires in 31 days</div>
+                        <div class="doc-title">Anti-retaliation</div>
+                        <div class="doc-meta">Crewing sees profile, not author</div>
                     </div>
                 </div>
                 <div class="doc-card">
-                    <div class="doc-icon">×</div>
+                    <div class="doc-icon">🔑</div>
                     <div class="doc-body">
-                        <div class="doc-title">Tanker Familiarization</div>
-                        <div class="doc-meta">Until 12 Apr 2026 · expired</div>
+                        <div class="doc-title">Separate review_pubkey</div>
+                        <div class="doc-meta">Seafarer vault and review — independent contours</div>
                     </div>
                 </div>
                 <div class="doc-card">
-                    <div class="doc-icon">📋</div>
+                    <div class="doc-icon">⏳</div>
                     <div class="doc-body">
-                        <div class="doc-title">Renewal calendar</div>
-                        <div class="doc-meta">2 actions this quarter</div>
+                        <div class="doc-title">Moderation gate</div>
+                        <div class="doc-meta">Pending → published after manual review</div>
                     </div>
                 </div>
             </div>
@@ -731,45 +791,45 @@
 
         <div class="feature-row">
             <div class="feature-text">
-                <span class="kicker">Jobs board &amp; Index</span>
-                <h2>Salary indices built on the live market</h2>
+                <span class="kicker">Decision support per role</span>
+                <h2>One data layer — four parties make decisions</h2>
                 <p>
-                    Thousands of open vacancies, aggregated and normalised by rank, vessel type, and flag. Skipi answers the question "what does a Master VLCC or a CE Container actually earn right now" with data, not rumours.
+                    Skipi does not build a separate product per role — everyone uses the same intelligence layer. Seafarers, crewing teams, ship managers, charterers and brokers see the vessel and company profile in the same structure, but apply it to their own decision.
                 </p>
                 <ul class="checklist">
-                    <li>Index across 12 ranks and 8 vessel types</li>
-                    <li>Monthly rate history</li>
-                    <li>Filters by flag and contract length</li>
-                    <li>Source: open vacancies from crewing agencies and ATS</li>
+                    <li>Seafarer: "should I sign this contract?"</li>
+                    <li>Crewing: "should we work with this ship manager?"</li>
+                    <li>Charterer: "should we fix this vessel?"</li>
+                    <li>Broker: "what risks are not visible from vetting reports?"</li>
                 </ul>
             </div>
             <div class="feature-visual">
                 <div class="doc-card">
-                    <div class="doc-icon">M</div>
+                    <div class="doc-icon">👤</div>
                     <div class="doc-body">
-                        <div class="doc-title">Master VLCC</div>
-                        <div class="doc-meta">median $14,200 / mo · n = 47 vacancies</div>
+                        <div class="doc-title">Seafarer · pre-contract check</div>
+                        <div class="doc-meta">Score 5.2 + warning «weak management response» → decline</div>
                     </div>
                 </div>
                 <div class="doc-card">
-                    <div class="doc-icon">CE</div>
+                    <div class="doc-icon">🏢</div>
                     <div class="doc-body">
-                        <div class="doc-title">Chief Engineer Container 8k+ TEU</div>
-                        <div class="doc-meta">median $13,500 / mo · n = 62</div>
+                        <div class="doc-title">Crewing · due diligence</div>
+                        <div class="doc-meta">Repeat employment rate 28% across fleet → red flag</div>
                     </div>
                 </div>
                 <div class="doc-card">
-                    <div class="doc-icon">CO</div>
+                    <div class="doc-icon">📦</div>
                     <div class="doc-body">
-                        <div class="doc-title">C/O Bulker Handymax</div>
-                        <div class="doc-meta">median $7,800 / mo · n = 134</div>
+                        <div class="doc-title">Charterer · pre-fixture vetting</div>
+                        <div class="doc-meta">Maintenance score 6.0 despite clean SIRE → deeper inspection</div>
                     </div>
                 </div>
                 <div class="doc-card">
-                    <div class="doc-icon">2O</div>
+                    <div class="doc-icon">⚖</div>
                     <div class="doc-body">
-                        <div class="doc-title">2/O Tanker MR</div>
-                        <div class="doc-meta">median $5,400 / mo · n = 91</div>
+                        <div class="doc-title">Broker · risk read</div>
+                        <div class="doc-meta">High vetting pressure + crew rotation chaos → caution</div>
                     </div>
                 </div>
             </div>
@@ -783,22 +843,22 @@
     <div class="container">
         <div class="block-head">
             <span class="kicker">Capabilities</span>
-            <h2>Built for the maritime industry</h2>
-            <p>Every feature maps to a concrete step in the workflow — from collecting documents to applying for a job.</p>
+            <h2>Intelligence plus supporting infrastructure</h2>
+            <p>The intelligence layer is the core. Vault, packages and indices are the rails along which signals naturally flow from the seafarer to aggregation.</p>
         </div>
         <div class="cap-grid">
-            <div class="cap"><div class="cap-ico">📦</div><h4>Document packages</h4><p>Pick files, generate a link, control download lifetime.</p></div>
-            <div class="cap"><div class="cap-ico">🏗</div><h4>SOLAS templates</h4><p>Document structure per vessel type is created automatically.</p></div>
+            <div class="cap"><div class="cap-ico">⚓</div><h4>Vessel reviews · 16 sections</h4><p>Structured form, not free text. Quick/Detailed/N/A modes.</p></div>
+            <div class="cap"><div class="cap-ico">📊</div><h4>Composite vessel score</h4><p>Aggregation of reviews into a single 0–10 index, broken down by section.</p></div>
+            <div class="cap"><div class="cap-ico">⚠</div><h4>Warning flags</h4><p>Vetting pressure, payment delays, management response — surfaced explicitly.</p></div>
+            <div class="cap"><div class="cap-ico">🏢</div><h4>Company profile</h4><p>Crewing, ship manager, owner — assembled from crew reviews.</p></div>
+            <div class="cap"><div class="cap-ico">🔒</div><h4>HMAC privacy</h4><p>Server-side hash — seafarer identity not exposed, no retaliation possible.</p></div>
+            <div class="cap"><div class="cap-ico">📅</div><h4>Per-epoch breakdown</h4><p>Management or owner change is visible in the review history.</p></div>
+            <div class="cap"><div class="cap-ico">🚢</div><h4>50k+ vessel database</h4><p>Pre-loaded into the distribution, enriched via Equasis, RightShip, news.</p></div>
+            <div class="cap"><div class="cap-ico">💾</div><h4>Local-first vault</h4><p>Documents and seafarer history stay on the device. Sync on demand.</p></div>
+            <div class="cap"><div class="cap-ico">📦</div><h4>Document packages</h4><p>CV pipeline and packages — rails for natural signal flow.</p></div>
             <div class="cap"><div class="cap-ico">📅</div><h4>Certificate control</h4><p>Colour-coded status and 30-day expiry warnings.</p></div>
-            <div class="cap"><div class="cap-ico">💾</div><h4>Local-first</h4><p>Files stay on your device. Sync happens on demand.</p></div>
-            <div class="cap"><div class="cap-ico">👤</div><h4>Personal vault</h4><p>Structured by rank: CoC, STCW, medical, and more.</p></div>
-            <div class="cap"><div class="cap-ico">📸</div><h4>Scan and recognise</h4><p>AI extracts expiry, number, and issuing authority.</p></div>
-            <div class="cap"><div class="cap-ico">🤖</div><h4>AI document analysis</h4><p>Metadata and PDF anomalies are highlighted automatically.</p></div>
-            <div class="cap"><div class="cap-ico">📧</div><h4>Two delivery modes</h4><p>Local ZIP via email or shareable link with limits.</p></div>
-            <div class="cap"><div class="cap-ico">🚢</div><h4>Vessel database and reviews</h4><p>Vessel card and crew experience — before applying.</p></div>
-            <div class="cap"><div class="cap-ico">📊</div><h4>Salary indices</h4><p>12 ranks and 8 vessel types from live vacancies.</p></div>
-            <div class="cap"><div class="cap-ico">🎯</div><h4>Instant search</h4><p>Crewing finds the candidate without noise and random applicants.</p></div>
-            <div class="cap"><div class="cap-ico">🔄</div><h4>Seafarer → crewing pipeline</h4><p>From the personal vault to a structured package and CV.</p></div>
+            <div class="cap"><div class="cap-ico">💰</div><h4>Salary indices</h4><p>12 ranks and 8 vessel types from live vacancies.</p></div>
+            <div class="cap"><div class="cap-ico">🔄</div><h4>Seafarer → crewing pipeline</h4><p>Structured application with CV and valid certificates.</p></div>
         </div>
     </div>
 </section>
@@ -808,24 +868,24 @@
     <div class="container">
         <div class="block-head">
             <span class="kicker">How it works</span>
-            <h2>From the seafarer's document to the crewing decision</h2>
-            <p>Three steps in one loop. The seafarer maintains the vault, the crewing receives the data, nothing gets lost in email threads.</p>
+            <h2>From a seafarer's review to a decision-maker's call</h2>
+            <p>Three steps in one loop. Direct signal from on board → aggregation and privacy → vessel and company profile for the decision.</p>
         </div>
         <div class="pillars-grid">
             <article class="pillar">
                 <div class="icon">1</div>
-                <h3>Profile and vault</h3>
-                <p>The seafarer creates a local vault, scans certificates — AI extracts expiry and issuing authority. Structure follows rank and STCW.</p>
+                <h3>Direct signal</h3>
+                <p>After the contract the seafarer fills in a structured 16-section review. Quick mode — 5 minutes, Detailed — 15. The personal vault remembers prior vessels — repeat contracts are counted.</p>
             </article>
             <article class="pillar">
                 <div class="icon">2</div>
-                <h3>Package and application</h3>
-                <p>For a vacancy or a crewing request, a package is built: CV and the relevant certificates. Skipi verifies nothing is expired before sending.</p>
+                <h3>Privacy and aggregation</h3>
+                <p>Server-side HMAC detaches the review from identity. A pending moderation gate filters anomalies. Published reviews are aggregated into a composite score and warning flags.</p>
             </article>
             <article class="pillar">
                 <div class="icon">3</div>
-                <h3>Structured intake</h3>
-                <p>The crewing receives a structured bundle — not "20 disconnected attachments" — filterable by certificate type and validity.</p>
+                <h3>Decision support</h3>
+                <p>Seafarers, crewing teams, ship managers, charterers and brokers see the vessel and company profile. Contract, hire or fixture decisions are made on data, not on rumours.</p>
             </article>
         </div>
     </div>
@@ -840,28 +900,36 @@
         </div>
         <div class="faq">
             <details class="faq-item">
+                <summary>Who can read reviews and see the profiles?</summary>
+                <p>Seafarers have free access to vessel and company profiles in the Skipi Seafarer client. Crewing teams, ship managers, charterers and brokers receive access on request with an authorisation token — write to info@tymur.org from a corporate domain.</p>
+            </details>
+            <details class="faq-item">
+                <summary>How is the identity of a reviewing seafarer protected?</summary>
+                <p>Skipi stores every review with a server-side HMAC hash over the identifier. Linking a review to a specific seafarer is technically impossible, even with admin rights. A separate review_pubkey detaches the review from the vault. Crewing sees the signal, not the author — retaliation is excluded.</p>
+            </details>
+            <details class="faq-item">
+                <summary>What if a company wants to dispute a review?</summary>
+                <p>Every review goes through a pending moderation gate before publication. Obvious anomalies (bot spam, irrelevant sections) are filtered out. A dispute on a specific review can be raised via info@tymur.org — but the author is not identified.</p>
+            </details>
+            <details class="faq-item">
+                <summary>How is Skipi different from Equasis and RightShip?</summary>
+                <p>Equasis exposes registries, inspections, PSC. RightShip provides a vetting baseline. Skipi exposes what only those who have been on board can see: safety culture, management response, vetting pressure from the inside, payment reliability, attitude to the crew. The signals complement each other, they do not replace.</p>
+            </details>
+            <details class="faq-item">
                 <summary>Is Skipi free?</summary>
-                <p>Skipi Seafarer is in public early access — free to download. Skipi Crewing is invite-only via an authorisation token; early adopters can request a token via info@tymur.org.</p>
+                <p>Skipi Seafarer is in public early access — free to download. Access for crewing teams, ship managers, charterers and brokers is invite-only via an authorisation token. Early adopters can request access on demand.</p>
             </details>
             <details class="faq-item">
-                <summary>Where are documents stored?</summary>
-                <p>On your device. Skipi uses a local-first architecture: the vault lives in files on your machine. Cloud sync is opt-in and explicit.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Does the recipient need an account?</summary>
-                <p>No. The recipient opens the package via the link. The sender sets the expiry and download limit — this simplifies vetting, PSC, and charterer workflows.</p>
-            </details>
-            <details class="faq-item">
-                <summary>How do the salary indices work?</summary>
-                <p>Skipi aggregates open vacancies from crewing agencies and ATS, normalises by rank and vessel type, and publishes the median in the index. The seafarer sees the actual market.</p>
+                <summary>Where are the seafarer's documents stored?</summary>
+                <p>On the seafarer's device. Skipi uses a local-first architecture: the vault is files on the user's machine. Cloud sync is opt-in and explicit. Reviews are stored separately from the vault, unlinked from identity.</p>
             </details>
             <details class="faq-item">
                 <summary>Which operating systems are supported?</summary>
-                <p>The desktop client builds for Windows, macOS, and Linux. Skipi is also available on the web; mobile clients are on the 2026 roadmap.</p>
+                <p>The desktop client builds for Windows, macOS and Linux. Skipi is also available on the web. Mobile clients are on the 2026 roadmap.</p>
             </details>
             <details class="faq-item">
-                <summary>I'm a crewing company — how do I get access?</summary>
-                <p>Send a short note from your corporate domain to info@tymur.org. We'll issue a token and run a short onboarding — typically 20–30 minutes.</p>
+                <summary>I represent a company — how do I get access to the intelligence layer?</summary>
+                <p>Send a short note from your corporate domain to info@tymur.org with a brief introduction and your role (crewing / ship manager / charterer / broker / owner). We issue a token and run a short onboarding — typically 20–30 minutes.</p>
             </details>
         </div>
     </div>
@@ -870,11 +938,11 @@
 <!-- ─── Final CTA ────────────────────────────────────────── -->
 <section class="cta-final">
     <div class="container">
-        <h2>Ready to try Skipi?</h2>
-        <p>Download the Seafarer client now, or request a Crewing token — early access is free, no subscription, no contract.</p>
+        <h2>Ready to get maritime intelligence?</h2>
+        <p>Download the Seafarer client and submit your first review — or request access for crewing, charterer or broker. Early access is free, no subscription.</p>
         <div class="cta-actions">
             <a href="/downloads" class="btn btn-primary">Download Seafarer client <span class="arrow">→</span></a>
-            <a href="mailto:info@tymur.org?subject=Skipi%20Crewing%20authorization%20token%20request" class="btn btn-ghost">Request a Crewing token</a>
+            <a href="mailto:info@tymur.org?subject=Skipi%20Intelligence%20access%20request" class="btn btn-ghost">Request company access</a>
         </div>
     </div>
 </section>
@@ -885,14 +953,14 @@
         <div class="foot-grid">
             <div class="foot-brand">
                 <div class="brand">Skipi<span class="dot">.</span></div>
-                <p>Maritime platform for seafarers and crewing companies. Local-first, open seafarer client, transparent market indices.</p>
+                <p>Maritime intelligence powered by direct seafarer signals. Structured reviews of vessels and companies. Local-first, privacy-preserving.</p>
             </div>
             <div class="foot-col">
                 <h5>Platform</h5>
                 <ul>
-                    <li><a href="#platform">Seafarer</a></li>
-                    <li><a href="#platform">Crewing</a></li>
-                    <li><a href="https://index.skipi.app">Jobs &amp; Index</a></li>
+                    <li><a href="#platform">Vessel Reviews</a></li>
+                    <li><a href="#platform">Company Profile</a></li>
+                    <li><a href="#platform">Decision Support</a></li>
                     <li><a href="/downloads">Download</a></li>
                 </ul>
             </div>
