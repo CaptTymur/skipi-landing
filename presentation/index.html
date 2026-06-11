@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Как работает Skipi — презентация в 4 рисунках</title>
+    <meta name="description" content="Skipi в 4 рисунках от капитана: anonymized job signature, apply без раскрытия данных, выгода для крюинга, decision support для моряка через Skipi Intelligence.">
+    <link rel="canonical" href="https://skipi.app/presentation/">
+    <meta property="og:title" content="Как работает Skipi — презентация в 4 рисунках">
+    <meta property="og:description" content="Капитан Тимур объясняет архитектуру Skipi: anonymized matching, E2E apply, decision support для моряка.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skipi.app/presentation/">
+    <meta property="og:image" content="https://skipi.app/presentation/img/slide-1.jpg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --ink:       #0a1f33;
+            --ink-soft:  #2a3f55;
+            --body:      #475569;
+            --muted:     #7f8da0;
+            --accent:    #007a86;
+            --accent-dk: #005e68;
+            --bg:        #ffffff;
+            --bg-soft:   #f6f8fa;
+            --bg-deep:   #edf1f5;
+            --border:    #e3e8ee;
+        }
+        html, body { height: 100%; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--body);
+            background: var(--bg);
+            line-height: 1.55;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            display: flex; flex-direction: column;
+            min-height: 100vh;
+        }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { color: var(--accent-dk); }
+
+        /* ── Header ───────────────────────────────────────────── */
+        header.site {
+            background: rgba(255,255,255,0.94);
+            backdrop-filter: saturate(160%) blur(8px);
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 50;
+        }
+        .nav {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.85rem 1.5rem;
+            max-width: 1400px; margin: 0 auto;
+        }
+        .brand {
+            font-weight: 800; font-size: 1.2rem; color: var(--ink);
+            letter-spacing: -0.01em;
+        }
+        .brand .dot { color: var(--accent); }
+        .nav-meta {
+            display: flex; align-items: center; gap: 1.5rem;
+            font-size: 0.88rem; color: var(--muted);
+        }
+        .nav-meta a { color: var(--ink-soft); font-weight: 500; }
+        .nav-meta a:hover { color: var(--accent); }
+        @media (max-width: 640px) {
+            .nav-meta { gap: 1rem; font-size: 0.8rem; }
+            .nav-meta .author { display: none; }
+        }
+
+        /* ── Slide area ───────────────────────────────────────── */
+        main.deck {
+            flex: 1;
+            display: flex; flex-direction: column;
+            padding: 2rem 1.5rem 1rem;
+            max-width: 1400px; width: 100%;
+            margin: 0 auto;
+        }
+        .deck-head {
+            display: flex; justify-content: space-between; align-items: baseline;
+            margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;
+        }
+        .deck-title {
+            font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+            font-weight: 800; color: var(--ink);
+            letter-spacing: -0.02em;
+        }
+        .deck-counter {
+            font-size: 0.92rem; color: var(--muted);
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+        .deck-counter strong { color: var(--ink); font-weight: 700; }
+
+        .slide {
+            display: grid;
+            grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+            gap: 2rem;
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.75rem;
+            flex: 1;
+            min-height: 0;
+            animation: fade 0.25s ease-out;
+        }
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: none; }
+        }
+
+        .slide-figure {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.9rem;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .slide-figure img {
+            max-width: 100%; max-height: 64vh;
+            width: auto; height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .slide-body {
+            display: flex; flex-direction: column;
+            padding-top: 0.25rem;
+        }
+        .slide-kicker {
+            display: inline-block;
+            color: var(--accent); font-weight: 700;
+            font-size: 0.74rem; letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.7rem;
+        }
+        .slide-title {
+            font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+            font-weight: 800; color: var(--ink);
+            letter-spacing: -0.02em; line-height: 1.18;
+            margin-bottom: 0.9rem;
+        }
+        .slide-lead {
+            font-size: 1.02rem; color: var(--ink-soft);
+            margin-bottom: 1.2rem;
+        }
+        .slide-points {
+            list-style: none;
+            display: grid; gap: 0.65rem;
+            margin-bottom: 1.2rem;
+        }
+        .slide-points li {
+            padding-left: 1.4rem; position: relative;
+            color: var(--ink-soft); font-size: 0.95rem;
+        }
+        .slide-points li::before {
+            content: "→"; position: absolute; left: 0; top: 0;
+            color: var(--accent); font-weight: 700;
+        }
+        .slide-foot {
+            margin-top: auto;
+            font-size: 0.82rem; color: var(--muted);
+            border-top: 1px solid var(--border);
+            padding-top: 0.85rem;
+        }
+        .slide-foot strong { color: var(--ink-soft); }
+
+        @media (max-width: 880px) {
+            .slide {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+                padding: 1.25rem;
+            }
+            .slide-figure img { max-height: 45vh; }
+        }
+
+        /* ── Controls ─────────────────────────────────────────── */
+        nav.controls {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 1rem;
+            padding: 1.25rem 1.5rem 2rem;
+            max-width: 1400px; width: 100%;
+            margin: 0 auto;
+        }
+        .ctrl-btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.7rem 1.25rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #fff; color: var(--ink);
+            font-weight: 600; font-size: 0.92rem;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: inherit;
+        }
+        .ctrl-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+        .ctrl-btn:disabled {
+            opacity: 0.35; cursor: not-allowed;
+        }
+        .ctrl-btn.primary {
+            background: var(--ink); color: #fff; border-color: var(--ink);
+        }
+        .ctrl-btn.primary:hover:not(:disabled) {
+            background: var(--accent); border-color: var(--accent); color: #fff;
+        }
+
+        .dots {
+            display: flex; gap: 0.5rem;
+        }
+        .dot {
+            width: 0.55rem; height: 0.55rem; border-radius: 50%;
+            background: var(--border);
+            cursor: pointer; transition: all 0.15s;
+            border: none; padding: 0;
+        }
+        .dot:hover { background: var(--muted); }
+        .dot.active {
+            background: var(--accent); transform: scale(1.3);
+        }
+        @media (max-width: 560px) {
+            nav.controls { flex-wrap: wrap; justify-content: center; }
+            .ctrl-btn { padding: 0.55rem 0.9rem; font-size: 0.86rem; }
+            .ctrl-btn .label { display: none; }
+        }
+
+        /* ── Footer ───────────────────────────────────────────── */
+        footer.site {
+            background: #061a2c; color: rgba(255,255,255,0.65);
+            padding: 1.25rem 1.5rem;
+            font-size: 0.84rem; text-align: center;
+        }
+        footer.site a { color: rgba(255,255,255,0.85); }
+        footer.site a:hover { color: #fff; }
+    </style>
+</head>
+<body>
+
+<header class="site">
+    <div class="nav">
+        <a href="/" class="brand">Skipi<span class="dot">.</span></a>
+        <div class="nav-meta">
+            <span class="author">Капитан Тимур · 11 июня 2026</span>
+            <a href="/">← К сайту</a>
+            <a href="/downloads">Скачать</a>
+        </div>
+    </div>
+</header>
+
+<main class="deck">
+    <div class="deck-head">
+        <div class="deck-title">Как работает Skipi — 4 рисунка</div>
+        <div class="deck-counter"><strong id="slide-now">1</strong> / <span id="slide-total">4</span></div>
+    </div>
+
+    <article class="slide" id="slide" aria-live="polite">
+        <div class="slide-figure">
+            <img id="slide-img" src="img/slide-1.jpg" alt="" loading="eager">
+        </div>
+        <div class="slide-body">
+            <span class="slide-kicker" id="slide-kicker"></span>
+            <h1 class="slide-title" id="slide-title"></h1>
+            <p class="slide-lead" id="slide-lead"></p>
+            <ul class="slide-points" id="slide-points"></ul>
+            <div class="slide-foot" id="slide-foot"></div>
+        </div>
+    </article>
+</main>
+
+<nav class="controls" aria-label="Навигация по слайдам">
+    <button class="ctrl-btn" id="prev" type="button">← <span class="label">Назад</span></button>
+    <div class="dots" id="dots" role="tablist"></div>
+    <button class="ctrl-btn primary" id="next" type="button"><span class="label">Дальше</span> →</button>
+</nav>
+
+<footer class="site">
+    © 2026 Skipi &nbsp;·&nbsp;
+    <a href="/">skipi.app</a> &nbsp;·&nbsp;
+    <a href="mailto:info@tymur.org">info@tymur.org</a>
+</footer>
+
+<script>
+(function () {
+    'use strict';
+
+    const SLIDES = [
+        {
+            kicker: 'Шаг 1 · Job signature',
+            title: 'Крюинг публикует подпись вакансии, а не «карточку с людьми»',
+            lead: 'Skipi не показывает базу моряков. Крюинг кладёт на сервер только анонимизированную подпись вакансии: ранг, тип судна, флаг, зарплата. Никаких CV, контактов, личных данных.',
+            points: [
+                'Crew Manager создаёт вакансию у себя в приложении (Master · Bulk · Ukraine)',
+                'На API уходит только signature-строка: ID, Rank, Type, Nationality, Wage',
+                'Public interface на скачивание моряков отсутствует — только подписи вакансий',
+                'Моряк ставит app, загружает документы → структурированный профиль строится локально',
+                'Клиент моряка сам пуллит API: «есть ли работа под мою подпись?»'
+            ],
+            foot: 'Все файлы — и у крюинга, и у моряка — остаются на устройстве. Сервер хранит подписи, не данные.'
+        },
+        {
+            kicker: 'Шаг 2 · Apply',
+            title: 'Apply без раскрытия данных. E2E включается только при mutual interest',
+            lead: 'Когда подпись моряка совпадает с подписью вакансии, моряк решает откликнуться. До этого момента никаких личных данных к крюингу не уходит. После взаимного интереса включается end-to-end-канал между устройствами.',
+            points: [
+                'Match считается на стороне моряка — крюинг не «выбирает из базы»',
+                'Apply — это явное действие моряка, а не «листинг» крюинга',
+                'При mutual interest канал становится E2E-encrypted',
+                'Документы передаются напрямую между устройствами, минуя сервер как хранилище'
+            ],
+            foot: 'Сервер — это рандеву-точка для подписей и установления канала, а не дата-вольт.'
+        },
+        {
+            kicker: 'Шаг 3 · For Crewing',
+            title: 'Что Skipi даёт крюинг-менеджеру',
+            lead: 'Skipi — операционный инструмент крюинга, а не «ещё одна доска объявлений». Структурный профиль кандидата, единый протокол данных, compliance-check под клиента, своя локальная база рассмотренных и ex-crew.',
+            points: [
+                'Solid documents profile structure — единая структура кандидатского профиля',
+                'Unified protocol of data exchange — один протокол вместо «PDF в почте»',
+                'Easy profile compliance check for particular client — соответствие под конкретного шипменеджера',
+                'Maintaining database of considered candidates and ex-crew — своя живая БД у крюинга'
+            ],
+            foot: 'Никакого vendor lock-in: база крюинга — это файлы на его устройстве, экспортируемые в любой момент.'
+        },
+        {
+            kicker: 'Шаг 4 · For Seafarer + Skipi Intelligence',
+            title: 'Моряк получает marketplace и intelligence одновременно',
+            lead: 'Поверх matching-петли работает Skipi Intelligence — база судов и компаний, которая питается оценками от самих моряков (assessment of ex vessel). Из неё рождаются индексы для принятия решений.',
+            points: [
+                'Channel of outreach to find job — исходящий канал поиска работы',
+                'Channel of incoming matching offers — входящие офферы под подпись профиля',
+                'Decision support через индексы: Position Salary Index · Position Demand Score · Company Retention Index · Profile Track Promotion Score',
+                'Easy document management: upload · send docs · receive job offers',
+                'Skipi Intelligence строится из оценок ex-vessel самими моряками — экипажи кормят базу'
+            ],
+            foot: 'Данные моряка не раскрываются, пока он сам не нажмёт «send». Send or not — решает моряк, опираясь на Skipi Intelligence.'
+        }
+    ];
+
+    const totalEl  = document.getElementById('slide-total');
+    const nowEl    = document.getElementById('slide-now');
+    const imgEl    = document.getElementById('slide-img');
+    const kickerEl = document.getElementById('slide-kicker');
+    const titleEl  = document.getElementById('slide-title');
+    const leadEl   = document.getElementById('slide-lead');
+    const pointsEl = document.getElementById('slide-points');
+    const footEl   = document.getElementById('slide-foot');
+    const slideEl  = document.getElementById('slide');
+    const prevBtn  = document.getElementById('prev');
+    const nextBtn  = document.getElementById('next');
+    const dotsEl   = document.getElementById('dots');
+
+    let idx = 0;
+
+    function parseHash() {
+        const m = (location.hash || '').match(/^#(\d+)/);
+        if (m) {
+            const n = parseInt(m[1], 10) - 1;
+            if (n >= 0 && n < SLIDES.length) return n;
+        }
+        return 0;
+    }
+
+    function writeHash(n) {
+        const h = '#' + (n + 1);
+        if (location.hash !== h) history.replaceState(null, '', h);
+    }
+
+    function render() {
+        const s = SLIDES[idx];
+
+        // Reset animation
+        slideEl.style.animation = 'none';
+        // force reflow
+        void slideEl.offsetWidth;
+        slideEl.style.animation = '';
+
+        imgEl.src = 'img/slide-' + (idx + 1) + '.jpg';
+        imgEl.alt = s.title;
+        kickerEl.textContent = s.kicker;
+        titleEl.textContent = s.title;
+        leadEl.textContent = s.lead;
+        pointsEl.innerHTML = s.points.map(p => '<li>' + p + '</li>').join('');
+        footEl.innerHTML = '<strong>Замечание капитана:</strong> ' + s.foot;
+        nowEl.textContent = idx + 1;
+
+        prevBtn.disabled = idx === 0;
+        nextBtn.disabled = idx === SLIDES.length - 1;
+
+        document.querySelectorAll('.dot').forEach((d, i) => {
+            d.classList.toggle('active', i === idx);
+            d.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+        });
+    }
+
+    function go(n) {
+        if (n < 0) n = 0;
+        if (n >= SLIDES.length) n = SLIDES.length - 1;
+        if (n === idx) return;
+        idx = n;
+        writeHash(idx);
+        render();
+    }
+
+    // Init dots
+    totalEl.textContent = SLIDES.length;
+    SLIDES.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'dot';
+        d.type = 'button';
+        d.setAttribute('role', 'tab');
+        d.setAttribute('aria-label', 'Слайд ' + (i + 1));
+        d.addEventListener('click', () => go(i));
+        dotsEl.appendChild(d);
+    });
+
+    prevBtn.addEventListener('click', () => go(idx - 1));
+    nextBtn.addEventListener('click', () => go(idx + 1));
+
+    // Keyboard
+    document.addEventListener('keydown', e => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+            e.preventDefault(); go(idx + 1);
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+            e.preventDefault(); go(idx - 1);
+        } else if (e.key === 'Home') {
+            e.preventDefault(); go(0);
+        } else if (e.key === 'End') {
+            e.preventDefault(); go(SLIDES.length - 1);
+        }
+    });
+
+    // Hash routing
+    window.addEventListener('hashchange', () => {
+        idx = parseHash();
+        render();
+    });
+
+    // Swipe (mobile)
+    let touchX = null;
+    document.addEventListener('touchstart', e => {
+        if (e.touches.length === 1) touchX = e.touches[0].clientX;
+    }, { passive: true });
+    document.addEventListener('touchend', e => {
+        if (touchX === null) return;
+        const dx = (e.changedTouches[0].clientX) - touchX;
+        if (Math.abs(dx) > 60) {
+            if (dx < 0) go(idx + 1);
+            else go(idx - 1);
+        }
+        touchX = null;
+    }, { passive: true });
+
+    // Initial render
+    idx = parseHash();
+    render();
+})();
+</script>
+
+</body>
+</html>
