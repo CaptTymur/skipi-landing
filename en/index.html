@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Skipi — Maritime Intelligence powered by direct seafarer signals</title>
-    <meta name="description" content="Skipi is a maritime intelligence system powered by direct seafarer signals: structured reviews of vessels and companies, decision support for seafarers, crewing teams, ship managers, charterers and brokers.">
-    <meta name="keywords" content="vessel reviews, ship reviews by crew, crewing company reviews, vetting pressure, maritime intelligence, vessel decision support, pre-fixture vetting, seafarer intelligence, ship reputation, crew experience database, vessel due diligence, anti-fraud crewing, ship management reviews, maritime risk signals">
+    <meta name="description" content="Skipi is a maritime intelligence system powered by direct seafarer signals. Structured reviews of vessels and companies. Decision support for seafarers, crewing teams, freight brokers, charterers, ship-finance banks, investors and P&amp;I clubs.">
+    <meta name="keywords" content="vessel reviews, ship reviews by crew, crewing company reviews, vetting pressure, maritime intelligence, vessel decision support, pre-fixture vetting, ship finance collateral monitoring, vessel due diligence for investors, P&amp;I underwriting signal, freight broker vessel assessment, seafarer intelligence, ship reputation, crew experience database, maritime risk signals">
     <meta name="author" content="Skipi">
     <meta property="og:title" content="Skipi — Maritime Intelligence powered by direct seafarer signals">
-    <meta property="og:description" content="Structured reviews of vessels and companies from those who've worked there. Decision support for seafarers, crewing teams, ship managers, charterers and brokers.">
+    <meta property="og:description" content="Structured reviews of vessels and companies. Decision support for seafarers, crewing teams, freight brokers, charterers, banks, investors and P&amp;I.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://skipi.app/en/">
     <meta property="og:site_name" content="Skipi">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Skipi — Maritime Intelligence powered by direct seafarer signals">
-    <meta name="twitter:description" content="Vessel and company reviews from crews who've been onboard. Decision support before signing or fixing.">
+    <meta name="twitter:description" content="Crew signals on vessels and companies. One data layer — from seafarer to ship-finance bank and freight broker.">
     <link rel="canonical" href="https://skipi.app/en/">
     <link rel="alternate" hreflang="en" href="https://skipi.app/en/">
     <link rel="alternate" hreflang="ru" href="https://skipi.app/">
@@ -37,7 +37,7 @@
         "copyrightYear": 2026,
         "copyrightHolder": { "@type": "Organization", "name": "Skipi" },
         "datePublished": "2026-04-06",
-        "description": "Skipi is a maritime intelligence system powered by direct seafarer signals. Structured crew reviews of vessels and companies are aggregated into a decision-support layer: vessel score, warning flags, vetting pressure, company profile. Used by seafarers to choose employers, by crewing teams and ship managers for due diligence, by charterers and brokers to assess a vessel before fixing.",
+        "description": "Skipi is a maritime intelligence system powered by direct seafarer signals. Structured crew reviews of vessels and companies are aggregated into a decision-support layer: vessel score, warning flags, vetting pressure, company profile. Used by seafarers to choose employers, by crewing teams and ship managers for due diligence, by freight brokers and charterers for pre-fixture vetting, by ship-finance banks for collateral monitoring, by investors and S&P advisors for pre-acquisition due diligence, and by P&I clubs and insurers for underwriting and risk pricing.",
         "featureList": [
             "Structured 16-section seafarer reviews of vessels they have worked on",
             "Composite vessel score derived from aggregated crew signals",
@@ -46,7 +46,9 @@
             "Privacy-preserving architecture: server-side HMAC hashes, seafarer identity is not exposed",
             "50k+ vessel database, enrichable from Equasis and RightShip",
             "Per-epoch review breakdown — visible shifts when management or owner changes",
-            "Decision support for seafarers, crewing teams, ship managers, charterers and brokers",
+            "Decision support for seafarers, crewing teams, ship managers, freight brokers, charterers, ship-finance banks, investors and P&I clubs",
+            "Pre-fixture vetting from crew signal for brokers and charterers",
+            "Operational signal for ship finance: collateral monitoring and pre-acquisition due diligence",
             "Local-first architecture: seafarer vault and documents remain on the device",
             "Structured CV pipeline and document packages as supporting infrastructure",
             "Certificate expiry control and SOLAS templates per vessel type",
@@ -678,12 +680,14 @@
             <article class="pillar">
                 <div class="icon">🎯</div>
                 <h3>Decision Support</h3>
-                <p>A layer for those who make decisions: seafarers choose employers, crewing teams and ship managers do due diligence, charterers and brokers assess a vessel before fixing.</p>
+                <p>A layer for everyone who makes decisions on a specific vessel or company — from the seafarer before signing to the bank before extending ship finance.</p>
                 <ul>
                     <li>Seafarers — employer profile before the contract</li>
-                    <li>Crewing teams — due diligence on counterparties</li>
-                    <li>Charterers — pre-fixture vetting from crew signal</li>
-                    <li>Brokers — read the real state of a vessel</li>
+                    <li>Crewing teams and ship managers — due diligence on counterparties</li>
+                    <li>Freight brokers and charterers — pre-fixture vetting from crew signal</li>
+                    <li>Ship-finance banks — collateral monitoring across the loan life</li>
+                    <li>Investors and S&amp;P advisors — pre-acquisition due diligence on vessel or fleet</li>
+                    <li>P&amp;I clubs and insurers — operational signal for underwriting</li>
                 </ul>
                 <div class="pillar-cta">
                     <a class="pillar-link" href="mailto:info@tymur.org?subject=Skipi%20Intelligence%20access%20request">Request access →</a>
@@ -792,15 +796,17 @@
         <div class="feature-row">
             <div class="feature-text">
                 <span class="kicker">Decision support per role</span>
-                <h2>One data layer — four parties make decisions</h2>
+                <h2>One data layer — many decision-makers along the chain around a vessel</h2>
                 <p>
-                    Skipi does not build a separate product per role — everyone uses the same intelligence layer. Seafarers, crewing teams, ship managers, charterers and brokers see the vessel and company profile in the same structure, but apply it to their own decision.
+                    Skipi does not build a separate product per role — everyone uses the same intelligence layer. Seafarers, crewing teams, ship managers, freight brokers, charterers, banks, investors and P&amp;I clubs see the vessel and company profile in the same structure, but apply it to their own decision.
                 </p>
                 <ul class="checklist">
                     <li>Seafarer: "should I sign this contract?"</li>
-                    <li>Crewing: "should we work with this ship manager?"</li>
-                    <li>Charterer: "should we fix this vessel?"</li>
-                    <li>Broker: "what risks are not visible from vetting reports?"</li>
+                    <li>Crewing and ship manager: "should we work with this owner / counterparty?"</li>
+                    <li>Broker and charterer: "should we fix this vessel?" — vetting before fixture</li>
+                    <li>Bank: "how is the collateral behaving in operational signals?"</li>
+                    <li>Investor: "what is missing from the broker pitch-deck before acquisition?"</li>
+                    <li>P&amp;I and insurer: "what risk premium fits this vessel?"</li>
                 </ul>
             </div>
             <div class="feature-visual">
@@ -819,17 +825,31 @@
                     </div>
                 </div>
                 <div class="doc-card">
-                    <div class="doc-icon">📦</div>
+                    <div class="doc-icon">⚖</div>
                     <div class="doc-body">
-                        <div class="doc-title">Charterer · pre-fixture vetting</div>
-                        <div class="doc-meta">Maintenance score 6.0 despite clean SIRE → deeper inspection</div>
+                        <div class="doc-title">Broker · pre-fixture vetting</div>
+                        <div class="doc-meta">Maintenance 6.0 despite clean SIRE → deeper inspection before fixture</div>
                     </div>
                 </div>
                 <div class="doc-card">
-                    <div class="doc-icon">⚖</div>
+                    <div class="doc-icon">🏦</div>
                     <div class="doc-body">
-                        <div class="doc-title">Broker · risk read</div>
-                        <div class="doc-meta">High vetting pressure + crew rotation chaos → caution</div>
+                        <div class="doc-title">Bank · collateral signal</div>
+                        <div class="doc-meta">Vetting pressure trending up quarter over quarter → covenant review</div>
+                    </div>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-icon">💼</div>
+                    <div class="doc-body">
+                        <div class="doc-title">Investor · pre-acquisition DD</div>
+                        <div class="doc-meta">Retention collapsed after management change → valuation revisit</div>
+                    </div>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-icon">🛡</div>
+                    <div class="doc-body">
+                        <div class="doc-title">P&amp;I · underwriting</div>
+                        <div class="doc-meta">Safety culture 8.1, payment reliability ok → premium below baseline</div>
                     </div>
                 </div>
             </div>
@@ -901,7 +921,7 @@
         <div class="faq">
             <details class="faq-item">
                 <summary>Who can read reviews and see the profiles?</summary>
-                <p>Seafarers have free access to vessel and company profiles in the Skipi Seafarer client. Crewing teams, ship managers, charterers and brokers receive access on request with an authorisation token — write to info@tymur.org from a corporate domain.</p>
+                <p>Seafarers have free access to vessel and company profiles in the Skipi Seafarer client. Crewing teams, ship managers, freight brokers and charterers receive access on request with an authorisation token. For ship-finance banks, investors, S&amp;P advisors and P&amp;I clubs there is a separate enterprise access tier per company. In all cases write to info@tymur.org from a corporate domain.</p>
             </details>
             <details class="faq-item">
                 <summary>How is the identity of a reviewing seafarer protected?</summary>
@@ -929,7 +949,7 @@
             </details>
             <details class="faq-item">
                 <summary>I represent a company — how do I get access to the intelligence layer?</summary>
-                <p>Send a short note from your corporate domain to info@tymur.org with a brief introduction and your role (crewing / ship manager / charterer / broker / owner). We issue a token and run a short onboarding — typically 20–30 minutes.</p>
+                <p>Send a short note from your corporate domain to info@tymur.org with a brief introduction and your role (crewing / ship manager / freight broker / charterer / owner / bank / investor / P&amp;I / insurer / cargo interest). We issue a token and run a short onboarding — typically 20–30 minutes.</p>
             </details>
         </div>
     </div>

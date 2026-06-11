@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Skipi — Maritime Intelligence на прямых сигналах моряков</title>
-    <meta name="description" content="Skipi — система maritime intelligence на прямых сигналах моряков: структурированные отзывы о судах и компаниях, decision-support для моряков, крюингов, фрахтователей и брокеров.">
-    <meta name="keywords" content="отзывы о судах, отзывы о крюинг-компаниях, vessel review, vetting pressure, выбор работодателя моряк, maritime intelligence, репутация судна, opyт работы на судне, decision support shipping, vessel database, профиль судна, история экипажа, скрытые риски судна, due diligence судна, чёрный список судов">
+    <meta name="description" content="Skipi — система maritime intelligence на прямых сигналах моряков. Структурированные отзывы о судах и компаниях. Decision-support для моряков, крюингов, фрахтовых брокеров, фрахтователей, банков, инвесторов и P&I clubs.">
+    <meta name="keywords" content="отзывы о судах, отзывы о крюинг-компаниях, vessel review, vetting pressure, выбор работодателя моряк, maritime intelligence, репутация судна, оценка во фрахте, pre-fixture vetting, ship finance collateral, due diligence судна, vessel database, профиль судна, история экипажа, чёрный список судов, P&amp;I underwriting">
     <meta name="author" content="Skipi">
     <meta property="og:title" content="Skipi — Maritime Intelligence на прямых сигналах моряков">
-    <meta property="og:description" content="Структурированные отзывы моряков о судах и компаниях. Decision-support для моряков, крюингов, фрахтователей и брокеров.">
+    <meta property="og:description" content="Структурированные отзывы моряков о судах и компаниях. Decision-support для моряков, крюингов, брокеров, фрахтователей, банков, инвесторов и P&amp;I.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://skipi.app/">
     <meta property="og:site_name" content="Skipi">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Skipi — Maritime Intelligence на прямых сигналах моряков">
-    <meta name="twitter:description" content="Отзывы моряков о судах и компаниях. Decision-support до подписания контракта или фиксы.">
+    <meta name="twitter:description" content="Сигналы моряков о судах и компаниях. Один слой данных — от моряка до банка, инвестора и фрахтового брокера.">
     <link rel="canonical" href="https://skipi.app/">
     <link rel="alternate" hreflang="en" href="https://skipi.app/en/">
     <link rel="alternate" hreflang="ru" href="https://skipi.app/">
@@ -37,7 +37,7 @@
         "copyrightYear": 2026,
         "copyrightHolder": { "@type": "Organization", "name": "Skipi" },
         "datePublished": "2026-04-06",
-        "description": "Skipi — maritime intelligence система на прямых сигналах моряков. Структурированные отзывы экипажей о судах и компаниях агрегируются в decision-support слой: vessel score, warning flags, vetting pressure, profile компании. Используется моряками для выбора работодателя, крюингами и шипменеджерами для due diligence, фрахтователями и брокерами для оценки судна до фиксы.",
+        "description": "Skipi — maritime intelligence система на прямых сигналах моряков. Структурированные отзывы экипажей о судах и компаниях агрегируются в decision-support слой: vessel score, warning flags, vetting pressure, profile компании. Используется моряками для выбора работодателя, крюингами и шипменеджерами для due diligence, фрахтовыми брокерами и фрахтователями для pre-fixture vetting, банками для collateral monitoring в ship finance, инвесторами и S&P для pre-acquisition due diligence, P&I clubs и страховщиками для underwriting и risk pricing.",
         "featureList": [
             "Структурированные отзывы моряков о судах по 16 секциям",
             "Composite vessel score на основе агрегации экипажных сигналов",
@@ -46,7 +46,9 @@
             "Privacy-preserving архитектура: HMAC server-side хеши, личность моряка не раскрывается",
             "База 50k+ судов с возможностью обогащения через Equasis/RightShip",
             "Per-epoch разрез отзывов — видно как менялось состояние судна со сменой менеджмента",
-            "Decision-support для моряков, крюингов, шипменеджеров, фрахтователей и брокеров",
+            "Decision-support для моряков, крюингов, шипменеджеров, фрахтовых брокеров, фрахтователей, банков, инвесторов и P&I clubs",
+            "Pre-fixture vetting экипажным сигналом для брокеров и фрахтователей — оценка во фрахте",
+            "Operational signal для ship finance: collateral monitoring и pre-acquisition due diligence",
             "Local-first архитектура: документы и vault моряка остаются на устройстве",
             "Структурированный CV-пайплайн и пакеты документов как supporting infrastructure",
             "Контроль сроков сертификатов и SOLAS-шаблоны по типу судна",
@@ -678,12 +680,14 @@
             <article class="pillar">
                 <div class="icon">🎯</div>
                 <h3>Decision Support</h3>
-                <p>Слой для тех, кто принимает решения: моряк выбирает работодателя, крюинг и шипменеджер делают due diligence, фрахтователь и брокер оценивают судно до фиксы.</p>
+                <p>Слой для всех, кто принимает решения по конкретному судну или компании — от моряка перед контрактом до банка перед выдачей ship finance.</p>
                 <ul>
                     <li>Морякам — профиль работодателя до контракта</li>
-                    <li>Крюингам — due diligence на контрагентов</li>
-                    <li>Фрахтователям — pre-fixture vetting экипажным сигналом</li>
-                    <li>Брокерам — оценка реального состояния судна</li>
+                    <li>Крюингам и шипменеджерам — due diligence на контрагентов</li>
+                    <li>Брокерам и фрахтователям — pre-fixture vetting (оценка во фрахте)</li>
+                    <li>Банкам — collateral monitoring для ship finance</li>
+                    <li>Инвесторам и S&amp;P — due diligence перед покупкой судна или флота</li>
+                    <li>P&amp;I и страховщикам — operational signal для underwriting</li>
                 </ul>
                 <div class="pillar-cta">
                     <a class="pillar-link" href="mailto:info@tymur.org?subject=Skipi%20Intelligence%20access%20request">Запросить доступ →</a>
@@ -792,15 +796,17 @@
         <div class="feature-row">
             <div class="feature-text">
                 <span class="kicker">Decision support по ролям</span>
-                <h2>Один слой данных — четыре стороны принимают решения</h2>
+                <h2>Один слой данных — много decision-makers по всей цепочке вокруг судна</h2>
                 <p>
-                    Skipi не строит отдельный продукт под каждую роль — все используют один и тот же intelligence-слой. Моряк, крюинг, шипменеджер, фрахтователь и брокер видят профиль судна и компании в одинаковой структуре, но используют его под свою задачу.
+                    Skipi не строит отдельный продукт под каждую роль — все используют один и тот же intelligence-слой. Моряк, крюинг, шипменеджер, фрахтовый брокер, фрахтователь, банк, инвестор и P&amp;I видят профиль судна и компании в одинаковой структуре, но применяют под свою задачу.
                 </p>
                 <ul class="checklist">
                     <li>Моряк: «стоит ли ехать на этот контракт?»</li>
-                    <li>Крюинг: «стоит ли работать с этим шипменеджером?»</li>
-                    <li>Фрахтователь: «стоит ли фиксовать это судно?»</li>
-                    <li>Брокер: «какие риски не видны из vetting reports?»</li>
+                    <li>Крюинг и шипменеджер: «стоит ли работать с этим owner'ом / контрагентом?»</li>
+                    <li>Брокер и фрахтователь: «стоит ли фиксовать это судно?» — оценка во фрахте</li>
+                    <li>Банк: «как ведёт себя collateral в operational signals?»</li>
+                    <li>Инвестор: «что не видно из брокерского pitch-deck перед покупкой?»</li>
+                    <li>P&amp;I и страховщик: «какой risk premium на это судно?»</li>
                 </ul>
             </div>
             <div class="feature-visual">
@@ -808,7 +814,7 @@
                     <div class="doc-icon">👤</div>
                     <div class="doc-body">
                         <div class="doc-title">Seafarer · pre-contract check</div>
-                        <div class="doc-meta">Score 5.2 + warning flag «management response слабый» → отказ</div>
+                        <div class="doc-meta">Score 5.2 + warning «management response слабый» → отказ</div>
                     </div>
                 </div>
                 <div class="doc-card">
@@ -819,17 +825,31 @@
                     </div>
                 </div>
                 <div class="doc-card">
-                    <div class="doc-icon">📦</div>
+                    <div class="doc-icon">⚖</div>
                     <div class="doc-body">
-                        <div class="doc-title">Charterer · pre-fixture vetting</div>
-                        <div class="doc-meta">Maintenance score 6.0 при чистом SIRE → углублённая инспекция</div>
+                        <div class="doc-title">Broker · pre-fixture vetting</div>
+                        <div class="doc-meta">Maintenance 6.0 при чистом SIRE → углублённая инспекция перед фиксой</div>
                     </div>
                 </div>
                 <div class="doc-card">
-                    <div class="doc-icon">⚖</div>
+                    <div class="doc-icon">🏦</div>
                     <div class="doc-body">
-                        <div class="doc-title">Broker · risk read</div>
-                        <div class="doc-meta">Vetting pressure высокое + crew rotation хаос → осторожно</div>
+                        <div class="doc-title">Bank · collateral signal</div>
+                        <div class="doc-meta">Vetting pressure растёт квартал к кварталу → covenant review</div>
+                    </div>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-icon">💼</div>
+                    <div class="doc-body">
+                        <div class="doc-title">Investor · pre-acquisition DD</div>
+                        <div class="doc-meta">Retention рухнул после смены менеджмента → пересмотр оценки</div>
+                    </div>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-icon">🛡</div>
+                    <div class="doc-body">
+                        <div class="doc-title">P&amp;I · underwriting</div>
+                        <div class="doc-meta">Safety culture 8.1, payment reliability ок → premium below baseline</div>
                     </div>
                 </div>
             </div>
@@ -901,7 +921,7 @@
         <div class="faq">
             <details class="faq-item">
                 <summary>Кто может читать отзывы и видеть профили?</summary>
-                <p>Морякам открыт профиль судна и компании в клиенте Skipi Seafarer бесплатно. Крюинги, шипменеджеры, фрахтователи и брокеры получают доступ по запросу с авторизационным токеном — пишите на info@tymur.org из корпоративного домена.</p>
+                <p>Морякам открыт профиль судна и компании в клиенте Skipi Seafarer бесплатно. Крюинги, шипменеджеры, фрахтовые брокеры и фрахтователи получают доступ по запросу с авторизационным токеном. Для банков (ship finance), инвесторов, S&amp;P-консультантов и P&amp;I clubs — отдельный enterprise-доступ на компанию. Во всех случаях пишите на info@tymur.org из корпоративного домена.</p>
             </details>
             <details class="faq-item">
                 <summary>Как защищена личность моряка, оставившего отзыв?</summary>
@@ -929,7 +949,7 @@
             </details>
             <details class="faq-item">
                 <summary>Я представляю компанию — как получить доступ к intelligence-слою?</summary>
-                <p>Напишите на info@tymur.org из корпоративного домена с короткой презентацией компании и ролью (крюинг / шипменеджер / фрахтователь / брокер / owner). Выдаём токен и проводим короткий онбординг — обычно 20–30 минут.</p>
+                <p>Напишите на info@tymur.org из корпоративного домена с короткой презентацией компании и ролью (крюинг / шипменеджер / фрахтовый брокер / фрахтователь / owner / банк / инвестор / P&amp;I / страховщик / cargo interest). Выдаём токен и проводим короткий онбординг — обычно 20–30 минут.</p>
             </details>
         </div>
     </div>
