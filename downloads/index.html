@@ -3,584 +3,955 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Скачать Skipi — морские документы, CV и рассылка</title>
-    <meta name="description" content="Скачать Skipi Seafarer и запросить авторизационный токен для Skipi Crewing. RF-доступные beta-загрузки с сайта skipi.app.">
+    <title>Скачать Skipi — пошаговая установка</title>
+    <meta name="description" content="Пошаговая установка Skipi: выберите продукт (Seafarer или Crewing), затем платформу (Windows, macOS, Linux). Skipi объяснит, какие разрешения нужно дать и почему.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://skipi.app/downloads">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --navy: #0f2b46;
-            --blue: #1a73e8;
-            --amber: #b45309;
-            --amber-bg: #fff7ed;
-            --green: #047857;
-            --green-bg: #ecfdf5;
-            --light: #f0f4f8;
-            --white: #ffffff;
-            --gray: #64748b;
-            --dark: #1e293b;
+            --ink:       #0a1f33;
+            --ink-soft:  #2a3f55;
+            --body:      #475569;
+            --muted:     #7f8da0;
+            --accent:    #007a86;
+            --accent-dk: #005e68;
+            --bg:        #ffffff;
+            --bg-soft:   #f6f8fa;
+            --bg-deep:   #edf1f5;
+            --border:    #e3e8ee;
+            --warn-bg:   #fff7ed;
+            --warn-bd:   #fed7aa;
+            --warn-ink:  #7c2d12;
+            --ok-bg:     #ecfdf5;
+            --ok-bd:     #a7f3d0;
+            --ok-ink:    #047857;
         }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            color: var(--dark);
-            line-height: 1.6;
-            background: var(--light);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--body);
+            background: var(--bg);
+            line-height: 1.55;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
+            display: flex; flex-direction: column;
+        }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { color: var(--accent-dk); }
+        code, kbd {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.86em;
+        }
+        .container { width: min(900px, 100% - 2rem); margin: 0 auto; }
+
+        header.site {
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: saturate(160%) blur(8px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.95rem 0;
+        }
+        .brand {
+            font-weight: 800; font-size: 1.25rem; color: var(--ink);
+            letter-spacing: -0.01em;
+        }
+        .brand .dot { color: var(--accent); }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+        .nav-links a {
+            color: var(--ink-soft); font-weight: 500; font-size: 0.92rem;
+        }
+        .nav-links a:hover { color: var(--accent); }
+        @media (max-width: 640px) {
+            .nav-links { display: none; }
         }
 
-        /* Header */
-        .header {
-            background: var(--navy);
-            padding: 1rem 1.5rem;
-            text-align: center;
-        }
-        .header a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.25rem;
-            font-weight: 700;
-        }
-
-        /* Main */
-        .main {
+        main.wizard {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 3rem 1.5rem;
-        }
-        .container {
-            max-width: 980px;
-            width: 100%;
-        }
-        h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 0.25rem;
-            text-align: center;
-        }
-        .subtitle {
-            text-align: center;
-            color: var(--gray);
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-        }
-        .version {
-            text-align: center;
-            color: var(--gray);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-        .release-strip {
-            background: var(--white);
-            border: 1px solid #dbe4ee;
-            border-radius: 10px;
-            padding: 0.9rem 1rem;
-            margin-bottom: 1rem;
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 0.75rem;
-            font-size: 0.88rem;
-        }
-        .release-strip strong {
-            display: block;
-            color: var(--dark);
-            margin-bottom: 0.1rem;
-        }
-        .release-strip span { color: var(--gray); }
-        .release-strip a,
-        .warning-panel a,
-        .trust-panel a {
-            color: var(--blue);
-            text-decoration: none;
-        }
-        .release-strip a:hover,
-        .warning-panel a:hover,
-        .trust-panel a:hover {
-            text-decoration: underline;
-        }
-        .warning-panel {
-            background: var(--amber-bg);
-            border: 1px solid #fed7aa;
-            border-left: 4px solid var(--amber);
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1.25rem;
-            color: #7c2d12;
-            font-size: 0.9rem;
-        }
-        .warning-panel strong {
-            display: block;
-            color: #7c2d12;
-            margin-bottom: 0.25rem;
-        }
-        .token-panel {
-            background: #eff6ff;
-            border: 1px solid #bfdbfe;
-            border-left: 4px solid var(--blue);
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-        .token-panel strong {
-            display: block;
-            color: var(--navy);
-            margin-bottom: 0.3rem;
-        }
-        .token-panel p {
-            color: var(--gray);
-            margin-bottom: 0.85rem;
-        }
-        .token-panel p a {
-            color: var(--blue);
-            text-decoration: none;
-        }
-        .token-panel p a:hover { text-decoration: underline; }
-        .download-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 1.25rem;
-            align-items: start;
-        }
-        .product-panel {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 1.25rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-        }
-        .product-panel h2 {
-            font-size: 1.25rem;
-            margin-bottom: 0.25rem;
-        }
-        .product-panel .product-desc {
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+            padding: 3rem 0 5rem;
         }
 
-        /* Platform cards */
-        .card {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            display: grid;
-            grid-template-columns: 2.5rem minmax(0, 1fr);
-            gap: 0.75rem 1rem;
-            align-items: center;
-        }
-        .card-info {
-            display: contents;
-        }
-        .card-icon {
-            font-size: 2rem;
-            line-height: 1;
-            text-align: center;
-            width: 2.5rem;
-        }
-        .card-label h3 {
-            font-size: 1.05rem;
-            margin-bottom: 0.15rem;
-        }
-        .card-label { min-width: 0; }
-        .card-label p {
-            font-size: 0.85rem;
-            color: var(--gray);
-            overflow-wrap: anywhere;
-        }
-        .card-actions {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
+        /* ── Step indicator ──────────────────────────────────── */
+        .steps {
+            display: flex; gap: 0.5rem;
+            margin-bottom: 2.5rem;
             flex-wrap: wrap;
-            grid-column: 2;
-            justify-content: flex-start;
         }
-        .card > .btn {
-            grid-column: 2;
-            justify-self: start;
+        .step-dot {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-size: 0.84rem; color: var(--muted);
+            padding: 0.3rem 0.75rem; border-radius: 999px;
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+            cursor: default;
         }
-        .btn {
-            display: inline-block;
-            padding: 0.6rem 1.25rem;
-            background: var(--blue);
+        .step-dot.active {
+            color: #fff; background: var(--ink); border-color: var(--ink);
+        }
+        .step-dot.done {
+            color: var(--accent); background: var(--bg-deep); border-color: var(--bg-deep);
+            cursor: pointer;
+        }
+        .step-dot .num {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 1.25rem; height: 1.25rem; border-radius: 50%;
+            font-size: 0.74rem; font-weight: 700;
+            background: rgba(255,255,255,0.18);
+        }
+        .step-dot.done .num { background: var(--accent); color: #fff; }
+
+        /* ── Back link ───────────────────────────────────────── */
+        .back-link {
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            color: var(--muted); font-size: 0.9rem; font-weight: 500;
+            margin-bottom: 1.5rem; cursor: pointer;
+            background: none; border: none; padding: 0;
+        }
+        .back-link:hover { color: var(--accent); }
+
+        /* ── Step panels ─────────────────────────────────────── */
+        .step-panel[hidden] { display: none; }
+
+        .step-panel h1 {
+            font-size: clamp(1.7rem, 3vw, 2.2rem);
+            font-weight: 800; color: var(--ink);
+            letter-spacing: -0.02em; line-height: 1.15;
+            margin-bottom: 0.6rem;
+        }
+        .step-panel .lead {
+            color: var(--body); font-size: 1.02rem;
+            margin-bottom: 2rem;
+        }
+
+        /* ── Choice cards (roles, OS) ────────────────────────── */
+        .choice-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+        .choice-grid.os-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        @media (max-width: 640px) {
+            .choice-grid, .choice-grid.os-grid { grid-template-columns: 1fr; }
+        }
+
+        .choice-card {
+            text-align: left;
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: 1.4rem 1.4rem 1.3rem;
+            cursor: pointer;
+            transition: all 0.15s;
+            font: inherit;
+            color: inherit;
+            position: relative;
+            display: flex; flex-direction: column;
+        }
+        .choice-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(10,31,51,0.07);
+        }
+        .choice-card .ico {
+            font-size: 1.8rem; line-height: 1;
+            margin-bottom: 0.7rem;
+        }
+        .choice-card h2 {
+            font-size: 1.18rem; font-weight: 700;
+            color: var(--ink); margin-bottom: 0.35rem;
+            letter-spacing: -0.01em;
+        }
+        .choice-card p {
+            color: var(--body); font-size: 0.91rem;
+            margin-bottom: 0.8rem;
+            flex: 1;
+        }
+        .choice-card .meta {
+            font-size: 0.78rem; color: var(--muted);
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+        .choice-card .meta.warn { color: var(--warn-ink); }
+        .choice-card .detected-badge {
+            position: absolute; top: 0.85rem; right: 0.85rem;
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--bg-deep);
+            padding: 0.2rem 0.5rem; border-radius: 4px;
+        }
+
+        /* ── Done step ───────────────────────────────────────── */
+        .download-hero {
+            background: linear-gradient(135deg, var(--ink) 0%, #173554 100%);
+            border-radius: 14px;
+            padding: 1.75rem;
             color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            white-space: nowrap;
-            transition: background 0.15s;
+            margin-bottom: 2rem;
         }
-        .btn:hover { background: #1557b0; }
-        .btn-alt {
-            display: inline-block;
-            padding: 0.5rem 0.75rem;
-            background: transparent;
-            color: var(--blue);
-            text-decoration: none;
-            border: 1.5px solid var(--blue);
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            white-space: nowrap;
-            transition: background 0.15s;
-        }
-        .btn-alt:hover { background: #f0f7ff; }
-
-        /* Linux sub-options */
-        .linux-extra {
-            margin-top: 0.5rem;
-            padding: 0 1.5rem 1rem;
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .linux-extra a {
-            font-size: 0.85rem;
-            color: var(--blue);
-            text-decoration: none;
-        }
-        .linux-extra a:hover { text-decoration: underline; }
-        .linux-extra span {
-            font-size: 0.85rem;
-            color: var(--gray);
-        }
-        /* Gatekeeper workaround note under macOS card. */
-        .mac-note {
-            margin-top: 0.5rem;
-            padding: 0 1.5rem 1rem;
-            font-size: 0.85rem;
-            color: var(--gray);
-            line-height: 1.5;
-        }
-        .mac-note p { margin: 0 0 0.5rem; }
-        .mac-note code {
+        .download-hero .dl-label {
             display: block;
-            background: #0f1f33;
-            color: #e2eaf2;
-            padding: 0.55rem 0.75rem;
-            border-radius: 6px;
-            font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-            font-size: 0.78rem;
-            user-select: all;
-            white-space: nowrap;
-            overflow-x: auto;
+            font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+            color: rgba(255,255,255,0.65); font-weight: 700;
+            margin-bottom: 0.4rem;
         }
-        .mac-note .why { font-size: 0.75rem; color: #93a2b2; margin-top: 0.35rem; }
-        .trust-panel {
-            background: var(--white);
-            border: 1px solid #dbe4ee;
-            border-radius: 12px;
-            padding: 1.25rem;
-            margin-top: 1.25rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        .trust-panel h2 {
-            font-size: 1.2rem;
-            margin-bottom: 0.35rem;
-        }
-        .trust-panel p {
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-        .trust-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 1rem;
-        }
-        .trust-list {
-            list-style: none;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .trust-list li {
-            display: grid;
-            grid-template-columns: 8.5rem minmax(0, 1fr);
-            gap: 0.75rem;
-            padding: 0.7rem 0.8rem;
-            border-top: 1px solid #e2e8f0;
-            font-size: 0.78rem;
-        }
-        .trust-list li:first-child { border-top: 0; }
-        .trust-list .file {
-            color: var(--dark);
-            font-weight: 700;
-        }
-        .trust-list code {
-            color: #334155;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            font-size: 0.76rem;
+        .download-hero .dl-file {
+            display: block;
+            font-size: 1.05rem; font-weight: 600;
+            margin-bottom: 0.3rem;
             word-break: break-all;
         }
-        .signing-status {
-            background: var(--green-bg);
-            border: 1px solid #a7f3d0;
-            border-radius: 10px;
-            color: var(--green);
-            font-size: 0.86rem;
-            margin-top: 1rem;
-            padding: 0.8rem;
+        .download-hero .dl-meta {
+            display: block;
+            font-size: 0.86rem; color: rgba(255,255,255,0.62);
+            margin-bottom: 1rem;
         }
-
-        /* Footer note */
-        .note {
-            text-align: center;
-            color: var(--gray);
-            font-size: 0.85rem;
-            margin-top: 1.5rem;
-            line-height: 1.7;
+        .dl-btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: var(--accent); color: #fff;
+            padding: 0.75rem 1.4rem; border-radius: 8px;
+            font-weight: 700; font-size: 0.96rem;
+            transition: background 0.15s;
         }
-        .note a { color: var(--blue); text-decoration: none; }
-        .note a:hover { text-decoration: underline; }
+        .dl-btn:hover { background: #00919e; color: #fff; }
+        .dl-btn .arrow { font-size: 1.05rem; transition: transform 0.15s; }
+        .dl-btn:hover .arrow { transform: translateY(2px); }
 
-        /* Footer */
-        footer {
-            background: var(--navy);
-            color: rgba(255,255,255,0.7);
-            text-align: center;
+        .alt-downloads {
+            margin-top: 0.85rem;
+            font-size: 0.84rem; color: rgba(255,255,255,0.7);
+        }
+        .alt-downloads a {
+            color: rgba(255,255,255,0.92);
+            border-bottom: 1px dotted rgba(255,255,255,0.4);
+        }
+        .alt-downloads a:hover { color: #fff; }
+
+        /* Build note (yellow) */
+        .build-note {
+            background: var(--warn-bg);
+            border: 1px solid var(--warn-bd);
+            border-left: 4px solid #b45309;
+            border-radius: 8px;
+            padding: 0.9rem 1rem;
+            color: var(--warn-ink);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        .build-note strong { display: block; margin-bottom: 0.2rem; }
+        .build-note a { color: var(--warn-ink); text-decoration: underline; }
+
+        /* Token block */
+        .token-block {
+            background: #fff7d6;
+            border: 1px solid #fde68a;
+            border-left: 4px solid #ca8a04;
+            border-radius: 8px;
+            padding: 1rem 1.1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.92rem;
+            color: #7c2d12;
+        }
+        .token-block strong { display: block; margin-bottom: 0.3rem; color: #7c2d12; font-size: 0.96rem; }
+        .token-block p { margin-bottom: 0.75rem; }
+        .token-block .token-btn {
+            display: inline-block;
+            background: #ca8a04; color: #fff;
+            padding: 0.55rem 1rem; border-radius: 6px;
+            font-weight: 600; font-size: 0.88rem;
+        }
+        .token-block .token-btn:hover { background: #a16207; color: #fff; }
+
+        /* Unavailable build block */
+        .unavailable-block {
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             padding: 1.5rem;
-            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--body);
         }
-        footer a { color: #60a5fa; text-decoration: none; }
+        .unavailable-block .ico { font-size: 2rem; margin-bottom: 0.5rem; }
+        .unavailable-block h3 { color: var(--ink); font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .unavailable-block .actions { margin-top: 1rem; display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+        .unavailable-block .actions a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--accent); color: var(--accent);
+            border-radius: 6px; font-weight: 600; font-size: 0.88rem;
+        }
+        .unavailable-block .actions a:hover {
+            background: var(--accent); color: #fff;
+        }
 
-        @media (max-width: 900px) {
-            .release-strip,
-            .download-grid { grid-template-columns: 1fr; }
+        /* Instructions */
+        .instructions {
+            background: var(--bg-soft);
+            border-radius: 12px;
+            padding: 1.75rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .instructions h2 {
+            font-size: 1.05rem; font-weight: 700; color: var(--ink);
+            letter-spacing: -0.01em;
+            margin: 1.5rem 0 0.7rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .instructions h2:first-child { margin-top: 0; }
+        .instructions h2 .step-n {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 1.6rem; height: 1.6rem; border-radius: 50%;
+            background: var(--accent); color: #fff;
+            font-size: 0.82rem; font-weight: 700;
+            flex-shrink: 0;
+        }
+        .instructions ol, .instructions ul {
+            padding-left: 1.3rem;
+            display: grid; gap: 0.55rem;
+            color: var(--ink-soft);
+            font-size: 0.94rem;
+        }
+        .instructions ol { padding-left: 1.5rem; }
+        .instructions li::marker { color: var(--accent); font-weight: 700; }
+        .instructions p {
+            color: var(--ink-soft); font-size: 0.94rem;
+            margin-bottom: 0.6rem;
+        }
+        .instructions code.cli {
+            display: block;
+            background: #0f1f33; color: #e2eaf2;
+            padding: 0.65rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.84rem;
+            user-select: all;
+            white-space: pre-wrap; word-break: break-all;
+            margin: 0.4rem 0;
+        }
+        .instructions code.inline {
+            background: var(--bg-deep); color: var(--ink);
+            padding: 0.1rem 0.35rem; border-radius: 3px;
+            font-size: 0.86em;
+        }
+        .why {
+            background: var(--bg-deep);
+            border-left: 3px solid var(--accent);
+            padding: 0.7rem 0.9rem;
+            border-radius: 6px;
+            margin: 0.7rem 0;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .why strong { color: var(--ink); }
+
+        /* Troubleshoot */
+        details.troubleshoot {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            background: #fff;
+            margin-bottom: 1rem;
+        }
+        details.troubleshoot summary {
+            cursor: pointer; font-weight: 600; color: var(--ink);
+            font-size: 0.96rem;
+            list-style: none;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        details.troubleshoot summary::-webkit-details-marker { display: none; }
+        details.troubleshoot summary::after {
+            content: "+"; color: var(--accent); font-size: 1.3rem;
+            transition: transform 0.2s;
+        }
+        details.troubleshoot[open] summary::after { content: "−"; }
+        details.troubleshoot p, details.troubleshoot li {
+            margin-top: 0.7rem;
+            font-size: 0.9rem; color: var(--ink-soft);
+            line-height: 1.6;
+        }
+        details.troubleshoot ul { padding-left: 1.2rem; }
+
+        /* Other resources at the bottom */
+        .other-builds {
+            border-top: 1px solid var(--border);
+            margin-top: 2.5rem; padding-top: 1.5rem;
+            font-size: 0.86rem; color: var(--muted);
+            display: flex; gap: 1rem; flex-wrap: wrap;
+        }
+        .other-builds a { color: var(--accent); }
+
+        noscript .nojs-warning {
+            background: var(--warn-bg); border: 1px solid var(--warn-bd);
+            padding: 1rem; border-radius: 8px; margin-bottom: 2rem;
+            color: var(--warn-ink); font-size: 0.92rem;
         }
 
-        @media (max-width: 500px) {
-            .main { padding: 2rem 1.25rem; }
-            .release-strip,
-            .download-grid { grid-template-columns: 1fr; }
-            .trust-grid { grid-template-columns: 1fr; }
-            .trust-list li { grid-template-columns: 1fr; gap: 0.25rem; }
-            .release-strip span,
-            .warning-panel,
-            .product-desc,
-            .note { overflow-wrap: anywhere; }
-            .card {
-                grid-template-columns: 2.5rem minmax(0, 1fr);
-            }
-            .card-actions {
-                width: 100%;
-                grid-column: 1 / -1;
-                align-items: stretch;
-            }
-            .card > .btn {
-                grid-column: 1 / -1;
-                justify-self: stretch;
-            }
-            .btn,
-            .btn-alt {
-                width: 100%;
-                text-align: center;
-            }
+        footer.site {
+            background: #061a2c; color: rgba(255,255,255,0.65);
+            padding: 1.5rem 0;
+            font-size: 0.84rem; text-align: center;
         }
+        footer.site a { color: rgba(255,255,255,0.85); }
+        footer.site a:hover { color: #fff; }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <a href="/">Skipi</a>
-</div>
+<header class="site">
+    <div class="container nav">
+        <a href="/" class="brand">Skipi<span class="dot">.</span></a>
+        <ul class="nav-links">
+            <li><a href="/#platform">Платформа</a></li>
+            <li><a href="/#how">Как работает</a></li>
+            <li><a href="/#faq">Вопросы</a></li>
+        </ul>
+    </div>
+</header>
 
-<div class="main">
+<main class="wizard">
     <div class="container">
-        <h1>Скачать Skipi</h1>
-        <p class="subtitle">Актуальные beta-сборки для Windows, macOS и Linux</p>
-        <p class="version">Ранний доступ</p>
 
-        <div class="release-strip">
-            <div>
-                <strong>Skipi Crewing v0.4.115</strong>
-                <span>Опубликовано 31 мая 2026 &middot; <a href="https://api-ru.skipi.app/crewing/latest.json">RF manifest</a></span>
+        <noscript>
+            <div class="nojs-warning">
+                Эта страница использует JavaScript для пошагового подбора версии. Включите JS — или скачайте напрямую с
+                <a href="https://github.com/CaptTymur/skipi.app/releases">GitHub Releases</a> (Seafarer).
+                Для Crewing запросите токен и ссылку у
+                <a href="mailto:info@tymur.org?subject=Skipi%20Crewing%20authorization%20token%20request">info@tymur.org</a>.
             </div>
-            <div>
-                <strong>Skipi Seafarer v0.4.140</strong>
-                <span>Опубликовано 25 мая 2026 &middot; <a href="https://github.com/CaptTymur/skipi.app/releases/tag/v0.4.140">GitHub release</a></span>
-            </div>
+        </noscript>
+
+        <div class="steps" id="steps">
+            <span class="step-dot" data-step="role" data-jump><span class="num">1</span> Продукт</span>
+            <span class="step-dot" data-step="os" data-jump><span class="num">2</span> Платформа</span>
+            <span class="step-dot" data-step="done"><span class="num">3</span> Установка</span>
         </div>
 
-        <div class="warning-panel">
-            <strong>Важное предупреждение перед установкой</strong>
-            Skipi сейчас в ранней beta. Windows, Microsoft Defender, браузер или корпоративная политика безопасности могут попросить подтверждение перед запуском нового установщика. На Linux может понадобиться разрешить запуск AppImage.
-        </div>
+        <!-- ─── STEP 1: ROLE ────────────────────────────────── -->
+        <section class="step-panel" id="panel-role">
+            <h1>Какую версию Skipi скачиваете?</h1>
+            <p class="lead">Skipi — desktop-приложение для Windows, macOS и Linux. Не веб-версия. Все данные остаются на вашем компьютере.</p>
 
-        <div class="warning-panel">
-            <strong>Зеркало для пользователей из РФ</strong>
-            Публичные ссылки Skipi Seafarer на этой странице ведут на актуальный GitHub Release. RF-зеркало Timeweb поддерживается отдельно; когда свежая версия синхронизирована туда, manifest доступен на <a href="https://api-ru.skipi.app/latest.json">api-ru.skipi.app/latest.json</a>. Skipi Crewing можно скачать здесь, но для работы приложения нужен токен авторизации.
-        </div>
-
-        <div class="warning-panel">
-            <strong>Skipi Crewing требует авторизационный токен</strong>
-            Crewing-версия предназначена для крюинг-компаний и приглашённых тестеров. Перед скачиванием и входом в приложение запросите токен авторизации Skipi по адресу <a href="mailto:info@tymur.org?subject=Skipi%20Crewing%20authorization%20token%20request">info@tymur.org</a>.
-        </div>
-
-        <div class="download-grid">
-            <section class="product-panel" id="crewing">
-                <h2>Skipi Crewing</h2>
-                <p class="product-desc">Для крюинг-менеджеров: публиковать вакансии, получать отклики, смотреть документы и вести локальный vault крюинга. Установка и работа с Crewing выполняются по авторизационному токену.</p>
-
-                <div class="token-panel">
-                    <strong>Запросите токен авторизации</strong>
-                    <p>Напишите на <a href="mailto:info@tymur.org?subject=Skipi%20Crewing%20authorization%20token%20request">info@tymur.org</a>, укажите компанию, контактное лицо, рабочий email и нужную платформу: Windows, macOS или Linux.</p>
-                    <a class="btn" href="mailto:info@tymur.org?subject=Skipi%20Crewing%20authorization%20token%20request&body=Hello%2C%0A%0APlease%20send%20me%20a%20Skipi%20Crewing%20authorization%20token.%0ACompany%3A%0AContact%20person%3A%0AEmail%3A%0APlatform%3A%0A%0AThank%20you.">Запросить токен</a>
-                </div>
-
-                <div class="card">
-                    <div class="card-info">
-                        <div class="card-icon">&#128187;</div>
-                        <div class="card-label">
-                            <h3>Windows</h3>
-                            <p>64-bit установщик &middot; .exe</p>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <a class="btn" href="https://api-ru.skipi.app/downloads/crewing/0.4.115/Skipi.Crewing_0.4.115_x64-setup.exe">Скачать</a>
-                        <a class="btn-alt" href="https://api-ru.skipi.app/downloads/crewing/0.4.115/Skipi.Crewing_0.4.115_x64_en-US.msi">.msi</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-info">
-                        <div class="card-icon">&#127822;</div>
-                        <div class="card-label">
-                            <h3>macOS Apple Silicon</h3>
-                            <p>M1 / M2 / M3 / M4 &middot; .dmg</p>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <a class="btn" href="https://api-ru.skipi.app/downloads/crewing/0.4.115/Skipi.Crewing_0.4.115_aarch64.dmg">Скачать</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-info">
-                        <div class="card-icon">&#127822;</div>
-                        <div class="card-label">
-                            <h3>macOS Intel</h3>
-                            <p>Intel Mac &middot; .dmg</p>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <a class="btn" href="https://api-ru.skipi.app/downloads/crewing/0.4.115/Skipi.Crewing_0.4.115_x64.dmg">Скачать</a>
-                    </div>
-                </div>
-                <div class="mac-note">
-                    <p><strong>После установки на macOS:</strong> перетащите Skipi Crewing.app в папку <em>Applications</em>, затем откройте <em>Терминал</em> и выполните одну команду:</p>
-                    <code>xattr -dr com.apple.quarantine "/Applications/Skipi Crewing.app"</code>
-                    <p class="why">Это beta-сборка без notarization: macOS может потребовать дополнительное подтверждение перед первым запуском.</p>
-                </div>
-
-                <div class="card">
-                    <div class="card-info">
-                        <div class="card-icon">&#128039;</div>
-                        <div class="card-label">
-                            <h3>Linux</h3>
-                            <p>Debian / Ubuntu &middot; .deb</p>
-                        </div>
-                    </div>
-                    <a class="btn" href="https://api-ru.skipi.app/downloads/crewing/0.4.115/Skipi.Crewing_0.4.115_amd64.deb">Скачать</a>
-                </div>
-                <div class="linux-extra">
-                    <span>Также:</span>
-                    <a href="https://api-ru.skipi.app/downloads/crewing/0.4.115/Skipi.Crewing_0.4.115_amd64.AppImage">AppImage</a>
-                    <a href="https://api-ru.skipi.app/downloads/crewing/0.4.115/Skipi.Crewing-0.4.115-1.x86_64.rpm">RPM</a>
-                </div>
-            </section>
-
-            <section class="product-panel" id="seafarer">
-                <h2>Skipi Seafarer</h2>
-                <p class="product-desc">Для моряков: личный vault документов, контроль сроков, CV, пакеты документов, поиск судов и отзывы по судам.</p>
-
-                <div class="card">
-                    <div class="card-info">
-                        <div class="card-icon">&#128187;</div>
-                        <div class="card-label">
-                            <h3>Windows</h3>
-                            <p>64-bit установщик &middot; .exe</p>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <a class="btn" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.140/Skipi_0.4.140_x64-setup.exe">Скачать</a>
-                        <a class="btn-alt" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.140/Skipi_0.4.140_x64_en-US.msi">.msi</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-info">
-                        <div class="card-icon">&#127822;</div>
-                        <div class="card-label">
-                            <h3>macOS (Intel)</h3>
-                            <p>64-bit установщик &middot; .dmg</p>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <a class="btn" href="https://api-ru.skipi.app/downloads/seafarer/0.4.128/Skipi_0.4.128_x64.dmg">Скачать</a>
-                    </div>
-                </div>
-                <div class="mac-note">
-                    <p><strong>После установки на macOS:</strong> перетащите Skipi.app в папку <em>Applications</em>, затем откройте <em>Терминал</em> (⌘+Space → «Terminal» → Enter) и выполните одну команду:</p>
-                    <code>xattr -dr com.apple.quarantine /Applications/Skipi.app</code>
-                    <p class="why">Это снимает карантинный флаг, который macOS навешивает на любое приложение, скачанное вне App Store. Один раз — и Skipi запустится. Без неё система покажет «Apple не удалось подтвердить, что приложение не содержит вредоносного ПО».</p>
-                </div>
-
-                <div class="card">
-                    <div class="card-info">
-                        <div class="card-icon">&#128039;</div>
-                        <div class="card-label">
-                            <h3>Linux</h3>
-                            <p>Debian / Ubuntu &middot; .deb</p>
-                        </div>
-                    </div>
-                    <a class="btn" href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.140/Skipi_0.4.140_amd64.deb">Скачать</a>
-                </div>
-                <div class="linux-extra">
-                    <span>Также:</span>
-                    <a href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.140/Skipi_0.4.140_amd64.AppImage">AppImage</a>
-                    <a href="https://github.com/CaptTymur/skipi.app/releases/download/v0.4.140/Skipi-0.4.140-1.x86_64.rpm">RPM</a>
-                </div>
-            </section>
-
-        </div>
-
-        <section class="trust-panel" id="verification">
-            <h2>Проверка скачанного файла</h2>
-            <p>Seafarer публикуется через RF-маршрут: <a href="https://api-ru.skipi.app/latest.json">Seafarer manifest</a>. Crewing публикуется через отдельный RF-маршрут: <a href="https://api-ru.skipi.app/crewing/latest.json">Crewing manifest</a>. Для входа в Crewing нужен токен авторизации, его можно запросить на <a href="mailto:info@tymur.org?subject=Skipi%20Crewing%20authorization%20token%20request">info@tymur.org</a>.</p>
-
-            <div class="signing-status">
-                Подпись Windows Authenticode будет включена для будущих публичных релизов. Текущие beta-установщики могут показывать предупреждение "Unknown publisher".
+            <div class="choice-grid">
+                <button type="button" class="choice-card" data-role="seafarer">
+                    <span class="ico">⚓</span>
+                    <h2>Skipi Seafarer</h2>
+                    <p>Для моряков: личный vault документов, контроль сроков, поиск судов, отзывы экипажей о судах и компаниях, выбор работодателя до контракта.</p>
+                    <span class="meta">✓ Бесплатно · публичный ранний доступ</span>
+                </button>
+                <button type="button" class="choice-card" data-role="crewing">
+                    <span class="ico">🏢</span>
+                    <h2>Skipi Crewing</h2>
+                    <p>Для крюингов, шипменеджеров, фрахтователей, брокеров: публикация вакансий, due diligence по судам и компаниям, доступ к intelligence-слою.</p>
+                    <span class="meta warn">⚠ Требуется токен авторизации</span>
+                </button>
             </div>
         </section>
 
-        <p class="note">
-            Это ранние beta-сборки. Если Windows или защитная программа блокирует установку, пришлите точный текст сообщения или скриншот на <a href="mailto:info@tymur.org">info@tymur.org</a>.<br>
-            Все данные остаются на вашем компьютере.<br>
-            <a href="https://github.com/CaptTymur/skipi.app">GitHub репозиторий Seafarer</a>
-            &nbsp;&middot;&nbsp;
-            <a href="mailto:info@tymur.org?subject=Skipi%20Crewing%20authorization%20token%20request">запросить токен Crewing</a>
-            &nbsp;&middot;&nbsp;
-            <a href="/">назад на skipi.app</a>
-        </p>
-    </div>
-</div>
+        <!-- ─── STEP 2: OS ──────────────────────────────────── -->
+        <section class="step-panel" id="panel-os" hidden>
+            <button type="button" class="back-link" data-back>← К выбору продукта</button>
+            <h1 id="step2-title">На какой операционной системе будете запускать?</h1>
+            <p class="lead">Skipi — нативное desktop-приложение для всех трёх платформ. Веб-версия не используется.</p>
 
-<footer>
-    &copy; 2026 Skipi &nbsp;&middot;&nbsp;
-    <a href="/terms.html">Условия</a> &nbsp;&middot;&nbsp;
-    <a href="/privacy.html">Конфиденциальность</a> &nbsp;&middot;&nbsp;
-    <a href="mailto:info@tymur.org">info@tymur.org</a>
+            <div class="choice-grid os-grid">
+                <button type="button" class="choice-card" data-os="windows">
+                    <span class="ico">⊞</span>
+                    <h2>Windows</h2>
+                    <p>Windows 10 или 11, 64-bit. Установщик .exe или .msi.</p>
+                </button>
+                <button type="button" class="choice-card" data-os="macos-arm">
+                    <span class="ico">🍎</span>
+                    <h2>macOS Apple Silicon</h2>
+                    <p>M1, M2, M3, M4. Нативная сборка .dmg.</p>
+                </button>
+                <button type="button" class="choice-card" data-os="macos-intel">
+                    <span class="ico">🍎</span>
+                    <h2>macOS Intel</h2>
+                    <p>Intel-процессор Mac. Сборка .dmg.</p>
+                </button>
+                <button type="button" class="choice-card" data-os="linux">
+                    <span class="ico">🐧</span>
+                    <h2>Linux</h2>
+                    <p>Ubuntu, Debian, Fedora, Arch и др. .deb, AppImage, RPM.</p>
+                </button>
+            </div>
+        </section>
+
+        <!-- ─── STEP 3: DONE ────────────────────────────────── -->
+        <section class="step-panel" id="panel-done" hidden>
+            <button type="button" class="back-link" data-back>← Выбрать другую платформу</button>
+            <h1 id="step3-title">Загрузка</h1>
+
+            <div id="token-block" class="token-block" hidden>
+                <strong>⚠ Skipi Crewing требует токен авторизации</strong>
+                <p>Crewing-версия — для крюингов, шипменеджеров и фрахтователей. Без токена приложение установится, но при первом запуске попросит вставить токен, и без него интерфейс не разблокируется. Запросите токен <strong>заранее</strong> — обычно высылаем в течение рабочего дня.</p>
+                <a class="token-btn" href="mailto:info@tymur.org?subject=Skipi%20Crewing%20authorization%20token%20request&body=Hello%2C%0A%0APlease%20send%20me%20a%20Skipi%20Crewing%20authorization%20token.%0ACompany%3A%0AContact%20person%3A%0AEmail%3A%0APlatform%3A%0A%0AThank%20you.">Запросить токен →</a>
+            </div>
+
+            <div id="build-note" class="build-note" hidden></div>
+
+            <div id="download-hero" class="download-hero">
+                <span class="dl-label">Готово к скачиванию</span>
+                <span class="dl-file" id="dl-file"></span>
+                <span class="dl-meta" id="dl-meta"></span>
+                <a class="dl-btn" id="dl-btn" href="#"><span>Скачать</span> <span class="arrow">↓</span></a>
+                <div class="alt-downloads" id="dl-alts"></div>
+            </div>
+
+            <div id="unavailable-block" class="unavailable-block" hidden>
+                <div class="ico">🚧</div>
+                <h3 id="unavailable-title"></h3>
+                <p id="unavailable-text"></p>
+                <div class="actions" id="unavailable-actions"></div>
+            </div>
+
+            <div id="instructions" class="instructions"></div>
+
+            <details class="troubleshoot" id="troubleshoot"></details>
+
+            <div class="other-builds">
+                <span>Не то, что нужно?</span>
+                <a href="#" data-back-to-role>Выбрать другой продукт</a>
+                <span>·</span>
+                <a href="https://github.com/CaptTymur/skipi.app/releases">Все релизы Seafarer на GitHub</a>
+                <span>·</span>
+                <a href="mailto:info@tymur.org">Написать в поддержку</a>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<footer class="site">
+    <div class="container">
+        © 2026 Skipi &nbsp;·&nbsp;
+        <a href="/terms.html">Условия</a> &nbsp;·&nbsp;
+        <a href="/privacy.html">Конфиденциальность</a> &nbsp;·&nbsp;
+        <a href="mailto:info@tymur.org">info@tymur.org</a>
+    </div>
 </footer>
+
+<script>
+(function () {
+    'use strict';
+
+    // ── Data ────────────────────────────────────────────────
+    const SEAFARER_VERSION = '0.4.140';
+    const SEAFARER_MACOS_VERSION = '0.4.128';
+    const CREWING_VERSION = '0.4.115';
+
+    const GH = 'https://github.com/CaptTymur/skipi.app/releases/download/v' + SEAFARER_VERSION + '/';
+    const RU_S = 'https://api-ru.skipi.app/downloads/seafarer/';
+    const RU_C = 'https://api-ru.skipi.app/downloads/crewing/' + CREWING_VERSION + '/';
+
+    const PRODUCT = {
+        seafarer: { name: 'Skipi Seafarer', appPath: '/Applications/Skipi.app', binName: 'skipi' },
+        crewing:  { name: 'Skipi Crewing',  appPath: '/Applications/Skipi Crewing.app', binName: 'skipi-crewing' }
+    };
+
+    const BUILDS = {
+        seafarer: {
+            windows: {
+                version: SEAFARER_VERSION,
+                primary: { file: 'Skipi_' + SEAFARER_VERSION + '_x64-setup.exe', url: GH + 'Skipi_' + SEAFARER_VERSION + '_x64-setup.exe', meta: 'Windows 10/11 · 64-bit · ~85 МБ' },
+                alts: [{ label: '.msi', url: GH + 'Skipi_' + SEAFARER_VERSION + '_x64_en-US.msi' }]
+            },
+            'macos-intel': {
+                version: SEAFARER_MACOS_VERSION,
+                primary: { file: 'Skipi_' + SEAFARER_MACOS_VERSION + '_x64.dmg', url: RU_S + SEAFARER_MACOS_VERSION + '/Skipi_' + SEAFARER_MACOS_VERSION + '_x64.dmg', meta: 'macOS Intel · ~90 МБ' },
+                alts: [],
+                note: 'macOS-сборка пока отстаёт от Windows/Linux: ' + SEAFARER_MACOS_VERSION + ' против ' + SEAFARER_VERSION + '. Функциональность близкая, ребилд скоро.'
+            },
+            'macos-arm': {
+                unavailable: true,
+                title: 'Apple Silicon-сборки Seafarer пока нет',
+                text: 'Native ARM-сборка для M1/M2/M3/M4 в работе. Прямо сейчас можно скачать Intel-версию — macOS установит Rosetta 2 при первом запуске и Skipi будет работать на любом Mac.',
+                actions: [
+                    { label: 'Скачать Intel-версию', href: '#/seafarer/macos-intel' },
+                    { label: 'Сообщить о приоритете', href: 'mailto:info@tymur.org?subject=Skipi%20Seafarer%20Apple%20Silicon%20build%20request' }
+                ]
+            },
+            linux: {
+                version: SEAFARER_VERSION,
+                primary: { file: 'Skipi_' + SEAFARER_VERSION + '_amd64.deb', url: GH + 'Skipi_' + SEAFARER_VERSION + '_amd64.deb', meta: 'Debian / Ubuntu / Mint · 64-bit · ~95 МБ' },
+                alts: [
+                    { label: 'AppImage', url: GH + 'Skipi_' + SEAFARER_VERSION + '_amd64.AppImage' },
+                    { label: 'RPM', url: GH + 'Skipi-' + SEAFARER_VERSION + '-1.x86_64.rpm' }
+                ]
+            }
+        },
+        crewing: {
+            windows: {
+                version: CREWING_VERSION,
+                primary: { file: 'Skipi.Crewing_' + CREWING_VERSION + '_x64-setup.exe', url: RU_C + 'Skipi.Crewing_' + CREWING_VERSION + '_x64-setup.exe', meta: 'Windows 10/11 · 64-bit' },
+                alts: [{ label: '.msi', url: RU_C + 'Skipi.Crewing_' + CREWING_VERSION + '_x64_en-US.msi' }]
+            },
+            'macos-arm': {
+                version: CREWING_VERSION,
+                primary: { file: 'Skipi.Crewing_' + CREWING_VERSION + '_aarch64.dmg', url: RU_C + 'Skipi.Crewing_' + CREWING_VERSION + '_aarch64.dmg', meta: 'macOS Apple Silicon (M1/M2/M3/M4)' },
+                alts: []
+            },
+            'macos-intel': {
+                version: CREWING_VERSION,
+                primary: { file: 'Skipi.Crewing_' + CREWING_VERSION + '_x64.dmg', url: RU_C + 'Skipi.Crewing_' + CREWING_VERSION + '_x64.dmg', meta: 'macOS Intel' },
+                alts: []
+            },
+            linux: {
+                version: CREWING_VERSION,
+                primary: { file: 'Skipi.Crewing_' + CREWING_VERSION + '_amd64.deb', url: RU_C + 'Skipi.Crewing_' + CREWING_VERSION + '_amd64.deb', meta: 'Debian / Ubuntu / Mint · 64-bit' },
+                alts: [
+                    { label: 'AppImage', url: RU_C + 'Skipi.Crewing_' + CREWING_VERSION + '_amd64.AppImage' },
+                    { label: 'RPM', url: RU_C + 'Skipi.Crewing-' + CREWING_VERSION + '-1.x86_64.rpm' }
+                ]
+            }
+        }
+    };
+
+    const OS_LABEL = {
+        windows: 'Windows',
+        'macos-arm': 'macOS Apple Silicon',
+        'macos-intel': 'macOS Intel',
+        linux: 'Linux'
+    };
+
+    // ── Instructions per OS ──────────────────────────────────
+    function instructions(role, os) {
+        const p = PRODUCT[role];
+        const tokenLi = role === 'crewing'
+            ? '<li><strong>Токен авторизации.</strong> При первом запуске Skipi Crewing попросит вставить токен. Без него интерфейс не разблокируется — запросите токен заранее.</li>'
+            : '';
+
+        if (os === 'windows') {
+            return `
+                <h2><span class="step-n">1</span>Установка</h2>
+                <ol>
+                    <li>Откройте скачанный <code class="inline">.exe</code> — он лежит в папке «Загрузки».</li>
+                    <li>Браузер или Windows может предупредить «Этот тип файла может нанести вред компьютеру» — выберите <strong>«Сохранить»</strong> / <strong>«Keep»</strong>.</li>
+                    <li>Запустите установщик двойным кликом.</li>
+                    <li>Появится синий экран Windows Defender SmartScreen: <strong>«Защитник Windows предотвратил запуск нераспознанного приложения»</strong>.</li>
+                </ol>
+                <div class="why">
+                    <strong>Почему так и что делать.</strong> Beta-версия пока без Authenticode-подписи (подключим к релизной). Windows показывает предупреждение для любого «незнакомого» установщика. Нажмите <strong>«Подробнее»</strong> (More info) под текстом — появится кнопка <strong>«Выполнить в любом случае»</strong> (Run anyway). Нажмите её — установка пойдёт обычным путём.
+                </div>
+                <ol start="5">
+                    <li>Пройдите шаги установщика. По умолчанию ${p.name} ставится в <code class="inline">C:\\Program Files\\${role === 'crewing' ? 'Skipi Crewing' : 'Skipi'}</code>.</li>
+                    <li>После установки приложение появится в меню «Пуск».</li>
+                </ol>
+
+                <h2><span class="step-n">2</span>Разрешения при первом запуске</h2>
+                <ul>
+                    <li><strong>Брандмауэр Windows.</strong> При первом запуске Windows спросит, разрешить ли ${p.name} сетевые соединения. Поставьте галки на <strong>«Частные сети»</strong> и <strong>«Общедоступные»</strong> — это нужно для загрузки базы 50k+ судов, отзывов и автоматических обновлений.</li>
+                    <li><strong>Доступ к папке vault.</strong> Skipi попросит выбрать папку для локального хранилища документов (по умолчанию <code class="inline">Documents\\Skipi</code>). Доступа к другим папкам приложение не запрашивает.</li>
+                    ${tokenLi}
+                </ul>
+
+                <h2><span class="step-n">3</span>Если антивирус блокирует</h2>
+                <p>Kaspersky, Avast, Bitdefender и корпоративные EDR иногда изолируют beta-установщики без подписи. Что делать:</p>
+                <ul>
+                    <li>Добавьте установщик в <strong>исключения</strong> антивируса.</li>
+                    <li>Если корпоративная политика не позволяет — пришлите точный текст блокировки на <a href="mailto:info@tymur.org">info@tymur.org</a>, поможем.</li>
+                    <li>Контрольная сумма SHA-256 для проверки целостности файла: <a href="https://github.com/CaptTymur/skipi.app/releases">в GitHub Release</a>.</li>
+                </ul>
+            `;
+        }
+
+        if (os === 'macos-arm' || os === 'macos-intel') {
+            const xattr = 'xattr -dr com.apple.quarantine "' + p.appPath + '"';
+            return `
+                <h2><span class="step-n">1</span>Установка</h2>
+                <ol>
+                    <li>Откройте скачанный <code class="inline">.dmg</code> двойным кликом — появится окно с иконкой ${p.name}.</li>
+                    <li>Перетащите иконку <strong>${p.name}</strong> в папку <strong>Applications</strong> (Программы).</li>
+                    <li>Закройте окно .dmg, можно нажать <strong>Eject</strong> на disk image.</li>
+                </ol>
+
+                <h2><span class="step-n">2</span>Снять карантин Gatekeeper (обязательно)</h2>
+                <p>macOS навешивает «карантинный» атрибут на любое приложение, скачанное вне App Store без notarization. При первом запуске система говорит: <em>«Apple не удалось проверить, что приложение не содержит вредоносного ПО»</em>.</p>
+                <ol>
+                    <li>Откройте Терминал (⌘+Space → введите <code class="inline">Terminal</code> → Enter).</li>
+                    <li>Скопируйте и выполните команду:</li>
+                </ol>
+                <code class="cli">${xattr}</code>
+                <div class="why">
+                    <strong>Что эта команда делает.</strong> <code>xattr -dr com.apple.quarantine</code> снимает карантинный флаг с указанного приложения — <strong>один раз, только для этого файла</strong>. Вы не отключаете Gatekeeper глобально и не теряете защиту от других неизвестных приложений. По сути, это говорит macOS: «я доверяю именно этому файлу».
+                </div>
+
+                <h2><span class="step-n">3</span>Разрешения при первом запуске</h2>
+                <ul>
+                    <li><strong>Сеть.</strong> Skipi свободно ходит наружу — для отзывов, базы судов и обновлений. Отдельное разрешение macOS не запрашивает.</li>
+                    <li><strong>Доступ к папке vault.</strong> macOS попросит: «Skipi хочет получить доступ к Documents» — нажмите <strong>OK</strong>. Это единственная папка, которую читает приложение.</li>
+                    <li><strong>Уведомления.</strong> Опционально — Skipi предложит присылать напоминания о сертификатах. Можно отказаться, переключить позже в System Settings → Notifications.</li>
+                    ${tokenLi}
+                </ul>
+                <p><em>Skipi <strong>не запрашивает</strong> доступ к камере, микрофону, контактам, фото, календарю или местоположению.</em></p>
+            `;
+        }
+
+        if (os === 'linux') {
+            const debFile = BUILDS[role].linux.primary.file;
+            const appImage = BUILDS[role].linux.alts[0] ? BUILDS[role].linux.alts[0].url.split('/').pop() : '';
+            return `
+                <h2><span class="step-n">1</span>Установка из .deb (Ubuntu, Debian, Mint, Pop!_OS)</h2>
+                <ol>
+                    <li>Откройте терминал в папке с .deb (обычно ~/Downloads).</li>
+                    <li>Установите пакет:</li>
+                </ol>
+                <code class="cli">sudo dpkg -i ~/Downloads/${debFile}</code>
+                <p>Если dpkg ругается на зависимости:</p>
+                <code class="cli">sudo apt --fix-broken install</code>
+                <p>Альтернативно — через GUI: двойной клик на .deb откроет GNOME Software / Discover / GDebi.</p>
+
+                <h2><span class="step-n">2</span>Альтернатива: AppImage (любой дистрибутив)</h2>
+                <p>AppImage не требует root и работает на Fedora, Arch, openSUSE, NixOS — везде, где есть GLIBC ≥ 2.31.</p>
+                <ol>
+                    <li>Сделайте файл исполняемым:</li>
+                </ol>
+                <code class="cli">chmod +x ~/Downloads/${appImage}</code>
+                <ol start="2">
+                    <li>Запустите двойным кликом или из терминала:</li>
+                </ol>
+                <code class="cli">~/Downloads/${appImage}</code>
+                <p>Для интеграции AppImage в меню приложений — установите <a href="https://github.com/TheAssassin/AppImageLauncher">AppImageLauncher</a> (опционально).</p>
+
+                <h2><span class="step-n">3</span>Разрешения при первом запуске</h2>
+                <ul>
+                    <li><strong>Сеть.</strong> Skipi ходит наружу без отдельного запроса — Linux не запрашивает per-app firewall разрешений.</li>
+                    <li><strong>Доступ к папке vault.</strong> Skipi попросит выбрать папку при первом запуске (по умолчанию <code class="inline">~/Documents/Skipi</code>). Других папок приложение не читает.</li>
+                    <li><strong>Уведомления.</strong> Skipi использует <code class="inline">org.freedesktop.Notifications</code> для напоминаний о сертификатах. Разрешите при первом всплытии.</li>
+                    ${tokenLi}
+                </ul>
+
+                <h2><span class="step-n">4</span>Запуск</h2>
+                <p>Через меню приложений (поиск «Skipi») или из терминала:</p>
+                <code class="cli">${p.binName}</code>
+                <p>Логи приложения: <code class="inline">~/.local/share/${p.binName}/logs/</code> — могут понадобиться, если будете писать в поддержку.</p>
+            `;
+        }
+
+        return '';
+    }
+
+    function troubleshoot(role, os) {
+        const items = [];
+        if (os === 'windows') {
+            items.push({ q: 'SmartScreen всё-таки не пускает', a: 'Если кнопки «Run anyway» нет — это значит, что админ домена отключил пользовательский bypass. Скачайте .msi-версию (она иногда обрабатывается мягче) или попросите IT временно добавить файл в whitelist по hash. Hash доступен в GitHub Release.' });
+            items.push({ q: 'Установщик зависает на «Initializing»', a: 'Чаще всего — фоновое сканирование антивируса. Подождите 1–2 минуты. Если не помогает — отключите real-time scanning на время установки.' });
+            items.push({ q: 'Не запускается после установки', a: 'Запустите из терминала: <code class="inline">"C:\\Program Files\\' + (role === 'crewing' ? 'Skipi Crewing\\Skipi Crewing.exe' : 'Skipi\\Skipi.exe') + '"</code> — увидите текст ошибки. Пришлите на <a href="mailto:info@tymur.org">info@tymur.org</a>.' });
+        }
+        if (os === 'macos-arm' || os === 'macos-intel') {
+            items.push({ q: 'Команда xattr пишет «Operation not permitted»', a: 'Возможно у вас включена защита SIP (System Integrity Protection) и приложение лежит не в /Applications. Переместите ' + PRODUCT[role].name + ' в /Applications и попробуйте снова. Если ошибка повторяется — добавьте sudo перед командой.' });
+            items.push({ q: '«Apple cannot verify» появляется снова', a: 'Иногда macOS повторно навешивает карантин при обновлении. Просто запустите команду ещё раз. Это нормально.' });
+            items.push({ q: 'Apple Silicon: Intel-сборка тормозит', a: 'Native ARM-сборка для Seafarer в работе — пока используйте Intel через Rosetta 2 (macOS установит её при первом запуске).' });
+        }
+        if (os === 'linux') {
+            items.push({ q: 'dpkg: dependency problems', a: 'Запустите <code class="inline">sudo apt --fix-broken install</code> — apt сам подтянет недостающие пакеты (webkit2gtk-4.1, libayatana-appindicator3 и т.д.).' });
+            items.push({ q: 'AppImage не запускается, ошибка про FUSE', a: 'На современных Ubuntu нужно установить libfuse2: <code class="inline">sudo apt install libfuse2</code>.' });
+            items.push({ q: 'Tray-иконка не появляется на GNOME', a: 'GNOME 40+ не показывает tray-иконки. Установите расширение AppIndicator: <code class="inline">sudo apt install gnome-shell-extension-appindicator</code> и включите в Extensions.' });
+        }
+        if (role === 'crewing') {
+            items.push({ q: 'Токен есть, но приложение его не принимает', a: 'Проверьте, что вставили токен целиком, без пробелов и переносов. Если ошибка повторяется — пришлите скриншот на <a href="mailto:info@tymur.org">info@tymur.org</a>.' });
+        }
+
+        if (!items.length) return '';
+        const itemsHtml = items.map(i => `<details class="troubleshoot"><summary>${i.q}</summary><p>${i.a}</p></details>`).join('');
+        return '<h2 style="font-size:1.05rem;font-weight:700;color:var(--ink);margin:1.5rem 0 0.7rem;">Если что-то не работает</h2>' + itemsHtml;
+    }
+
+    // ── State + routing ─────────────────────────────────────
+    let state = { role: null, os: null };
+
+    function parseHash() {
+        const parts = (location.hash || '').replace(/^#\/?/, '').split('/').filter(Boolean);
+        const r = parts[0], o = parts[1];
+        return {
+            role: (r && PRODUCT[r]) ? r : null,
+            os:   (o && OS_LABEL[o]) ? o : null
+        };
+    }
+
+    function writeHash() {
+        let h = '';
+        if (state.role) h = '#/' + state.role;
+        if (state.role && state.os) h += '/' + state.os;
+        if (location.hash !== h) {
+            history.replaceState(null, '', h || location.pathname + location.search);
+        }
+    }
+
+    function detectOS() {
+        const ua = navigator.userAgent;
+        if (/Win/i.test(ua)) return 'windows';
+        if (/Mac/i.test(ua)) {
+            // Heuristic: Apple Silicon ships with macOS 11+ and reports Intel Mac OS X in UA.
+            // navigator.platform is more reliable but still spoofed. We default to ARM for modern macOS.
+            const m = ua.match(/Mac OS X (\d+)[._](\d+)/);
+            if (m && parseInt(m[1], 10) >= 11) return 'macos-arm';
+            return 'macos-intel';
+        }
+        if (/Linux/i.test(ua)) return 'linux';
+        return null;
+    }
+
+    // ── Render ──────────────────────────────────────────────
+    function render() {
+        const current = state.os ? 'done' : (state.role ? 'os' : 'role');
+        const order = ['role', 'os', 'done'];
+        const curIdx = order.indexOf(current);
+
+        document.querySelectorAll('.step-panel').forEach(p => {
+            p.hidden = p.id !== 'panel-' + current;
+        });
+
+        // Step indicator
+        document.querySelectorAll('#steps .step-dot').forEach(el => {
+            const idx = order.indexOf(el.dataset.step);
+            el.classList.remove('active', 'done');
+            if (idx === curIdx) el.classList.add('active');
+            else if (idx < curIdx) el.classList.add('done');
+        });
+
+        if (current === 'os') {
+            const role = PRODUCT[state.role];
+            document.getElementById('step2-title').textContent = role.name + ': выберите платформу';
+            // Highlight detected OS
+            const detected = detectOS();
+            document.querySelectorAll('#panel-os [data-os]').forEach(c => {
+                const old = c.querySelector('.detected-badge');
+                if (old) old.remove();
+                if (c.dataset.os === detected) {
+                    const b = document.createElement('span');
+                    b.className = 'detected-badge';
+                    b.textContent = 'Похоже на вашу';
+                    c.appendChild(b);
+                }
+            });
+        }
+
+        if (current === 'done') {
+            const role = PRODUCT[state.role];
+            const build = BUILDS[state.role][state.os];
+            const osLabel = OS_LABEL[state.os];
+
+            document.getElementById('step3-title').textContent = role.name + ' для ' + osLabel;
+
+            // Token block (crewing only)
+            document.getElementById('token-block').hidden = state.role !== 'crewing';
+
+            // Build note (e.g. macOS version mismatch)
+            const noteEl = document.getElementById('build-note');
+            if (build && build.note) {
+                noteEl.innerHTML = '<strong>Примечание о версии</strong>' + build.note;
+                noteEl.hidden = false;
+            } else {
+                noteEl.hidden = true;
+            }
+
+            // Unavailable vs available
+            const dlHero = document.getElementById('download-hero');
+            const unavail = document.getElementById('unavailable-block');
+            if (build && build.unavailable) {
+                dlHero.hidden = true;
+                unavail.hidden = false;
+                document.getElementById('unavailable-title').textContent = build.title;
+                document.getElementById('unavailable-text').textContent = build.text;
+                const acts = document.getElementById('unavailable-actions');
+                acts.innerHTML = '';
+                (build.actions || []).forEach(a => {
+                    const el = document.createElement('a');
+                    el.href = a.href; el.textContent = a.label;
+                    acts.appendChild(el);
+                });
+                document.getElementById('instructions').innerHTML = '';
+                document.getElementById('troubleshoot').outerHTML = '<details class="troubleshoot" id="troubleshoot" hidden></details>';
+                return;
+            }
+            dlHero.hidden = false;
+            unavail.hidden = true;
+
+            const p = build.primary;
+            document.getElementById('dl-file').textContent = p.file;
+            document.getElementById('dl-meta').textContent = 'Версия ' + build.version + ' · ' + (p.meta || osLabel);
+            const btn = document.getElementById('dl-btn');
+            btn.href = p.url;
+            btn.setAttribute('download', '');
+
+            const altsEl = document.getElementById('dl-alts');
+            if (build.alts && build.alts.length) {
+                altsEl.innerHTML = 'Альтернативные форматы: ' + build.alts.map(a =>
+                    '<a href="' + a.url + '" download>' + a.label + '</a>'
+                ).join(' · ');
+            } else {
+                altsEl.innerHTML = '';
+            }
+
+            document.getElementById('instructions').innerHTML = instructions(state.role, state.os);
+
+            // Replace troubleshoot wrapper
+            const tsEl = document.getElementById('troubleshoot');
+            const tsHtml = troubleshoot(state.role, state.os);
+            if (tsHtml) {
+                tsEl.outerHTML = '<div id="troubleshoot">' + tsHtml + '</div>';
+            } else {
+                tsEl.outerHTML = '<details class="troubleshoot" id="troubleshoot" hidden></details>';
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    // ── Events ──────────────────────────────────────────────
+    document.addEventListener('click', function (e) {
+        const role = e.target.closest('[data-role]');
+        const os = e.target.closest('[data-os]');
+        const back = e.target.closest('[data-back]');
+        const backRole = e.target.closest('[data-back-to-role]');
+        const jump = e.target.closest('[data-jump]');
+
+        if (role) { state.role = role.dataset.role; writeHash(); render(); return; }
+        if (os)   { state.os = os.dataset.os; writeHash(); render(); return; }
+        if (back) {
+            if (state.os) state.os = null;
+            else state.role = null;
+            writeHash(); render();
+            return;
+        }
+        if (backRole) {
+            e.preventDefault();
+            state.role = null; state.os = null;
+            writeHash(); render();
+            return;
+        }
+        if (jump && jump.classList.contains('done')) {
+            const target = jump.dataset.step;
+            if (target === 'role') { state.role = null; state.os = null; }
+            else if (target === 'os') { state.os = null; }
+            writeHash(); render();
+        }
+    });
+
+    window.addEventListener('hashchange', function () {
+        const h = parseHash();
+        state.role = h.role; state.os = h.os;
+        render();
+    });
+
+    // Init
+    const init = parseHash();
+    state.role = init.role; state.os = init.os;
+    render();
+})();
+</script>
 
 </body>
 </html>
