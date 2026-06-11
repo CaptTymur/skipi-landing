@@ -496,7 +496,19 @@
         nowEl.textContent = idx + 1;
 
         prevBtn.disabled = idx === 0;
-        nextBtn.disabled = idx === SLIDES.length - 1;
+
+        // On the last slide, the "next" button turns into a download CTA.
+        if (idx === SLIDES.length - 1) {
+            nextBtn.disabled = false;
+            nextBtn.dataset.mode = 'download';
+            nextBtn.innerHTML = '<span class="label">Скачать Skipi</span> →';
+            nextBtn.setAttribute('aria-label', 'Скачать Skipi');
+        } else {
+            nextBtn.disabled = false;
+            nextBtn.dataset.mode = 'next';
+            nextBtn.innerHTML = '<span class="label">Дальше</span> →';
+            nextBtn.setAttribute('aria-label', 'Следующий слайд');
+        }
 
         document.querySelectorAll('.dot').forEach((d, i) => {
             d.classList.toggle('active', i === idx);
@@ -526,7 +538,13 @@
     });
 
     prevBtn.addEventListener('click', () => go(idx - 1));
-    nextBtn.addEventListener('click', () => go(idx + 1));
+    nextBtn.addEventListener('click', () => {
+        if (nextBtn.dataset.mode === 'download') {
+            window.location.href = '/downloads';
+        } else {
+            go(idx + 1);
+        }
+    });
 
     // Keyboard
     document.addEventListener('keydown', e => {
