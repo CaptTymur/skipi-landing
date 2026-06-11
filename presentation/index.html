@@ -128,6 +128,51 @@
             display: block;
         }
 
+        /* Synthetic figure: consumer cards grid (slide 5) */
+        .slide-figure[data-type="consumers"] {
+            padding: 1.5rem 1.25rem;
+            background: linear-gradient(155deg, #f6f8fa 0%, #e6eef4 100%);
+            align-items: stretch; justify-content: flex-start;
+            flex-direction: column;
+        }
+        .slide-figure[data-type="consumers"] img { display: none; }
+        .consumers-title {
+            font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--accent); font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        .consumers-source {
+            font-size: 0.82rem; color: var(--ink); font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .consumers-source span { color: var(--muted); font-weight: 500; }
+        .consumers-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.7rem;
+            flex: 1; min-height: 0;
+        }
+        .consumer-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.8rem 0.9rem;
+            display: flex; flex-direction: column;
+            gap: 0.3rem;
+        }
+        .consumer-card .ico { font-size: 1.25rem; line-height: 1; }
+        .consumer-card h4 {
+            font-size: 0.9rem; font-weight: 700; color: var(--ink);
+            letter-spacing: -0.01em; line-height: 1.2;
+        }
+        .consumer-card p {
+            font-size: 0.78rem; color: var(--ink-soft);
+            line-height: 1.45;
+        }
+        @media (max-width: 880px) {
+            .consumers-grid { grid-template-columns: 1fr; }
+        }
+
         .slide-body {
             display: flex; flex-direction: column;
             padding-top: 0.25rem;
@@ -262,7 +307,7 @@
     </div>
 
     <article class="slide" id="slide" aria-live="polite">
-        <div class="slide-figure">
+        <div class="slide-figure" id="slide-figure">
             <img id="slide-img" src="img/slide-1.jpg" alt="" loading="eager">
         </div>
         <div class="slide-body">
@@ -340,12 +385,52 @@
                 'Easy document management: upload · send docs · receive job offers',
                 'Skipi Intelligence строится из оценок ex-vessel самими моряками — экипажи кормят базу'
             ],
-            foot: 'Данные моряка не раскрываются, пока он сам не нажмёт «send». Send or not — решает моряк, опираясь на Skipi Intelligence.'
+            foot: 'Данные моряка не раскрываются, пока он сам не нажмёт «send». Send or not — решает моряк, опираясь на Skipi Intelligence. И эти же сигналы нужны не только морякам — см. следующий слайд.'
+        },
+        {
+            kicker: 'Шаг 5 · Intelligence consumers',
+            title: 'Эти же сигналы нужны всей цепочке решений вокруг судна',
+            lead: 'Vessel score, vetting pressure, management response, company retention — те же индексы покупают банки, инвесторы, фрахтовые брокеры, фрахтователи, P&I и шипменеджеры. Любому, кто принимает деньги или коммерческое решение по конкретному судну или компании, нужен operational signal изнутри.',
+            figureType: 'consumers',
+            consumers: [
+                {
+                    ico: '⚖',
+                    name: 'Фрахтовые брокеры и фрахтователи',
+                    desc: 'Pre-fixture vetting: реальное состояние судна, а не только чистый SIRE. Не повести клиента на проблемное судно — это качество брокера. «Оценка во фрахте» — ядро решения о фиксе.'
+                },
+                {
+                    ico: '🏦',
+                    name: 'Банки (ship finance)',
+                    desc: 'Collateral monitoring перед выдачей и в течение life loan’а. Skipi-score дополняет classification society reports реальным operational signal от экипажа.'
+                },
+                {
+                    ico: '💼',
+                    name: 'Инвесторы и S&P',
+                    desc: 'Due diligence перед покупкой судна или флота. Track record менеджмента, retention rate экипажа, скрытые операционные проблемы, не видные из брокерских pitch-decks.'
+                },
+                {
+                    ico: '🛡',
+                    name: 'P&I clubs и страховщики',
+                    desc: 'Risk pricing и underwriting. Vessel score становится частью cargo / H&M / P&I модели — особенно для tonnage без длинного claim-history.'
+                },
+                {
+                    ico: '⚙',
+                    name: 'Шипменеджеры (third-party)',
+                    desc: 'Benchmark собственного флота против рынка, оценка контрагентов и конкурентов. Поведение крюинга-партнёра по retention видно объективно.'
+                },
+                {
+                    ico: '📦',
+                    name: 'Грузовладельцы и cargo interests',
+                    desc: 'Прямая проверка судна и owner’а до контракта на перевозку. Особенно при отгрузке высокостоимостного груза, где репутация судна важнее ставки.'
+                }
+            ],
+            foot: 'Skipi Intelligence — единый слой данных от экипажей, обслуживающий всю цепочку принятия решений по судну. Моряк — поставщик сигнала. Все остальные — потребители.'
         }
     ];
 
     const totalEl  = document.getElementById('slide-total');
     const nowEl    = document.getElementById('slide-now');
+    const figEl    = document.getElementById('slide-figure');
     const imgEl    = document.getElementById('slide-img');
     const kickerEl = document.getElementById('slide-kicker');
     const titleEl  = document.getElementById('slide-title');
@@ -382,12 +467,31 @@
         void slideEl.offsetWidth;
         slideEl.style.animation = '';
 
-        imgEl.src = 'img/slide-' + (idx + 1) + '.jpg';
-        imgEl.alt = s.title;
+        // Figure: either hand-drawn image, or synthetic consumers grid
+        if (s.figureType === 'consumers') {
+            figEl.setAttribute('data-type', 'consumers');
+            figEl.innerHTML =
+                '<div class="consumers-title">Skipi Intelligence</div>' +
+                '<div class="consumers-source">Один слой данных от экипажей <span>→ много decision-makers</span></div>' +
+                '<div class="consumers-grid">' +
+                s.consumers.map(c =>
+                    '<div class="consumer-card">' +
+                        '<div class="ico">' + c.ico + '</div>' +
+                        '<h4>' + c.name + '</h4>' +
+                        '<p>' + c.desc + '</p>' +
+                    '</div>'
+                ).join('') +
+                '</div>';
+        } else {
+            figEl.removeAttribute('data-type');
+            figEl.innerHTML = '<img id="slide-img" src="img/slide-' + (idx + 1) + '.jpg" alt="' + s.title.replace(/"/g, '&quot;') + '" loading="eager">';
+        }
+
         kickerEl.textContent = s.kicker;
         titleEl.textContent = s.title;
         leadEl.textContent = s.lead;
-        pointsEl.innerHTML = s.points.map(p => '<li>' + p + '</li>').join('');
+        pointsEl.innerHTML = (s.points || []).map(p => '<li>' + p + '</li>').join('');
+        pointsEl.style.display = (s.points && s.points.length) ? '' : 'none';
         footEl.innerHTML = '<strong>Замечание капитана:</strong> ' + s.foot;
         nowEl.textContent = idx + 1;
 
