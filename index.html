@@ -172,40 +172,113 @@
             line-height: 1.55;
         }
         .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-        .hero-platforms-label {
-            font-size: 0.84rem;
-            color: var(--ink-soft);
+
+        /* Audience split (two big cards) */
+        .hero-audience-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.85rem;
             margin-top: 1.4rem;
-            margin-bottom: 0.6rem;
-            font-weight: 600;
-            letter-spacing: 0.01em;
         }
-        .hero-platforms {
-            display: flex;
-            gap: 0.55rem;
-            flex-wrap: wrap;
-        }
-        .hero-platform {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.5rem 0.95rem;
-            border: 1px solid var(--border);
-            border-radius: 7px;
-            background: var(--bg-soft);
+        .audience-card {
+            display: flex; flex-direction: column;
+            gap: 0.45rem;
+            padding: 1.25rem 1.3rem 1.15rem;
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
             color: var(--ink);
-            font-size: 0.86rem;
-            font-weight: 600;
-            transition: background 0.15s, border-color 0.15s, color 0.15s;
+            transition: all 0.15s;
+            text-decoration: none;
         }
-        .hero-platform:hover {
-            background: var(--bg-deep);
+        .audience-card:hover {
             border-color: var(--accent);
-            color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(10,31,51,0.08);
+            color: var(--ink);
         }
-        .hero-platform .os-glyph {
-            font-size: 0.95rem;
-            line-height: 1;
+        .audience-icon {
+            font-size: 1.55rem; line-height: 1;
+            margin-bottom: 0.2rem;
+        }
+        .audience-card h3 {
+            font-size: 1.15rem; font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin: 0;
+        }
+        .audience-card .audience-desc {
+            font-size: 0.91rem; color: var(--ink-soft);
+            line-height: 1.45;
+            margin: 0;
+        }
+        .audience-card .audience-tech {
+            font-size: 0.78rem; color: var(--muted);
+            margin: 0;
+        }
+        .audience-card .audience-cta {
+            margin-top: auto;
+            font-weight: 700; font-size: 0.92rem;
+            color: var(--accent);
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            padding-top: 0.5rem;
+        }
+        .audience-card .audience-cta::after {
+            content: "→"; transition: transform 0.15s;
+        }
+        .audience-card:hover .audience-cta::after { transform: translateX(3px); }
+
+        .hero-secondary {
+            font-size: 0.9rem; color: var(--ink-soft);
+            margin-top: 1.1rem;
+        }
+        .hero-secondary a {
+            color: var(--accent); font-weight: 600;
+            border-bottom: 1px dotted var(--accent);
+            transition: border-color 0.15s;
+        }
+        .hero-secondary a:hover { border-bottom-color: transparent; }
+
+        @media (max-width: 640px) {
+            .hero-audience-split { grid-template-columns: 1fr; }
+        }
+
+        /* Hamburger menu */
+        .nav-toggle {
+            display: none;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            width: 2.4rem; height: 2.4rem;
+            font-size: 1.15rem; line-height: 1;
+            cursor: pointer; color: var(--ink);
+            transition: border-color 0.15s, color 0.15s;
+            font-family: inherit;
+        }
+        .nav-toggle:hover {
+            border-color: var(--accent); color: var(--accent);
+        }
+        @media (max-width: 880px) {
+            .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
+            .nav-links {
+                display: none !important;
+                position: absolute;
+                top: 100%; left: 0; right: 0;
+                background: #fff;
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                padding: 1rem 1.5rem 1.25rem;
+                gap: 0.85rem;
+                box-shadow: 0 12px 28px rgba(10,31,51,0.08);
+                z-index: 60;
+            }
+            header.site.menu-open .nav-links {
+                display: flex !important;
+            }
+            .nav-links a {
+                font-size: 1rem; padding: 0.3rem 0;
+                color: var(--ink);
+            }
         }
         .hero-visual {
             background: linear-gradient(155deg, #f6f8fa 0%, #e6eef4 100%);
@@ -579,6 +652,7 @@
                 <a class="lang-link" href="/en/" lang="en">EN</a>
             </div>
             <a href="/downloads" class="btn btn-primary">Скачать <span class="arrow">→</span></a>
+            <button class="nav-toggle" type="button" aria-label="Меню" aria-expanded="false" id="nav-toggle">☰</button>
         </div>
     </div>
 </header>
@@ -593,16 +667,23 @@
                 <p class="lead">
                     Skipi собирает структурированные отзывы моряков о судах и компаниях, на которых они работали. Из этих сигналов рождается decision-support слой: моряк видит реальный профиль работодателя до подписания контракта, крюинг, шипменеджер, фрахтователь и брокер — реальное состояние судна до решения о найме или фиксе.
                 </p>
-                <div class="hero-actions">
-                    <a href="/downloads" class="btn btn-primary">Получить Skipi <span class="arrow">→</span></a>
-                    <a href="/presentation/" class="btn btn-ghost">Посмотреть презентацию <span class="arrow">→</span></a>
+                <div class="hero-audience-split">
+                    <a href="/downloads" class="audience-card">
+                        <span class="audience-icon">⚓</span>
+                        <h3>Я моряк</h3>
+                        <p class="audience-desc">Vault, контроль сертификатов, отзывы о судах и компаниях, выбор работодателя.</p>
+                        <p class="audience-tech">Desktop app для Windows, macOS, Linux. Не веб-версия — работает локально.</p>
+                        <span class="audience-cta">Скачать клиент Seafarer</span>
+                    </a>
+                    <a href="/for-companies/" class="audience-card">
+                        <span class="audience-icon">🏢</span>
+                        <h3>Я представляю компанию</h3>
+                        <p class="audience-desc">Крюинг · брокер · фрахтователь · банк · инвестор · P&amp;I · cargo · шипменеджер.</p>
+                        <p class="audience-tech">Enterprise-доступ к intelligence-слою по запросу.</p>
+                        <span class="audience-cta">Узнать о доступе</span>
+                    </a>
                 </div>
-                <p class="hero-platforms-label">Desktop-приложение. Не веб-версия. Работает локально на вашем компьютере.</p>
-                <div class="hero-platforms">
-                    <a class="hero-platform" href="/downloads#/seafarer/windows"><span class="os-glyph">⊞</span> Windows</a>
-                    <a class="hero-platform" href="/downloads#/seafarer/macos-arm"><span class="os-glyph">🍎</span> macOS</a>
-                    <a class="hero-platform" href="/downloads#/seafarer/linux"><span class="os-glyph">🐧</span> Linux</a>
-                </div>
+                <p class="hero-secondary">Сначала разобраться, как это устроено? <a href="/presentation/">Презентация Skipi в 6 шагах →</a></p>
             </div>
             <div class="hero-visual" aria-hidden="true">
                 <div class="hv-window">
@@ -1008,6 +1089,24 @@
         </div>
     </div>
 </footer>
+
+<script>
+(function () {
+    var toggle = document.getElementById('nav-toggle');
+    var header = document.querySelector('header.site');
+    if (!toggle || !header) return;
+    toggle.addEventListener('click', function () {
+        var open = header.classList.toggle('menu-open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.querySelectorAll('.nav-links a').forEach(function (a) {
+        a.addEventListener('click', function () {
+            header.classList.remove('menu-open');
+            toggle.setAttribute('aria-expanded', 'false');
+        });
+    });
+})();
+</script>
 
 </body>
 </html>
