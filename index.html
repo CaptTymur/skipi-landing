@@ -27,15 +27,41 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://skipi.app/#organization",
+                "name": "Skipi",
+                "url": "https://skipi.app/",
+                "logo": "https://skipi.app/favicon.png",
+                "founder": { "@id": "https://skipi.app/#captain" },
+                "description": "Maritime intelligence platform powered by direct seafarer signals — structured reviews of vessels and companies, decision support for the entire decision chain around a vessel.",
+                "sameAs": [
+                    "https://github.com/CaptTymur"
+                ]
+            },
+            {
+                "@type": "Person",
+                "@id": "https://skipi.app/#captain",
+                "name": "Captain Tymur Rudov",
+                "alternateName": "Тимур Рудов",
+                "jobTitle": "Master Mariner, freight broker, founder of Skipi",
+                "worksFor": { "@id": "https://skipi.app/#organization" },
+                "sameAs": [
+                    "https://github.com/CaptTymur"
+                ]
+            },
+            {
+    "@type": "SoftwareApplication",
         "name": "Skipi",
         "alternateName": "Skipi Maritime Intelligence",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Web, Windows, macOS, Linux",
         "url": "https://skipi.app/",
-        "author": { "@type": "Organization", "name": "Skipi" },
+        "author": { "@id": "https://skipi.app/#organization" },
+        "creator": { "@id": "https://skipi.app/#captain" },
         "copyrightYear": 2026,
-        "copyrightHolder": { "@type": "Organization", "name": "Skipi" },
+        "copyrightHolder": { "@id": "https://skipi.app/#organization" },
         "datePublished": "2026-04-06",
         "description": "Skipi — maritime intelligence система на прямых сигналах моряков. Структурированные отзывы экипажей о судах и компаниях агрегируются в decision-support слой: vessel score, warning flags, vetting pressure, profile компании. Используется моряками для выбора работодателя, крюингами и шипменеджерами для due diligence, фрахтовыми брокерами и фрахтователями для pre-fixture vetting, банками для collateral monitoring в ship finance, инвесторами и S&P для pre-acquisition due diligence, P&I clubs и страховщиками для underwriting и risk pricing.",
         "featureList": [
@@ -53,6 +79,8 @@
             "Структурированный CV-пайплайн и пакеты документов как supporting infrastructure",
             "Контроль сроков сертификатов и SOLAS-шаблоны по типу судна",
             "Индексы зарплат по рангам и типам судов на основе агрегации открытых вакансий"
+        ]
+            }
         ]
     }
     </script>
@@ -633,6 +661,101 @@
         @media (max-width: 560px) {
             .foot-grid { grid-template-columns: 1fr; }
         }
+
+        /* Deck preview banner (between metrics and pillars) */
+        section.deck-preview {
+            padding: 3.5rem 0;
+            background: var(--bg);
+        }
+        .deck-card {
+            display: grid;
+            grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+            gap: 2rem;
+            align-items: center;
+            background: linear-gradient(135deg, #f6f8fa 0%, #e6eef4 100%);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.75rem 1.85rem;
+            color: var(--ink);
+            transition: all 0.15s;
+            text-decoration: none;
+        }
+        .deck-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 14px 32px rgba(10,31,51,0.09);
+            color: var(--ink);
+        }
+        .deck-thumb {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.7rem;
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .deck-thumb img {
+            max-width: 100%; max-height: 100%;
+            object-fit: contain;
+        }
+        .deck-text .deck-kicker {
+            display: inline-block;
+            color: var(--accent); font-weight: 700;
+            font-size: 0.74rem; letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.7rem;
+        }
+        .deck-text h3 {
+            font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+            font-weight: 800; color: var(--ink);
+            letter-spacing: -0.02em; line-height: 1.18;
+            margin: 0 0 0.6rem;
+        }
+        .deck-text p {
+            font-size: 0.98rem; color: var(--ink-soft);
+            margin: 0 0 1rem;
+        }
+        .deck-cta {
+            font-weight: 700; font-size: 0.94rem;
+            color: var(--accent);
+            display: inline-flex; align-items: center; gap: 0.35rem;
+        }
+        .deck-cta::after { content: "→"; transition: transform 0.15s; }
+        .deck-card:hover .deck-cta::after { transform: translateX(4px); }
+        @media (max-width: 720px) {
+            .deck-card { grid-template-columns: 1fr; gap: 1.25rem; padding: 1.25rem; }
+        }
+
+        /* Decision Support clustered audiences */
+        .ds-cluster {
+            margin-bottom: 0.9rem;
+        }
+        .ds-cluster:last-of-type { margin-bottom: 1.2rem; }
+        .ds-cluster-name {
+            font-size: 0.72rem; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--accent);
+            font-weight: 700; margin-bottom: 0.3rem;
+        }
+        .ds-cluster p {
+            font-size: 0.9rem; color: var(--ink-soft);
+            margin: 0; line-height: 1.4;
+        }
+
+        /* Metric tooltip indicator */
+        .metric-info {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 0.95rem; height: 0.95rem;
+            margin-left: 0.25rem;
+            border-radius: 50%;
+            background: var(--bg-deep);
+            color: var(--accent);
+            font-size: 0.65rem; font-weight: 700;
+            cursor: help;
+            vertical-align: middle;
+            line-height: 1;
+        }
+        .metric-info:hover { background: var(--accent); color: #fff; }
     </style>
 </head>
 <body>
@@ -714,10 +837,27 @@
 <!-- ─── Metrics ──────────────────────────────────────────── -->
 <section class="metrics" aria-label="Ключевые показатели">
     <div class="container metrics-grid">
-        <div class="metric"><div class="n">50K+</div><div class="lbl">судов в базе Skipi</div></div>
+        <div class="metric"><div class="n">50K+</div><div class="lbl">судов в базе Skipi <span class="metric-info" title="Pre-loaded в дистрибутив, обогащается через Equasis, RightShip и собственный новостной flow. Обновление: ежемесячно.">i</span></div></div>
         <div class="metric"><div class="n">16</div><div class="lbl">секций в структурированном отзыве</div></div>
         <div class="metric"><div class="n">HMAC</div><div class="lbl">личность моряка не раскрывается</div></div>
         <div class="metric"><div class="n">Local-first</div><div class="lbl">vault и документы у моряка</div></div>
+    </div>
+</section>
+
+<!-- ─── Deck preview banner ──────────────────────────────── -->
+<section class="deck-preview" aria-label="Captain's deck preview">
+    <div class="container">
+        <a href="/presentation/" class="deck-card">
+            <div class="deck-thumb">
+                <img src="/presentation/img/slide-1.jpg" alt="Превью первого слайда презентации Skipi" loading="lazy">
+            </div>
+            <div class="deck-text">
+                <span class="deck-kicker">Captain's deck · 6 шагов · 4 минуты</span>
+                <h3>Skipi за 6 рисунков от капитана — без жаргона</h3>
+                <p>От anonymized job signature до Intelligence consumers. Архитектура, приватность, кто и зачем покупает сигналы. Реальная схема, нарисованная Master Mariner'ом, который сам ходит в море.</p>
+                <span class="deck-cta">Открыть презентацию</span>
+            </div>
+        </a>
     </div>
 </section>
 
@@ -761,17 +901,21 @@
             <article class="pillar">
                 <div class="icon">🎯</div>
                 <h3>Decision Support</h3>
-                <p>Слой для всех, кто принимает решения по конкретному судну или компании — от моряка перед контрактом до банка перед выдачей ship finance.</p>
-                <ul>
-                    <li>Морякам — профиль работодателя до контракта</li>
-                    <li>Крюингам и шипменеджерам — due diligence на контрагентов</li>
-                    <li>Брокерам и фрахтователям — pre-fixture vetting (оценка во фрахте)</li>
-                    <li>Банкам — collateral monitoring для ship finance</li>
-                    <li>Инвесторам и S&amp;P — due diligence перед покупкой судна или флота</li>
-                    <li>P&amp;I и страховщикам — operational signal для underwriting</li>
-                </ul>
+                <p>Слой для всех, кто принимает решения по конкретному судну или компании — от моряка перед контрактом до банка перед ship-finance covenant'ом.</p>
+                <div class="ds-cluster">
+                    <div class="ds-cluster-name">Industry</div>
+                    <p>Моряки · Крюинги · Шипменеджеры · Брокеры · Фрахтователи · Cargo owners</p>
+                </div>
+                <div class="ds-cluster">
+                    <div class="ds-cluster-name">Capital</div>
+                    <p>Ship-finance банки · Инвесторы · S&amp;P advisors</p>
+                </div>
+                <div class="ds-cluster">
+                    <div class="ds-cluster-name">Risk</div>
+                    <p>P&amp;I clubs · Cargo / H&amp;M / P&amp;I страховщики</p>
+                </div>
                 <div class="pillar-cta">
-                    <a class="pillar-link" href="mailto:info@tymur.org?subject=Skipi%20Intelligence%20access%20request">Запросить доступ →</a>
+                    <a class="pillar-link" href="/for-companies/">Узнать о доступе →</a>
                 </div>
             </article>
         </div>
@@ -1059,33 +1203,37 @@
             <div class="foot-col">
                 <h5>Платформа</h5>
                 <ul>
-                    <li><a href="#platform">Vessel Reviews</a></li>
-                    <li><a href="#platform">Company Profile</a></li>
-                    <li><a href="#platform">Decision Support</a></li>
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/presentation/">Презентация</a></li>
+                    <li><a href="/for-companies/">Для компаний</a></li>
                     <li><a href="/downloads">Скачать</a></li>
                 </ul>
             </div>
             <div class="foot-col">
                 <h5>Ресурсы</h5>
                 <ul>
-                    <li><a href="#capabilities">Возможности</a></li>
-                    <li><a href="#how">Как это работает</a></li>
-                    <li><a href="#faq">Частые вопросы</a></li>
+                    <li><a href="#platform">Vessel Reviews</a></li>
+                    <li><a href="#how">Как работает</a></li>
+                    <li><a href="#faq">Вопросы</a></li>
                     <li><a href="/ip-notice.html">IP-уведомление</a></li>
                 </ul>
             </div>
             <div class="foot-col">
-                <h5>Контакты</h5>
+                <h5>GitHub</h5>
                 <ul>
+                    <li><a href="https://github.com/CaptTymur/skipi.app">Seafarer (public)</a></li>
+                    <li><a href="https://github.com/CaptTymur/skipi-broker">Broker (public)</a></li>
+                    <li><a href="https://github.com/CaptTymur/skipi-crewing">Crewing (private)</a></li>
                     <li><a href="mailto:info@tymur.org">info@tymur.org</a></li>
-                    <li><a href="/terms.html">Условия использования</a></li>
-                    <li><a href="/privacy.html">Политика конфиденциальности</a></li>
                 </ul>
             </div>
         </div>
         <div class="foot-bottom">
-            <div>© 2026 Skipi. Все права защищены.</div>
-            <div>Название Skipi, логотип и сервисная архитектура защищены как интеллектуальная собственность. Первая публикация: 6 апреля 2026.</div>
+            <div>© 2026 Skipi. Все права защищены. Первая публикация: 6 апреля 2026.</div>
+            <div>
+                <a href="/terms.html">Условия</a> &middot;
+                <a href="/privacy.html">Privacy</a>
+            </div>
         </div>
     </div>
 </footer>

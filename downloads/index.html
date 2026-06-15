@@ -121,6 +121,14 @@
 
         /* ── Step panels ─────────────────────────────────────── */
         .step-panel[hidden] { display: none; }
+        .step-panel { animation: stepFade 0.25s ease-out; }
+        @keyframes stepFade {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .step-panel { animation: none; }
+        }
 
         .step-panel h1 {
             font-size: clamp(1.7rem, 3vw, 2.2rem);
@@ -158,6 +166,31 @@
             color: inherit;
             position: relative;
             display: flex; flex-direction: column;
+            text-decoration: none;
+        }
+        .choice-card-wide {
+            grid-column: 1 / -1;
+            background: var(--bg-soft);
+            border-style: solid;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 1.25rem;
+            padding: 1.1rem 1.4rem;
+        }
+        .choice-card-wide .ico { font-size: 1.55rem; margin: 0; }
+        .choice-card-wide h2 { font-size: 1.05rem; margin-bottom: 0.15rem; }
+        .choice-card-wide p { font-size: 0.86rem; margin-bottom: 0; flex: none; }
+        .choice-card-wide .meta {
+            font-size: 0.84rem; color: var(--accent); font-weight: 700;
+            white-space: nowrap;
+        }
+        @media (max-width: 640px) {
+            .choice-card-wide {
+                grid-template-columns: 1fr;
+                gap: 0.45rem;
+            }
+            .choice-card-wide .meta { justify-self: start; }
         }
         .choice-card:hover {
             border-color: var(--accent);
@@ -452,9 +485,17 @@
                 <button type="button" class="choice-card" data-role="crewing">
                     <span class="ico">🏢</span>
                     <h2>Skipi Crewing</h2>
-                    <p>Для крюингов, шипменеджеров, фрахтователей, брокеров: публикация вакансий, due diligence по судам и компаниям, доступ к intelligence-слою.</p>
+                    <p>Для крюинг-менеджеров: публикация вакансий, отклики моряков, рассылка под профиль, доступ к intelligence-слою.</p>
                     <span class="meta warn">⚠ Требуется токен авторизации</span>
                 </button>
+                <a class="choice-card choice-card-wide" href="/for-companies/">
+                    <span class="ico">🏦</span>
+                    <div>
+                        <h2>Я представляю банк, P&amp;I, инвестора или брокера</h2>
+                        <p>Enterprise-доступ к intelligence-слою (vessel score, vetting pressure, company profile). Не клиент моряка и не Crewing app.</p>
+                    </div>
+                    <span class="meta">Узнать о доступе →</span>
+                </a>
             </div>
         </section>
 
@@ -569,18 +610,15 @@
             },
             'macos-intel': {
                 version: SEAFARER_MACOS_VERSION,
-                primary: { file: 'Skipi_' + SEAFARER_MACOS_VERSION + '_x64.dmg', url: RU_S + SEAFARER_MACOS_VERSION + '/Skipi_' + SEAFARER_MACOS_VERSION + '_x64.dmg', meta: 'macOS Intel · ~90 МБ' },
+                primary: { file: 'Skipi_' + SEAFARER_MACOS_VERSION + '_x64.dmg', url: RU_S + SEAFARER_MACOS_VERSION + '/Skipi_' + SEAFARER_MACOS_VERSION + '_x64.dmg', meta: 'macOS · Universal Intel build · ~90 МБ' },
                 alts: [],
-                note: 'macOS-сборка пока отстаёт от Windows/Linux: ' + SEAFARER_MACOS_VERSION + ' против ' + SEAFARER_VERSION + '. Функциональность близкая, ребилд скоро.'
+                note: 'Universal build. На Apple Silicon (M1/M2/M3/M4) запускается через Rosetta 2 — macOS установит автоматически при первом запуске.'
             },
             'macos-arm': {
-                unavailable: true,
-                title: 'Apple Silicon-сборки Seafarer пока нет',
-                text: 'Native ARM-сборка для M1/M2/M3/M4 в работе. Прямо сейчас можно скачать Intel-версию — macOS установит Rosetta 2 при первом запуске и Skipi будет работать на любом Mac.',
-                actions: [
-                    { label: 'Скачать Intel-версию', href: '#/seafarer/macos-intel' },
-                    { label: 'Сообщить о приоритете', href: 'mailto:info@tymur.org?subject=Skipi%20Seafarer%20Apple%20Silicon%20build%20request' }
-                ]
+                version: SEAFARER_MACOS_VERSION,
+                primary: { file: 'Skipi_' + SEAFARER_MACOS_VERSION + '_x64.dmg', url: RU_S + SEAFARER_MACOS_VERSION + '/Skipi_' + SEAFARER_MACOS_VERSION + '_x64.dmg', meta: 'macOS Apple Silicon · runs via Rosetta 2 · ~90 МБ' },
+                alts: [],
+                note: 'Это универсальная Intel-сборка. macOS автоматически установит Rosetta 2 при первом запуске — Skipi работает на M1/M2/M3/M4 без отдельных шагов. Native Apple Silicon build готовим к следующему релизу.'
             },
             linux: {
                 version: SEAFARER_VERSION,
@@ -810,7 +848,14 @@
         const curIdx = order.indexOf(current);
 
         document.querySelectorAll('.step-panel').forEach(p => {
-            p.hidden = p.id !== 'panel-' + current;
+            var becomingVisible = p.id === 'panel-' + current;
+            p.hidden = !becomingVisible;
+            if (becomingVisible) {
+                // Restart the fade animation on the newly visible panel
+                p.style.animation = 'none';
+                void p.offsetWidth;
+                p.style.animation = '';
+            }
         });
 
         // Step indicator

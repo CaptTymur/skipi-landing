@@ -27,32 +27,55 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Skipi",
-        "alternateName": "Skipi Maritime Intelligence",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web, Windows, macOS, Linux",
-        "url": "https://skipi.app/en/",
-        "author": { "@type": "Organization", "name": "Skipi" },
-        "copyrightYear": 2026,
-        "copyrightHolder": { "@type": "Organization", "name": "Skipi" },
-        "datePublished": "2026-04-06",
-        "description": "Skipi is a maritime intelligence system powered by direct seafarer signals. Structured crew reviews of vessels and companies are aggregated into a decision-support layer: vessel score, warning flags, vetting pressure, company profile. Used by seafarers to choose employers, by crewing teams and ship managers for due diligence, by freight brokers and charterers for pre-fixture vetting, by ship-finance banks for collateral monitoring, by investors and S&P advisors for pre-acquisition due diligence, and by P&I clubs and insurers for underwriting and risk pricing.",
-        "featureList": [
-            "Structured 16-section seafarer reviews of vessels they have worked on",
-            "Composite vessel score derived from aggregated crew signals",
-            "Warning flags: vetting pressure, payment reliability, management response",
-            "Crewing company and ship manager profile built from crew reviews",
-            "Privacy-preserving architecture: server-side HMAC hashes, seafarer identity is not exposed",
-            "50k+ vessel database, enrichable from Equasis and RightShip",
-            "Per-epoch review breakdown — visible shifts when management or owner changes",
-            "Decision support for seafarers, crewing teams, ship managers, freight brokers, charterers, ship-finance banks, investors and P&I clubs",
-            "Pre-fixture vetting from crew signal for brokers and charterers",
-            "Operational signal for ship finance: collateral monitoring and pre-acquisition due diligence",
-            "Local-first architecture: seafarer vault and documents remain on the device",
-            "Structured CV pipeline and document packages as supporting infrastructure",
-            "Certificate expiry control and SOLAS templates per vessel type",
-            "Salary indices by rank and vessel type aggregated from open vacancies"
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://skipi.app/#organization",
+                "name": "Skipi",
+                "url": "https://skipi.app/",
+                "logo": "https://skipi.app/favicon.png",
+                "founder": { "@id": "https://skipi.app/#captain" },
+                "description": "Maritime intelligence platform powered by direct seafarer signals — structured reviews of vessels and companies, decision support for the entire decision chain around a vessel.",
+                "sameAs": ["https://github.com/CaptTymur"]
+            },
+            {
+                "@type": "Person",
+                "@id": "https://skipi.app/#captain",
+                "name": "Captain Tymur Rudov",
+                "jobTitle": "Master Mariner, freight broker, founder of Skipi",
+                "worksFor": { "@id": "https://skipi.app/#organization" },
+                "sameAs": ["https://github.com/CaptTymur"]
+            },
+            {
+                "@type": "SoftwareApplication",
+                "name": "Skipi",
+                "alternateName": "Skipi Maritime Intelligence",
+                "applicationCategory": "BusinessApplication",
+                "operatingSystem": "Web, Windows, macOS, Linux",
+                "url": "https://skipi.app/en/",
+                "author": { "@id": "https://skipi.app/#organization" },
+                "creator": { "@id": "https://skipi.app/#captain" },
+                "copyrightYear": 2026,
+                "copyrightHolder": { "@id": "https://skipi.app/#organization" },
+                "datePublished": "2026-04-06",
+                "description": "Skipi is a maritime intelligence system powered by direct seafarer signals. Structured crew reviews of vessels and companies are aggregated into a decision-support layer: vessel score, warning flags, vetting pressure, company profile. Used by seafarers to choose employers, by crewing teams and ship managers for due diligence, by freight brokers and charterers for pre-fixture vetting, by ship-finance banks for collateral monitoring, by investors and S&P advisors for pre-acquisition due diligence, and by P&I clubs and insurers for underwriting and risk pricing.",
+                "featureList": [
+                    "Structured 16-section seafarer reviews of vessels they have worked on",
+                    "Composite vessel score derived from aggregated crew signals",
+                    "Warning flags: vetting pressure, payment reliability, management response",
+                    "Crewing company and ship manager profile built from crew reviews",
+                    "Privacy-preserving architecture: server-side HMAC hashes, seafarer identity is not exposed",
+                    "50k+ vessel database, enrichable from Equasis and RightShip",
+                    "Per-epoch review breakdown — visible shifts when management or owner changes",
+                    "Decision support for seafarers, crewing teams, ship managers, freight brokers, charterers, ship-finance banks, investors and P&I clubs",
+                    "Pre-fixture vetting from crew signal for brokers and charterers",
+                    "Operational signal for ship finance: collateral monitoring and pre-acquisition due diligence",
+                    "Local-first architecture: seafarer vault and documents remain on the device",
+                    "Structured CV pipeline and document packages as supporting infrastructure",
+                    "Certificate expiry control and SOLAS templates per vessel type",
+                    "Salary indices by rank and vessel type aggregated from open vacancies"
+                ]
+            }
         ]
     }
     </script>
@@ -633,6 +656,101 @@
         @media (max-width: 560px) {
             .foot-grid { grid-template-columns: 1fr; }
         }
+
+        /* Deck preview banner (between metrics and pillars) */
+        section.deck-preview {
+            padding: 3.5rem 0;
+            background: var(--bg);
+        }
+        .deck-card {
+            display: grid;
+            grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+            gap: 2rem;
+            align-items: center;
+            background: linear-gradient(135deg, #f6f8fa 0%, #e6eef4 100%);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.75rem 1.85rem;
+            color: var(--ink);
+            transition: all 0.15s;
+            text-decoration: none;
+        }
+        .deck-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 14px 32px rgba(10,31,51,0.09);
+            color: var(--ink);
+        }
+        .deck-thumb {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.7rem;
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .deck-thumb img {
+            max-width: 100%; max-height: 100%;
+            object-fit: contain;
+        }
+        .deck-text .deck-kicker {
+            display: inline-block;
+            color: var(--accent); font-weight: 700;
+            font-size: 0.74rem; letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.7rem;
+        }
+        .deck-text h3 {
+            font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+            font-weight: 800; color: var(--ink);
+            letter-spacing: -0.02em; line-height: 1.18;
+            margin: 0 0 0.6rem;
+        }
+        .deck-text p {
+            font-size: 0.98rem; color: var(--ink-soft);
+            margin: 0 0 1rem;
+        }
+        .deck-cta {
+            font-weight: 700; font-size: 0.94rem;
+            color: var(--accent);
+            display: inline-flex; align-items: center; gap: 0.35rem;
+        }
+        .deck-cta::after { content: "→"; transition: transform 0.15s; }
+        .deck-card:hover .deck-cta::after { transform: translateX(4px); }
+        @media (max-width: 720px) {
+            .deck-card { grid-template-columns: 1fr; gap: 1.25rem; padding: 1.25rem; }
+        }
+
+        /* Decision Support clustered audiences */
+        .ds-cluster {
+            margin-bottom: 0.9rem;
+        }
+        .ds-cluster:last-of-type { margin-bottom: 1.2rem; }
+        .ds-cluster-name {
+            font-size: 0.72rem; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--accent);
+            font-weight: 700; margin-bottom: 0.3rem;
+        }
+        .ds-cluster p {
+            font-size: 0.9rem; color: var(--ink-soft);
+            margin: 0; line-height: 1.4;
+        }
+
+        /* Metric tooltip indicator */
+        .metric-info {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 0.95rem; height: 0.95rem;
+            margin-left: 0.25rem;
+            border-radius: 50%;
+            background: var(--bg-deep);
+            color: var(--accent);
+            font-size: 0.65rem; font-weight: 700;
+            cursor: help;
+            vertical-align: middle;
+            line-height: 1;
+        }
+        .metric-info:hover { background: var(--accent); color: #fff; }
     </style>
 </head>
 <body>
@@ -714,10 +832,27 @@
 <!-- ─── Metrics ──────────────────────────────────────────── -->
 <section class="metrics" aria-label="Key metrics">
     <div class="container metrics-grid">
-        <div class="metric"><div class="n">50K+</div><div class="lbl">vessels in the Skipi database</div></div>
+        <div class="metric"><div class="n">50K+</div><div class="lbl">vessels in the Skipi database <span class="metric-info" title="Pre-loaded into the distribution, enriched via Equasis, RightShip and our own news flow. Refresh cadence: monthly.">i</span></div></div>
         <div class="metric"><div class="n">16</div><div class="lbl">sections in a structured review</div></div>
         <div class="metric"><div class="n">HMAC</div><div class="lbl">seafarer identity is not exposed</div></div>
         <div class="metric"><div class="n">Local-first</div><div class="lbl">vault and documents stay with the seafarer</div></div>
+    </div>
+</section>
+
+<!-- ─── Deck preview banner ──────────────────────────────── -->
+<section class="deck-preview" aria-label="Captain's deck preview">
+    <div class="container">
+        <a href="/en/presentation/" class="deck-card">
+            <div class="deck-thumb">
+                <img src="/presentation/img/slide-1.jpg" alt="Preview of the first Skipi presentation slide" loading="lazy">
+            </div>
+            <div class="deck-text">
+                <span class="deck-kicker">Captain's deck · 6 steps · 4 minutes</span>
+                <h3>Skipi in 6 hand-drawn steps by the Captain — no jargon</h3>
+                <p>From anonymized job signature to Intelligence consumers. Architecture, privacy, who buys the signals and why. The real picture, drawn by a Master Mariner who is still at sea.</p>
+                <span class="deck-cta">Open the deck</span>
+            </div>
+        </a>
     </div>
 </section>
 
@@ -761,17 +896,21 @@
             <article class="pillar">
                 <div class="icon">🎯</div>
                 <h3>Decision Support</h3>
-                <p>A layer for everyone who makes decisions on a specific vessel or company — from the seafarer before signing to the bank before extending ship finance.</p>
-                <ul>
-                    <li>Seafarers — employer profile before the contract</li>
-                    <li>Crewing teams and ship managers — due diligence on counterparties</li>
-                    <li>Freight brokers and charterers — pre-fixture vetting from crew signal</li>
-                    <li>Ship-finance banks — collateral monitoring across the loan life</li>
-                    <li>Investors and S&amp;P advisors — pre-acquisition due diligence on vessel or fleet</li>
-                    <li>P&amp;I clubs and insurers — operational signal for underwriting</li>
-                </ul>
+                <p>A layer for everyone who makes decisions on a specific vessel or company — from the seafarer before signing to the bank before a ship-finance covenant review.</p>
+                <div class="ds-cluster">
+                    <div class="ds-cluster-name">Industry</div>
+                    <p>Seafarers · Crewing teams · Ship managers · Brokers · Charterers · Cargo owners</p>
+                </div>
+                <div class="ds-cluster">
+                    <div class="ds-cluster-name">Capital</div>
+                    <p>Ship-finance banks · Investors · S&amp;P advisors</p>
+                </div>
+                <div class="ds-cluster">
+                    <div class="ds-cluster-name">Risk</div>
+                    <p>P&amp;I clubs · Cargo / H&amp;M / P&amp;I insurers</p>
+                </div>
                 <div class="pillar-cta">
-                    <a class="pillar-link" href="mailto:info@tymur.org?subject=Skipi%20Intelligence%20access%20request">Request access →</a>
+                    <a class="pillar-link" href="/en/for-companies/">Learn about access →</a>
                 </div>
             </article>
         </div>
@@ -1059,33 +1198,37 @@
             <div class="foot-col">
                 <h5>Platform</h5>
                 <ul>
-                    <li><a href="#platform">Vessel Reviews</a></li>
-                    <li><a href="#platform">Company Profile</a></li>
-                    <li><a href="#platform">Decision Support</a></li>
+                    <li><a href="/en/">Home</a></li>
+                    <li><a href="/en/presentation/">Captain's deck</a></li>
+                    <li><a href="/en/for-companies/">For companies</a></li>
                     <li><a href="/downloads">Download</a></li>
                 </ul>
             </div>
             <div class="foot-col">
                 <h5>Resources</h5>
                 <ul>
-                    <li><a href="#capabilities">Capabilities</a></li>
+                    <li><a href="#platform">Vessel Reviews</a></li>
                     <li><a href="#how">How it works</a></li>
                     <li><a href="#faq">FAQ</a></li>
                     <li><a href="/ip-notice.html">IP notice</a></li>
                 </ul>
             </div>
             <div class="foot-col">
-                <h5>Contact</h5>
+                <h5>GitHub</h5>
                 <ul>
+                    <li><a href="https://github.com/CaptTymur/skipi.app">Seafarer (public)</a></li>
+                    <li><a href="https://github.com/CaptTymur/skipi-broker">Broker (public)</a></li>
+                    <li><a href="https://github.com/CaptTymur/skipi-crewing">Crewing (private)</a></li>
                     <li><a href="mailto:info@tymur.org">info@tymur.org</a></li>
-                    <li><a href="/terms.html">Terms of use</a></li>
-                    <li><a href="/privacy.html">Privacy policy</a></li>
                 </ul>
             </div>
         </div>
         <div class="foot-bottom">
-            <div>© 2026 Skipi. All rights reserved.</div>
-            <div>The Skipi name, logo, and service architecture are protected as intellectual property. First publication: 6 April 2026.</div>
+            <div>© 2026 Skipi. All rights reserved. First publication: 6 April 2026.</div>
+            <div>
+                <a href="/terms.html">Terms</a> &middot;
+                <a href="/privacy.html">Privacy</a>
+            </div>
         </div>
     </div>
 </footer>
