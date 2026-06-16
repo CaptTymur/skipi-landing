@@ -588,13 +588,13 @@
     'use strict';
 
     // ── Data ────────────────────────────────────────────────
-    const SEAFARER_VERSION = '0.4.140';
+    const SEAFARER_VERSION = '0.4.145';
     const SEAFARER_MACOS_VERSION = '0.4.128';
-    const CREWING_VERSION = '0.4.120';
+    const CREWING_VERSION = '0.4.121';
 
     const GH = 'https://github.com/CaptTymur/skipi.app/releases/download/v' + SEAFARER_VERSION + '/';
     const RU_S = 'https://api-ru.skipi.app/downloads/seafarer/';
-    const RU_C = 'https://api-ru.skipi.app/downloads/crewing/' + CREWING_VERSION + '/';
+    const CREWING_GH = 'https://github.com/CaptTymur/skipi-crewing/releases/download/v' + CREWING_VERSION + '/';
 
     const PRODUCT = {
         seafarer: { name: 'Skipi Seafarer', appPath: '/Applications/Skipi.app', binName: 'skipi' },
@@ -632,25 +632,25 @@
         crewing: {
             windows: {
                 version: CREWING_VERSION,
-                primary: { file: 'Skipi.Crewing_' + CREWING_VERSION + '_x64-setup.exe', url: RU_C + 'Skipi.Crewing_' + CREWING_VERSION + '_x64-setup.exe', meta: 'Windows 10/11 · 64-bit' },
-                alts: [{ label: '.msi', url: RU_C + 'Skipi.Crewing_' + CREWING_VERSION + '_x64_en-US.msi' }]
+                primary: { file: 'Skipi.Crewing_' + CREWING_VERSION + '_x64-setup.exe', url: CREWING_GH + 'Skipi.Crewing_' + CREWING_VERSION + '_x64-setup.exe', meta: 'Windows 10/11 · 64-bit' },
+                alts: [{ label: '.msi', url: CREWING_GH + 'Skipi.Crewing_' + CREWING_VERSION + '_x64_en-US.msi' }]
             },
             'macos-arm': {
                 version: CREWING_VERSION,
-                primary: { file: 'Skipi.Crewing_' + CREWING_VERSION + '_aarch64.dmg', url: RU_C + 'Skipi.Crewing_' + CREWING_VERSION + '_aarch64.dmg', meta: 'macOS Apple Silicon (M1/M2/M3/M4)' },
+                primary: { file: 'Skipi.Crewing_' + CREWING_VERSION + '_aarch64.dmg', url: CREWING_GH + 'Skipi.Crewing_' + CREWING_VERSION + '_aarch64.dmg', meta: 'macOS Apple Silicon (M1/M2/M3/M4)' },
                 alts: []
             },
             'macos-intel': {
                 version: CREWING_VERSION,
-                primary: { file: 'Skipi.Crewing_' + CREWING_VERSION + '_x64.dmg', url: RU_C + 'Skipi.Crewing_' + CREWING_VERSION + '_x64.dmg', meta: 'macOS Intel' },
+                primary: { file: 'Skipi.Crewing_' + CREWING_VERSION + '_x64.dmg', url: CREWING_GH + 'Skipi.Crewing_' + CREWING_VERSION + '_x64.dmg', meta: 'macOS Intel' },
                 alts: []
             },
             linux: {
                 version: CREWING_VERSION,
-                primary: { file: 'Skipi.Crewing_' + CREWING_VERSION + '_amd64.deb', url: RU_C + 'Skipi.Crewing_' + CREWING_VERSION + '_amd64.deb', meta: 'Debian / Ubuntu / Mint · 64-bit' },
+                primary: { file: 'Skipi.Crewing_' + CREWING_VERSION + '_amd64.deb', url: CREWING_GH + 'Skipi.Crewing_' + CREWING_VERSION + '_amd64.deb', meta: 'Debian / Ubuntu / Mint · 64-bit' },
                 alts: [
-                    { label: 'AppImage', url: RU_C + 'Skipi.Crewing_' + CREWING_VERSION + '_amd64.AppImage' },
-                    { label: 'RPM', url: RU_C + 'Skipi.Crewing-' + CREWING_VERSION + '-1.x86_64.rpm' }
+                    { label: 'AppImage', url: CREWING_GH + 'Skipi.Crewing_' + CREWING_VERSION + '_amd64.AppImage' },
+                    { label: 'RPM', url: CREWING_GH + 'Skipi.Crewing-' + CREWING_VERSION + '-1.x86_64.rpm' }
                 ]
             }
         }
