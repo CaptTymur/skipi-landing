@@ -472,7 +472,7 @@
             <div>
                 <div class="eyebrow" id="eyebrow">Download center</div>
                 <h1 id="page-title">Что вы хотите скачать?</h1>
-                <p class="lead" id="page-lead">Skipi - United Seafarers. Выберите один из трех продуктов Skipi. Дальше страница проведет вас по шагам: mobile или desktop, затем конкретная платформа.</p>
+                <p class="lead" id="page-lead">Skipi - United Seafarers. Desktop-версии можно скачать сразу. Для mobile выберите продукт и оставьте заявку в программу тестирования Android или iPhone.</p>
             </div>
 
             <nav class="crumbs hidden" id="crumbs" aria-label="Навигация по шагам"></nav>
@@ -495,7 +495,7 @@
                         <span class="symbol">▥</span>
                         <div>
                             <h2>Mobile</h2>
-                            <p>Версия для Android, iPhone или iPad.</p>
+                            <p>Android и iPhone/iPad доступны через программы тестирования.</p>
                         </div>
                         <span class="meta">Выбрать устройство →</span>
                     </button>
@@ -768,7 +768,7 @@
                 <div class="form-grid">
                     <label class="form-field">
                         ${accountLabel} *
-                        <input name="email" type="email" required autocomplete="email" placeholder="name@gmail.com">
+                        <input name="email" type="email" required autocomplete="email" placeholder="${platform === "android" ? "name@gmail.com" : "appleid@example.com"}">
                     </label>
                     <label class="form-field">
                         Устройство
@@ -827,9 +827,9 @@
             return `
                 <div class="download-card green">
                     <h3>Android через Google Play testing</h3>
-                    <p>Приложение сейчас находится в закрытом тестировании Google Play. Это не мешает получить мобильную версию: мы добавим ваш Google email в список тестировщиков и пришлем ссылку установки.</p>
+                    <p>Мобильная версия распространяется через закрытое тестирование Google Play. Это нормальный путь до публичного релиза: мы добавим ваш Google email в список тестировщиков и пришлем ссылку установки.</p>
                     <ol>
-                        <li>Заполните форму ниже и отправьте Google email.</li>
+                        <li>Заполните форму ниже и отправьте Google email, который используется на телефоне в Google Play.</li>
                         <li>На телефоне войдите в Google Play именно под этим аккаунтом.</li>
                         <li>После нашего подтверждения откройте ссылку тестирования и нажмите Join testing / Install.</li>
                         <li>Если видите «App not available», ответьте на письмо и приложите скриншот.</li>
@@ -842,7 +842,13 @@
         return `
             <div class="download-card purple">
                 <h3>iPhone / iPad через TestFlight</h3>
-                <p>iOS/iPadOS-ветка открывается через TestFlight. Оставьте Apple ID и устройство, чтобы получить приглашение, когда тестовая сборка будет доступна.</p>
+                <p>iOS/iPadOS-версия распространяется через Apple TestFlight. Оставьте Apple ID и устройство: мы добавим вас в тестовую программу и пришлем приглашение, когда сборка будет доступна для выбранного продукта.</p>
+                <ol>
+                    <li>Укажите Apple ID email, которым пользуетесь в App Store / TestFlight.</li>
+                    <li>Установите приложение TestFlight из App Store, если его ещё нет.</li>
+                    <li>После приглашения откройте ссылку от Apple и нажмите Accept / Install.</li>
+                    <li>Если приглашение не пришло, ответьте на письмо и укажите модель iPhone/iPad.</li>
+                </ol>
                 ${requestForm(product, "ios")}
             </div>
         `;
@@ -902,19 +908,19 @@
         eyebrow.textContent = "Download center";
         if (!state.product) {
             title.textContent = "Что вы хотите скачать?";
-            lead.textContent = "Skipi - United Seafarers. Выберите один из трех продуктов Skipi. Дальше страница проведет вас по шагам: mobile или desktop, затем конкретная платформа.";
+            lead.textContent = "Skipi - United Seafarers. Desktop-версии можно скачать сразу. Для mobile выберите продукт и оставьте заявку в программу тестирования Android или iPhone.";
             return;
         }
         if (!state.channel) {
             title.textContent = product.label;
-            lead.textContent = `${product.title}. Выберите, какая версия нужна: desktop или mobile.`;
+            lead.textContent = `${product.title}. Desktop можно скачать сразу; mobile подключается через программу тестирования.`;
             return;
         }
         if (!state.platform) {
             title.textContent = state.channel === "desktop" ? `${product.label}: desktop` : `${product.label}: mobile`;
             lead.textContent = state.channel === "desktop"
                 ? "Выберите операционную систему компьютера."
-                : "Выберите мобильную платформу. Подробности про тестирование Android появятся на следующем шаге.";
+                : "Выберите мобильную платформу. На следующем шаге будет форма заявки в Google Play testing или Apple TestFlight.";
             return;
         }
         title.textContent = `${product.title}: ${platformLabels[state.platform][0]}`;
