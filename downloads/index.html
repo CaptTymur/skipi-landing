@@ -607,28 +607,30 @@
             desktop: {
                 windows: {
                     title: "Windows",
-                    version: "v0.1.9",
+                    version: "v0.1.137",
                     text: "Windows 10/11, 64-bit. Для быстрой установки используйте EXE, для корпоративного окружения — MSI.",
                     links: [
-                        ["EXE", "https://api.skipi.app/broker/releases/Skipi-Broker_0.1.9_x64-setup.exe", true],
-                        ["MSI", "https://api.skipi.app/broker/releases/Skipi-Broker_0.1.9_x64_en-US.msi", false]
+                        ["EXE", "https://github.com/CaptTymur/skipi-broker/releases/download/v0.1.137/Skipi.Broker_0.1.137_x64-setup.exe", true],
+                        ["MSI", "https://github.com/CaptTymur/skipi-broker/releases/download/v0.1.137/Skipi.Broker_0.1.137_x64_en-US.msi", false]
                     ]
                 },
                 macos: {
                     title: "macOS",
-                    version: "по запросу",
-                    text: "macOS-сборка пока не размещена публично. Запросите ссылку, если готовы тестировать Broker desktop.",
+                    version: "v0.1.137",
+                    text: "Universal DMG для Apple Silicon и Intel. Если macOS блокирует запуск, перенесите приложение в Applications и снимите quarantine.",
                     links: [
-                        ["Запросить доступ", "mailto:broker@skipi.app?subject=Skipi%20Broker%20macOS%20early%20access&body=Hello%2C%0A%0AI%20want%20early%20access%20to%20Skipi%20Broker%20for%20macOS.%0A%0ACompany%3A%20%0ARole%3A%20%0AMac%20type%20(Intel%20or%20Apple%20Silicon)%3A%20%0A%0AThank%20you.", true]
-                    ]
+                        ["DMG", "https://github.com/CaptTymur/skipi-broker/releases/download/v0.1.137/Skipi.Broker_0.1.137_universal.dmg", true]
+                    ],
+                    note: 'Terminal: <code>xattr -dr com.apple.quarantine "/Applications/Skipi Broker.app"</code>'
                 },
                 linux: {
                     title: "Linux",
-                    version: "v0.1.130 AppImage / v0.1.9 DEB",
-                    text: "Свежая Linux-сборка Broker доступна как AppImage. DEB оставлен как предыдущий пакет для Debian/Ubuntu.",
+                    version: "v0.1.137",
+                    text: "Для Debian/Ubuntu используйте DEB. Для остальных дистрибутивов удобнее AppImage или RPM.",
                     links: [
-                        ["AppImage", "https://api.skipi.app/broker/releases/Skipi-Broker_0.1.130_amd64.AppImage", true],
-                        ["DEB", "https://api.skipi.app/broker/releases/Skipi-Broker_0.1.9_amd64.deb", false]
+                        ["AppImage", "https://github.com/CaptTymur/skipi-broker/releases/download/v0.1.137/Skipi.Broker_0.1.137_amd64.AppImage", true],
+                        ["DEB", "https://github.com/CaptTymur/skipi-broker/releases/download/v0.1.137/Skipi.Broker_0.1.137_amd64.deb", false],
+                        ["RPM", "https://github.com/CaptTymur/skipi-broker/releases/download/v0.1.137/Skipi.Broker-0.1.137-1.x86_64.rpm", false]
                     ]
                 }
             }
