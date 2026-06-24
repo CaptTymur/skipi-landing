@@ -417,6 +417,15 @@
         }
         @media (max-width: 640px) {
             .nav-links { display: none; }
+            .stage,
+            .result-panel,
+            .result-body,
+            .download-card,
+            .crumbs,
+            .actions {
+                min-width: 0;
+                max-width: 100%;
+            }
             .container {
                 width: 100%;
                 padding-left: 1rem;
@@ -439,6 +448,16 @@
             }
             .actions,
             .btn { width: 100%; }
+            .actions { align-items: stretch; }
+            .btn,
+            .crumbs button,
+            .crumbs span,
+            .lead,
+            .download-card p,
+            .download-card li {
+                white-space: normal;
+                overflow-wrap: anywhere;
+            }
             .form-grid { grid-template-columns: 1fr; }
             .result-head {
                 grid-template-columns: 58px minmax(0, 1fr);
@@ -565,6 +584,14 @@
             description: "Для крюинговых команд: вакансии, отклики, профиль моряка, outreach и intelligence-слой.",
             email: "info@skipi.app",
             requestEmail: "crewing@skipi.app",
+            mobile: {
+                android: {
+                    version: "0.4.126 / 4126",
+                    testingUrl: "https://play.google.com/apps/testing/app.skipi.crewing.mobile",
+                    installUrl: "https://play.google.com/store/apps/details?id=app.skipi.crewing.mobile",
+                    note: "Ссылка работает только для Google email, добавленного в closed testing."
+                }
+            },
             desktop: {
                 windows: {
                     title: "Windows",
@@ -824,10 +851,25 @@
 
     function renderMobileResult(product) {
         if (state.platform === "android") {
+            const mobileItem = product.mobile && product.mobile.android;
+            const buildInfo = mobileItem
+                ? `<p><strong>Доступная тестовая сборка:</strong> ${escapeHtml(mobileItem.version)}.</p>`
+                : "";
+            const playLinks = mobileItem
+                ? `
+                    <div class="actions">
+                        <a class="btn primary" href="${mobileItem.testingUrl}" target="_blank" rel="noopener">Открыть Play testing</a>
+                        <a class="btn" href="${mobileItem.installUrl}" target="_blank" rel="noopener">Открыть установку</a>
+                    </div>
+                    <p class="support-note">${escapeHtml(mobileItem.note)}</p>
+                `
+                : "";
             return `
                 <div class="download-card green">
                     <h3>Android через Google Play testing</h3>
+                    ${buildInfo}
                     <p>Мобильная версия распространяется через закрытое тестирование Google Play. Это нормальный путь до публичного релиза: мы добавим ваш Google email в список тестировщиков и пришлем ссылку установки.</p>
+                    ${playLinks}
                     <ol>
                         <li>Заполните форму ниже и отправьте Google email, который используется на телефоне в Google Play.</li>
                         <li>На телефоне войдите в Google Play именно под этим аккаунтом.</li>
