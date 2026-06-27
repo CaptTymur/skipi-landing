@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Скачать Skipi - United Seafarers</title>
-    <meta name="description" content="Skipi - United Seafarers. Скачайте Skipi Seafarer, Skipi Crewing или Skipi Broker для desktop и mobile.">
+    <meta name="description" content="Skipi - United Seafarers. Скачайте Skipi Seafarer, Skipi Crewing, Skipi Broker или Skipi On Board для desktop и mobile.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://skipi.app/downloads">
 
@@ -145,7 +145,7 @@
 
         .choice-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1rem;
             margin-top: 1.2rem;
         }
@@ -501,24 +501,7 @@
             </section>
 
             <section class="hidden" id="channel-step" aria-label="Выбор типа приложения">
-                <div class="choice-grid two">
-                    <button class="choice-card compact" type="button" data-action="select-channel" data-channel="desktop">
-                        <span class="symbol">▣</span>
-                        <div>
-                            <h2>Desktop</h2>
-                            <p>Версия для Windows, macOS или Linux.</p>
-                        </div>
-                        <span class="meta">Выбрать платформу →</span>
-                    </button>
-                    <button class="choice-card compact" type="button" data-action="select-channel" data-channel="mobile">
-                        <span class="symbol">▥</span>
-                        <div>
-                            <h2>Mobile</h2>
-                            <p>Android и iPhone/iPad доступны через программы тестирования.</p>
-                        </div>
-                        <span class="meta">Выбрать устройство →</span>
-                    </button>
-                </div>
+                <div class="choice-grid two" id="channel-grid"></div>
             </section>
 
             <section class="hidden" id="platform-step" aria-label="Выбор платформы">
@@ -661,13 +644,39 @@
                     ]
                 }
             }
+        },
+        onboard: {
+            label: "On Board",
+            title: "Skipi On Board",
+            icon: "/assets/app-icons/skipi-onboard.png",
+            description: "Linux-first приложение для судовой onboarding-подготовки, handover и рабочих checklists.",
+            email: "info@skipi.app",
+            requestEmail: "info@skipi.app",
+            mobile: false,
+            desktop: {
+                linux: {
+                    title: "Linux",
+                    version: "v0.1.0",
+                    text: "Linux-first выпуск. AppImage подходит для большинства дистрибутивов; для Debian/Ubuntu можно использовать DEB.",
+                    links: [
+                        ["AppImage", "https://github.com/CaptTymur/skipi-onboard/releases/download/v0.1.0/Skipi.On.Board_0.1.0_amd64.AppImage", true],
+                        ["DEB", "https://github.com/CaptTymur/skipi-onboard/releases/download/v0.1.0/Skipi.On.Board_0.1.0_amd64.deb", false]
+                    ],
+                    note: 'Updater manifest: <a href="https://github.com/CaptTymur/skipi-onboard/releases/latest/download/latest.json">latest.json</a>'
+                }
+            }
         }
+    };
+
+    const channelLabels = {
+        desktop: ["Desktop", "▣", "Версия для компьютера."],
+        mobile: ["Mobile", "▥", "Android и iPhone/iPad через программы тестирования."]
     };
 
     const platformLabels = {
         windows: ["Windows", "⊞", "Установщик для Windows 10/11"],
         macos: ["macOS", "⌘", "DMG для Mac"],
-        linux: ["Linux", "λ", "DEB, AppImage или RPM"],
+        linux: ["Linux", "λ", "AppImage, DEB или RPM"],
         android: ["Android", "▣", "Google Play testing"],
         ios: ["iPhone / iPad", "▥", "TestFlight"]
     };
@@ -675,6 +684,7 @@
     const productStep = document.getElementById("product-step");
     const productGrid = document.getElementById("product-grid");
     const channelStep = document.getElementById("channel-step");
+    const channelGrid = document.getElementById("channel-grid");
     const platformStep = document.getElementById("platform-step");
     const platformGrid = document.getElementById("platform-grid");
     const resultStep = document.getElementById("result-step");
@@ -684,6 +694,35 @@
     const eyebrow = document.getElementById("eyebrow");
 
     const state = { product: null, channel: null, platform: null };
+
+    function availableChannels(product) {
+        const channels = [];
+        if (product.desktop && Object.keys(product.desktop).length) channels.push("desktop");
+        if (product.mobile !== false) channels.push("mobile");
+        return channels;
+    }
+
+    function availablePlatforms(product, channel) {
+        if (channel === "desktop") return Object.keys(product.desktop || {});
+        if (channel === "mobile") return ["android", "ios"];
+        return [];
+    }
+
+    function applySingleChoiceDefaults() {
+        const product = state.product ? products[state.product] : null;
+        if (!product) return;
+
+        const channels = availableChannels(product);
+        if (state.channel && !channels.includes(state.channel)) {
+            state.channel = null;
+            state.platform = null;
+        }
+        if (!state.channel && channels.length === 1) state.channel = channels[0];
+
+        const platforms = state.channel ? availablePlatforms(product, state.channel) : [];
+        if (state.platform && !platforms.includes(state.platform)) state.platform = null;
+        if (!state.platform && platforms.length === 1) state.platform = platforms[0];
+    }
 
     function escapeHtml(value) {
         return String(value)
@@ -735,13 +774,42 @@
         `).join("");
     }
 
+    function renderChannels() {
+        const product = products[state.product];
+        const channels = availableChannels(product);
+        channelGrid.className = channels.length === 2 ? "choice-grid two" : "choice-grid";
+        channelGrid.innerHTML = channels.map((key) => {
+            const [label, symbol, description] = channelLabels[key];
+            return `
+                <button class="choice-card compact" type="button" data-action="select-channel" data-channel="${key}">
+                    <span class="symbol">${symbol}</span>
+                    <div>
+                        <h2>${label}</h2>
+                        <p>${description}</p>
+                    </div>
+                    <span class="meta">${key === "desktop" ? "Выбрать платформу" : "Выбрать устройство"} →</span>
+                </button>
+            `;
+        }).join("");
+    }
+
+    function platformDescription(product, channel, key) {
+        if (channel === "desktop") {
+            const item = product.desktop && product.desktop[key];
+            if (item && Array.isArray(item.links)) {
+                return item.links.map(([label]) => label).join(", ");
+            }
+        }
+        return platformLabels[key][2];
+    }
+
     function renderPlatforms() {
-        const platforms = state.channel === "desktop"
-            ? ["windows", "macos", "linux"]
-            : ["android", "ios"];
+        const product = products[state.product];
+        const platforms = availablePlatforms(product, state.channel);
 
         platformGrid.innerHTML = platforms.map((key) => {
-            const [label, symbol, description] = platformLabels[key];
+            const [label, symbol] = platformLabels[key];
+            const description = platformDescription(product, state.channel, key);
             return `
                 <button class="choice-card compact" type="button" data-action="select-platform" data-platform="${key}">
                     <span class="symbol">${symbol}</span>
@@ -972,6 +1040,7 @@
     }
 
     function render() {
+        applySingleChoiceDefaults();
         hideAllSteps();
         renderCopy();
         renderCrumbs();
@@ -980,6 +1049,7 @@
             return;
         }
         if (!state.channel) {
+            renderChannels();
             channelStep.classList.remove("hidden");
             return;
         }
@@ -1046,6 +1116,7 @@
         if (action === "go-platform") {
             state.platform = null;
         }
+        applySingleChoiceDefaults();
         setHash();
         render();
         window.scrollTo({ top: 0, behavior: "smooth" });

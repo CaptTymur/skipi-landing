@@ -8,6 +8,11 @@ assets.
 - Seafarer: https://api-ru.skipi.app/latest.json
 - Crewing: https://api-ru.skipi.app/crewing/latest.json
 - Broker: https://api-ru.skipi.app/broker/latest.json
+- On Board: https://github.com/CaptTymur/skipi-onboard/releases/latest/download/latest.json
 
 Кнопки скачивания на сайте должны вести на тот же RF-доступный Timeweb route,
 что и эти manifests.
+
+Исключение: Skipi On Board v0.1.0 сейчас публикуется как Linux-first GitHub
+release, поэтому кнопки On Board ведут напрямую на GitHub Releases и
+соответствуют GitHub updater manifest выше.
