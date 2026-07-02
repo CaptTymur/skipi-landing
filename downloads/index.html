@@ -571,8 +571,8 @@
                 android: {
                     version: "0.4.128 / 4128",
                     testingUrl: "https://play.google.com/apps/testing/app.skipi.crewing.mobile",
-                    installUrl: "https://play.google.com/store/apps/details?id=app.skipi.crewing.mobile",
-                    note: "Ссылка работает только для Google email, добавленного в closed testing."
+                    installUrl: null,
+                    note: "Closed testing: откройте Play testing под Google email, добавленным в тестовую группу."
                 }
             },
             desktop: {
@@ -927,7 +927,7 @@
                 ? `
                     <div class="actions">
                         <a class="btn primary" href="${mobileItem.testingUrl}" target="_blank" rel="noopener">Открыть Play testing</a>
-                        <a class="btn" href="${mobileItem.installUrl}" target="_blank" rel="noopener">Открыть установку</a>
+                        ${mobileItem.installUrl ? `<a class="btn" href="${mobileItem.installUrl}" target="_blank" rel="noopener">Открыть установку</a>` : ""}
                     </div>
                     <p class="support-note">${escapeHtml(mobileItem.note)}</p>
                 `
