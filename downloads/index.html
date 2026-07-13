@@ -563,11 +563,10 @@
                 macos: {
                     title: "macOS",
                     version: "v0.4.177",
-                    text: "Сборка для Intel v0.4.177 (актуальная). На Apple Silicon (M1/M2/M3/M4) запускается через Rosetta 2. Не нотаризовано: при первом запуске перенесите приложение в Applications и снимите карантинный флаг командой ниже.",
+                    text: "Universal DMG для Apple Silicon (M1/M2/M3/M4) и Intel, нотаризовано Apple — запускается без предупреждений Gatekeeper.",
                     links: [
-                        ["DMG", "https://github.com/CaptTymur/skipi.app/releases/download/v0.4.177/Skipi.Seafarer_0.4.177_x64.dmg", true]
-                    ],
-                    note: 'Терминал: <code>xattr -dr com.apple.quarantine "/Applications/Skipi Seafarer.app"</code>'
+                        ["DMG", "https://github.com/CaptTymur/skipi.app/releases/download/v0.4.177/Skipi.Seafarer_0.4.177_universal.dmg", true]
+                    ]
                 },
                 linux: {
                     title: "Linux",
@@ -609,12 +608,10 @@
                 macos: {
                     title: "macOS",
                     version: "v0.4.132",
-                    text: "Выберите сборку под ваш Mac: Apple Silicon для M1/M2/M3/M4, Intel для старых Mac.",
+                    text: "Universal DMG для Apple Silicon (M1/M2/M3/M4) и Intel, нотаризовано Apple — запускается без предупреждений Gatekeeper.",
                     links: [
-                        ["Apple Silicon", "https://github.com/CaptTymur/skipi-crewing/releases/download/v0.4.132/Skipi.Crewing_0.4.132_aarch64.dmg", true],
-                        ["Intel", "https://github.com/CaptTymur/skipi-crewing/releases/download/v0.4.132/Skipi.Crewing_0.4.132_x64.dmg", false]
-                    ],
-                    note: 'Терминал: <code>xattr -dr com.apple.quarantine "/Applications/Skipi Crewing.app"</code>'
+                        ["DMG", "https://github.com/CaptTymur/skipi-crewing/releases/download/v0.4.132/Skipi.Crewing_0.4.132_universal.dmg", true]
+                    ]
                 },
                 linux: {
                     title: "Linux",
@@ -648,11 +645,10 @@
                 macos: {
                     title: "macOS",
                     version: "v0.1.151",
-                    text: "Universal DMG для Apple Silicon и Intel. Если macOS блокирует запуск, перенесите приложение в Applications и снимите quarantine.",
+                    text: "Universal DMG для Apple Silicon и Intel, нотаризовано Apple — запускается без предупреждений Gatekeeper.",
                     links: [
                         ["DMG", "https://github.com/CaptTymur/skipi-broker/releases/download/v0.1.151/Skipi.Broker_0.1.151_universal.dmg", true]
-                    ],
-                    note: 'Терминал: <code>xattr -dr com.apple.quarantine "/Applications/Skipi Broker.app"</code>'
+                    ]
                 },
                 linux: {
                     title: "Linux",
