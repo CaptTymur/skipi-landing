@@ -1,0 +1,243 @@
+#!/usr/bin/env python3
+"""HTML-проверки лендинга skipi.app (stdlib-only, без сети).
+
+Волна «redesign v2 — journey» (owner, 05.08). Вердикт владельца по v1:
+«слишком много всего», «пользователь должен путешествовать по сайту,
+а не читать». Новая структура: сайт = путешествие из сцен.
+
+Скелет (FigJam-борд владельца):
+  1. Вход (index) — ровно два действия:
+     «Начать пользоваться» → https://assistant.skipi.app
+     «Что такое Skipi»     → /story/ (путешествие-объяснение)
+  2. Путешествие /story/ — полноэкранные главы:
+     prologue → assistant (identity-канон) → apps → contours → start
+  3. Все пути сходятся в assistant.skipi.app.
+
+Группы проверок:
+  A — вход: два действия, локали, лёгкость (бюджет слов).
+  S — story: сцены-главы, identity-канон, apps, contours, финальный CTA.
+  I — инварианты: все .cta → assistant, светлая тема, никаких новых
+      внешних CDN, downloads не сломан, sitemap.
+
+Принцип «МАЛО на экране» проверяется механически: бюджет слов на
+вход и на каждую сцену.
+
+Запуск:  python3 tests/check_html.py   (exit 0 = все PASS)
+"""
+
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+
+ASSISTANT = "https://assistant.skipi.app"
+
+# локаль -> (входная, story, ссылка на story, lang-атрибут)
+LOCALES = {
+    "root": ("index.html", "story/index.html", "/story/", "ru"),
+    "en":   ("en/index.html", "en/story/index.html", "/en/story/", "en"),
+    "ru":   ("ru/index.html", "ru/story/index.html", "/ru/story/", "ru"),
+    "hi":   ("hi/index.html", "hi/story/index.html", "/hi/story/", "hi"),
+    "id":   ("id/index.html", "id/story/index.html", "/id/story/", "id"),
+}
+
+START_LABEL = {
+    "root": "Начать пользоваться",
+    "en":   "Start using",
+    "ru":   "Начать пользоваться",
+    "hi":   "उपयोग शुरू",
+    "id":   "Mulai gunakan",
+}
+WHATIS_LABEL = {
+    "root": "Что такое Skipi",
+    "en":   "What is Skipi",
+    "ru":   "Что такое Skipi",
+    "hi":   "Skipi क्या है",
+    "id":   "Apa itu Skipi",
+}
+
+# identity-канон ассистента (DECISIONS 2026-08-05 (10)):
+# специализированный ИИ под судоходство, создан капитаном Тимуром
+# Рудовым на основе коллективного опыта моряков. hi/id — подход репо
+# (смешанный текст, EN-термины).
+IDENTITY = {
+    "root": ("заточенный под судоходство", "Тимуром Рудовым",
+             "коллективного опыта моряков"),
+    "ru":   ("заточенный под судоходство", "Тимуром Рудовым",
+             "коллективного опыта моряков"),
+    "en":   ("purpose-built for shipping", "Tymur Rudov",
+             "collective experience of seafarers"),
+    "hi":   ("purpose-built", "Tymur Rudov"),
+    "id":   ("khusus untuk pelayaran", "Tymur Rudov"),
+}
+
+APPS = ("Seafarer", "Crewing", "Broker")
+
+CONTOURS = {
+    "root": ("моряк", "крюинг", "брокер"),
+    "ru":   ("моряк", "крюинг", "брокер"),
+    "en":   ("seafarer", "crewing", "broker"),
+    "hi":   ("seafarer", "crewing", "broker"),
+    "id":   ("pelaut", "crewing", "broker"),
+}
+
+SCENES = ("prologue", "assistant", "apps", "contours", "start")
+
+# бюджеты слов: сдержанность как механический инвариант
+ENTRY_WORD_BUDGET = 40   # <main> входной страницы
+SCENE_WORD_BUDGET = 60   # каждая сцена story
+
+# разрешённые внешние хосты (href/src). Новых CDN не появляется.
+ALLOWED_HOSTS = {
+    "assistant.skipi.app",
+    "skipi.app",
+    "fonts.googleapis.com",
+    "fonts.gstatic.com",
+}
+
+results = []
+
+
+def check(name: str, ok: bool, detail: str = "") -> None:
+    results.append((name, bool(ok)))
+    mark = "PASS" if ok else "FAIL"
+    line = f"[{mark}] {name}"
+    if not ok and detail:
+        line += f" — {detail}"
+    print(line)
+
+
+def read(rel: str) -> str:
+    p = ROOT / rel
+    if not p.is_file():
+        return ""
+    return p.read_text(encoding="utf-8")
+
+
+def strip_text(html: str) -> str:
+    """Видимый текст: без script/style/тегов/entities."""
+    html = re.sub(r"<script\b.*?</script>", " ", html, flags=re.S | re.I)
+    html = re.sub(r"<style\b.*?</style>", " ", html, flags=re.S | re.I)
+    html = re.sub(r"<!--.*?-->", " ", html, flags=re.S)
+    html = re.sub(r"<[^>]+>", " ", html)
+    html = re.sub(r"&[a-z#0-9]+;", " ", html)
+    return html
+
+
+def word_count(html: str) -> int:
+    return len([w for w in strip_text(html).split()
+                if any(ch.isalnum() for ch in w)])
+
+
+def section_of(html: str, sec_id: str) -> str:
+    """Фрагмент <section ... id="sec_id" ...> до </section>."""
+    m = re.search(r'<section\b[^>]*\bid="%s"' % re.escape(sec_id), html)
+    if not m:
+        return ""
+    return html[m.start():].split("</section>", 1)[0]
+
+
+def main_of(html: str) -> str:
+    m = re.search(r"<main\b[^>]*>", html)
+    if not m:
+        return ""
+    return html[m.end():].split("</main>", 1)[0]
+
+
+def external_hosts(html: str):
+    hosts = set()
+    for m in re.finditer(r'(?:href|src)="(https?://[^"/]+)', html):
+        hosts.add(m.group(1).split("://", 1)[1].lower())
+    return hosts
+
+
+for loc, (entry_rel, story_rel, story_href, lang) in LOCALES.items():
+    entry = read(entry_rel)
+    story = read(story_rel)
+
+    # ── Группа A: вход ──────────────────────────────────────────────
+    check(f"A1[{loc}] входная существует: {entry_rel}", bool(entry))
+    check(f"A2[{loc}] lang=\"{lang}\"",
+          f'lang="{lang}"' in entry.split(">", 2)[1] + ">"
+          if entry else False,
+          "нет lang в <html>")
+    entry_main = main_of(entry)
+    check(f"A3[{loc}] действие 1: «{START_LABEL[loc]}» → assistant",
+          f'href="{ASSISTANT}"' in entry_main
+          and START_LABEL[loc] in entry_main)
+    check(f"A4[{loc}] действие 2: «{WHATIS_LABEL[loc]}» → {story_href}",
+          f'href="{story_href}"' in entry_main
+          and WHATIS_LABEL[loc] in entry_main)
+    wc = word_count(entry_main)
+    check(f"A5[{loc}] вход лёгкий: <main> ≤ {ENTRY_WORD_BUDGET} слов "
+          f"(факт {wc})", 0 < wc <= ENTRY_WORD_BUDGET)
+    check(f"A6[{loc}] вход подключает journey.css",
+          "/assets/journey.css" in entry)
+
+    # ── Группа S: путешествие ──────────────────────────────────────
+    check(f"S1[{loc}] story существует: {story_rel}", bool(story))
+    for sc in SCENES:
+        sec = section_of(story, sc)
+        okwc = word_count(sec)
+        check(f"S2[{loc}] сцена «{sc}»: есть и ≤ {SCENE_WORD_BUDGET} "
+              f"слов (факт {okwc})",
+              bool(sec) and 0 < okwc <= SCENE_WORD_BUDGET)
+
+    asec = section_of(story, "assistant")
+    check(f"S3[{loc}] глава ИИ-помощник: identity-канон {IDENTITY[loc]}",
+          bool(asec) and all(s in asec for s in IDENTITY[loc]))
+
+    psec = section_of(story, "apps")
+    check(f"S4[{loc}] глава Приложения: Seafarer/Crewing/Broker "
+          f"+ /downloads",
+          bool(psec) and all(a in psec for a in APPS)
+          and 'href="/downloads' in psec)
+
+    csec = section_of(story, "contours")
+    check(f"S5[{loc}] глава Контуры: три роли {CONTOURS[loc]}",
+          bool(csec) and all(c in csec.lower() for c in CONTOURS[loc]))
+
+    ssec = section_of(story, "start")
+    check(f"S6[{loc}] финал: «{START_LABEL[loc]}» → assistant",
+          bool(ssec) and f'href="{ASSISTANT}"' in ssec
+          and START_LABEL[loc] in ssec)
+
+    check(f"S7[{loc}] из любой точки шаг «начать»: постоянная "
+          f"cta-ссылка в шапке story",
+          bool(story) and f'href="{ASSISTANT}"' in
+          (story.split("</header>", 1)[0] if "</header>" in story else ""))
+
+    # ── Группа I (по-локально): CTA и внешние хосты ────────────────
+    for rel, html in ((entry_rel, entry), (story_rel, story)):
+        ctas = re.findall(r'<a\b[^>]*class="[^"]*cta[^"]*"[^>]*>', html)
+        cta_ok = bool(ctas) and all(f'href="{ASSISTANT}"' in c
+                                    for c in ctas)
+        check(f"I1[{loc}] {rel}: каждый .cta → assistant.skipi.app "
+              f"({len(ctas)} шт.)", cta_ok)
+        bad = external_hosts(html) - ALLOWED_HOSTS
+        check(f"I2[{loc}] {rel}: без новых внешних CDN",
+              bool(html) and not bad, f"лишние хосты: {sorted(bad)}")
+
+# ── Группа I (глобально) ───────────────────────────────────────────
+css = read("assets/journey.css")
+check("I3 светлая тема: journey.css задаёт color-scheme: light + белый фон",
+      "color-scheme: light" in css and "#ffffff" in css)
+check("I4 тёмная тема не задана по умолчанию: в journey.css нет "
+      "prefers-color-scheme: dark",
+      bool(css) and "prefers-color-scheme: dark" not in css)
+
+downloads = read("downloads/index.html")
+check("I5 downloads жив и не тронут этой волной",
+      bool(downloads) and "Seafarer" in downloads)
+
+sitemap = read("sitemap.xml")
+check("I6 sitemap: все пять story-URL",
+      all(f"https://skipi.app{h}" in sitemap
+          for h in ("/story/", "/en/story/", "/ru/story/",
+                    "/hi/story/", "/id/story/")))
+
+passed = sum(1 for _, ok in results if ok)
+total = len(results)
+print(f"\n{passed}/{total} checks passed")
+sys.exit(0 if passed == total else 1)
