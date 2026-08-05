@@ -115,7 +115,8 @@ for loc, (entry_rel, sections_rel, sections_href) in LOCALES.items():
           WHATIS_LABEL[loc] in entry, entry_rel)
 
     # ── Группа N: страница «Разделы» (failing-first) ────────────────
-    hero_entry = entry.split("hero-entry", 1)[-1].split("</div>", 1)[0]
+    # HTML-блок hero-entry (маркер с '">' отсекает упоминание в CSS)
+    hero_entry = entry.split('hero-entry">', 1)[-1].split("</div>", 1)[0]
     check(f"N1[{loc}] входная: «Что такое Skipi» ведёт на {sections_href} "
           f"(отдельная страница, не якорь)",
           f'href="{sections_href}"' in hero_entry,
