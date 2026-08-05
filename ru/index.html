@@ -173,6 +173,8 @@
             line-height: 1.55;
         }
         .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .hero-actions.hero-entry { margin-bottom: 1rem; }
+        .btn-hero { padding: 1rem 1.8rem; font-size: 1.12rem; border-radius: 8px; }
         .hero-visual {
             background: linear-gradient(155deg, #f6f8fa 0%, #e6eef4 100%);
             border-radius: 14px;
@@ -548,8 +550,12 @@
                 <p class="lead">
                     Skipi соединяет моряка и крюинг в одном цифровом контуре: личный vault документов, контроль сроков сертификатов, структурированные отклики на вакансии и индексы зарплат на основе открытого рынка.
                 </p>
+                <div class="hero-actions hero-entry">
+                    <a href="https://assistant.skipi.app" class="btn btn-primary btn-hero">Начать пользоваться <span class="arrow">→</span></a>
+                    <a href="#platform" class="btn btn-ghost btn-hero">Узнать, что это такое</a>
+                </div>
                 <div class="hero-actions">
-                    <a href="/downloads" class="btn btn-primary">Получить Skipi <span class="arrow">→</span></a>
+                    <a href="/downloads" class="btn btn-ghost">Получить Skipi <span class="arrow">→</span></a>
                     <a href="#platform" class="btn btn-ghost">Посмотреть платформу</a>
                 </div>
             </div>

@@ -199,6 +199,8 @@
             line-height: 1.55;
         }
         .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .hero-actions.hero-entry { margin-bottom: 1.6rem; }
+        .btn-hero { padding: 1rem 1.8rem; font-size: 1.12rem; border-radius: 8px; }
 
         /* Audience split (two big cards) */
         .hero-audience-split {
@@ -885,6 +887,10 @@
                 <p class="lead">
                     Skipi collects structured seafarer reviews of the vessels and companies they have served on. Those signals aggregate into a decision-support layer: a seafarer sees the real profile of an employer before signing; a crewing team, ship manager, charterer or broker sees the real state of a vessel before hiring or fixing.
                 </p>
+                <div class="hero-actions hero-entry">
+                    <a href="https://assistant.skipi.app" class="btn btn-primary btn-hero">Start using Skipi <span class="arrow">→</span></a>
+                    <a href="#what-is-skipi" class="btn btn-ghost btn-hero">What is Skipi?</a>
+                </div>
                 <div class="hero-audience-split">
                     <a href="/downloads" class="audience-card">
                         <span class="audience-icon">⚓</span>
@@ -940,7 +946,7 @@
 </section>
 
 <!-- ─── Product video ───────────────────────────────────────── -->
-<section class="product-video" aria-labelledby="product-video-title">
+<section class="product-video" id="what-is-skipi" aria-labelledby="product-video-title">
     <div class="container video-grid">
         <div class="video-copy">
             <span class="kicker">42-second walkthrough</span>

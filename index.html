@@ -204,6 +204,8 @@
             line-height: 1.55;
         }
         .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .hero-actions.hero-entry { margin-bottom: 1.6rem; }
+        .btn-hero { padding: 1rem 1.8rem; font-size: 1.12rem; border-radius: 8px; }
 
         /* Audience split (two big cards) */
         .hero-audience-split {
@@ -866,6 +868,10 @@
                 <p class="lead">
                     Skipi собирает структурированные отзывы моряков о судах и компаниях, на которых они работали. Из этих сигналов рождается decision-support слой: моряк видит реальный профиль работодателя до подписания контракта, крюинг, шипменеджер, фрахтователь и брокер — реальное состояние судна до решения о найме или фиксе.
                 </p>
+                <div class="hero-actions hero-entry">
+                    <a href="https://assistant.skipi.app" class="btn btn-primary btn-hero">Начать пользоваться <span class="arrow">→</span></a>
+                    <a href="#what-is-skipi" class="btn btn-ghost btn-hero">Узнать, что это такое</a>
+                </div>
                 <div class="hero-audience-split">
                     <a href="/downloads" class="audience-card">
                         <span class="audience-icon">⚓</span>
@@ -921,7 +927,7 @@
 </section>
 
 <!-- ─── Product video ───────────────────────────────────────── -->
-<section class="product-video" aria-labelledby="product-video-title">
+<section class="product-video" id="what-is-skipi" aria-labelledby="product-video-title">
     <div class="container video-grid">
         <div class="video-copy">
             <span class="kicker">42-секундный walkthrough</span>
