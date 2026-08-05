@@ -33,9 +33,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 ASSISTANT = "https://assistant.skipi.app"
 
+# Язык по умолчанию = АНГЛИЙСКИЙ (owner-решение 05.08, задача №92):
+# корень / и /story/ — EN; русский полноценно живёт на /ru/ и /ru/story/;
+# /en/ остаётся зеркалом корня с canonical на корень.
+
 # локаль -> (входная, story, ссылка на story, lang-атрибут)
 LOCALES = {
-    "root": ("index.html", "story/index.html", "/story/", "ru"),
+    "root": ("index.html", "story/index.html", "/story/", "en"),
     "en":   ("en/index.html", "en/story/index.html", "/en/story/", "en"),
     "ru":   ("ru/index.html", "ru/story/index.html", "/ru/story/", "ru"),
     "hi":   ("hi/index.html", "hi/story/index.html", "/hi/story/", "hi"),
@@ -43,14 +47,14 @@ LOCALES = {
 }
 
 START_LABEL = {
-    "root": "Начать пользоваться",
+    "root": "Start using",
     "en":   "Start using",
     "ru":   "Начать пользоваться",
     "hi":   "उपयोग शुरू",
     "id":   "Mulai gunakan",
 }
 WHATIS_LABEL = {
-    "root": "Что такое Skipi",
+    "root": "What is Skipi",
     "en":   "What is Skipi",
     "ru":   "Что такое Skipi",
     "hi":   "Skipi क्या है",
@@ -62,8 +66,8 @@ WHATIS_LABEL = {
 # Рудовым на основе коллективного опыта моряков. hi/id — подход репо
 # (смешанный текст, EN-термины).
 IDENTITY = {
-    "root": ("заточенный под судоходство", "Тимуром Рудовым",
-             "коллективного опыта моряков"),
+    "root": ("purpose-built for shipping", "Tymur Rudov",
+             "collective experience of seafarers"),
     "ru":   ("заточенный под судоходство", "Тимуром Рудовым",
              "коллективного опыта моряков"),
     "en":   ("purpose-built for shipping", "Tymur Rudov",
@@ -75,7 +79,7 @@ IDENTITY = {
 APPS = ("Seafarer", "Crewing", "Broker")
 
 CONTOURS = {
-    "root": ("моряк", "крюинг", "брокер"),
+    "root": ("seafarer", "crewing", "broker"),
     "ru":   ("моряк", "крюинг", "брокер"),
     "en":   ("seafarer", "crewing", "broker"),
     "hi":   ("seafarer", "crewing", "broker"),
@@ -218,6 +222,88 @@ for loc, (entry_rel, story_rel, story_href, lang) in LOCALES.items():
         bad = external_hosts(html) - ALLOWED_HOSTS
         check(f"I2[{loc}] {rel}: без новых внешних CDN",
               bool(html) and not bad, f"лишние хосты: {sorted(bad)}")
+
+# ── Группа L: язык по умолчанию = EN (задача №92) ──────────────────
+SITE = "https://skipi.app"
+
+
+def canonical_of(html: str) -> str:
+    m = re.search(r'<link rel="canonical" href="([^"]+)"', html)
+    return m.group(1) if m else ""
+
+
+def og_url_of(html: str) -> str:
+    m = re.search(r'<meta property="og:url" content="([^"]+)"', html)
+    return m.group(1) if m else ""
+
+
+def hreflangs_of(html: str) -> dict:
+    return dict(re.findall(
+        r'<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"', html))
+
+
+root = read("index.html")
+root_story = read("story/index.html")
+en = read("en/index.html")
+en_story = read("en/story/index.html")
+ru = read("ru/index.html")
+ru_story = read("ru/story/index.html")
+
+check("L1 корень = EN: canonical и og:url корня — https://skipi.app/",
+      canonical_of(root) == f"{SITE}/" and og_url_of(root) == f"{SITE}/",
+      f"canonical={canonical_of(root)} og:url={og_url_of(root)}")
+
+hl = hreflangs_of(root)
+check("L2 hreflang корня: en → корень, ru → /ru/, x-default → корень",
+      hl.get("en") == f"{SITE}/" and hl.get("ru") == f"{SITE}/ru/"
+      and hl.get("x-default") == f"{SITE}/", f"факт: {hl}")
+
+check("L3 /story/ = EN: canonical/og:url → /story/, hreflang en → /story/, "
+      "ru → /ru/story/, x-default → /story/",
+      canonical_of(root_story) == f"{SITE}/story/"
+      and og_url_of(root_story) == f"{SITE}/story/"
+      and hreflangs_of(root_story).get("en") == f"{SITE}/story/"
+      and hreflangs_of(root_story).get("ru") == f"{SITE}/ru/story/"
+      and hreflangs_of(root_story).get("x-default") == f"{SITE}/story/")
+
+check("L4 /en/ — зеркало корня: canonical → корень, /en/story/ → /story/",
+      canonical_of(en) == f"{SITE}/"
+      and canonical_of(en_story) == f"{SITE}/story/",
+      f"факт: {canonical_of(en)}, {canonical_of(en_story)}")
+
+check("L5 /ru/ самодостаточен: canonical /ru/ и /ru/story/, "
+      "hreflang ru → /ru/ и /ru/story/",
+      canonical_of(ru) == f"{SITE}/ru/"
+      and canonical_of(ru_story) == f"{SITE}/ru/story/"
+      and hreflangs_of(ru).get("ru") == f"{SITE}/ru/"
+      and hreflangs_of(ru_story).get("ru") == f"{SITE}/ru/story/")
+
+# единый языковой футер: EN/RU/TL/HI/ID доступны с каждой входной локали
+LANG_FOOTER = {"en": "/", "ru": "/ru/", "tl": "/tl/",
+               "hi": "/hi/", "id": "/id/"}
+for page in ("index.html", "en/index.html", "ru/index.html",
+             "hi/index.html", "id/index.html", "tl/index.html"):
+    html = read(page)
+    missing = [f'{code} → {href}' for code, href in LANG_FOOTER.items()
+               if f'href="{href}" lang="{code}"' not in html]
+    check(f"L6 {page}: футер-переключатель EN/RU/TL/HI/ID "
+          f"(EN → корень, RU → /ru/)", bool(html) and not missing,
+          f"нет: {missing}")
+
+# hi/id/tl: hreflang мигрирован на новую раскладку (en → корень, ru → /ru/)
+for page in ("hi/index.html", "id/index.html", "tl/index.html"):
+    hlp = hreflangs_of(read(page))
+    check(f"L7 {page}: hreflang en → корень, ru → /ru/, x-default → корень",
+          hlp.get("en") == f"{SITE}/" and hlp.get("ru") == f"{SITE}/ru/"
+          and hlp.get("x-default") == f"{SITE}/", f"факт: {hlp}")
+for page in ("hi/story/index.html", "id/story/index.html",
+             "en/story/index.html", "ru/story/index.html"):
+    hlp = hreflangs_of(read(page))
+    check(f"L8 {page}: hreflang en → /story/, ru → /ru/story/, "
+          f"x-default → /story/",
+          hlp.get("en") == f"{SITE}/story/"
+          and hlp.get("ru") == f"{SITE}/ru/story/"
+          and hlp.get("x-default") == f"{SITE}/story/", f"факт: {hlp}")
 
 # ── Группа I (глобально) ───────────────────────────────────────────
 css = read("assets/journey.css")
