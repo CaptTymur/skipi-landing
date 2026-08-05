@@ -3,15 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Skipi - United Seafarers | नाविकों के सीधे संकेतों पर आधारित Maritime Intelligence</title>
-    <meta name="description" content="Skipi - United Seafarers. Skipi नाविकों से जहाज़ों और कंपनियों पर structured reviews इकट्ठा करता है और उन्हें seafarers, crewing teams, brokers, charterers, banks, investors और P&amp;I के लिए decision support में बदलता है।">
+    <title>Skipi — maritime ecosystem | नाविकों के लिए AI assistant और apps</title>
+    <meta name="description" content="Skipi — maritime ecosystem: shipping के लिए purpose-built AI assistant और नाविकों, crewing teams और brokers के लिए apps। Captain Tymur Rudov ने नाविकों के collective experience से बनाया।">
     <meta name="author" content="Skipi">
-    <meta property="og:title" content="Skipi - United Seafarers">
-    <meta property="og:description" content="जहाज़ों और कंपनियों पर structured seafarer reviews. Maritime decisions के लिए एक intelligence layer.">
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:title" content="Skipi — maritime ecosystem">
+    <meta property="og:description" content="नाविकों, crewing teams और brokers के लिए AI assistant और apps।">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://skipi.app/hi/">
     <meta property="og:site_name" content="Skipi">
-    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:card" content="summary">
     <link rel="canonical" href="https://skipi.app/hi/">
     <link rel="alternate" hreflang="en" href="https://skipi.app/en/">
     <link rel="alternate" hreflang="ru" href="https://skipi.app/">
@@ -22,149 +23,34 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/localized-home.css">
-    <style>
-        .hero-actions.hero-entry { margin-bottom: 0.9rem; }
-        .hero-entry .btn { padding: 0.95rem 1.6rem; font-size: 1.05rem; }
-    </style>
+    <link rel="stylesheet" href="/assets/journey.css">
 </head>
-<body>
-<header class="site-header">
-    <div class="container nav">
-        <a class="brand" href="/hi/">Skipi<span>.</span></a>
-        <ul class="nav-links">
-            <li><a href="#platform">प्लेटफ़ॉर्म</a></li>
-            <li><a href="/en/presentation/">Captain's deck</a></li>
-            <li><a href="#how">कैसे काम करता है</a></li>
-            <li><a href="#faq">FAQ</a></li>
-        </ul>
-        <div class="nav-actions">
-            <div class="lang-switch" aria-label="Languages">
-                <a class="lang-link" href="/" lang="ru">RU</a>
-                <a class="lang-link" href="/en/" lang="en">EN</a>
-                <a class="lang-link" href="/tl/" lang="tl">TL</a>
-                <a class="lang-link active" href="/hi/" lang="hi">HI</a>
-                <a class="lang-link" href="/id/" lang="id">ID</a>
-            </div>
-            <a class="btn primary" href="/downloads">डाउनलोड</a>
-        </div>
+<body class="entry-page">
+
+<main class="entry">
+    <div class="entry-inner">
+        <p class="kicker reveal">United Seafarers</p>
+        <h1 class="wordmark reveal">Skipi<span class="dot">.</span></h1>
+        <div class="horizon reveal" aria-hidden="true"></div>
+        <p class="entry-line reveal">Maritime ecosystem: नाविकों, crewing teams और brokers के लिए AI assistant और apps।</p>
+        <nav class="entry-actions reveal" aria-label="Primary actions">
+            <a class="cta" href="https://assistant.skipi.app">उपयोग शुरू करें <span class="arr">→</span></a>
+            <a class="ghost" href="/hi/story/">Skipi क्या है</a>
+        </nav>
     </div>
-</header>
-
-<main>
-    <section class="hero">
-        <div class="container hero-grid">
-            <div>
-                <span class="kicker">Skipi - United Seafarers</span>
-                <h1>जहाज़ और कंपनियों पर निर्णय उन लोगों के <em>सीधे संकेतों</em> पर जो वहाँ काम कर चुके हैं</h1>
-                <p class="lead">Skipi नाविकों से जहाज़ों और कंपनियों पर structured reviews इकट्ठा करता है। यही संकेत decision-support layer बनते हैं: नाविक contract से पहले employer profile देखता है, और crewing, broker, charterer या risk team vessel की वास्तविक स्थिति समझती है।</p>
-                <div class="hero-actions hero-entry">
-                    <a class="btn primary" href="https://assistant.skipi.app">Skipi का उपयोग शुरू करें</a>
-                    <a class="btn" href="#platform">Skipi क्या है?</a>
-                </div>
-                <div class="hero-actions">
-                    <a class="btn" href="/downloads">Skipi प्राप्त करें</a>
-                    <a class="btn" href="/en/for-companies/">कंपनी access</a>
-                </div>
-            </div>
-            <aside class="signal-panel" aria-label="Skipi vessel signal">
-                <div class="signal-head">
-                    <img src="/assets/app-icons/skipi-seafarer.png" alt="">
-                    <div>
-                        <h2>Vessel signal profile</h2>
-                        <p>Aggregated crew feedback</p>
-                    </div>
-                </div>
-                <div class="score-list">
-                    <div class="score-row"><span>Payment reliability</span><div class="bar"><i style="--score: 84%"></i></div></div>
-                    <div class="score-row"><span>Safety culture</span><div class="bar"><i style="--score: 72%"></i></div></div>
-                    <div class="score-row"><span>Management response</span><div class="bar"><i style="--score: 64%"></i></div></div>
-                    <div class="score-row"><span>Contract clarity</span><div class="bar"><i style="--score: 78%"></i></div></div>
-                </div>
-            </aside>
-        </div>
-        <div class="container stats">
-            <div class="stat"><strong>50K+</strong><span>डेटाबेस में जहाज़</span></div>
-            <div class="stat"><strong>16</strong><span>review sections</span></div>
-            <div class="stat"><strong>HMAC</strong><span>नाविक की identity उजागर नहीं होती</span></div>
-            <div class="stat"><strong>Local-first</strong><span>vault और documents device पर रहते हैं</span></div>
-        </div>
-    </section>
-
-    <section class="section soft" id="platform">
-        <div class="container">
-            <div class="section-title">
-                <h2>तीन उत्पाद, एक maritime data layer</h2>
-                <p>Skipi seafarers, crewing teams और broker workflow के लिए apps का परिवार है। सभी उत्पाद structured maritime signal से जुड़े हैं।</p>
-            </div>
-            <div class="product-grid">
-                <a class="card" href="/downloads#seafarer">
-                    <img src="/assets/app-icons/skipi-seafarer.png" alt="">
-                    <h3>Skipi Seafarer</h3>
-                    <p>Personal vault, documents, certificate deadlines, CV packages, vessel reviews और contract से पहले employer profile.</p>
-                    <span class="meta">Desktop और mobile testing</span>
-                </a>
-                <a class="card" href="/downloads#crewing">
-                    <img src="/assets/app-icons/skipi-crewing.png" alt="">
-                    <h3>Skipi Crewing</h3>
-                    <p>Vacancies, candidate response, outreach और crewing decisions के लिए intelligence signal.</p>
-                    <span class="meta">Desktop और Android testing</span>
-                </a>
-                <a class="card" href="/downloads#broker">
-                    <img src="/assets/app-icons/skipi-broker.png" alt="">
-                    <h3>Skipi Broker</h3>
-                    <p>Market information, Telegram bot workflow और brokers तथा operators के लिए vessel intelligence.</p>
-                    <span class="meta">Early access</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="how">
-        <div class="container video-wrap">
-            <div class="video-frame">
-                <video controls preload="metadata" poster="/assets/video/skipi-crew-signals-hi-poster.jpg">
-                    <source src="/assets/video/skipi-crew-signals-hi.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div>
-                <div class="section-title">
-                    <h2>Crew signal intelligence कैसे बनता है</h2>
-                    <p>Skipi का core random comments नहीं है। Review structured होता है, sections में बंटा होता है और vessel, company तथा work period से जुड़ा होता है।</p>
-                </div>
-                <ul class="check-list">
-                    <li>नाविक vessel और employer पर structured review भरता है।</li>
-                    <li>Identity सुरक्षित रहती है; aggregate signal उपयोग होता है, व्यक्ति का नाम नहीं।</li>
-                    <li>Result crew, crewing, brokers, charterers और risk teams के लिए decision support बनता है।</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section class="section soft" id="faq">
-        <div class="container">
-            <div class="section-title">
-                <h2>यह किसके लिए है?</h2>
-            </div>
-            <div class="audience-grid">
-                <div class="card">
-                    <h3>मैं नाविक हूँ</h3>
-                    <p>Documents, deadlines और contract लेने से पहले vessel या company को बेहतर समझने के लिए Skipi इस्तेमाल करें।</p>
-                </div>
-                <div class="card">
-                    <h3>मैं कंपनी का प्रतिनिधि हूँ</h3>
-                    <p>Vessel intelligence, company profile या maritime operations के लिए decision support चाहिए तो access request करें।</p>
-                </div>
-            </div>
-        </div>
-    </section>
 </main>
 
-<footer class="site-footer">
-    <div class="container footer-inner">
-        <span>© 2026 Skipi</span>
-        <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="mailto:info@skipi.app">info@skipi.app</a></span>
-    </div>
+<footer class="whisper">
+    <nav class="langs" aria-label="Languages">
+        <a href="/" lang="ru">RU</a>
+        <a href="/en/" lang="en">EN</a>
+        <a href="/tl/" lang="tl">TL</a>
+        <a class="active" href="/hi/" lang="hi">HI</a>
+        <a href="/id/" lang="id">ID</a>
+    </nav>
+    <a class="quiet" href="/downloads">Downloads</a>
 </footer>
+
+<script src="/assets/journey.js" defer></script>
 </body>
 </html>
