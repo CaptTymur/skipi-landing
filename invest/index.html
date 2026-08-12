@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Invest — Skipi | The AI assistant seafarers live in, and the data layer maritime decisions depend on</title>
+    <meta name="description" content="Skipi: the AI assistant seafarers live in — and the data layer maritime decisions depend on. Investor-relations contact for Captain Tymur Rudov, founder. A private invitation to talk.">
+    <meta name="author" content="Skipi">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Skipi — Invest">
+    <meta property="og:description" content="The AI assistant seafarers live in — and the data layer maritime decisions depend on.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://skipi.app/invest/">
+    <meta property="og:site_name" content="Skipi">
+    <meta property="og:image" content="https://skipi.app/presentation/img/slide-1.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Skipi — Invest">
+    <meta name="twitter:description" content="The AI assistant seafarers live in — and the data layer maritime decisions depend on.">
+    <meta name="twitter:image" content="https://skipi.app/presentation/img/slide-1.jpg">
+
+    <link rel="canonical" href="https://skipi.app/invest/">
+    <link rel="alternate" hreflang="en" href="https://skipi.app/invest/">
+    <link rel="alternate" hreflang="x-default" href="https://skipi.app/invest/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --ink:       #0a1f33;
+            --ink-soft:  #2a3f55;
+            --body:      #475569;
+            --muted:     #7f8da0;
+            --accent:    #007a86;
+            --accent-dk: #005e68;
+            --bg:        #ffffff;
+            --bg-soft:   #f6f8fa;
+            --bg-deep:   #edf1f5;
+            --border:    #e3e8ee;
+        }
+        html { scroll-behavior: smooth; color-scheme: light; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--body); background: var(--bg);
+            line-height: 1.6; font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { color: var(--accent-dk); }
+        .container { width: min(880px, 100% - 2.5rem); margin: 0 auto; }
+
+        /* Header */
+        header.site {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: saturate(160%) blur(8px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav { display: flex; align-items: center; justify-content: space-between; padding: 0.95rem 0; }
+        .brand { font-weight: 800; font-size: 1.25rem; color: var(--ink); letter-spacing: -0.01em; }
+        .brand .dot { color: var(--accent); }
+        .nav-cta { display: flex; align-items: center; gap: 0.75rem; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.6rem 1.1rem; border-radius: 6px;
+            font-weight: 600; font-size: 0.92rem;
+            transition: background 0.15s, color 0.15s;
+            border: 1px solid transparent; white-space: nowrap;
+            cursor: pointer; font-family: inherit;
+        }
+        .btn-primary { background: var(--ink); color: #fff; }
+        .btn-primary:hover { background: var(--accent); color: #fff; }
+        .btn-ghost { background: transparent; color: var(--ink); border-color: var(--border); }
+        .btn-ghost:hover { background: var(--bg-soft); color: var(--ink); }
+        .btn .arrow { transition: transform 0.15s; }
+        .btn:hover .arrow { transform: translateX(2px); }
+
+        /* Hero */
+        section.hero { padding: 4.5rem 0 2.5rem; }
+        .hero .kicker {
+            display: inline-block; font-size: 0.82rem; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--accent); margin-bottom: 1rem;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 2.9rem); font-weight: 800;
+            color: var(--ink); letter-spacing: -0.02em; line-height: 1.1;
+            margin-bottom: 1.1rem;
+        }
+        .hero .thesis-line {
+            font-size: clamp(1.1rem, 2.4vw, 1.35rem); font-style: italic;
+            color: var(--ink-soft); max-width: 720px;
+        }
+
+        /* Copy sections */
+        section.copy { padding: 1.4rem 0; }
+        .copy h2 {
+            font-size: 1.45rem; font-weight: 800; color: var(--ink);
+            letter-spacing: -0.01em; margin-bottom: 0.7rem;
+        }
+        .copy p { font-size: 1.02rem; color: var(--body); margin-bottom: 0.9rem; }
+        .copy p strong { color: var(--ink); }
+        .copy p:last-child { margin-bottom: 0; }
+
+        .divider { border: none; border-top: 1px solid var(--border); margin: 1.6rem 0; }
+
+        /* Contact block */
+        section.contact { background: var(--bg-soft); padding: 3.5rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-top: 2rem; }
+        .contact-card { max-width: 640px; margin: 0 auto; background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 2.25rem; text-align: center; }
+        .contact-card h2 { font-size: 1.5rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+        .contact-card p.who { color: var(--ink-soft); font-size: 1rem; margin-bottom: 1.5rem; }
+        .contact-actions { display: flex; gap: 0.9rem; justify-content: center; flex-wrap: wrap; }
+        .contact-actions .btn { padding: 0.75rem 1.4rem; font-size: 0.98rem; }
+
+        /* Fact-sheet */
+        section.factsheet { padding: 4rem 0; }
+        .factsheet h2 { font-size: 1.45rem; font-weight: 800; color: var(--ink); letter-spacing: -0.01em; margin-bottom: 1.4rem; text-align: center; }
+        .factsheet dl {
+            max-width: 780px; margin: 0 auto;
+            border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+        }
+        .factsheet dl .row {
+            display: grid; grid-template-columns: 160px 1fr;
+            border-bottom: 1px solid var(--border);
+        }
+        .factsheet dl .row:last-child { border-bottom: none; }
+        .factsheet dt {
+            padding: 0.85rem 1.1rem; background: var(--bg-soft);
+            font-weight: 700; color: var(--ink); font-size: 0.9rem;
+            border-right: 1px solid var(--border);
+        }
+        .factsheet dd { padding: 0.85rem 1.1rem; color: var(--body); font-size: 0.94rem; }
+        @media (max-width: 620px) {
+            .factsheet dl .row { grid-template-columns: 1fr; }
+            .factsheet dt { border-right: none; border-bottom: 1px solid var(--border); }
+        }
+
+        /* Footer */
+        footer.site { background: #061a2c; color: rgba(255,255,255,0.65); padding: 2.5rem 0 1.8rem; }
+        .foot-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        .foot-inner .brand { color: #fff; }
+        .foot-inner a { color: rgba(255,255,255,0.65); }
+        .foot-inner a:hover { color: #fff; }
+        .foot-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.4rem; margin-top: 1.8rem; font-size: 0.82rem; color: rgba(255,255,255,0.45); text-align: center; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://skipi.app/#organization",
+                "name": "Skipi",
+                "description": "The AI assistant seafarers live in — and the data layer maritime decisions depend on.",
+                "url": "https://skipi.app/",
+                "logo": "https://skipi.app/assets/app-icons/skipi-seafarer.png",
+                "founder": {
+                    "@type": "Person",
+                    "@id": "https://skipi.app/invest/#founder",
+                    "name": "Tymur Rudov",
+                    "jobTitle": "Founder — Master Mariner & Marine Superintendent"
+                },
+                "contactPoint": {
+                    "@type": "ContactPoint",
+                    "contactType": "investor relations",
+                    "telephone": "+35797617412",
+                    "email": "info@skipi.app"
+                }
+            },
+            {
+                "@type": "Person",
+                "@id": "https://skipi.app/invest/#founder",
+                "name": "Tymur Rudov",
+                "jobTitle": "Founder — Master Mariner & Marine Superintendent"
+            },
+            {
+                "@type": "WebPage",
+                "url": "https://skipi.app/invest/",
+                "name": "Invest — Skipi",
+                "description": "The AI assistant seafarers live in — and the data layer maritime decisions depend on. Investor-relations contact.",
+                "about": { "@id": "https://skipi.app/#organization" },
+                "mainEntity": {
+                    "@type": "Organization",
+                    "name": "Skipi (pre-incorporation)",
+                    "description": "AI assistant + proprietary data platform for maritime / seafarers",
+                    "founder": "Capt. Tymur Rudov — master mariner (since 2013), marine superintendent (technical management)",
+                    "audience": "220,000+ (YouTube 195K · Instagram 10K · Telegram 9K · TikTok 6K)",
+                    "additionalProperty": [
+                        { "@type": "PropertyValue", "name": "Product", "value": "assistant.skipi.app live; persistent per-user memory; app platform + plugins + decision support" },
+                        { "@type": "PropertyValue", "name": "Users", "value": "live assistant in production (assistant.skipi.app), early-stage · Paying: 0 (pre-monetization) · Revenue: $0" },
+                        { "@type": "PropertyValue", "name": "Apps", "value": "Seafarer (free) — in App Store & Google Play review; Broker/Crewing ($10/mo, 14-day trial); PRO ($5/mo)" },
+                        { "@type": "PropertyValue", "name": "Model", "value": "free seafarer funnel → paid apps/PRO → B2B maritime data & decision support" },
+                        { "@type": "PropertyValue", "name": "Market", "value": "2.57M seafarers (BIMCO/ICS 2026); 80%+ world trade by sea (IMO/UNCTAD); ~68,700 commercial vessels ≥500 GT (Equasis); >2,000 vessels sold / >$50B 2024 (Clarksons); ~22,000 SIRE 2.0 + 100,000+ PSC inspections/yr; 68,528 vessels on LEO connectivity (Valour Q1 2026)" },
+                        { "@type": "PropertyValue", "name": "Stage", "value": "pre-seed, bootstrapped, founder-led" },
+                        { "@type": "PropertyValue", "name": "Contact", "value": "WhatsApp +357 97 617 412 · info@skipi.app" }
+                    ]
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+
+<header class="site">
+    <div class="container nav">
+        <a href="/" class="brand">Skipi<span class="dot">.</span></a>
+        <div class="nav-cta">
+            <a href="mailto:info@skipi.app" class="btn btn-primary">Contact <span class="arrow">&rarr;</span></a>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <span class="kicker">Invest</span>
+        <h1>Skipi</h1>
+        <p class="thesis-line">The AI assistant seafarers live in &mdash; and the data layer maritime decisions depend on.</p>
+    </div>
+</section>
+
+<section class="copy">
+    <div class="container">
+        <h2>Thesis</h2>
+        <p>2.57M seafarers crew the ships that move 80%+ of world trade, yet they remain among the least digitized professionals on earth. Skipi gives each seafarer an AI assistant that knows their vessel, role, certificates and career &mdash; one they live inside and that remembers them between visits. That engagement compounds into what the industry has never had: proprietary, ground-truth signal on ships, companies and ports, from the people actually onboard. <strong>The assistant is the wedge; the data is the asset.</strong></p>
+
+        <hr class="divider">
+
+        <h2>Why now</h2>
+        <p>AI makes a genuinely personal maritime assistant possible for the first time; English is regulation-mandated across the profession; and connectivity has reached the ships &mdash; 68,528 commercial vessels now run low-earth-orbit internet (Valour, 2026), with near-universal crew access.</p>
+
+        <hr class="divider">
+
+        <h2>Traction today</h2>
+        <p>An owned audience of 220,000+ seafarers and maritime followers &mdash; 195K on YouTube plus Instagram, Telegram and TikTok &mdash; a warm, low-CAC channel from day one. A live AI assistant in production (assistant.skipi.app) with persistent per-user memory, already in early use. The first mobile app (Seafarer) is in App Store and Google Play review now. Pre-revenue: monetization is the current build, not yet switched on.</p>
+
+        <hr class="divider">
+
+        <h2>Product</h2>
+        <p>A live AI assistant seafarers live in &mdash; assistant, app platform, plugins and decision support. Free for seafarers (Seafarer, Onboard) as the top of a trusted funnel; paid licenses for Broker and Crewing ($10/mo) and a PRO tier for power users.</p>
+
+        <hr class="divider">
+
+        <h2>The compounding asset</h2>
+        <p>As seafarers work inside Skipi, they generate structured signal on vessels, employers and ports &mdash; the ground-truth needed by those who decide about ships: crew managers hiring, charterers fixing tonnage, buyers in sale-and-purchase (&gt;2,000 vessels / &gt;$50B in 2024), inspectors and vetting (~22,000 SIRE 2.0 and 100,000+ Port State Control inspections a year). A data moat that deepens with every active user and that no competitor can back-fill.</p>
+
+        <hr class="divider">
+
+        <h2>Founder&ndash;market fit</h2>
+        <p>Built by Captain Tymur Rudov &mdash; a ship's master at sea since 2013 and a marine superintendent in technical management. He has commanded the vessels his users sail and worked the shore side that buys the data Skipi will supply. Not a team studying the market &mdash; the market building for itself, audience already in hand.</p>
+
+        <hr class="divider">
+
+        <h2>Efficiency</h2>
+        <p>The product reached live, in-store and in-memory on the founder's own resources. Distribution is owned, not bought.</p>
+
+        <hr class="divider">
+
+        <h2>Stage</h2>
+        <p>Pre-seed, founder-led, bootstrapped. In early conversations with investors who back defensible, data-driven platforms before the category is obvious. <strong>Not a public offering &mdash; a private invitation to talk.</strong></p>
+    </div>
+</section>
+
+<section class="contact" id="contact">
+    <div class="container">
+        <div class="contact-card">
+            <h2>Contact</h2>
+            <p class="who">Captain Tymur Rudov, Founder</p>
+            <div class="contact-actions">
+                <a href="https://wa.me/35797617412" class="btn btn-primary">WhatsApp +357 97 617 412 <span class="arrow">&rarr;</span></a>
+                <a href="mailto:info@skipi.app" class="btn btn-ghost">info@skipi.app</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="factsheet" id="factsheet">
+    <div class="container">
+        <h2>Fact sheet</h2>
+        <dl>
+            <div class="row"><dt>Company</dt><dd>Skipi (pre-incorporation)</dd></div>
+            <div class="row"><dt>Category</dt><dd>AI assistant + proprietary data platform for maritime / seafarers</dd></div>
+            <div class="row"><dt>Founder</dt><dd>Capt. Tymur Rudov &mdash; master mariner (since 2013), marine superintendent (technical management)</dd></div>
+            <div class="row"><dt>Audience</dt><dd>220,000+ (YouTube 195K &middot; Instagram 10K &middot; Telegram 9K &middot; TikTok 6K)</dd></div>
+            <div class="row"><dt>Product</dt><dd>assistant.skipi.app live; persistent per-user memory; app platform + plugins + decision support</dd></div>
+            <div class="row"><dt>Users</dt><dd>live assistant in production (assistant.skipi.app), early-stage &middot; Paying: 0 (pre-monetization) &middot; Revenue: $0</dd></div>
+            <div class="row"><dt>Apps</dt><dd>Seafarer (free) &mdash; in App Store &amp; Google Play review; Broker/Crewing ($10/mo, 14-day trial); PRO ($5/mo)</dd></div>
+            <div class="row"><dt>Model</dt><dd>free seafarer funnel &rarr; paid apps/PRO &rarr; B2B maritime data &amp; decision support</dd></div>
+            <div class="row"><dt>Market</dt><dd>2.57M seafarers (BIMCO/ICS 2026); 80%+ world trade by sea (IMO/UNCTAD); ~68,700 commercial vessels &ge;500 GT (Equasis); &gt;2,000 vessels sold / &gt;$50B 2024 (Clarksons); ~22,000 SIRE 2.0 + 100,000+ PSC inspections/yr; 68,528 vessels on LEO connectivity (Valour Q1 2026)</dd></div>
+            <div class="row"><dt>Stage</dt><dd>pre-seed, bootstrapped, founder-led</dd></div>
+            <div class="row"><dt>Contact</dt><dd>WhatsApp +357 97 617 412 &middot; info@skipi.app</dd></div>
+        </dl>
+    </div>
+</section>
+
+<footer class="site">
+    <div class="container">
+        <div class="foot-inner">
+            <a href="/" class="brand">Skipi<span class="dot">.</span></a>
+            <nav aria-label="Footer">
+                <a href="/story/">What is Skipi</a>
+            </nav>
+        </div>
+        <div class="foot-bottom">
+            Skipi &mdash; a private invitation to talk. Not a public offering.
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
