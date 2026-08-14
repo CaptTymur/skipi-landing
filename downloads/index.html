@@ -550,6 +550,13 @@
             description: "Для моряков: документы, резюме моряка, сроки сертификатов, пакеты документов и профиль судна.",
             email: "info@skipi.app",
             requestEmail: "seafarer@skipi.app",
+            mobile: {
+                android: {
+                    version: "0.4.184 / 4184",
+                    storeUrl: "https://play.google.com/store/apps/details?id=app.skipi.seafarer",
+                    note: "Публичный релиз в Google Play. Для работы приложения нужен вход в аккаунт Skipi."
+                }
+            },
             desktop: {
                 windows: {
                     title: "Windows",
@@ -688,14 +695,14 @@
 
     const channelLabels = {
         desktop: ["Компьютер", "▣", "Версия для Windows, macOS или Linux."],
-        mobile: ["Мобильная версия", "▥", "Android и iPhone/iPad через программы тестирования."]
+        mobile: ["Мобильная версия", "▥", "Android в Google Play, iPhone/iPad — через программы тестирования."]
     };
 
     const platformLabels = {
         windows: ["Windows", "⊞", "Установщик для Windows 10/11"],
         macos: ["macOS", "⌘", "DMG для Mac"],
         linux: ["Linux", "λ", "AppImage, DEB или RPM"],
-        android: ["Android", "▣", "Тестирование Google Play"],
+        android: ["Android", "▣", "Google Play"],
         ios: ["iPhone / iPad", "▥", "TestFlight"]
     };
 
@@ -945,6 +952,18 @@
     function renderMobileResult(product) {
         if (state.platform === "android") {
             const mobileItem = product.mobile && product.mobile.android;
+            if (mobileItem && mobileItem.storeUrl) {
+                return `
+                    <div class="download-card green">
+                        <h3>Android — доступно в Google Play</h3>
+                        <p><strong>Версия:</strong> ${escapeHtml(mobileItem.version)}.</p>
+                        <div class="actions">
+                            <a class="btn primary" href="${mobileItem.storeUrl}" target="_blank" rel="noopener">Скачать в Google Play</a>
+                        </div>
+                        <p class="support-note">${escapeHtml(mobileItem.note)}</p>
+                    </div>
+                `;
+            }
             const buildInfo = mobileItem
                 ? `<p><strong>Доступная тестовая сборка:</strong> ${escapeHtml(mobileItem.version)}.</p>`
                 : "";
