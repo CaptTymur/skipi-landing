@@ -223,6 +223,24 @@ for loc, (entry_rel, story_rel, story_href, lang) in LOCALES.items():
         check(f"I2[{loc}] {rel}: без новых внешних CDN",
               bool(html) and not bad, f"лишние хосты: {sorted(bad)}")
 
+# ── Группа P: секция-развилка на главной (№135, owner 14.08) ──────
+# Три роли → входы в SaaS: моряк → assistant, крюинг и брокер →
+# веб-кабинеты. Локали: корень + en + ru; hi/id/tl не участвуют.
+PATH_LINKS = (f"{ASSISTANT}/app/crewing", f"{ASSISTANT}/app/broker")
+PATH_ROLES = {
+    "index.html":    ("For seafarers", "For crewing teams", "For brokers"),
+    "en/index.html": ("For seafarers", "For crewing teams", "For brokers"),
+    "ru/index.html": ("Для моряка", "Для крюинга", "Для брокера"),
+}
+for page, roles in PATH_ROLES.items():
+    html = read(page)
+    ok = ('class="paths"' in html
+          and f'href="{ASSISTANT}"' in html
+          and all(f'href="{u}"' in html for u in PATH_LINKS)
+          and all(r in html for r in roles))
+    check(f"P1 {page}: развилка — 3 роли и SaaS-входы "
+          f"(assistant / app/crewing / app/broker)", ok)
+
 # ── Группа L: язык по умолчанию = EN (задача №92) ──────────────────
 SITE = "https://skipi.app"
 

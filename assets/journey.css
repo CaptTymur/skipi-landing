@@ -157,6 +157,63 @@ a { color: inherit; text-decoration: none; }
 .langs a.active { color: var(--ink); font-weight: 700; }
 .whisper .quiet { font-size: 0.8rem; }
 
+/* ── развилка на главной: три SaaS-входа (№135) ── */
+
+.paths {
+    background: #fbfdfe;
+    border-top: 1px solid var(--hairline);
+    text-align: center;
+    padding: 4.5rem 1.5rem 7.5rem;
+}
+.paths-title {
+    font-size: clamp(1.55rem, 5vw, 2.3rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    text-wrap: balance;
+    margin-top: 1rem;
+}
+.path-grid {
+    display: grid;
+    gap: 1rem;
+    max-width: 960px;
+    margin: 2.4rem auto 0;
+}
+@media (min-width: 760px) {
+    .path-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.path-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    text-align: left;
+    padding: 1.5rem 1.4rem;
+    border: 1px solid var(--hairline);
+    border-radius: 18px;
+    background: var(--paper);
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.path-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.path-card:hover .arr { transform: translateX(4px); }
+.path-card h3 {
+    font-size: 1.12rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+.path-card p {
+    font-size: 0.95rem;
+    color: var(--body);
+    flex-grow: 1;
+}
+.path-go {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--accent-dk);
+}
+
 /* ── путешествие ── */
 
 .voyage-bar {
