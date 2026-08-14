@@ -55,17 +55,25 @@ START_LABEL = {
     "hi":   "उपयोग शुरू",
     "id":   "Mulai gunakan",
 }
-# Развилка в hero (№135, owner-уточнение 14.08 по живой странице):
-# на root/en/ru одиночная CTA заменена тремя роль-кнопками прямо в hero
-# (перенос секции .paths, не дубль). hi/id/tl — не участвуют.
+# Развилка в hero (№135, owner-уточнение 14.08, вторая итерация):
+# одна фраза-приглашение «Start using Skipi as:» (лид-строка) + три
+# равноправные роль-кнопки прямо в hero (перенос секции .paths,
+# не дубль). hi/id/tl — не участвуют.
 FORK_LOCALES = ("root", "en", "ru")
 FORK_HREFS = (ASSISTANT,
               f"{ASSISTANT}/app/crewing",
               f"{ASSISTANT}/app/broker")
+FORK_LEAD = {
+    "root": "Start using Skipi as",
+    "en":   "Start using Skipi as",
+    "ru":   "Начните использовать Skipi как",
+}
+# лейблы ролей проверяются как точный текст ссылки (">…<"), иначе
+# «Seafarer» ложно совпадает с kicker «United Seafarers»
 FORK_ROLES = {
-    "root": ("For seafarers", "For crewing teams", "For brokers"),
-    "en":   ("For seafarers", "For crewing teams", "For brokers"),
-    "ru":   ("Для моряка", "Для крюинга", "Для брокера"),
+    "root": ("Seafarer", "Crewing manager", "Broker"),
+    "en":   ("Seafarer", "Crewing manager", "Broker"),
+    "ru":   ("Моряк", "Крюинг-менеджер", "Брокер"),
 }
 # I1 (owner-решение 14.08): допустимые href для .cta — РОВНО эти три
 # SaaS-входа, не «любая ссылка».
@@ -185,13 +193,17 @@ for loc, (entry_rel, story_rel, story_href, lang) in LOCALES.items():
           if entry else False,
           "нет lang в <html>")
     entry_main = main_of(entry)
-    # действие 1: на fork-локалях — первичная роль-кнопка моряка,
-    # на остальных — прежняя одиночная CTA (№135, owner 14.08)
-    act1_label = (FORK_ROLES[loc][0] if loc in FORK_LOCALES
-                  else START_LABEL[loc])
-    check(f"A3[{loc}] действие 1: «{act1_label}» → assistant",
-          f'href="{ASSISTANT}"' in entry_main
-          and act1_label in entry_main)
+    # действие 1: на fork-локалях — роль-кнопка моряка (точный текст
+    # ссылки), на остальных — прежняя одиночная CTA (№135, owner 14.08)
+    if loc in FORK_LOCALES:
+        act1_label = FORK_ROLES[loc][0]
+        act1_ok = (f'href="{ASSISTANT}"' in entry_main
+                   and f">{act1_label}<" in entry_main)
+    else:
+        act1_label = START_LABEL[loc]
+        act1_ok = (f'href="{ASSISTANT}"' in entry_main
+                   and act1_label in entry_main)
+    check(f"A3[{loc}] действие 1: «{act1_label}» → assistant", act1_ok)
     check(f"A4[{loc}] действие 2: «{WHATIS_LABEL[loc]}» → {story_href}",
           f'href="{story_href}"' in entry_main
           and WHATIS_LABEL[loc] in entry_main)
@@ -249,17 +261,20 @@ for loc, (entry_rel, story_rel, story_href, lang) in LOCALES.items():
               bool(html) and not bad, f"лишние хосты: {sorted(bad)}")
 
 # ── Группа P: развилка в HERO (№135; owner-уточнение 14.08) ───────
-# Owner по живой странице: развилка живёт ПРЯМО в hero, на месте
-# одиночной CTA (перенос, не дубль). Три роли → входы в SaaS:
-# моряк → assistant, крюинг и брокер → веб-кабинеты.
+# Owner (вторая итерация, дословно): «стильная развилка start using
+# skipi as: seafarer, crewing manager, broker». Форма: лид-строка
+# + три равноправные роли → входы в SaaS: моряк → assistant,
+# крюинг-менеджер и брокер → веб-кабинеты.
 # Локали: корень + en + ru; hi/id/tl не участвуют.
 for loc in FORK_LOCALES:
     page = LOCALES[loc][0]
     html = read(page)
     hero = main_of(html)
     ok = (all(f'href="{u}"' in hero for u in FORK_HREFS)
-          and all(r in hero for r in FORK_ROLES[loc]))
-    check(f"P1[{loc}] {page}: развилка в hero — 3 роли → 3 SaaS-входа "
+          and FORK_LEAD[loc] in hero
+          and all(f">{r}<" in hero for r in FORK_ROLES[loc]))
+    check(f"P1[{loc}] {page}: hero-развилка — лид «{FORK_LEAD[loc]}» "
+          f"+ 3 роли → 3 SaaS-входа "
           f"(assistant / app/crewing / app/broker)", ok)
     check(f"P2[{loc}] {page}: отдельной секции .paths ниже hero нет "
           f"(перенос, не дубль)", bool(html) and 'class="paths"' not in html)

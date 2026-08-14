@@ -159,15 +159,21 @@ a { color: inherit; text-decoration: none; }
 .langs a.active { color: var(--ink); font-weight: 700; }
 .whisper .quiet { font-size: 0.8rem; }
 
-/* ── развилка в hero: три SaaS-входа на месте одиночной CTA
-      (№135, owner-уточнение 14.08; перенос из секции .paths) ── */
+/* ── развилка в hero: лид-строка «Start using Skipi as:» + три
+      равноправные роли (№135, owner-уточнение 14.08) ── */
 
 .entry-actions.has-fork { flex-direction: column; gap: 1.2rem; }
+.fork-lead {
+    font-size: 0.92rem;
+    color: var(--muted);
+    letter-spacing: 0.01em;
+}
 .entry-fork {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.7rem;
+    margin-top: -0.5rem; /* ближе к лид-строке, чем к ghost-ссылке */
 }
 @media (min-width: 700px) {
     .entry-fork { flex-direction: row; justify-content: center; }
