@@ -6,9 +6,11 @@
 а не читать». Новая структура: сайт = путешествие из сцен.
 
 Скелет (FigJam-борд владельца):
-  1. Вход (index) — ровно два действия:
-     «Начать пользоваться» → https://assistant.skipi.app
-     «Что такое Skipi»     → /story/ (путешествие-объяснение)
+  1. Вход (index):
+     root/en/ru — развилка трёх ролей ПРЯМО в hero (№135, owner 14.08):
+       моряк → assistant, крюинг → /app/crewing, брокер → /app/broker;
+     hi/id — одиночная «Начать пользоваться» → https://assistant.skipi.app;
+     везде «Что такое Skipi» → /story/ (путешествие-объяснение).
   2. Путешествие /story/ — полноэкранные главы:
      prologue → assistant (identity-канон) → apps → contours → start
   3. Все пути сходятся в assistant.skipi.app.
@@ -53,6 +55,22 @@ START_LABEL = {
     "hi":   "उपयोग शुरू",
     "id":   "Mulai gunakan",
 }
+# Развилка в hero (№135, owner-уточнение 14.08 по живой странице):
+# на root/en/ru одиночная CTA заменена тремя роль-кнопками прямо в hero
+# (перенос секции .paths, не дубль). hi/id/tl — не участвуют.
+FORK_LOCALES = ("root", "en", "ru")
+FORK_HREFS = (ASSISTANT,
+              f"{ASSISTANT}/app/crewing",
+              f"{ASSISTANT}/app/broker")
+FORK_ROLES = {
+    "root": ("For seafarers", "For crewing teams", "For brokers"),
+    "en":   ("For seafarers", "For crewing teams", "For brokers"),
+    "ru":   ("Для моряка", "Для крюинга", "Для брокера"),
+}
+# I1 (owner-решение 14.08): допустимые href для .cta — РОВНО эти три
+# SaaS-входа, не «любая ссылка».
+CTA_ALLOWED = set(FORK_HREFS)
+
 WHATIS_LABEL = {
     "root": "What is Skipi",
     "en":   "What is Skipi",
@@ -167,9 +185,13 @@ for loc, (entry_rel, story_rel, story_href, lang) in LOCALES.items():
           if entry else False,
           "нет lang в <html>")
     entry_main = main_of(entry)
-    check(f"A3[{loc}] действие 1: «{START_LABEL[loc]}» → assistant",
+    # действие 1: на fork-локалях — первичная роль-кнопка моряка,
+    # на остальных — прежняя одиночная CTA (№135, owner 14.08)
+    act1_label = (FORK_ROLES[loc][0] if loc in FORK_LOCALES
+                  else START_LABEL[loc])
+    check(f"A3[{loc}] действие 1: «{act1_label}» → assistant",
           f'href="{ASSISTANT}"' in entry_main
-          and START_LABEL[loc] in entry_main)
+          and act1_label in entry_main)
     check(f"A4[{loc}] действие 2: «{WHATIS_LABEL[loc]}» → {story_href}",
           f'href="{story_href}"' in entry_main
           and WHATIS_LABEL[loc] in entry_main)
@@ -215,31 +237,32 @@ for loc, (entry_rel, story_rel, story_href, lang) in LOCALES.items():
     # ── Группа I (по-локально): CTA и внешние хосты ────────────────
     for rel, html in ((entry_rel, entry), (story_rel, story)):
         ctas = re.findall(r'<a\b[^>]*class="[^"]*cta[^"]*"[^>]*>', html)
-        cta_ok = bool(ctas) and all(f'href="{ASSISTANT}"' in c
-                                    for c in ctas)
-        check(f"I1[{loc}] {rel}: каждый .cta → assistant.skipi.app "
-              f"({len(ctas)} шт.)", cta_ok)
+        hrefs = [m.group(1) for c in ctas
+                 for m in [re.search(r'href="([^"]+)"', c)] if m]
+        cta_ok = (bool(ctas) and len(hrefs) == len(ctas)
+                  and all(h in CTA_ALLOWED for h in hrefs))
+        check(f"I1[{loc}] {rel}: каждый .cta → один из трёх SaaS-входов "
+              f"(assistant / app/crewing / app/broker; {len(ctas)} шт.)",
+              cta_ok)
         bad = external_hosts(html) - ALLOWED_HOSTS
         check(f"I2[{loc}] {rel}: без новых внешних CDN",
               bool(html) and not bad, f"лишние хосты: {sorted(bad)}")
 
-# ── Группа P: секция-развилка на главной (№135, owner 14.08) ──────
-# Три роли → входы в SaaS: моряк → assistant, крюинг и брокер →
-# веб-кабинеты. Локали: корень + en + ru; hi/id/tl не участвуют.
-PATH_LINKS = (f"{ASSISTANT}/app/crewing", f"{ASSISTANT}/app/broker")
-PATH_ROLES = {
-    "index.html":    ("For seafarers", "For crewing teams", "For brokers"),
-    "en/index.html": ("For seafarers", "For crewing teams", "For brokers"),
-    "ru/index.html": ("Для моряка", "Для крюинга", "Для брокера"),
-}
-for page, roles in PATH_ROLES.items():
+# ── Группа P: развилка в HERO (№135; owner-уточнение 14.08) ───────
+# Owner по живой странице: развилка живёт ПРЯМО в hero, на месте
+# одиночной CTA (перенос, не дубль). Три роли → входы в SaaS:
+# моряк → assistant, крюинг и брокер → веб-кабинеты.
+# Локали: корень + en + ru; hi/id/tl не участвуют.
+for loc in FORK_LOCALES:
+    page = LOCALES[loc][0]
     html = read(page)
-    ok = ('class="paths"' in html
-          and f'href="{ASSISTANT}"' in html
-          and all(f'href="{u}"' in html for u in PATH_LINKS)
-          and all(r in html for r in roles))
-    check(f"P1 {page}: развилка — 3 роли и SaaS-входы "
+    hero = main_of(html)
+    ok = (all(f'href="{u}"' in hero for u in FORK_HREFS)
+          and all(r in hero for r in FORK_ROLES[loc]))
+    check(f"P1[{loc}] {page}: развилка в hero — 3 роли → 3 SaaS-входа "
           f"(assistant / app/crewing / app/broker)", ok)
+    check(f"P2[{loc}] {page}: отдельной секции .paths ниже hero нет "
+          f"(перенос, не дубль)", bool(html) and 'class="paths"' not in html)
 
 # ── Группа L: язык по умолчанию = EN (задача №92) ──────────────────
 SITE = "https://skipi.app"
