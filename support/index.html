@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Support — Skipi | Fund the AI assistant and API seafarers use</title>
+    <meta name="description" content="Support the Skipi project: keep the maritime AI assistant and its API running. Contribute via PayPal or Patreon. Not personal charity — project funding.">
+    <meta name="author" content="Skipi">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Skipi — Support">
+    <meta property="og:description" content="Project funding for the Skipi AI assistant and API. PayPal or Patreon.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://skipi.app/support/">
+    <meta property="og:site_name" content="Skipi">
+    <meta property="og:image" content="https://skipi.app/presentation/img/slide-1.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Skipi — Support">
+    <meta name="twitter:description" content="Project funding for the Skipi AI assistant and API. PayPal or Patreon.">
+    <meta name="twitter:image" content="https://skipi.app/presentation/img/slide-1.jpg">
+
+    <link rel="canonical" href="https://skipi.app/support/">
+    <link rel="alternate" hreflang="en" href="https://skipi.app/support/">
+    <link rel="alternate" hreflang="x-default" href="https://skipi.app/support/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --ink:       #0a1f33;
+            --ink-soft:  #2a3f55;
+            --body:      #475569;
+            --muted:     #7f8da0;
+            --accent:    #007a86;
+            --accent-dk: #005e68;
+            --bg:        #ffffff;
+            --bg-soft:   #f6f8fa;
+            --bg-deep:   #edf1f5;
+            --border:    #e3e8ee;
+        }
+        html { scroll-behavior: smooth; color-scheme: light; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--body); background: var(--bg);
+            line-height: 1.6; font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { color: var(--accent-dk); }
+        .container { width: min(880px, 100% - 2.5rem); margin: 0 auto; }
+
+        header.site {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: saturate(160%) blur(8px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav { display: flex; align-items: center; justify-content: space-between; padding: 0.95rem 0; }
+        .brand { font-weight: 800; font-size: 1.25rem; color: var(--ink); letter-spacing: -0.01em; }
+        .brand .dot { color: var(--accent); }
+        .nav-cta { display: flex; align-items: center; gap: 0.75rem; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.6rem 1.1rem; border-radius: 6px;
+            font-weight: 600; font-size: 0.92rem;
+            transition: background 0.15s, color 0.15s;
+            border: 1px solid transparent; white-space: nowrap;
+            cursor: pointer; font-family: inherit;
+        }
+        .btn-primary { background: var(--ink); color: #fff; }
+        .btn-primary:hover { background: var(--accent); color: #fff; }
+        .btn-ghost { background: transparent; color: var(--ink); border-color: var(--border); }
+        .btn-ghost:hover { background: var(--bg-soft); color: var(--ink); }
+        .btn .arrow { transition: transform 0.15s; }
+        .btn:hover .arrow { transform: translateX(2px); }
+
+        section.hero { padding: 4.5rem 0 2.5rem; }
+        .hero .kicker {
+            display: inline-block; font-size: 0.82rem; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--accent); margin-bottom: 1rem;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 2.9rem); font-weight: 800;
+            color: var(--ink); letter-spacing: -0.02em; line-height: 1.1;
+            margin-bottom: 1.1rem;
+        }
+        .hero .thesis-line {
+            font-size: clamp(1.1rem, 2.4vw, 1.35rem); font-style: italic;
+            color: var(--ink-soft); max-width: 720px;
+        }
+
+        section.copy { padding: 1.4rem 0; }
+        .copy h2 {
+            font-size: 1.45rem; font-weight: 800; color: var(--ink);
+            letter-spacing: -0.01em; margin-bottom: 0.7rem;
+        }
+        .copy p { font-size: 1.02rem; color: var(--body); margin-bottom: 0.9rem; }
+        .copy p strong { color: var(--ink); }
+        .copy p:last-child { margin-bottom: 0; }
+
+        .divider { border: none; border-top: 1px solid var(--border); margin: 1.6rem 0; }
+
+        section.contact { background: var(--bg-soft); padding: 3.5rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-top: 2rem; }
+        .contact-card { max-width: 640px; margin: 0 auto; background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 2.25rem; text-align: center; }
+        .contact-card h2 { font-size: 1.5rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+        .contact-card p.who { color: var(--ink-soft); font-size: 1rem; margin-bottom: 1.5rem; }
+        .contact-actions { display: flex; gap: 0.9rem; justify-content: center; flex-wrap: wrap; }
+        .contact-actions .btn { padding: 0.75rem 1.4rem; font-size: 0.98rem; }
+        @media (max-width: 620px) {
+            .contact-card { padding: 1.6rem 1.15rem; }
+            .foot-inner { flex-direction: column; align-items: flex-start; }
+        }
+
+        footer.site { background: #061a2c; color: rgba(255,255,255,0.65); padding: 2.5rem 0 1.8rem; }
+        .foot-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        .foot-inner .brand { color: #fff; }
+        .foot-inner nav { display: flex; gap: 1.1rem; flex-wrap: wrap; }
+        .foot-inner a { color: rgba(255,255,255,0.65); }
+        .foot-inner a:hover { color: #fff; }
+        .foot-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.4rem; margin-top: 1.8rem; font-size: 0.82rem; color: rgba(255,255,255,0.45); text-align: center; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://skipi.app/#organization",
+                "name": "Skipi",
+                "description": "The AI assistant seafarers live in — and the data layer maritime decisions depend on.",
+                "url": "https://skipi.app/",
+                "logo": "https://skipi.app/assets/app-icons/skipi-seafarer.png",
+                "email": "info@skipi.app"
+            },
+            {
+                "@type": "WebPage",
+                "url": "https://skipi.app/support/",
+                "name": "Support — Skipi",
+                "description": "Project funding for the Skipi AI assistant and API.",
+                "about": { "@id": "https://skipi.app/#organization" }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+
+<header class="site">
+    <div class="container nav">
+        <a href="/" class="brand">Skipi<span class="dot">.</span></a>
+        <div class="nav-cta">
+            <a href="mailto:info@skipi.app" class="btn btn-ghost">Contact</a>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <span class="kicker">Support</span>
+        <h1>Fund the assistant</h1>
+        <p class="thesis-line">Skipi needs project funding to keep the maritime AI assistant and its API running.</p>
+    </div>
+</section>
+
+<section class="copy">
+    <div class="container">
+        <h2>What this is</h2>
+        <p>Skipi is a live AI assistant for seafarers &mdash; purpose-built for shipping, already in production at assistant.skipi.app, with apps around one data layer. Running that assistant takes compute, model and API access, and the work to keep the product moving.</p>
+        <p><strong>This is project funding, not personal charity.</strong> Contributions go toward the assistant, the API, and the product seafarers already use.</p>
+
+        <hr class="divider">
+
+        <h2>How to contribute</h2>
+        <p>Two official channels: PayPal (one-time or recurring) and Patreon (membership). Questions: <a href="mailto:info@skipi.app">info@skipi.app</a>.</p>
+    </div>
+</section>
+
+<section class="contact" id="contribute">
+    <div class="container">
+        <div class="contact-card">
+            <h2>Support Skipi</h2>
+            <p class="who">PayPal or Patreon &mdash; project funding for the AI assistant and API</p>
+            <div class="contact-actions">
+                <a href="https://www.paypal.com/donate/?business=tymur.rudov%40icloud.com&no_recurring=0&item_name=Support+Skipi+AI+assistant&currency_code=USD" class="btn btn-primary">PayPal <span class="arrow">&rarr;</span></a>
+                <a href="https://patreon.com/Capt_Tymur" class="btn btn-ghost">Patreon</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="site">
+    <div class="container">
+        <div class="foot-inner">
+            <a href="/" class="brand">Skipi<span class="dot">.</span></a>
+            <nav aria-label="Footer">
+                <a href="/story/">What is Skipi</a>
+                <a href="/downloads">Downloads</a>
+            </nav>
+        </div>
+        <div class="foot-bottom">
+            Skipi &mdash; project funding for the AI assistant and API.
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -379,6 +379,39 @@ check("I6 sitemap: все пять story-URL",
           for h in ("/story/", "/en/story/", "/ru/story/",
                     "/hi/story/", "/id/story/")))
 
+# ── Группа SUP: страница поддержки проекта (2026-08-17) ────────────
+PAYPAL_DONATE = (
+    "https://www.paypal.com/donate/?business=tymur.rudov%40icloud.com"
+    "&no_recurring=0&item_name=Support+Skipi+AI+assistant"
+    "&currency_code=USD"
+)
+PATREON = "https://patreon.com/Capt_Tymur"
+support = read("support/index.html")
+check("SUP1 support/index.html существует", bool(support))
+check("SUP2 PayPal: официальный donate-URL (не paypal.me)",
+      PAYPAL_DONATE in support and "paypal.me" not in support.lower())
+check("SUP3 Patreon: https://patreon.com/Capt_Tymur",
+      PATREON in support)
+forbidden = ("USDT", "Bybit", "IBAN", "SWIFT")
+hit = [w for w in forbidden if w.lower() in support.lower()]
+check("SUP4 нет USDT/Bybit/IBAN/SWIFT",
+      bool(support) and not hit, f"запрещённые слова: {hit}")
+check("SUP5 sitemap: https://skipi.app/support/",
+      "https://skipi.app/support/" in sitemap)
+check("SUP6 светлая тема + accent #007a86 + Inter",
+      bool(support)
+      and "color-scheme: light" in support
+      and "#007a86" in support
+      and "Inter" in support)
+for page, label in (("index.html", "Support"),
+                    ("en/index.html", "Support"),
+                    ("ru/index.html", "Поддержка"),
+                    ("hi/index.html", "Support"),
+                    ("id/index.html", "Support")):
+    html = read(page)
+    check(f"SUP7 {page}: футер quiet-ссылка «{label}» → /support/",
+          f'href="/support/"' in html and label in html)
+
 passed = sum(1 for _, ok in results if ok)
 total = len(results)
 print(f"\n{passed}/{total} checks passed")
