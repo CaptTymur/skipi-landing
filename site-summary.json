@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "name": "Skipi",
+  "canonical_url": "https://skipi.app/",
+  "summary": "A maritime ecosystem with an AI assistant and public entry points for seafarers, crewing managers and brokers.",
+  "languages": [
+    "en",
+    "ru",
+    "tl",
+    "hi",
+    "id"
+  ],
+  "public_pages": {
+    "product_overview": "https://skipi.app/story/",
+    "resources_for_agents": "https://skipi.app/for-agents/",
+    "downloads": "https://skipi.app/downloads",
+    "support": "https://skipi.app/support/"
+  },
+  "product_entry_points": [
+    {
+      "audience": "seafarer",
+      "url": "https://assistant.skipi.app"
+    },
+    {
+      "audience": "crewing_manager",
+      "url": "https://assistant.skipi.app/app/crewing"
+    },
+    {
+      "audience": "broker",
+      "url": "https://assistant.skipi.app/app/broker"
+    }
+  ],
+  "machine_readable": {
+    "llms_txt": "https://skipi.app/llms.txt",
+    "site_summary": "https://skipi.app/site-summary.json",
+    "sitemap": "https://skipi.app/sitemap.xml",
+    "robots": "https://skipi.app/robots.txt"
+  },
+  "related_sites": [
+    {
+      "name": "Skipi Vacancy Index",
+      "canonical_url": "https://skipi.info/",
+      "relationship": "A separate discovery and analysis surface for maritime salary benchmarks and public maritime signals.",
+      "llms_txt": "https://skipi.info/llms.txt",
+      "methodology": "https://skipi.info/methodology.html",
+      "structured_feeds": [
+        "https://skipi.info/data/index_latest.json",
+        "https://skipi.info/data/signals/latest.json",
+        "https://skipi.info/data/seafarer/latest.json"
+      ]
+    }
+  ],
+  "boundaries": [
+    "This summary documents public discovery routes only.",
+    "A listed route does not promise access or availability.",
+    "Data published on skipi.info is governed by that site's methodology and caveats and is not a claim about a Skipi app feature."
+  ],
+  "last_reviewed": "2026-08-25"
+}

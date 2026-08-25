@@ -27,6 +27,7 @@
 Запуск:  python3 tests/check_html.py   (exit 0 = все PASS)
 """
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -411,6 +412,61 @@ for page, label in (("index.html", "Support"),
     html = read(page)
     check(f"SUP7 {page}: футер quiet-ссылка «{label}» → /support/",
           f'href="/support/"' in html and label in html)
+
+# ── Группа AG: agent-readable поверхность (owner, 2026-08-25) ─────
+agent_page = read("for-agents/index.html")
+llms = read("llms.txt")
+site_summary_raw = read("site-summary.json")
+try:
+    site_summary = json.loads(site_summary_raw)
+except (TypeError, json.JSONDecodeError):
+    site_summary = {}
+
+check("AG1 for-agents/index.html существует и canonical → /for-agents/",
+      bool(agent_page)
+      and '<link rel="canonical" href="https://skipi.app/for-agents/">'
+      in agent_page)
+check("AG2 /for-agents/ видимо связан с главной страницей",
+      'href="/for-agents/"' in root and ">For agents<" in root)
+check("AG3 /for-agents/ указывает на обе локальные machine-readable поверхности",
+      'href="/llms.txt"' in agent_page
+      and 'href="/site-summary.json"' in agent_page)
+check("AG4 /for-agents/ связывает продукт с отдельным skipi.info",
+      'href="https://skipi.info/"' in agent_page
+      and 'href="https://skipi.info/llms.txt"' in agent_page)
+
+required_llms_urls = (
+    "https://skipi.app/",
+    "https://skipi.app/for-agents/",
+    "https://skipi.app/site-summary.json",
+    "https://skipi.info/",
+    "https://skipi.info/llms.txt",
+)
+check("AG5 llms.txt содержит canonical product/discovery routes",
+      llms.startswith("# Skipi\n")
+      and all(url in llms for url in required_llms_urls))
+
+check("AG6 site-summary.json валиден и self-identifies",
+      site_summary.get("schema_version") == "1.0"
+      and site_summary.get("name") == "Skipi"
+      and site_summary.get("canonical_url") == "https://skipi.app/")
+machine = site_summary.get("machine_readable", {})
+related = site_summary.get("related_sites", [])
+check("AG7 structured summary связывает llms/sitemap и skipi.info",
+      machine.get("llms_txt") == "https://skipi.app/llms.txt"
+      and machine.get("sitemap") == "https://skipi.app/sitemap.xml"
+      and bool(related)
+      and related[0].get("canonical_url") == "https://skipi.info/"
+      and related[0].get("llms_txt") == "https://skipi.info/llms.txt")
+
+agent_surface = "\n".join((agent_page, llms, site_summary_raw)).lower()
+unsupported = ("real-time", "guaranteed", "public api", "/api/", "api key")
+hits = [claim for claim in unsupported if claim in agent_surface]
+check("AG8 нет неподтверждённых real-time/API/guarantee claims",
+      bool(agent_page) and bool(llms) and bool(site_summary_raw) and not hits,
+      f"сомнительные claims: {hits}")
+check("AG9 sitemap содержит /for-agents/",
+      "https://skipi.app/for-agents/" in sitemap)
 
 passed = sum(1 for _, ok in results if ok)
 total = len(results)

@@ -1,0 +1,38 @@
+# Skipi
+
+> Skipi is a maritime ecosystem with an AI assistant and public entry points for seafarers, crewing managers and brokers. This file lists canonical discovery routes; it does not imply access or availability beyond what each destination currently shows.
+
+## Canonical product pages
+
+- Product site: https://skipi.app/
+- Product overview: https://skipi.app/story/
+- Resources for agents: https://skipi.app/for-agents/
+- Downloads: https://skipi.app/downloads
+- Support: https://skipi.app/support/
+
+## Product entry points
+
+- Seafarer: https://assistant.skipi.app
+- Crewing manager: https://assistant.skipi.app/app/crewing
+- Broker: https://assistant.skipi.app/app/broker
+
+Verify current access and availability at the destination. A listed route is not a promise that every visitor can use every function.
+
+## Machine-readable files
+
+- Structured site summary: https://skipi.app/site-summary.json
+- Sitemap: https://skipi.app/sitemap.xml
+- Crawler rules: https://skipi.app/robots.txt
+
+## Related public data
+
+Skipi Vacancy Index is a separate discovery and analysis surface for maritime salary benchmarks and public maritime signals. Its own methodology and caveats govern its data.
+
+- Site: https://skipi.info/
+- Agent guide: https://skipi.info/llms.txt
+- Methodology: https://skipi.info/methodology.html
+- Structured salary index: https://skipi.info/data/index_latest.json
+- Public maritime signals: https://skipi.info/data/signals/latest.json
+- Seafarer feed: https://skipi.info/data/seafarer/latest.json
+
+Do not infer unlisted endpoints, access rights or product capabilities from these discovery files.

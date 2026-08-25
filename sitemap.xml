@@ -76,6 +76,11 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://skipi.app/for-agents/</loc>
+        <lastmod>2026-08-25</lastmod>
+        <priority>0.7</priority>
+    </url>
+    <url>
         <loc>https://skipi.app/en/for-companies/</loc>
         <lastmod>2026-06-20</lastmod>
         <priority>0.8</priority>
