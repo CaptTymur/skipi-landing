@@ -328,6 +328,10 @@
             font-size: 0.82rem; color: rgba(255,255,255,0.45);
             text-align: center;
         }
+        .foot-legal { line-height: 1.6; }
+        .foot-bottom a { color: rgba(255,255,255,0.6); }
+        .foot-bottom a:hover { color: #fff; }
+        .foot-note { display: block; margin-top: 0.85rem; }
         @media (max-width: 880px) {
             .foot-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
         }
@@ -514,7 +518,7 @@
                 </div>
                 <div class="form-submit">
                     <button type="submit" class="btn btn-primary">Отправить запрос <span class="arrow">→</span></button>
-                    <span class="submit-hint">Откроется ваш email-клиент с уже заполненным письмом на info@tymur.org. Можете отредактировать перед отправкой.</span>
+                    <span class="submit-hint">Откроется ваш email-клиент с уже заполненным письмом на info@skipi.app. Можете отредактировать перед отправкой.</span>
                 </div>
             </form>
         </div>
@@ -577,7 +581,7 @@
             </details>
             <details class="faq-item">
                 <summary>Кто стоит за Skipi?</summary>
-                <p>Captain Tymur Rudov — Master Mariner с активной практикой во фрахтовом брокераже. Skipi построен изнутри индустрии, а не «техно-стартап про море». Это даёт правильные defaults в expert classification, weight'ах score'а и в трактовке сигналов.</p>
+                <p>Skipi управляет SKIPI LTD — private limited company, зарегистрированная в England and Wales (company no. 17433479). Основатель и директор — Captain Tymur Rudov, Master Mariner с активной практикой во фрахтовом брокераже. Skipi построен изнутри индустрии, а не «техно-стартап про море». Это даёт правильные defaults в expert classification, weight'ах score'а и в трактовке сигналов.</p>
             </details>
         </div>
     </div>
@@ -610,13 +614,20 @@
             <div class="foot-col">
                 <h5>Контакт</h5>
                 <ul>
-                    <li><a href="mailto:info@tymur.org">info@tymur.org</a></li>
+                    <li><a href="mailto:info@skipi.app">info@skipi.app</a></li>
                     <li><a href="/terms.html">Условия</a></li>
                     <li><a href="/privacy.html">Privacy</a></li>
                 </ul>
             </div>
         </div>
-        <div class="foot-bottom">© 2026 Skipi. Все права защищены.</div>
+        <div class="foot-bottom">
+            <p class="foot-legal">
+                SKIPI LTD &middot; Registered in England and Wales &middot; Company No. 17433479<br>
+                Registered office: Office 20748, 182-184 High Street North, East Ham, London, United Kingdom, E6 2JA<br>
+                Тимур Рудов (Tymur Rudov) &mdash; основатель и директор &middot; <a href="mailto:info@skipi.app">info@skipi.app</a>
+            </p>
+            <span class="foot-note">© 2026 Skipi. Все права защищены.</span>
+        </div>
     </div>
 </footer>
 
@@ -664,7 +675,7 @@
                 'Use case:\n' + (brief || '(not specified)') + '\n\n' +
                 'Thank you.';
 
-            var href = 'mailto:info@tymur.org?subject=' + encodeURIComponent(subject) +
+            var href = 'mailto:info@skipi.app?subject=' + encodeURIComponent(subject) +
                        '&body=' + encodeURIComponent(body);
             window.location.href = href;
         });

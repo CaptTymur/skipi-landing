@@ -146,6 +146,10 @@
         .foot-inner a { color: rgba(255,255,255,0.65); }
         .foot-inner a:hover { color: #fff; }
         .foot-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.4rem; margin-top: 1.8rem; font-size: 0.82rem; color: rgba(255,255,255,0.45); text-align: center; }
+        .foot-legal { line-height: 1.6; }
+        .foot-bottom a { color: rgba(255,255,255,0.6); }
+        .foot-bottom a:hover { color: #fff; }
+        .foot-note { display: block; margin-top: 0.85rem; }
     </style>
 
     <script type="application/ld+json">
@@ -156,27 +160,51 @@
                 "@type": "Organization",
                 "@id": "https://skipi.app/#organization",
                 "name": "Skipi",
+                "legalName": "SKIPI LTD",
                 "description": "The AI assistant seafarers live in — and the data layer maritime decisions depend on.",
                 "url": "https://skipi.app/",
                 "logo": "https://skipi.app/assets/app-icons/skipi-seafarer.png",
-                "founder": {
-                    "@type": "Person",
-                    "@id": "https://skipi.app/invest/#founder",
-                    "name": "Tymur Rudov",
-                    "jobTitle": "Founder — Master Mariner & Marine Superintendent"
+                "email": "info@skipi.app",
+                "identifier": {
+                    "@type": "PropertyValue",
+                    "name": "UK company number",
+                    "value": "17433479"
                 },
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Office 20748, 182-184 High Street North, East Ham",
+                    "addressLocality": "London",
+                    "postalCode": "E6 2JA",
+                    "addressCountry": "GB"
+                },
+                "founder": { "@id": "https://skipi.app/invest/#founder" },
                 "contactPoint": {
                     "@type": "ContactPoint",
                     "contactType": "investor relations",
                     "telephone": "+35797617412",
                     "email": "info@skipi.app"
-                }
+                },
+                "additionalProperty": [
+                    { "@type": "PropertyValue", "name": "Company", "value": "SKIPI LTD — private limited company registered in England and Wales, company no. 17433479" },
+                    { "@type": "PropertyValue", "name": "Category", "value": "AI assistant + proprietary data platform for maritime / seafarers" },
+                    { "@type": "PropertyValue", "name": "Founder", "value": "Capt. Tymur Rudov — Founder & Director; master mariner (since 2013), marine superintendent (technical management)" },
+                    { "@type": "PropertyValue", "name": "Audience", "value": "220,000+ (YouTube 195K · Instagram 10K · Telegram 9K · TikTok 6K)" },
+                    { "@type": "PropertyValue", "name": "Product", "value": "assistant.skipi.app live; persistent per-user memory; app platform + plugins + decision support" },
+                    { "@type": "PropertyValue", "name": "Users", "value": "live assistant in production (assistant.skipi.app), early-stage · Paying: 0 (pre-monetization) · Revenue: $0" },
+                    { "@type": "PropertyValue", "name": "Apps", "value": "Seafarer (free) — in App Store & Google Play review; Broker/Crewing ($10/mo, 14-day trial); PRO ($5/mo)" },
+                    { "@type": "PropertyValue", "name": "Model", "value": "free seafarer funnel → paid apps/PRO → B2B maritime data & decision support" },
+                    { "@type": "PropertyValue", "name": "Market", "value": "2.57M seafarers (BIMCO/ICS 2026); 80%+ world trade by sea (IMO/UNCTAD); ~68,700 commercial vessels ≥500 GT (Equasis); >2,000 vessels sold / >$50B 2024 (Clarksons); ~22,000 SIRE 2.0 + 100,000+ PSC inspections/yr; 68,528 vessels on LEO connectivity (Valour Q1 2026)" },
+                    { "@type": "PropertyValue", "name": "Stage", "value": "pre-seed, bootstrapped, founder-led" },
+                    { "@type": "PropertyValue", "name": "Contact", "value": "WhatsApp +357 97 617 412 · info@skipi.app" }
+                ]
             },
             {
                 "@type": "Person",
                 "@id": "https://skipi.app/invest/#founder",
                 "name": "Tymur Rudov",
-                "jobTitle": "Founder — Master Mariner & Marine Superintendent"
+                "jobTitle": "Founder & Director",
+                "worksFor": { "@id": "https://skipi.app/#organization" },
+                "description": "Master Mariner & Marine Superintendent"
             },
             {
                 "@type": "WebPage",
@@ -184,22 +212,7 @@
                 "name": "Invest — Skipi",
                 "description": "The AI assistant seafarers live in — and the data layer maritime decisions depend on. Investor-relations contact.",
                 "about": { "@id": "https://skipi.app/#organization" },
-                "mainEntity": {
-                    "@type": "Organization",
-                    "name": "Skipi (pre-incorporation)",
-                    "description": "AI assistant + proprietary data platform for maritime / seafarers",
-                    "founder": "Capt. Tymur Rudov — master mariner (since 2013), marine superintendent (technical management)",
-                    "audience": "220,000+ (YouTube 195K · Instagram 10K · Telegram 9K · TikTok 6K)",
-                    "additionalProperty": [
-                        { "@type": "PropertyValue", "name": "Product", "value": "assistant.skipi.app live; persistent per-user memory; app platform + plugins + decision support" },
-                        { "@type": "PropertyValue", "name": "Users", "value": "live assistant in production (assistant.skipi.app), early-stage · Paying: 0 (pre-monetization) · Revenue: $0" },
-                        { "@type": "PropertyValue", "name": "Apps", "value": "Seafarer (free) — in App Store & Google Play review; Broker/Crewing ($10/mo, 14-day trial); PRO ($5/mo)" },
-                        { "@type": "PropertyValue", "name": "Model", "value": "free seafarer funnel → paid apps/PRO → B2B maritime data & decision support" },
-                        { "@type": "PropertyValue", "name": "Market", "value": "2.57M seafarers (BIMCO/ICS 2026); 80%+ world trade by sea (IMO/UNCTAD); ~68,700 commercial vessels ≥500 GT (Equasis); >2,000 vessels sold / >$50B 2024 (Clarksons); ~22,000 SIRE 2.0 + 100,000+ PSC inspections/yr; 68,528 vessels on LEO connectivity (Valour Q1 2026)" },
-                        { "@type": "PropertyValue", "name": "Stage", "value": "pre-seed, bootstrapped, founder-led" },
-                        { "@type": "PropertyValue", "name": "Contact", "value": "WhatsApp +357 97 617 412 · info@skipi.app" }
-                    ]
-                }
+                "mainEntity": { "@id": "https://skipi.app/#organization" }
             }
         ]
     }
@@ -270,7 +283,7 @@
     <div class="container">
         <div class="contact-card">
             <h2>Contact</h2>
-            <p class="who">Captain Tymur Rudov, Founder</p>
+            <p class="who">Captain Tymur Rudov &mdash; Founder &amp; Director, SKIPI LTD</p>
             <div class="contact-actions">
                 <a href="https://wa.me/35797617412" class="btn btn-primary">WhatsApp +357 97 617 412 <span class="arrow">&rarr;</span></a>
                 <a href="mailto:info@skipi.app" class="btn btn-ghost">info@skipi.app</a>
@@ -283,9 +296,9 @@
     <div class="container">
         <h2>Fact sheet</h2>
         <dl>
-            <div class="row"><dt>Company</dt><dd>Skipi (pre-incorporation)</dd></div>
+            <div class="row"><dt>Company</dt><dd>SKIPI LTD &mdash; private limited company registered in England and Wales, company no. 17433479</dd></div>
             <div class="row"><dt>Category</dt><dd>AI assistant + proprietary data platform for maritime / seafarers</dd></div>
-            <div class="row"><dt>Founder</dt><dd>Capt. Tymur Rudov &mdash; master mariner (since 2013), marine superintendent (technical management)</dd></div>
+            <div class="row"><dt>Founder</dt><dd>Capt. Tymur Rudov &mdash; Founder &amp; Director; master mariner (since 2013), marine superintendent (technical management)</dd></div>
             <div class="row"><dt>Audience</dt><dd>220,000+ (YouTube 195K &middot; Instagram 10K &middot; Telegram 9K &middot; TikTok 6K)</dd></div>
             <div class="row"><dt>Product</dt><dd>assistant.skipi.app live; persistent per-user memory; app platform + plugins + decision support</dd></div>
             <div class="row"><dt>Users</dt><dd>live assistant in production (assistant.skipi.app), early-stage &middot; Paying: 0 (pre-monetization) &middot; Revenue: $0</dd></div>
@@ -307,7 +320,12 @@
             </nav>
         </div>
         <div class="foot-bottom">
-            Skipi &mdash; a private invitation to talk. Not a public offering.
+            <p class="foot-legal">
+                SKIPI LTD &middot; Registered in England and Wales &middot; Company No. 17433479<br>
+                Registered office: Office 20748, 182-184 High Street North, East Ham, London, United Kingdom, E6 2JA<br>
+                Tymur Rudov &mdash; Founder &amp; Director &middot; <a href="mailto:info@skipi.app">info@skipi.app</a>
+            </p>
+            <span class="foot-note">Skipi &mdash; a private invitation to talk. Not a public offering.</span>
         </div>
     </div>
 </footer>
