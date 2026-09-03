@@ -31,7 +31,9 @@
   I — инварианты: все .cta → assistant, светлая тема, никаких новых
       внешних CDN, downloads не сломан, sitemap.
   R — прежние языковые адреса редиректят на английский.
-  X — англоязычность: переключателя нет, неанглийских hreflang нет.
+  X — англоязычность: переключателя нет, неанглийских hreflang нет,
+      русских страниц не осталось.
+  DL — страница загрузок и её заглушка англоязычные.
   LTD — юрблок SKIPI LTD (опубликован 03.09) на месте.
 
 Принцип «МАЛО на экране» проверяется механически: бюджет слов на
@@ -405,6 +407,14 @@ bad_hl = {f: v for f, v in bad_hl.items() if v}
 check("X2 hreflang-альтернатив неанглийских версий нет "
       "(только en / x-default)", not bad_hl, f"факт: {bad_hl}")
 
+CYRILLIC = set(range(0x0400, 0x0460)) | {0x0451, 0x0401}
+ru_pages = sorted(f for f in HTML_FILES
+                  if '<html lang="ru"' in read(f)
+                  or any(ord(ch) in CYRILLIC for ch in read(f)))
+check("X4 русских страниц не осталось: ни <html lang=\"ru\">, "
+      "ни кириллицы ни в одном HTML (owner 03.09 — «пока только "
+      "английский язык»)", not ru_pages, f"осталось: {ru_pages}")
+
 check("X3 мёртвых стилей переключателя нет ни в одном CSS "
       "(.langs / .lang-switch / .lang-link)",
       not [c for c in ("assets/journey.css", "assets/localized-home.css")
@@ -463,6 +473,35 @@ for page, label in (("index.html", "Support"),
     html = read(page)
     check(f"SUP7 {page}: футер quiet-ссылка «{label}» → /support/",
           f'href="/support/"' in html and label in html)
+
+# ── Группа DL: страница загрузок англоязычная (owner 03.09) ────────
+# /downloads была последней русской страницей сайта; переведена целиком
+# (видимый текст, заголовки, мета, подписи кнопок, тексты писем-заявок).
+# Ссылки, версии и пути к артефактам при переводе не менялись.
+dl = read("downloads/index.html")
+check("DL1 downloads/index.html: англоязычная страница "
+      "(lang=\"en\", английский <title>, ноль кириллицы)",
+      bool(dl)
+      and '<html lang="en">' in dl
+      and "<title>Download Skipi</title>" in dl
+      and not any(ord(ch) in CYRILLIC for ch in dl))
+
+check("DL2 downloads: ссылки на артефакты релизов живы "
+      "(github releases + Google Play)",
+      bool(dl)
+      and dl.count("https://github.com/CaptTymur/") >= 10
+      and "https://play.google.com/store/apps/details?id=app.skipi.seafarer" in dl)
+
+dl_stub = read("download.html")
+check("DL3 download.html: англоязычная заглушка-переход на /downloads "
+      "(meta refresh + canonical + видимая ссылка, lang=\"en\")",
+      bool(dl_stub)
+      and '<html lang="en">' in dl_stub
+      and 'content="0; url=/downloads"' in dl_stub
+      and f'<link rel="canonical" href="{SITE}/downloads">' in dl_stub
+      and '<a href="/downloads">' in dl_stub
+      and not any(ord(ch) in CYRILLIC for ch in dl_stub))
+
 
 # ── Группа LTD: корпоративный юрблок SKIPI LTD (опубликован 03.09) ─
 # Обязательные по закону сведения UK-компании. Волна «только английский»
