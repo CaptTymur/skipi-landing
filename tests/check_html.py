@@ -5,21 +5,27 @@
 «слишком много всего», «пользователь должен путешествовать по сайту,
 а не читать». Новая структура: сайт = путешествие из сцен.
 
+Сайт англоязычный (owner 03.09: «это убери с сайта совсем. пока только
+английский язык»). Переключателя языков нет; прежние языковые адреса
+(/ru/, /tl/, /hi/, /id/ и их /story/) живут как заглушки-редиректы на
+английскую версию — ссылки из внешнего мира не ломаются.
+
 Скелет (FigJam-борд владельца):
-  1. Вход (index):
-     root/en/ru — развилка трёх ролей ПРЯМО в hero (№135, owner 14.08):
-       моряк → assistant, крюинг → /app/crewing, брокер → /app/broker;
-     hi/id — одиночная «Начать пользоваться» → https://assistant.skipi.app;
-     везде «Что такое Skipi» → /story/ (путешествие-объяснение).
+  1. Вход (index): root/en — развилка трёх ролей ПРЯМО в hero (№135,
+     owner 14.08): моряк → assistant, крюинг → /app/crewing,
+     брокер → /app/broker; «What is Skipi» → /story/.
   2. Путешествие /story/ — полноэкранные главы:
      prologue → assistant (identity-канон) → apps → contours → start
   3. Все пути сходятся в assistant.skipi.app.
 
 Группы проверок:
-  A — вход: два действия, локали, лёгкость (бюджет слов).
+  A — вход: два действия, лёгкость (бюджет слов).
   S — story: сцены-главы, identity-канон, apps, contours, финальный CTA.
   I — инварианты: все .cta → assistant, светлая тема, никаких новых
       внешних CDN, downloads не сломан, sitemap.
+  R — прежние языковые адреса редиректят на английский.
+  X — англоязычность: переключателя нет, неанглийских hreflang нет.
+  LTD — юрблок SKIPI LTD (опубликован 03.09) на месте.
 
 Принцип «МАЛО на экране» проверяется механически: бюджет слов на
 вход и на каждую сцену.
@@ -35,45 +41,37 @@ ROOT = Path(__file__).resolve().parents[1]
 
 ASSISTANT = "https://assistant.skipi.app"
 
-# Язык по умолчанию = АНГЛИЙСКИЙ (owner-решение 05.08, задача №92):
-# корень / и /story/ — EN; русский полноценно живёт на /ru/ и /ru/story/;
-# /en/ остаётся зеркалом корня с canonical на корень.
+# Язык сайта = АНГЛИЙСКИЙ и только он (owner-решение 03.09).
+# Живой контент: корень / и /story/ (+ зеркало /en/ и /en/story/).
+# Неанглийские адреса — заглушки-редиректы, они проверяются группой R.
 
 # локаль -> (входная, story, ссылка на story, lang-атрибут)
 LOCALES = {
     "root": ("index.html", "story/index.html", "/story/", "en"),
     "en":   ("en/index.html", "en/story/index.html", "/en/story/", "en"),
-    "ru":   ("ru/index.html", "ru/story/index.html", "/ru/story/", "ru"),
-    "hi":   ("hi/index.html", "hi/story/index.html", "/hi/story/", "hi"),
-    "id":   ("id/index.html", "id/story/index.html", "/id/story/", "id"),
 }
 
 START_LABEL = {
     "root": "Start using",
     "en":   "Start using",
-    "ru":   "Начать пользоваться",
-    "hi":   "उपयोग शुरू",
-    "id":   "Mulai gunakan",
 }
 # Развилка в hero (№135, owner-уточнение 14.08, вторая итерация):
 # одна фраза-приглашение «Start using Skipi as:» (лид-строка) + три
 # равноправные роль-кнопки прямо в hero (перенос секции .paths,
 # не дубль). hi/id/tl — не участвуют.
-FORK_LOCALES = ("root", "en", "ru")
+FORK_LOCALES = ("root", "en")
 FORK_HREFS = (ASSISTANT,
               f"{ASSISTANT}/app/crewing",
               f"{ASSISTANT}/app/broker")
 FORK_LEAD = {
     "root": "Start using Skipi as",
     "en":   "Start using Skipi as",
-    "ru":   "Начните использовать Skipi как",
 }
 # лейблы ролей проверяются как точный текст ссылки (">…<"), иначе
 # «Seafarer» ложно совпадает с kicker «United Seafarers»
 FORK_ROLES = {
     "root": ("Seafarer", "Crewing manager", "Broker"),
     "en":   ("Seafarer", "Crewing manager", "Broker"),
-    "ru":   ("Моряк", "Крюинг-менеджер", "Брокер"),
 }
 # I1 (owner-решение 14.08): допустимые href для .cta — РОВНО эти три
 # SaaS-входа, не «любая ссылка».
@@ -82,34 +80,23 @@ CTA_ALLOWED = set(FORK_HREFS)
 WHATIS_LABEL = {
     "root": "What is Skipi",
     "en":   "What is Skipi",
-    "ru":   "Что такое Skipi",
-    "hi":   "Skipi क्या है",
-    "id":   "Apa itu Skipi",
 }
 
 # identity-канон ассистента (DECISIONS 2026-08-05 (10)):
 # специализированный ИИ под судоходство, создан капитаном Тимуром
-# Рудовым на основе коллективного опыта моряков. hi/id — подход репо
-# (смешанный текст, EN-термины).
+# Рудовым на основе коллективного опыта моряков.
 IDENTITY = {
     "root": ("purpose-built for shipping", "Tymur Rudov",
              "collective experience of seafarers"),
-    "ru":   ("заточенный под судоходство", "Тимуром Рудовым",
-             "коллективного опыта моряков"),
     "en":   ("purpose-built for shipping", "Tymur Rudov",
              "collective experience of seafarers"),
-    "hi":   ("purpose-built", "Tymur Rudov"),
-    "id":   ("khusus untuk pelayaran", "Tymur Rudov"),
 }
 
 APPS = ("Seafarer", "Crewing", "Broker")
 
 CONTOURS = {
     "root": ("seafarer", "crewing", "broker"),
-    "ru":   ("моряк", "крюинг", "брокер"),
     "en":   ("seafarer", "crewing", "broker"),
-    "hi":   ("seafarer", "crewing", "broker"),
-    "id":   ("pelaut", "crewing", "broker"),
 }
 
 SCENES = ("prologue", "assistant", "apps", "contours", "start")
@@ -265,7 +252,7 @@ for loc, (entry_rel, story_rel, story_href, lang) in LOCALES.items():
 # skipi as: seafarer, crewing manager, broker». Форма: лид-строка
 # + три равноправные роли → входы в SaaS: моряк → assistant,
 # крюинг-менеджер и брокер → веб-кабинеты.
-# Локали: корень + en + ru; hi/id/tl не участвуют.
+# Локали: корень + en (сайт англоязычный, owner 03.09).
 for loc in FORK_LOCALES:
     page = LOCALES[loc][0]
     html = read(page)
@@ -279,7 +266,7 @@ for loc in FORK_LOCALES:
     check(f"P2[{loc}] {page}: отдельной секции .paths ниже hero нет "
           f"(перенос, не дубль)", bool(html) and 'class="paths"' not in html)
 
-# ── Группа L: язык по умолчанию = EN (задача №92) ──────────────────
+# ── Группа L: единственный язык сайта = EN (owner 03.09) ───────────
 SITE = "https://skipi.app"
 
 
@@ -302,64 +289,92 @@ root = read("index.html")
 root_story = read("story/index.html")
 en = read("en/index.html")
 en_story = read("en/story/index.html")
-ru = read("ru/index.html")
-ru_story = read("ru/story/index.html")
 
 check("L1 корень = EN: canonical и og:url корня — https://skipi.app/",
       canonical_of(root) == f"{SITE}/" and og_url_of(root) == f"{SITE}/",
       f"canonical={canonical_of(root)} og:url={og_url_of(root)}")
 
 hl = hreflangs_of(root)
-check("L2 hreflang корня: en → корень, ru → /ru/, x-default → корень",
-      hl.get("en") == f"{SITE}/" and hl.get("ru") == f"{SITE}/ru/"
-      and hl.get("x-default") == f"{SITE}/", f"факт: {hl}")
+check("L2 hreflang корня: только en → корень и x-default → корень",
+      hl == {"en": f"{SITE}/", "x-default": f"{SITE}/"}, f"факт: {hl}")
 
-check("L3 /story/ = EN: canonical/og:url → /story/, hreflang en → /story/, "
-      "ru → /ru/story/, x-default → /story/",
+check("L3 /story/ = EN: canonical/og:url → /story/, hreflang только "
+      "en → /story/ и x-default → /story/",
       canonical_of(root_story) == f"{SITE}/story/"
       and og_url_of(root_story) == f"{SITE}/story/"
-      and hreflangs_of(root_story).get("en") == f"{SITE}/story/"
-      and hreflangs_of(root_story).get("ru") == f"{SITE}/ru/story/"
-      and hreflangs_of(root_story).get("x-default") == f"{SITE}/story/")
+      and hreflangs_of(root_story) == {"en": f"{SITE}/story/",
+                                       "x-default": f"{SITE}/story/"},
+      f"факт: {hreflangs_of(root_story)}")
 
 check("L4 /en/ — зеркало корня: canonical → корень, /en/story/ → /story/",
       canonical_of(en) == f"{SITE}/"
       and canonical_of(en_story) == f"{SITE}/story/",
       f"факт: {canonical_of(en)}, {canonical_of(en_story)}")
 
-check("L5 /ru/ самодостаточен: canonical /ru/ и /ru/story/, "
-      "hreflang ru → /ru/ и /ru/story/",
-      canonical_of(ru) == f"{SITE}/ru/"
-      and canonical_of(ru_story) == f"{SITE}/ru/story/"
-      and hreflangs_of(ru).get("ru") == f"{SITE}/ru/"
-      and hreflangs_of(ru_story).get("ru") == f"{SITE}/ru/story/")
+check("L5 /en/story/ — зеркало: hreflang только en и x-default → /story/",
+      hreflangs_of(en_story) == {"en": f"{SITE}/story/",
+                                 "x-default": f"{SITE}/story/"},
+      f"факт: {hreflangs_of(en_story)}")
 
-# единый языковой футер: EN/RU/TL/HI/ID доступны с каждой входной локали
-LANG_FOOTER = {"en": "/", "ru": "/ru/", "tl": "/tl/",
-               "hi": "/hi/", "id": "/id/"}
-for page in ("index.html", "en/index.html", "ru/index.html",
-             "hi/index.html", "id/index.html", "tl/index.html"):
+
+# ── Группа R: прежние языковые адреса → редирект на английский ─────
+# owner 03.09: неанглийские страницы не удаляем, а перенаправляем —
+# внешние ссылки и поисковая выдача не ломаются.
+REDIRECTS = {
+    "ru/index.html": "/",
+    "tl/index.html": "/",
+    "hi/index.html": "/",
+    "id/index.html": "/",
+    "ru/story/index.html": "/story/",
+    "hi/story/index.html": "/story/",
+    "id/story/index.html": "/story/",
+}
+for page, target in REDIRECTS.items():
     html = read(page)
-    missing = [f'{code} → {href}' for code, href in LANG_FOOTER.items()
-               if f'href="{href}" lang="{code}"' not in html]
-    check(f"L6 {page}: футер-переключатель EN/RU/TL/HI/ID "
-          f"(EN → корень, RU → /ru/)", bool(html) and not missing,
-          f"нет: {missing}")
+    ok = (bool(html)
+          and f'content="0; url={target}"' in html
+          and f'<link rel="canonical" href="{SITE}{target}">' in html
+          and f'href="{target}"' in html          # видимая ссылка
+          and 'lang="en"' in html.split(">", 2)[1] + ">")
+    check(f"R1 {page}: meta-refresh + canonical + видимая ссылка → "
+          f"{target}, lang=\"en\"", ok)
 
-# hi/id/tl: hreflang мигрирован на новую раскладку (en → корень, ru → /ru/)
-for page in ("hi/index.html", "id/index.html", "tl/index.html"):
-    hlp = hreflangs_of(read(page))
-    check(f"L7 {page}: hreflang en → корень, ru → /ru/, x-default → корень",
-          hlp.get("en") == f"{SITE}/" and hlp.get("ru") == f"{SITE}/ru/"
-          and hlp.get("x-default") == f"{SITE}/", f"факт: {hlp}")
-for page in ("hi/story/index.html", "id/story/index.html",
-             "en/story/index.html", "ru/story/index.html"):
-    hlp = hreflangs_of(read(page))
-    check(f"L8 {page}: hreflang en → /story/, ru → /ru/story/, "
-          f"x-default → /story/",
-          hlp.get("en") == f"{SITE}/story/"
-          and hlp.get("ru") == f"{SITE}/ru/story/"
-          and hlp.get("x-default") == f"{SITE}/story/", f"факт: {hlp}")
+check("R2 /en/** не тронут редиректами (это английский)",
+      all(k.split("/")[0] != "en" for k in REDIRECTS))
+
+
+# ── Группа X: сайт англоязычный (owner 03.09) ──────────────────────
+HTML_FILES = sorted(pp.relative_to(ROOT).as_posix()
+                    for pp in ROOT.rglob("*.html")
+                    if ".git" not in pp.parts)
+check("X0 обход страниц непустой", len(HTML_FILES) > 10,
+      f"найдено {len(HTML_FILES)}")
+
+# ОТКРЫТЫЙ ХВОСТ (вне объёма карточки 03.09, решает владелец):
+# /for-companies/ и /presentation/ — САМИ по себе русские страницы
+# (lang="ru") с английскими двойниками /en/for-companies/ и
+# /en/presentation/. Карточка их не перечисляет. Переключатель RU/EN
+# на русской /for-companies/ — единственный мост оттуда на английский,
+# поэтому он снят только с английского двойника, а русский оставлен
+# нетронутым до owner-решения (редиректить эту пару или нет).
+RU_PENDING_OWNER = ("for-companies/index.html", "presentation/index.html")
+
+switcher = [f for f in HTML_FILES
+            if f not in RU_PENDING_OWNER
+            and ('class="langs"' in read(f) or 'lang-link' in read(f))]
+check("X1 переключателя языков нет ни на одной странице "
+      f"(кроме {RU_PENDING_OWNER} — открытый хвост владельцу)",
+      not switcher, f"остался на: {switcher}")
+
+NON_EN = ("ru", "tl", "hi", "id")
+bad_hl = {f: [c for c in hreflangs_of(read(f)) if c in NON_EN]
+          for f in HTML_FILES}
+bad_hl = {f: v for f, v in bad_hl.items() if v}
+check("X2 hreflang-альтернатив неанглийских версий нет "
+      "(только en / x-default)", not bad_hl, f"факт: {bad_hl}")
+
+check("X3 .langs больше не описан в journey.css (мёртвый стиль убран)",
+      ".langs" not in read("assets/journey.css"))
 
 # ── Группа I (глобально) ───────────────────────────────────────────
 css = read("assets/journey.css")
@@ -374,10 +389,13 @@ check("I5 downloads жив и не тронут этой волной",
       bool(downloads) and "Seafarer" in downloads)
 
 sitemap = read("sitemap.xml")
-check("I6 sitemap: все пять story-URL",
-      all(f"https://skipi.app{h}" in sitemap
-          for h in ("/story/", "/en/story/", "/ru/story/",
-                    "/hi/story/", "/id/story/")))
+check("I6 sitemap: английские story-URL на месте",
+      all(f"<loc>https://skipi.app{h}</loc>" in sitemap
+          for h in ("/", "/story/", "/en/story/")))
+check("I7 sitemap: неанглийских адресов нет",
+      not [h for h in ("/ru/", "/tl/", "/hi/", "/id/", "/ru/story/",
+                       "/hi/story/", "/id/story/")
+           if f"<loc>https://skipi.app{h}</loc>" in sitemap])
 
 # ── Группа SUP: страница поддержки проекта (2026-08-17) ────────────
 PAYPAL_DONATE = (
@@ -404,13 +422,35 @@ check("SUP6 светлая тема + accent #007a86 + Inter",
       and "#007a86" in support
       and "Inter" in support)
 for page, label in (("index.html", "Support"),
-                    ("en/index.html", "Support"),
-                    ("ru/index.html", "Поддержка"),
-                    ("hi/index.html", "Support"),
-                    ("id/index.html", "Support")):
+                    ("en/index.html", "Support")):
     html = read(page)
     check(f"SUP7 {page}: футер quiet-ссылка «{label}» → /support/",
           f'href="/support/"' in html and label in html)
+
+# ── Группа LTD: корпоративный юрблок SKIPI LTD (опубликован 03.09) ─
+# Обязательные по закону сведения UK-компании. Волна «только английский»
+# не имеет права их повредить, поэтому инвариант зафиксирован тестом.
+# Страницы-редиректы (группа R) юрблока не несут — это заглушки.
+LTD_PAGES = (
+    "index.html", "en/index.html", "story/index.html", "en/story/index.html",
+    "downloads/index.html", "support/index.html", "invest/index.html",
+    "for-companies/index.html", "en/for-companies/index.html",
+    "presentation/index.html", "en/presentation/index.html",
+    "terms.html", "privacy.html",
+)
+LTD_STRINGS = ("SKIPI LTD", "England and Wales", "17433479",
+               "182-184 High Street North", "E6 2JA", "info@skipi.app")
+for page in LTD_PAGES:
+    html = read(page)
+    missing = [t for t in LTD_STRINGS if t not in html]
+    check(f"LTD1 {page}: юрблок SKIPI LTD полный "
+          f"(название, England and Wales, No. 17433479, office, контакт)",
+          bool(html) and not missing, f"нет: {missing}")
+
+for page in REDIRECTS:
+    check(f"LTD2 {page}: заглушка-редирект без юрблока (ожидаемо)",
+          "17433479" not in read(page))
+
 
 passed = sum(1 for _, ok in results if ok)
 total = len(results)
