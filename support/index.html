@@ -123,6 +123,10 @@
         .foot-inner a { color: rgba(255,255,255,0.65); }
         .foot-inner a:hover { color: #fff; }
         .foot-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.4rem; margin-top: 1.8rem; font-size: 0.82rem; color: rgba(255,255,255,0.45); text-align: center; }
+        .foot-legal { line-height: 1.6; }
+        .foot-bottom a { color: rgba(255,255,255,0.6); }
+        .foot-bottom a:hover { color: #fff; }
+        .foot-note { display: block; margin-top: 0.85rem; }
     </style>
 
     <script type="application/ld+json">
@@ -133,10 +137,31 @@
                 "@type": "Organization",
                 "@id": "https://skipi.app/#organization",
                 "name": "Skipi",
+                "legalName": "SKIPI LTD",
                 "description": "The AI assistant seafarers live in — and the data layer maritime decisions depend on.",
                 "url": "https://skipi.app/",
                 "logo": "https://skipi.app/assets/app-icons/skipi-seafarer.png",
-                "email": "info@skipi.app"
+                "email": "info@skipi.app",
+                "identifier": {
+                    "@type": "PropertyValue",
+                    "name": "UK company number",
+                    "value": "17433479"
+                },
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Office 20748, 182-184 High Street North, East Ham",
+                    "addressLocality": "London",
+                    "postalCode": "E6 2JA",
+                    "addressCountry": "GB"
+                },
+                "founder": { "@id": "https://skipi.app/#founder" }
+            },
+            {
+                "@type": "Person",
+                "@id": "https://skipi.app/#founder",
+                "name": "Tymur Rudov",
+                "jobTitle": "Founder & Director",
+                "worksFor": { "@id": "https://skipi.app/#organization" }
             },
             {
                 "@type": "WebPage",
@@ -204,7 +229,12 @@
             </nav>
         </div>
         <div class="foot-bottom">
-            Skipi &mdash; project funding for the AI assistant and API.
+            <p class="foot-legal">
+                SKIPI LTD &middot; Registered in England and Wales &middot; Company No. 17433479<br>
+                Registered office: Office 20748, 182-184 High Street North, East Ham, London, United Kingdom, E6 2JA<br>
+                Tymur Rudov &mdash; Founder &amp; Director &middot; <a href="mailto:info@skipi.app">info@skipi.app</a>
+            </p>
+            <span class="foot-note">Skipi &mdash; project funding for the AI assistant and API.</span>
         </div>
     </div>
 </footer>

@@ -27,16 +27,38 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Skipi",
-        "slogan": "Skipi — United Seafarers",
-        "url": "https://skipi.app/",
-        "founder": {
-            "@type": "Person",
-            "name": "Captain Tymur Rudov",
-            "jobTitle": "Master Mariner, freight broker, founder of Skipi"
-        },
-        "description": "Skipi is a maritime ecosystem: an AI assistant purpose-built for shipping, and the Seafarer, Crewing and Broker apps around one data layer."
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://skipi.app/#organization",
+                "name": "Skipi",
+                "legalName": "SKIPI LTD",
+                "slogan": "Skipi — United Seafarers",
+                "url": "https://skipi.app/",
+                "email": "info@skipi.app",
+                "identifier": {
+                    "@type": "PropertyValue",
+                    "name": "UK company number",
+                    "value": "17433479"
+                },
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Office 20748, 182-184 High Street North, East Ham",
+                    "addressLocality": "London",
+                    "postalCode": "E6 2JA",
+                    "addressCountry": "GB"
+                },
+                "founder": { "@id": "https://skipi.app/#founder" },
+                "description": "Skipi is a maritime ecosystem: an AI assistant purpose-built for shipping, and the Seafarer, Crewing and Broker apps around one data layer."
+            },
+            {
+                "@type": "Person",
+                "@id": "https://skipi.app/#founder",
+                "name": "Tymur Rudov",
+                "jobTitle": "Founder & Director",
+                "worksFor": { "@id": "https://skipi.app/#organization" }
+            }
+        ]
     }
     </script>
 </head>
@@ -72,6 +94,11 @@
         <a class="quiet" href="/downloads">Downloads</a>
         <a class="quiet" href="/support/">Support</a>
     </nav>
+    <p class="legal-line">
+        SKIPI LTD &middot; Registered in England and Wales &middot; Company No. 17433479<br>
+        Registered office: Office 20748, 182-184 High Street North, East Ham, London, United Kingdom, E6 2JA<br>
+        Tymur Rudov &mdash; Founder &amp; Director &middot; <a href="mailto:info@skipi.app">info@skipi.app</a>
+    </p>
 </footer>
 
 <script src="/assets/journey.js" defer></script>

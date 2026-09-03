@@ -110,7 +110,7 @@ a { color: inherit; text-decoration: none; }
     display: grid;
     place-items: center;
     text-align: center;
-    padding: 2rem 1.5rem 5.5rem;
+    padding: 2rem 1.5rem 9.5rem;
 }
 
 .wordmark {
@@ -168,6 +168,29 @@ a { color: inherit; text-decoration: none; }
         padding: 0.85rem 1rem 1.15rem;
         gap: 0.4rem;
     }
+    .entry { padding-bottom: 13rem; }
+}
+
+/* ── единый юридический блок SKIPI LTD (owner 03.09) ──
+      обязательные сведения UK-компании на сайте: полное название,
+      England and Wales, номер, registered office, контакт. */
+
+.legal-line {
+    font-size: 0.72rem;
+    line-height: 1.55;
+    color: var(--muted);
+    text-align: center;
+    text-wrap: pretty;
+}
+.legal-line a { color: var(--muted); border-bottom: 1px solid transparent; }
+.legal-line a:hover { color: var(--ink); border-color: currentColor; }
+
+.whisper .legal-line { width: 100%; order: 3; flex: none; margin-top: 0.15rem; }
+
+footer.legal-foot {
+    padding: 2.4rem 1.5rem 2.8rem;
+    border-top: 1px solid var(--hairline);
+    background: var(--paper);
 }
 
 /* ── развилка в hero: лид-строка «Start using Skipi as:» + три
