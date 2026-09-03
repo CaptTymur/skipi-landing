@@ -10,6 +10,13 @@
 (/ru/, /tl/, /hi/, /id/ и их /story/) живут как заглушки-редиректы на
 английскую версию — ссылки из внешнего мира не ломаются.
 
+Второе owner-решение 03.09 — «английский на главный адрес»: английский
+контент /en/for-companies/ и /en/presentation/ переехал на /for-companies/
+и /presentation/ (русские версии этих двух страниц заменены английскими,
+текст остался в истории git), а /en/-двойники стали заглушками-переходами
+на верхний уровень. Зеркало /en/ и /en/story/ (canonical на корень)
+сохраняется как было.
+
 Скелет (FigJam-борд владельца):
   1. Вход (index): root/en — развилка трёх ролей ПРЯМО в hero (№135,
      owner 14.08): моряк → assistant, крюинг → /app/crewing,
@@ -321,6 +328,7 @@ check("L5 /en/story/ — зеркало: hreflang только en и x-default �
 # owner 03.09: неанглийские страницы не удаляем, а перенаправляем —
 # внешние ссылки и поисковая выдача не ломаются.
 REDIRECTS = {
+    # прежние языковые адреса → английская версия (owner 03.09, решение 1)
     "ru/index.html": "/",
     "tl/index.html": "/",
     "hi/index.html": "/",
@@ -328,6 +336,10 @@ REDIRECTS = {
     "ru/story/index.html": "/story/",
     "hi/story/index.html": "/story/",
     "id/story/index.html": "/story/",
+    # английский переехал на главный адрес (owner 03.09, решение 2):
+    # /en/-двойники этих двух страниц теперь ведут на верхний уровень
+    "en/for-companies/index.html": "/for-companies/",
+    "en/presentation/index.html": "/presentation/",
 }
 for page, target in REDIRECTS.items():
     html = read(page)
@@ -339,8 +351,35 @@ for page, target in REDIRECTS.items():
     check(f"R1 {page}: meta-refresh + canonical + видимая ссылка → "
           f"{target}, lang=\"en\"", ok)
 
-check("R2 /en/** не тронут редиректами (это английский)",
-      all(k.split("/")[0] != "en" for k in REDIRECTS))
+# зеркало корня /en/ и /en/story/ остаётся содержательным (canonical
+# на корень) — редиректами его не трогали
+EN_MIRROR = ("en/index.html", "en/story/index.html")
+check("R2 зеркало /en/ и /en/story/ живое, не заглушка",
+      all(k not in REDIRECTS and "http-equiv=\"refresh\"" not in read(k)
+          for k in EN_MIRROR))
+
+# ── Группа T: английский на главном адресе (owner 03.09, решение 2) ─
+TOP_LEVEL_EN = {
+    "for-companies/index.html": ("/for-companies/", "Intelligence for companies"),
+    "presentation/index.html":  ("/presentation/", "How Skipi works"),
+}
+for page, (url, title_part) in TOP_LEVEL_EN.items():
+    html = read(page)
+    head = html.split(">", 2)[1] + ">" if html else ""
+    ok = (bool(html)
+          and 'lang="en"' in head
+          and f'<title>' in html and title_part in html
+          and f'<link rel="canonical" href="{SITE}{url}">' in html
+          and "http-equiv=\"refresh\"" not in html)   # это контент, не заглушка
+    check(f"T1 {page}: англоязычная содержательная страница на главном "
+          f"адресе (lang=\"en\", canonical → {url})", ok)
+    check(f"T2 {page}: внутри нет ссылок на /en/-двойники "
+          f"(английский теперь верхний уровень)",
+          bool(html) and "/en/" not in html,
+          "остались /en/-ссылки")
+    check(f"T3 sitemap: {url} есть, /en{url} нет",
+          f"<loc>{SITE}{url}</loc>" in read("sitemap.xml")
+          and f"<loc>{SITE}/en{url}</loc>" not in read("sitemap.xml"))
 
 
 # ── Группа X: сайт англоязычный (owner 03.09) ──────────────────────
@@ -350,20 +389,13 @@ HTML_FILES = sorted(pp.relative_to(ROOT).as_posix()
 check("X0 обход страниц непустой", len(HTML_FILES) > 10,
       f"найдено {len(HTML_FILES)}")
 
-# ОТКРЫТЫЙ ХВОСТ (вне объёма карточки 03.09, решает владелец):
-# /for-companies/ и /presentation/ — САМИ по себе русские страницы
-# (lang="ru") с английскими двойниками /en/for-companies/ и
-# /en/presentation/. Карточка их не перечисляет. Переключатель RU/EN
-# на русской /for-companies/ — единственный мост оттуда на английский,
-# поэтому он снят только с английского двойника, а русский оставлен
-# нетронутым до owner-решения (редиректить эту пару или нет).
-RU_PENDING_OWNER = ("for-companies/index.html", "presentation/index.html")
-
+# Хвост закрыт owner-решением 03.09 «английский на главный адрес»:
+# /for-companies/ и /presentation/ теперь сами английские, исключений
+# из этой проверки больше нет — ни одной страницы с переключателем.
 switcher = [f for f in HTML_FILES
-            if f not in RU_PENDING_OWNER
-            and ('class="langs"' in read(f) or 'lang-link' in read(f))]
-check("X1 переключателя языков нет ни на одной странице "
-      f"(кроме {RU_PENDING_OWNER} — открытый хвост владельцу)",
+            if 'class="langs"' in read(f) or 'lang-link' in read(f)
+            or 'lang-switch' in read(f)]
+check("X1 переключателя языков нет ни на одной странице (без исключений)",
       not switcher, f"остался на: {switcher}")
 
 NON_EN = ("ru", "tl", "hi", "id")
@@ -373,8 +405,11 @@ bad_hl = {f: v for f, v in bad_hl.items() if v}
 check("X2 hreflang-альтернатив неанглийских версий нет "
       "(только en / x-default)", not bad_hl, f"факт: {bad_hl}")
 
-check("X3 .langs больше не описан в journey.css (мёртвый стиль убран)",
-      ".langs" not in read("assets/journey.css"))
+check("X3 мёртвых стилей переключателя нет ни в одном CSS "
+      "(.langs / .lang-switch / .lang-link)",
+      not [c for c in ("assets/journey.css", "assets/localized-home.css")
+           if any(t in read(c)
+                  for t in (".langs", ".lang-switch", ".lang-link"))])
 
 # ── Группа I (глобально) ───────────────────────────────────────────
 css = read("assets/journey.css")
@@ -392,9 +427,11 @@ sitemap = read("sitemap.xml")
 check("I6 sitemap: английские story-URL на месте",
       all(f"<loc>https://skipi.app{h}</loc>" in sitemap
           for h in ("/", "/story/", "/en/story/")))
-check("I7 sitemap: неанглийских адресов нет",
+check("I7 sitemap: ни неанглийских адресов, ни /en/-двойников "
+      "переехавших страниц",
       not [h for h in ("/ru/", "/tl/", "/hi/", "/id/", "/ru/story/",
-                       "/hi/story/", "/id/story/")
+                       "/hi/story/", "/id/story/",
+                       "/en/for-companies/", "/en/presentation/")
            if f"<loc>https://skipi.app{h}</loc>" in sitemap])
 
 # ── Группа SUP: страница поддержки проекта (2026-08-17) ────────────
@@ -431,11 +468,12 @@ for page, label in (("index.html", "Support"),
 # Обязательные по закону сведения UK-компании. Волна «только английский»
 # не имеет права их повредить, поэтому инвариант зафиксирован тестом.
 # Страницы-редиректы (группа R) юрблока не несут — это заглушки.
+# /en/for-companies/ и /en/presentation/ ушли отсюда в REDIRECTS
+# (owner 03.09, решение 2) — юрблок теперь на верхнеуровневой паре.
 LTD_PAGES = (
     "index.html", "en/index.html", "story/index.html", "en/story/index.html",
     "downloads/index.html", "support/index.html", "invest/index.html",
-    "for-companies/index.html", "en/for-companies/index.html",
-    "presentation/index.html", "en/presentation/index.html",
+    "for-companies/index.html", "presentation/index.html",
     "terms.html", "privacy.html",
 )
 LTD_STRINGS = ("SKIPI LTD", "England and Wales", "17433479",
