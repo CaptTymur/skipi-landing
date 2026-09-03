@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Skipi - United Seafarers | Как работает Skipi</title>
-    <meta name="description" content="Skipi - United Seafarers. Skipi в 6 рисунках от капитана: anonymized job signature, apply без раскрытия данных, выгода для крюинга, decision support для моряка через Skipi Intelligence.">
+    <title>Skipi - United Seafarers | How Skipi works</title>
+    <meta name="description" content="Skipi - United Seafarers. Skipi explained in 6 hand-drawn steps by Captain Tymur: anonymized job signature, apply without disclosure, E2E chat, what crewing and seafarer get, outreach minimum, and wider Intelligence consumers.">
     <link rel="canonical" href="https://skipi.app/presentation/">
+    <link rel="alternate" hreflang="en" href="https://skipi.app/presentation/">
     <meta property="og:title" content="Skipi - United Seafarers">
-    <meta property="og:description" content="Капитан Тимур объясняет архитектуру Skipi: anonymized matching, E2E apply, decision support для моряка.">
+    <meta property="og:description" content="Captain Tymur explains the Skipi architecture: anonymized matching, E2E apply, decision support for the seafarer, and the wider intelligence consumers.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://skipi.app/presentation/">
     <meta property="og:image" content="https://skipi.app/presentation/img/slide-1.jpg">
@@ -296,24 +297,24 @@
 
 <header class="site">
     <div class="nav">
-        <a href="/ru/" class="brand">Skipi<span class="dot">.</span></a>
+        <a href="/" class="brand">Skipi<span class="dot">.</span></a>
         <div class="nav-meta">
-            <span class="author">Капитан Тимур · 11 июня 2026</span>
-            <a href="/ru/">← К сайту</a>
-            <a href="/downloads">Скачать</a>
+            <span class="author">Captain Tymur · 11 June 2026</span>
+            <a href="/">← Back to site</a>
+            <a href="/downloads">Download</a>
         </div>
     </div>
 </header>
 
 <main class="deck">
     <div class="deck-head">
-        <div class="deck-title">Skipi - United Seafarers · как это работает</div>
-        <div class="deck-counter"><strong id="slide-now">1</strong> / <span id="slide-total">4</span></div>
+        <div class="deck-title">Skipi - United Seafarers · how it works</div>
+        <div class="deck-counter"><strong id="slide-now">1</strong> / <span id="slide-total">6</span></div>
     </div>
 
     <article class="slide" id="slide" aria-live="polite">
         <div class="slide-figure" id="slide-figure">
-            <img id="slide-img" src="img/slide-1.jpg" alt="" loading="eager">
+            <img id="slide-img" src="/presentation/img/slide-1.jpg" alt="" loading="eager">
         </div>
         <div class="slide-body">
             <span class="slide-kicker" id="slide-kicker"></span>
@@ -325,24 +326,24 @@
     </article>
 </main>
 
-<nav class="controls" aria-label="Навигация по слайдам">
-    <button class="ctrl-btn" id="prev" type="button">← <span class="label">Назад</span></button>
+<nav class="controls" aria-label="Slide navigation">
+    <button class="ctrl-btn" id="prev" type="button">← <span class="label">Back</span></button>
     <div class="dots" id="dots" role="tablist"></div>
-    <button class="ctrl-btn primary" id="next" type="button"><span class="label">Дальше</span> →</button>
+    <button class="ctrl-btn primary" id="next" type="button"><span class="label">Next</span> →</button>
 </nav>
 
 <footer class="site">
     © 2026 Skipi &nbsp;·&nbsp;
-    <a href="/ru/">skipi.app</a> &nbsp;·&nbsp;
+    <a href="/">skipi.app</a> &nbsp;·&nbsp;
     <a href="mailto:info@skipi.app">info@skipi.app</a> &nbsp;·&nbsp;
     GitHub:
     <a href="https://github.com/CaptTymur/skipi.app">Seafarer</a> ·
     <a href="https://github.com/CaptTymur/skipi-broker">Broker</a> ·
-    <a href="https://github.com/CaptTymur/skipi-crewing" title="Приватный — доступ по инвайту, токен на info@skipi.app">Crewing (приватный)</a>
+    <a href="https://github.com/CaptTymur/skipi-crewing" title="Private — access by invite, request a token at info@skipi.app">Crewing (private)</a>
     <div class="foot-legal">
         SKIPI LTD &middot; Registered in England and Wales &middot; Company No. 17433479<br>
         Registered office: Office 20748, 182-184 High Street North, East Ham, London, United Kingdom, E6 2JA<br>
-        Тимур Рудов (Tymur Rudov) &mdash; основатель и директор &middot; <a href="mailto:info@skipi.app">info@skipi.app</a>
+        Tymur Rudov &mdash; Founder &amp; Director &middot; <a href="mailto:info@skipi.app">info@skipi.app</a>
     </div>
 </footer>
 
@@ -352,105 +353,105 @@
 
     const SLIDES = [
         {
-            kicker: 'Шаг 1 · Профиль и подпись запроса',
-            title: 'Профиль моряка — локально. Запрос крюинга — подписью. Match — у моряка.',
-            lead: 'Моряк подгружает в Skipi свои документы и опыт — структурированный профиль строится локально, файлы остаются у него. Крюинг создаёт запрос на моряка с нужным профилем и кладёт на сервер только подпись запроса: тип судна, должность, национальность. Приложение моряка проверяет базу — есть ли запросы под его профиль. Личные данные при этом никуда не передаются.',
+            kicker: 'Step 1 · Profile and request signature',
+            title: "Seafarer's profile — local. Crewing's request — by signature. Match — on the seafarer's side.",
+            lead: "The seafarer uploads documents and sea experience into Skipi — the structured profile is built locally, the files stay on the device. The crewing creates a request for a seafarer with a specific profile and pushes only the request signature to the server: vessel type, position, nationality. The seafarer's app checks the database — are there requests under their profile? No personal data leaves the device.",
             points: [
-                'Моряк подгружает документы и опыт → структурированный профиль строится локально, файлы остаются у него',
-                'Крюинг создаёт запрос на моряка с заданным профилем (тип судна · должность · национальность)',
-                'Приложение моряка проверяет базу: есть ли запросы под его профиль',
-                'Личные данные не передаются — на сервере остаётся только сигнатура профиля'
+                'Seafarer uploads documents and experience → structured profile is built locally, files stay on the device',
+                'Crewing creates a request for a seafarer with a specific profile (vessel type · position · nationality)',
+                "Seafarer's app checks the database: any requests matching my profile?",
+                'No personal data is transferred — only the profile signature lives on the server'
             ],
-            foot: 'Все файлы — и у моряка, и у крюинга — остаются на устройстве. Сервер хранит подпись запроса, не данные.'
+            foot: 'All files — on both the seafarer and the crewing side — stay on the device. The server holds the request signature, not the data.'
         },
         {
-            kicker: 'Шаг 2 · Apply и E2E-чат',
-            title: 'Match → уведомление → отклик одной кнопкой. Дальше — E2E-чат и структурированные документы.',
-            lead: 'Если для моряка нашлась работа под его профиль — он получает уведомление. Может посмотреть условия предложения и откликнуться одной кнопкой. Крюинг получает отклик, но без раскрытия личных данных. Дальше открывается end-to-end-шифрованный чат: в нём крюинг запрашивает документы, моряк отправляет в один клик. Документы приходят в жёстко структурированном виде.',
+            kicker: 'Step 2 · Apply and E2E chat',
+            title: 'Match → notification → apply in one click. Then — E2E chat and structured documents.',
+            lead: 'When work matching the seafarer\u2019s profile is found, they get a notification. They can review the offer and apply in one click. The crewing receives the application without disclosure of personal data. From there, an end-to-end encrypted chat opens: the crewing requests documents, the seafarer sends them in one click. Documents arrive in a strictly structured form.',
             points: [
-                'Match найден → моряк получает уведомление с условиями предложения',
-                'Отклик — одной кнопкой. Крюинг получает заявку без личных данных моряка',
-                'Открывается чат с end-to-end шифрованием между устройствами',
-                'В чате крюинг запрашивает документы, моряк отправляет — всё в один клик',
-                'Документы приходят в жёстко структурированном виде, а не PDF-свалкой в почте'
+                'Match found → the seafarer gets a notification with the offer terms',
+                "Apply — one button. The crewing receives the application without the seafarer's personal data",
+                'An end-to-end encrypted chat opens between the devices',
+                'In the chat the crewing requests documents, the seafarer sends them — all in one click',
+                'Documents arrive in a strictly structured form, not as a pile of PDFs in an email'
             ],
-            foot: 'Сервер — точка установления чата, не дата-вольт. Документы и сообщения идут напрямую между устройствами, в структурированном протоколе.'
+            foot: 'The server is a rendezvous point for the chat, not a data vault. Documents and messages flow directly between devices, in a structured protocol.'
         },
         {
-            kicker: 'Шаг 3 · For Crewing',
-            title: 'Что Skipi даёт крюинг-менеджеру',
-            lead: 'Skipi — операционный инструмент крюинга, а не «ещё одна доска объявлений». Структурный профиль кандидата, единый протокол данных, compliance-check под клиента, своя локальная база рассмотренных и ex-crew.',
+            kicker: 'Step 3 · For Crewing',
+            title: 'What Skipi gives a crewing manager',
+            lead: 'Skipi is an operational tool for the crewing, not "yet another job board". A structured candidate profile, a unified data-exchange protocol, compliance check per specific client, and a local database of considered candidates and ex-crew.',
             points: [
-                'Solid documents profile structure — единая структура кандидатского профиля',
-                'Unified protocol of data exchange — один протокол вместо «PDF в почте»',
-                'Easy profile compliance check for particular client — соответствие под конкретного шипменеджера',
-                'Maintaining database of considered candidates and ex-crew — своя живая БД у крюинга'
+                'Solid documents profile structure — one canonical structure for the candidate profile',
+                'Unified protocol of data exchange — one protocol instead of "PDFs in email"',
+                'Easy profile compliance check for a particular client — compliance fit per specific ship manager',
+                'Maintaining a database of considered candidates and ex-crew — a living DB owned by the crewing'
             ],
-            foot: 'Никакого vendor lock-in: база крюинга — это файлы на его устройстве, экспортируемые в любой момент.'
+            foot: "No vendor lock-in: the crewing's database lives in files on its device, exportable at any moment."
         },
         {
-            kicker: 'Шаг 4 · For Seafarer + Skipi Intelligence',
-            title: 'Моряк получает marketplace и intelligence одновременно',
-            lead: 'Поверх matching-петли работает Skipi Intelligence — база судов и компаний, которая питается оценками от самих моряков (assessment of ex vessel). Из неё рождаются индексы для принятия решений.',
+            kicker: 'Step 4 · For Seafarer + Skipi Intelligence',
+            title: 'The seafarer gets a marketplace and intelligence at the same time',
+            lead: "On top of the matching loop sits Skipi Intelligence — a database of vessels and companies fed by seafarers' own assessments of ex-vessels. From it come the indices that support decisions.",
             points: [
-                'Channel of outreach to find job — исходящий канал поиска работы',
-                'Channel of incoming matching offers — входящие офферы под подпись профиля',
-                'Decision support через индексы: Position Salary Index · Position Demand Score · Company Retention Index · Profile Track Promotion Score',
+                'Channel of outreach to find a job — outgoing channel for finding work',
+                'Channel of incoming matching offers — inbound offers under the profile signature',
+                'Decision support via indices: Position Salary Index · Position Demand Score · Company Retention Index · Profile Track Promotion Score',
                 'Easy document management: upload · send docs · receive job offers',
-                'Skipi Intelligence строится из оценок ex-vessel самими моряками — экипажи кормят базу'
+                'Skipi Intelligence is built from ex-vessel assessments by the seafarers themselves — crews feed the database'
             ],
-            foot: 'Данные моряка не раскрываются, пока он сам не нажмёт «send». Send or not — решает моряк, опираясь на Skipi Intelligence.'
+            foot: "The seafarer's data is not disclosed until they hit 'send'. Send or not — the seafarer decides, supported by Skipi Intelligence."
         },
         {
-            kicker: 'Шаг 5 · Outreach minimum',
-            title: 'Даже без доступа к индустрии Skipi становится инструментом outreach',
-            lead: 'Пока вся индустрия ещё не на Skipi — моряк не теряет рынок. Минимальный outreach-функционал собирает CV и пакет документов один раз и рассылает их одним действием на три типа адресатов. Те же артефакты можно забрать локально — ZIP-архив документов и CV в PDF — и отправить в любой канал руками.',
+            kicker: 'Step 5 · Outreach minimum',
+            title: 'Even without industry-wide adoption, Skipi becomes an outreach tool',
+            lead: "Until the whole industry is on Skipi — the seafarer doesn't lose the market. The minimum outreach functionality assembles the CV and document package once and dispatches them in a single action to three types of recipients. The same artifacts can be exported locally — a ZIP archive of documents and a CV as PDF — and sent through any channel by hand.",
             points: [
-                'Custom email list — любые имейлы, которые моряк ввёл сам (своя адресная книга outreach)',
-                'Запросы крюингов под профиль — крюинги, которые скачали Skipi Crewing и сделали в модуле рассылок подписку на моряков с этой подписью профиля',
-                'Email list suggested by Skipi — куратированный набор контактов под ранг, тип судна, географию',
-                'ZIP-архив всех документов и CV в PDF — можно забрать локально и послать вручную в любой канал'
+                'Your custom email list — addresses the seafarer entered manually (their own outreach address book)',
+                'Crewing-office requests for your profile — crewings that installed Skipi Crewing and subscribed in the outreach module to seafarers with this profile signature',
+                'Email list suggested by Skipi — curated contacts by rank, vessel type, geography',
+                'ZIP archive of all documents and CV as PDF — export locally and send through any channel by hand'
             ],
-            foot: 'Outreach minimum закрывает зазор между Skipi-вселенной и обычным email-миром. Скачал Skipi — и CV с пакетом всегда наготове, в любую сторону.'
+            foot: 'Outreach minimum closes the gap between the Skipi universe and the regular email world. Install Skipi — and the CV with the document package is always ready, in any direction.'
         },
         {
-            kicker: 'Шаг 6 · Intelligence consumers',
-            title: 'Эти же сигналы нужны всей цепочке решений вокруг судна',
-            lead: 'Vessel score, vetting pressure, management response, company retention — те же индексы покупают банки, инвесторы, фрахтовые брокеры, фрахтователи, P&I и шипменеджеры. Любому, кто принимает деньги или коммерческое решение по конкретному судну или компании, нужен operational signal изнутри.',
+            kicker: 'Step 6 · Intelligence consumers',
+            title: 'These same signals are needed by the entire decision chain around a vessel',
+            lead: 'Vessel score, vetting pressure, management response, company retention — the same indices are bought by ship-finance banks, investors, freight brokers, charterers, P&I clubs and ship managers. Anyone who commits money or makes a commercial decision on a specific vessel or company needs an operational signal from the inside.',
             figureType: 'consumers',
             consumers: [
                 {
                     ico: '⚖',
-                    name: 'Фрахтовые брокеры и фрахтователи',
-                    desc: 'Pre-fixture vetting: реальное состояние судна, а не только чистый SIRE. Не повести клиента на проблемное судно — это качество брокера. «Оценка во фрахте» — ядро решения о фиксе.'
+                    name: 'Freight brokers and charterers',
+                    desc: 'Pre-fixture vetting: the real state of the vessel, not only a clean SIRE. Not taking your client onto a problem vessel is what makes a good broker. Vessel assessment in chartering — the core fixture decision.'
                 },
                 {
                     ico: '🏦',
-                    name: 'Банки (ship finance)',
-                    desc: 'Collateral monitoring перед выдачей и в течение life loan’а. Skipi-score дополняет classification society reports реальным operational signal от экипажа.'
+                    name: 'Banks (ship finance)',
+                    desc: 'Collateral monitoring before drawdown and across the life of the loan. Skipi-score complements classification society reports with a real operational signal from the crew.'
                 },
                 {
                     ico: '💼',
-                    name: 'Инвесторы и S&P',
-                    desc: 'Due diligence перед покупкой судна или флота. Track record менеджмента, retention rate экипажа, скрытые операционные проблемы, не видные из брокерских pitch-decks.'
+                    name: 'Investors and S&P',
+                    desc: 'Due diligence before buying a vessel or fleet. Management track record, crew retention rate, hidden operational issues not visible from broker pitch-decks.'
                 },
                 {
                     ico: '🛡',
-                    name: 'P&I clubs и страховщики',
-                    desc: 'Risk pricing и underwriting. Vessel score становится частью cargo / H&M / P&I модели — особенно для tonnage без длинного claim-history.'
+                    name: 'P&I clubs and insurers',
+                    desc: 'Risk pricing and underwriting. Vessel score becomes part of the cargo / H&M / P&I model — especially for tonnage without a long claim history.'
                 },
                 {
                     ico: '⚙',
-                    name: 'Шипменеджеры (third-party)',
-                    desc: 'Benchmark собственного флота против рынка, оценка контрагентов и конкурентов. Поведение крюинга-партнёра по retention видно объективно.'
+                    name: 'Third-party ship managers',
+                    desc: "Benchmark your own fleet against the market, assess counterparties and competitors. Your crewing partner's behaviour on retention is objectively visible."
                 },
                 {
                     ico: '📦',
-                    name: 'Грузовладельцы и cargo interests',
-                    desc: 'Прямая проверка судна и owner’а до контракта на перевозку. Особенно при отгрузке высокостоимостного груза, где репутация судна важнее ставки.'
+                    name: 'Cargo owners and cargo interests',
+                    desc: 'Direct check on the vessel and owner before a transportation contract. Especially relevant for high-value cargo where vessel reputation matters more than the rate.'
                 }
             ],
-            foot: 'Skipi Intelligence — единый слой данных от экипажей, обслуживающий всю цепочку принятия решений по судну. Моряк — поставщик сигнала. Все остальные — потребители.'
+            foot: 'Skipi Intelligence — one data layer from the crew, serving the entire decision chain around a vessel. The seafarer is the signal source. All others are consumers.'
         }
     ];
 
@@ -498,7 +499,7 @@
             figEl.setAttribute('data-type', 'consumers');
             figEl.innerHTML =
                 '<div class="consumers-title">Skipi Intelligence</div>' +
-                '<div class="consumers-source">Один слой данных от экипажей <span>→ много decision-makers</span></div>' +
+                '<div class="consumers-source">One data layer from the crew <span>→ many decision-makers</span></div>' +
                 '<div class="consumers-grid">' +
                 s.consumers.map(c =>
                     '<div class="consumer-card">' +
@@ -510,7 +511,7 @@
                 '</div>';
         } else {
             figEl.removeAttribute('data-type');
-            figEl.innerHTML = '<img id="slide-img" src="img/slide-' + (idx + 1) + '.jpg" alt="' + s.title.replace(/"/g, '&quot;') + '" loading="eager">';
+            figEl.innerHTML = '<img id="slide-img" src="/presentation/img/slide-' + (idx + 1) + '.jpg" alt="' + s.title.replace(/"/g, '&quot;') + '" loading="eager">';
         }
 
         kickerEl.textContent = s.kicker;
@@ -518,7 +519,7 @@
         leadEl.textContent = s.lead;
         pointsEl.innerHTML = (s.points || []).map(p => '<li>' + p + '</li>').join('');
         pointsEl.style.display = (s.points && s.points.length) ? '' : 'none';
-        footEl.innerHTML = '<strong>Замечание капитана:</strong> ' + s.foot;
+        footEl.innerHTML = '<strong>Captain&rsquo;s note:</strong> ' + s.foot;
         nowEl.textContent = idx + 1;
 
         prevBtn.disabled = idx === 0;
@@ -527,13 +528,13 @@
         if (idx === SLIDES.length - 1) {
             nextBtn.disabled = false;
             nextBtn.dataset.mode = 'download';
-            nextBtn.innerHTML = '<span class="label">Скачать Skipi</span> →';
-            nextBtn.setAttribute('aria-label', 'Скачать Skipi');
+            nextBtn.innerHTML = '<span class="label">Download Skipi</span> →';
+            nextBtn.setAttribute('aria-label', 'Download Skipi');
         } else {
             nextBtn.disabled = false;
             nextBtn.dataset.mode = 'next';
-            nextBtn.innerHTML = '<span class="label">Дальше</span> →';
-            nextBtn.setAttribute('aria-label', 'Следующий слайд');
+            nextBtn.innerHTML = '<span class="label">Next</span> →';
+            nextBtn.setAttribute('aria-label', 'Next slide');
         }
 
         document.querySelectorAll('.dot').forEach((d, i) => {
@@ -558,7 +559,7 @@
         d.className = 'dot';
         d.type = 'button';
         d.setAttribute('role', 'tab');
-        d.setAttribute('aria-label', 'Слайд ' + (i + 1));
+        d.setAttribute('aria-label', 'Slide ' + (i + 1));
         d.addEventListener('click', () => go(i));
         dotsEl.appendChild(d);
     });

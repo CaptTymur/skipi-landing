@@ -98,27 +98,6 @@ a:hover {
     gap: 0.7rem;
 }
 
-.lang-switch {
-    display: flex;
-    align-items: center;
-    gap: 0.2rem;
-}
-
-.lang-link {
-    min-width: 2.1rem;
-    padding: 0.34rem 0.48rem;
-    border-radius: 6px;
-    color: var(--muted);
-    font-size: 0.76rem;
-    font-weight: 800;
-    text-align: center;
-}
-
-.lang-link.active {
-    background: var(--panel-2);
-    color: var(--ink);
-}
-
 .btn {
     display: inline-flex;
     align-items: center;
