@@ -444,7 +444,12 @@ check("I7 sitemap: ни неанглийских адресов, ни /en/-дв�
                        "/en/for-companies/", "/en/presentation/")
            if f"<loc>https://skipi.app{h}</loc>" in sitemap])
 
-# ── Группа SUP: страница поддержки проекта (2026-08-17) ────────────
+# ── Группа SUP: страница поддержки (2026-08-17, переписана 05.09) ──
+# Прежняя редакция страницы объявляла ВТОРОЙ платёжный канал на домене
+# продавца: PayPal-donate на ЛИЧНЫЙ адрес и Patreon-рекуррент, при том
+# что продавец — SKIPI LTD. Перед подачей в Paddle канал снят целиком
+# (BACKLOG №198, DECISIONS (234)), а SUP2/SUP3 ИНВЕРТИРОВАНЫ: сторож
+# страницы сохранён, но теперь он сторожит отсутствие, а не наличие.
 PAYPAL_DONATE = (
     "https://www.paypal.com/donate/?business=tymur.rudov%40icloud.com"
     "&no_recurring=0&item_name=Support+Skipi+AI+assistant"
@@ -453,10 +458,14 @@ PAYPAL_DONATE = (
 PATREON = "https://patreon.com/Capt_Tymur"
 support = read("support/index.html")
 check("SUP1 support/index.html существует", bool(support))
-check("SUP2 PayPal: официальный donate-URL (не paypal.me)",
-      PAYPAL_DONATE in support and "paypal.me" not in support.lower())
-check("SUP3 Patreon: https://patreon.com/Capt_Tymur",
-      PATREON in support)
+check("SUP2 PayPal-донат снят: ни donate-URL, ни paypal.me, ни слова "
+      "paypal на странице поддержки (инвертирован 05.09)",
+      bool(support) and PAYPAL_DONATE not in support
+      and "paypal" not in support.lower())
+check("SUP3 Patreon снят: ни ссылки, ни упоминания "
+      "(инвертирован 05.09)",
+      bool(support) and PATREON not in support
+      and "patreon" not in support.lower())
 forbidden = ("USDT", "Bybit", "IBAN", "SWIFT")
 hit = [w for w in forbidden if w.lower() in support.lower()]
 check("SUP4 нет USDT/Bybit/IBAN/SWIFT",
@@ -473,6 +482,25 @@ for page, label in (("index.html", "Support"),
     html = read(page)
     check(f"SUP7 {page}: футер quiet-ссылка «{label}» → /support/",
           f'href="/support/"' in html and label in html)
+
+# ── PAY7: второго платёжного канала нет НИГДЕ на домене продавца ───
+# Отрицательная проверка по всему сайту, а не по одной странице:
+# ревьюер платёжной платформы смотрит домен целиком. Заменяет прежние
+# положительные SUP2/SUP3 (BACKLOG №198).
+PAY_BANNED = ("paypal", "patreon", "donate")
+pay_hits = {}
+for f in HTML_FILES:
+    low = read(f).lower()
+    found = [w for w in PAY_BANNED if w in low]
+    if found:
+        pay_hits[f] = found
+sm_low = read("sitemap.xml").lower()
+sm_found = [w for w in PAY_BANNED if w in sm_low]
+if sm_found:
+    pay_hits["sitemap.xml"] = sm_found
+check("PAY7 второго платёжного канала на сайте нет: ни paypal, ни "
+      "patreon, ни donate ни в одном .html, ни в sitemap.xml",
+      not pay_hits, f"найдено: {pay_hits}")
 
 # ── Группа DL: страница загрузок англоязычная (owner 03.09) ────────
 # /downloads была последней русской страницей сайта; переведена целиком
