@@ -601,6 +601,35 @@ check("PAY9 /invest/ вне индексации: noindex в <meta robots> и н
       "noindex" in invest_robots
       and f"<loc>{SITE}/invest/</loc>" not in sitemap)
 
+# Строка приоритетных рынков перечисляла страны поимённо, включая
+# Россию, в одном документе с обязательством не нарушать санкции —
+# для платёжного андеррайтинга самая дорогая строка на сайте.
+# OWNER 05.09: «приоритетный рынок не Россия. Если можно, я бы
+# воздержался от этого» → перечисление убрано целиком, юридическая
+# функция абзаца сохранена. Тест сторожит, чтобы список не вернулся.
+# Georgia в privacy §9 — это НЕ целевой рынок, а раскрытие места
+# фактической обработки данных, и оно обязано остаться.
+COUNTRY_LIST = ("Russia", "Ukraine", "India", "Philippines",
+                "Indonesia", "Sri Lanka")
+country_hits = {}
+for page in ("terms.html", "privacy.html"):
+    found = [c for c in COUNTRY_LIST if c in read(page)]
+    if found:
+        country_hits[page] = found
+check("PAY10 terms.html и privacy.html: приоритетные рынки без "
+      f"перечисления стран и без слова Russia {COUNTRY_LIST}",
+      not country_hits, f"найдено: {country_hits}")
+
+# Оба юрдокумента содержательно изменены 05.09 (коммерческие разделы
+# в terms, Paddle в privacy §8, строка рынков в обоих). Протухшая
+# строка «Last updated» на политике — заметный дефект для платёжного
+# ревью, поэтому дата закреплена тестом, а не памятью.
+LAST_UPDATED = "Last updated: September 5, 2026"
+stale = [f for f in ("terms.html", "privacy.html")
+         if LAST_UPDATED not in read(f)]
+check(f"PAY11 terms.html и privacy.html: строка даты обновлена "
+      f"(«{LAST_UPDATED}»)", not stale, f"протухло: {stale}")
+
 # ── Группа DL: страница загрузок англоязычная (owner 03.09) ────────
 # /downloads была последней русской страницей сайта; переведена целиком
 # (видимый текст, заголовки, мета, подписи кнопок, тексты писем-заявок).
