@@ -502,6 +502,93 @@ check("PAY7 второго платёжного канала на сайте н�
       "patreon, ни donate ни в одном .html, ни в sitemap.xml",
       not pay_hits, f"найдено: {pay_hits}")
 
+
+# ── Группа PAY: витрина продавца перед подачей в Paddle (№198) ─────
+# Ревьюер платёжного комплаенса ищет глазами три вещи: страницу цены,
+# страницу возвратов и коммерческий раздел в Terms с merchant of
+# record. Проверяем их механически, включая щели, из-за которых сьют
+# остался бы зелёным при сломанной работе (§K карточки).
+PAY_PAGES = {
+    "pricing/index.html": "/pricing/",
+    "refunds/index.html": "/refunds/",
+}
+pricing = read("pricing/index.html")
+refunds = read("refunds/index.html")
+
+for page, url in PAY_PAGES.items():
+    html = read(page)
+    head = html.split(">", 2)[1] + ">" if html else ""
+    ok = (bool(html)
+          and 'lang="en"' in head
+          and canonical_of(html) == f"{SITE}{url}"
+          and og_url_of(html) == f"{SITE}{url}"
+          and hreflangs_of(html) == {"en": f"{SITE}{url}",
+                                     "x-default": f"{SITE}{url}"}
+          and "http-equiv=\"refresh\"" not in html)
+    check(f"PAY1 {page}: содержательная страница на {url} "
+          f"(lang=\"en\", canonical/og:url/hreflang → {url})", ok,
+          f"canonical={canonical_of(html)} og:url={og_url_of(html)} "
+          f"hreflang={hreflangs_of(html)}")
+
+# сверяем ВИДИМЫЙ текст, а не сырой html: иначе строку вроде
+# «Merchant of Record» достаточно оставить в <meta description>, и
+# проверка промолчит при пустой странице (поймано на adversarial-
+# прогоне 05.09 — мутация тела прошла мимо теста).
+pricing_text = strip_text(pricing)
+refunds_text = strip_text(refunds)
+
+PRICING_MUST = ("$10", "per seat", "14-day free trial",
+                "Merchant of Record", "Paddle")
+missing = [t for t in PRICING_MUST if t not in pricing_text]
+check("PAY2 /pricing/ (видимый текст): цена, единица, триал, merchant "
+      f"of record, Paddle {PRICING_MUST}",
+      bool(pricing) and not missing, f"нет: {missing}")
+
+REFUNDS_MUST = ("14 days", "full refund", "Paddle", "info@skipi.app")
+missing = [t for t in REFUNDS_MUST if t not in refunds_text]
+check("PAY3 /refunds/ (видимый текст): срок, полный возврат, Paddle, "
+      f"адрес {REFUNDS_MUST}",
+      bool(refunds) and not missing, f"нет: {missing}")
+
+terms = read("terms.html")
+TERMS_MUST = ("Merchant of Record", "Paddle.com", "refund", "renew",
+              "cancel", "VAT")
+missing = [t for t in TERMS_MUST if t not in strip_text(terms)]
+nums = [int(n) for n in re.findall(r"<h2>(\d+)\.", terms)]
+numbering_ok = nums == list(range(1, len(nums) + 1)) and len(nums) == 22
+check("PAY4 terms.html: коммерческий блок есть "
+      f"{TERMS_MUST} и разделы идут подряд 1..22 без пропусков и "
+      f"дублей (факт {nums})",
+      bool(terms) and not missing and numbering_ok,
+      f"нет: {missing}; нумерация: {nums}")
+
+in_sitemap = [u for u in PAY_PAGES.values()
+              if f"<loc>{SITE}{u}</loc>" not in sitemap]
+not_linked = [u for u in PAY_PAGES.values()
+              for f in ("index.html", "en/index.html")
+              if f'href="{u}"' not in read(f)]
+check("PAY5 /pricing/ и /refunds/: обе в sitemap.xml и обе слинкованы "
+      "из футера входной страницы (root и en)",
+      not in_sitemap and not not_linked,
+      f"нет в sitemap: {in_sitemap}; не слинковано: {sorted(set(not_linked))}")
+
+# витрина и инвесторская страница не должны называть разные цены за
+# одно и то же место — расхождение ловится механически, не глазами
+invest = read("invest/index.html")
+PRICE_RE = re.compile(r"(?:Broker|Crewing)[^.<]{0,80}?\$(\d+)")
+pricing_prices = set(PRICE_RE.findall(pricing))
+invest_prices = set(PRICE_RE.findall(invest))
+check("PAY6 цена Broker/Crewing на /pricing/ и в /invest/ совпадает "
+      f"(обе $10; факт pricing={sorted(pricing_prices)} "
+      f"invest={sorted(invest_prices)})",
+      pricing_prices == {"10"} and invest_prices == {"10"})
+
+check("PAY8 /support/ — настоящая поддержка: info@skipi.app + ссылки "
+      "на /pricing/ и /refunds/",
+      bool(support) and "info@skipi.app" in support
+      and 'href="/pricing/"' in support
+      and 'href="/refunds/"' in support)
+
 # ── Группа DL: страница загрузок англоязычная (owner 03.09) ────────
 # /downloads была последней русской страницей сайта; переведена целиком
 # (видимый текст, заголовки, мета, подписи кнопок, тексты писем-заявок).
@@ -537,10 +624,13 @@ check("DL3 download.html: англоязычная заглушка-перехо
 # Страницы-редиректы (группа R) юрблока не несут — это заглушки.
 # /en/for-companies/ и /en/presentation/ ушли отсюда в REDIRECTS
 # (owner 03.09, решение 2) — юрблок теперь на верхнеуровневой паре.
+# 05.09: список был хардкодом из 11 страниц — новые страницы вышли бы
+# без юрблока, а тест смолчал бы. Добавлены /pricing/ и /refunds/.
 LTD_PAGES = (
     "index.html", "en/index.html", "story/index.html", "en/story/index.html",
     "downloads/index.html", "support/index.html", "invest/index.html",
     "for-companies/index.html", "presentation/index.html",
+    "pricing/index.html", "refunds/index.html",
     "terms.html", "privacy.html",
 )
 LTD_STRINGS = ("SKIPI LTD", "England and Wales", "17433479",
