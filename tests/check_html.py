@@ -589,6 +589,18 @@ check("PAY8 /support/ — настоящая поддержка: info@skipi.app 
       and 'href="/pricing/"' in support
       and 'href="/refunds/"' in support)
 
+# /invest/ стоит в выдаче и спорит с витриной: объявляет четвёртую цену
+# «PRO ($5/mo)», которую нельзя купить, и рядом печатает «Paying: 0 ·
+# Revenue: $0». Страница остаётся доступной по прямой ссылке для
+# инвесторов — из индекса и sitemap она убрана (§F карточки №198).
+invest_robots = re.search(r'<meta name="robots" content="([^"]+)"', invest)
+invest_robots = invest_robots.group(1).replace(" ", "").lower() \
+    if invest_robots else ""
+check("PAY9 /invest/ вне индексации: noindex в <meta robots> и нет "
+      f"в sitemap.xml (факт robots=\"{invest_robots}\")",
+      "noindex" in invest_robots
+      and f"<loc>{SITE}/invest/</loc>" not in sitemap)
+
 # ── Группа DL: страница загрузок англоязычная (owner 03.09) ────────
 # /downloads была последней русской страницей сайта; переведена целиком
 # (видимый текст, заголовки, мета, подписи кнопок, тексты писем-заявок).
@@ -625,13 +637,14 @@ check("DL3 download.html: англоязычная заглушка-перехо
 # /en/for-companies/ и /en/presentation/ ушли отсюда в REDIRECTS
 # (owner 03.09, решение 2) — юрблок теперь на верхнеуровневой паре.
 # 05.09: список был хардкодом из 11 страниц — новые страницы вышли бы
-# без юрблока, а тест смолчал бы. Добавлены /pricing/ и /refunds/.
+# без юрблока, а тест смолчал бы. Добавлены /pricing/, /refunds/ и
+# ip-notice.html (юрблока не имел вовсе, контакт вёл на чужой домен).
 LTD_PAGES = (
     "index.html", "en/index.html", "story/index.html", "en/story/index.html",
     "downloads/index.html", "support/index.html", "invest/index.html",
     "for-companies/index.html", "presentation/index.html",
     "pricing/index.html", "refunds/index.html",
-    "terms.html", "privacy.html",
+    "terms.html", "privacy.html", "ip-notice.html",
 )
 LTD_STRINGS = ("SKIPI LTD", "England and Wales", "17433479",
                "182-184 High Street North", "E6 2JA", "info@skipi.app")
