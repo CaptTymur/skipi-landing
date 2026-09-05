@@ -121,6 +121,12 @@ ALLOWED_HOSTS = {
     "fonts.googleapis.com",
     "fonts.gstatic.com",
 }
+# Точечное разрешение ОДНОЙ ссылки, а не хоста (owner 05.09, сигнал
+# легитимности Android): страница Skipi Seafarer в Google Play. Хост
+# play.google.com в ALLOWED_HOSTS НЕ добавляется — чужой app-id и любой
+# <script src> с этого хоста по-прежнему краснеют по I2.
+PLAY_URL = "https://play.google.com/store/apps/details?id=app.skipi.seafarer"
+ALLOWED_LINKS = {PLAY_URL}
 
 results = []
 
@@ -173,8 +179,10 @@ def main_of(html: str) -> str:
 
 def external_hosts(html: str):
     hosts = set()
-    for m in re.finditer(r'(?:href|src)="(https?://[^"/]+)', html):
-        hosts.add(m.group(1).split("://", 1)[1].lower())
+    for attr, url in re.findall(r'(href|src)="(https?://[^"]+)"', html):
+        if attr == "href" and url in ALLOWED_LINKS:   # exact-URL, не хост
+            continue
+        hosts.add(url.split("://", 1)[1].split("/", 1)[0].lower())
     return hosts
 
 
@@ -208,6 +216,18 @@ for loc, (entry_rel, story_rel, story_href, lang) in LOCALES.items():
           f"(факт {wc})", 0 < wc <= ENTRY_WORD_BUDGET)
     check(f"A6[{loc}] вход подключает journey.css",
           "/assets/journey.css" in entry)
+    # A7 (owner 05.09, сигнал легитимности Android): в <main> одна тихая
+    # строка «Skipi Seafarer for Android is on Google Play.» — ссылка на
+    # словах «Google Play» ведёт на живую страницу магазина (exact-URL
+    # PLAY_URL). Это НЕ .cta (I1 держит ровно три SaaS-входа); издатель
+    # не называется. A5 сторожит, чтобы строка осталась короткой.
+    play_a = re.search(r'<a\b[^>]*\bhref="%s"[^>]*>Google Play</a>'
+                       % re.escape(PLAY_URL), entry_main)
+    check(f"A7[{loc}] Play-строка в <main>: <a href=PLAY_URL>Google Play</a> "
+          f"без класса cta",
+          bool(play_a)
+          and not re.search(r'class="[^"]*cta[^"]*"', play_a.group(0)),
+          "в <main> нет ссылки «Google Play» на PLAY_URL, или у неё .cta")
 
     # ── Группа S: путешествие ──────────────────────────────────────
     check(f"S1[{loc}] story существует: {story_rel}", bool(story))
@@ -634,13 +654,21 @@ check(f"PAY11 terms.html и privacy.html: строка даты обновлен
 # тогда как PRO продавался тем же PayPal-флоу (флот: paid_price_usd=5
 # при enabled=true, webapp/pro.py), а /invest/ печатал «PRO ($5/mo)».
 # Платный продукт, названный бесплатным, — ровно то расхождение
-# витрины и продукта, которое ищет платёжный андеррайтинг.
-# OWNER 05.09: «контур с пейпалом вообще пока отменяем, строим доступ
-# через паддл» → PRO перестаёт продаваться, и оговорка становится
-# правдой. Тест держит оговорку на месте, пока идёт переезд.
-PRO_CAVEAT = "not on sale while we move to Paddle"
-check(f"PAY12 /pricing/ (видимый текст): статус PRO назван честно "
-      f"(«{PRO_CAVEAT}»)", PRO_CAVEAT in pricing_text)
+# витрины и продукта, которое ищет платёжный андеррайтинг. Первая
+# редакция PAY12 (05.09-I) держала на /pricing/ оговорку «not on sale
+# while we move to Paddle».
+# OWNER 05.09 (DECISIONS (258)): «PRO снимается совсем» → упоминания
+# сняты с /pricing/ и /invest/ (включая JSON-LD), а PAY12 ИНВЕРТИРОВАН
+# И ГЛОБАЛЕН: слово «PRO» (отдельное слово, регистр учитывается —
+# «pro», «PropertyValue» не считаются) = 0 вхождений в ПОЛНОМ html
+# каждого файла сайта, не только в видимом тексте: JSON-LD /invest/
+# читают роботы.
+PRO_WORD = re.compile(r"\bPRO\b")
+pro_hits = {f: len(PRO_WORD.findall(read(f))) for f in HTML_FILES}
+pro_hits = {f: n for f, n in pro_hits.items() if n}
+check("PAY12 слова «PRO» нет ни в одном html сайта (полный html, включая "
+      "JSON-LD; owner 05.09 — «PRO снимается совсем»)",
+      not pro_hits, f"найдено: {pro_hits}")
 
 # ── Группа DL: страница загрузок англоязычная (owner 03.09) ────────
 # /downloads была последней русской страницей сайта; переведена целиком
