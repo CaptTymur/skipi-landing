@@ -35,6 +35,9 @@
       русских страниц не осталось.
   DL — страница загрузок и её заглушка англоязычные.
   LTD — юрблок SKIPI LTD (опубликован 03.09) на месте.
+  G — щели, вскрытые мутациями (№200, 05.09): индексируемость и
+      видимость витрины, нижний порог слов, Paddle в privacy, страны
+      по всему сайту, вывод множества страниц из rglob, sitemap ↔ файлы.
 
 Принцип «МАЛО на экране» проверяется механически: бюджет слов на
 вход и на каждую сцену.
@@ -699,6 +702,153 @@ check("DL3 download.html: англоязычная заглушка-перехо
       and not any(ord(ch) in CYRILLIC for ch in dl_stub))
 
 
+# ── Группа G: щели сьюта, вскрытые мутациями (BACKLOG №200; аудиты 05.09) ─
+# Каждая проверка заведена под одну конкретную мутацию, на которой сьют
+# оставался зелёным (M36, M37, M38, M40, M29, M41a/M41b, M42). Критерий
+# узости — «ровно одна красная»: названная мутация красит только свою
+# проверку, не соседнюю.
+
+# G1 (M36): обратное к PAY9 состояние было запинено только для /invest/ —
+# noindex,nofollow на витрине прошёл бы молча.
+def robots_of(html: str) -> str:
+    m = re.search(r'<meta\b[^>]*\bname="robots"[^>]*>', html, flags=re.I)
+    c = re.search(r'\bcontent="([^"]*)"', m.group(0), flags=re.I) if m else None
+    return c.group(1).replace(" ", "").lower() if c else ""
+
+
+robots_bad = {p: robots_of(read(p)) for p in PAY_PAGES}
+robots_bad = {p: v for p, v in robots_bad.items()
+              if "noindex" in v or "nofollow" in v}
+check("G1 /pricing/ и /refunds/ индексируемы: <meta robots> отсутствует "
+      "или без noindex/nofollow", not robots_bad, f"факт: {robots_bad}")
+
+# G2 (M37): strip_text читает DOM, а не рендер — <body style="display:none">
+# оставлял PAY2/PAY3 зелёными. Это ДЕНИЛИСТ известных способов спрятать
+# страницу целиком, а НЕ доказательство видимости: смотрим только
+# открывающие теги <body>/<main> и наличие <template> на PAY_PAGES.
+HIDE_DENYLIST = ("display:none", "visibility:hidden", "height:0", "opacity:0")
+
+
+def hidden_by(html: str) -> list:
+    hits = []
+    for tag in re.findall(r"<(?:body|main)\b[^>]*>", html, flags=re.I):
+        flat = re.sub(r"\s+", "", tag).lower()   # 'display: none' → 'display:none'
+        hits += [t for t in HIDE_DENYLIST
+                 if re.search(re.escape(t) + r"(?![.\d])", flat)]  # opacity:0.9 — не 0
+        if re.search(r"\shidden(?=[\s>/=])", tag, flags=re.I):     # атрибут, не класс
+            hits.append("hidden")
+    if re.search(r"<template\b", html, flags=re.I):
+        hits.append("<template>")
+    return hits
+
+
+hide_hits = {p: hidden_by(read(p)) for p in PAY_PAGES}
+hide_hits = {p: h for p, h in hide_hits.items() if h}
+check("G2 /pricing/ и /refunds/ не спрятаны целиком — ДЕНИЛИСТ на "
+      "<body>/<main>: display:none, visibility:hidden, height:0, opacity:0, "
+      "атрибут hidden, <template> (денилист, не доказательство видимости)",
+      not hide_hits, f"факт: {hide_hits}")
+
+# G3 (M38): нижнего порога содержательности не было — <head> + строка-суп
+# с ключевыми словами + юрфутер проходили PAY1+PAY2+LTD1. Порог ТОЛЬКО для
+# PAY_PAGES (у входных — ВЕРХНИЙ бюджет A5). Замеры word_count всей
+# страницы 05.09: /pricing/ = 423 (436 до снятия PRO), /refunds/ = 322,
+# минимальный суп ≈ 30 слов; 150 — с запасом в обе стороны.
+PAY_WORD_FLOOR = 150
+pay_wc = {p: word_count(read(p)) for p in PAY_PAGES}
+thin = {p: n for p, n in pay_wc.items() if n < PAY_WORD_FLOOR}
+check(f"G3 /pricing/ и /refunds/ содержательны: ≥ {PAY_WORD_FLOOR} слов "
+      f"видимого текста (факт "
+      f"{' '.join(f'{PAY_PAGES[p]}={n}' for p, n in pay_wc.items())})",
+      not thin, f"мало слов: {thin}")
+
+# G4 (M40): ту же претензию — Paddle как Merchant of Record — в terms
+# сторожит PAY4; абзац privacy §8 не сторожил никто.
+privacy_text = strip_text(read("privacy.html"))
+check("G4 privacy.html (видимый текст): Paddle назван Merchant of Record "
+      "(§8; та же претензия, что PAY4 держит в terms)",
+      "Paddle" in privacy_text
+      and "merchant of record" in privacy_text.lower())
+
+# G5 (M29): PAY10 привязан к двум документам — «Russia» на /for-companies/
+# прошла бы. Тот же COUNTRY_LIST, но по всему сайту, как PAY7.
+country_hits_all = {}
+for f in HTML_FILES:
+    found = [c for c in COUNTRY_LIST if c in read(f)]
+    if found:
+        country_hits_all[f] = found
+check(f"G5 ни один html сайта не называет страны {COUNTRY_LIST} "
+      "(глобально по rglob, как PAY7; PAY10 держит только terms/privacy)",
+      not country_hits_all, f"найдено: {country_hits_all}")
+
+# G6 (M41a/M41b): LTD_PAGES, PAY_PAGES, REDIRECTS — жёсткие кортежи; новая
+# англоязычная страница выходила без юрблока, без canonical и вне sitemap
+# молча. Множество содержательных страниц ВЫВОДИТСЯ из rglob минус явные
+# исключения, а не перечисляется: REDIRECTS (заглушки), download.html
+# (заглушка DL3) и google0dd040fd25f43a16.html (подтверждение Search
+# Console — удалять нельзя; canonical и юрблока не несёт).
+# G6a — canonical (ПРИСУТСТВИЕ, не равенство своему URL: зеркала /en/* по
+# L4/L5 указывают на корень) + адрес в sitemap.xml (исключение — явный
+# список, не robots: /invest/ по PAY9). og:url и hreflang НЕ требуются —
+# их нет у части легитимных страниц.
+# G6b — юрблок: цикл LTD1 ниже обходит CONTENT_PAGES сверх именованного
+# LTD_PAGES (отдельной строки нет намеренно — она дублировала бы LTD1).
+NON_CONTENT = ("download.html", "google0dd040fd25f43a16.html")
+CONTENT_PAGES = [f for f in HTML_FILES
+                 if f not in REDIRECTS and f not in NON_CONTENT]
+SITEMAP_EXEMPT = ("invest/index.html",)   # /invest/ — намеренно вне sitemap
+
+
+def sitemap_locs_of(rel: str) -> tuple:
+    """Допустимые <loc> файла. x/index.html → /x/ И /x: sitemap держит
+    /downloads без слэша, и DL3 пинит именно этот адрес."""
+    if rel == "index.html":
+        return (f"{SITE}/",)
+    if rel.endswith("/index.html"):
+        d = rel[:-len("/index.html")]
+        return (f"{SITE}/{d}/", f"{SITE}/{d}")
+    return (f"{SITE}/{rel}",)
+
+
+no_canonical = [f for f in CONTENT_PAGES
+                if not re.search(r'<link\b[^>]*\brel="canonical"', read(f))]
+not_in_sitemap = [f for f in CONTENT_PAGES if f not in SITEMAP_EXEMPT
+                  and not any(f"<loc>{u}</loc>" in sitemap
+                              for u in sitemap_locs_of(f))]
+check(f"G6a все {len(CONTENT_PAGES)} содержательных страниц (rglob минус "
+      f"REDIRECTS и {NON_CONTENT}): есть <link rel=\"canonical\"> и адрес "
+      "в sitemap.xml (кроме /invest/)",
+      bool(CONTENT_PAGES) and not no_canonical and not not_in_sitemap,
+      f"без canonical: {no_canonical}; нет в sitemap: {not_in_sitemap}")
+
+
+# G7 (M42): соответствие sitemap ↔ файлы не проверялось ни в одну сторону —
+# несуществующий URL в sitemap проходил. Каждый <loc> → существующий файл:
+# «/» → index.html; «/x/» → x/index.html; «/x.html» → x.html;
+# «/x» без слэша и без .html → x/index.html (так в sitemap живёт /downloads).
+def file_of_loc(loc: str):
+    if not loc.startswith(f"{SITE}/"):
+        return None                       # чужой хост — тоже дефект
+    path = loc[len(SITE):]
+    if path == "/":
+        return "index.html"
+    if path.endswith(".html"):
+        return path.lstrip("/")
+    return path.strip("/") + "/index.html"
+
+
+sm_locs = re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", sitemap)
+ghost = {}
+for loc in sm_locs:
+    rel = file_of_loc(loc)
+    if rel is None or not (ROOT / rel).is_file():
+        ghost[loc] = rel
+check(f"G7 sitemap.xml: каждый из {len(sm_locs)} <loc> ведёт на "
+      "существующий файл (/ → index.html; /x/ и /x → x/index.html; "
+      "/x.html → x.html)",
+      bool(sm_locs) and not ghost, f"нет файла: {ghost}")
+
+
 # ── Группа LTD: корпоративный юрблок SKIPI LTD (опубликован 03.09) ─
 # Обязательные по закону сведения UK-компании. Волна «только английский»
 # не имеет права их повредить, поэтому инвариант зафиксирован тестом.
@@ -708,6 +858,11 @@ check("DL3 download.html: англоязычная заглушка-перехо
 # 05.09: список был хардкодом из 11 страниц — новые страницы вышли бы
 # без юрблока, а тест смолчал бы. Добавлены /pricing/, /refunds/ и
 # ip-notice.html (юрблока не имел вовсе, контакт вёл на чужой домен).
+# 05.09-II (№200, G6b): механизм починен. LTD_PAGES остаётся именованным
+# МИНИМУМОМ — пином существования каждой из 14 страниц (удалённая
+# страница краснеет; ip-notice.html иначе не сторожит никто), а цикл LTD1
+# сверх него обходит все CONTENT_PAGES, выведенные из rglob (группа G):
+# новая страница без юрблока краснеет сама, без правки списка.
 LTD_PAGES = (
     "index.html", "en/index.html", "story/index.html", "en/story/index.html",
     "downloads/index.html", "support/index.html", "invest/index.html",
@@ -717,7 +872,8 @@ LTD_PAGES = (
 )
 LTD_STRINGS = ("SKIPI LTD", "England and Wales", "17433479",
                "182-184 High Street North", "E6 2JA", "info@skipi.app")
-for page in LTD_PAGES:
+for page in LTD_PAGES + tuple(p for p in CONTENT_PAGES
+                              if p not in LTD_PAGES):   # G6b
     html = read(page)
     missing = [t for t in LTD_STRINGS if t not in html]
     check(f"LTD1 {page}: юрблок SKIPI LTD полный "
