@@ -560,11 +560,20 @@ for page, url in PAY_PAGES.items():
 pricing_text = strip_text(pricing)
 refunds_text = strip_text(refunds)
 
-PRICING_MUST = ("$10", "per seat", "14-day free trial",
-                "Merchant of Record", "Paddle")
+# 05.09-II (три SKU по $10, DECISIONS (248)/(269)): пины стали фразами,
+# а не словами — «$10» и «per seat» оставались зелёными при «Assistant —
+# $5» рядом с «Broker — $10». Merchant of record в обеих формах: §7 плана
+# вводит строчную в подписи о биллинге, раздел «Who you buy from» держит
+# прописную; уронить любую — красный. «free tier» — обещание бесплатного
+# уровня Assistant с дневным лимитом (владелец: платный = без лимита).
+PRICING_MUST = ("$10 per month", "$10 per seat, per month",
+                "14-day free trial", "merchant of record",
+                "Merchant of Record", "Paddle", "Cancel anytime",
+                "free tier")
 missing = [t for t in PRICING_MUST if t not in pricing_text]
-check("PAY2 /pricing/ (видимый текст): цена, единица, триал, merchant "
-      f"of record, Paddle {PRICING_MUST}",
+check("PAY2 /pricing/ (видимый текст): Assistant $10 per month, Broker/"
+      "Crewing $10 per seat, per month, триал, merchant of record (обе "
+      f"формы), Paddle, Cancel anytime, free tier {PRICING_MUST}",
       bool(pricing) and not missing, f"нет: {missing}")
 
 REFUNDS_MUST = ("14 days", "full refund", "Paddle", "info@skipi.app")
@@ -672,6 +681,35 @@ pro_hits = {f: n for f, n in pro_hits.items() if n}
 check("PAY12 слова «PRO» нет ни в одном html сайта (полный html, включая "
       "JSON-LD; owner 05.09 — «PRO снимается совсем»)",
       not pro_hits, f"найдено: {pro_hits}")
+
+# 05.09-II (три SKU): Skipi Assistant стал платной подпиской ($10/мес без
+# дневного лимита), а страница называла его «free» и в lede/meta/og писала
+# «free for seafarers». Платный продукт, названный бесплатным, — то самое
+# расхождение витрины и продукта, которое ищет платёжный андеррайтинг
+# (см. PAY12). Негатив по ПОЛНОМУ html (meta/og мимо strip_text), допустимые
+# контексты — ЛИТЕРАЛЬНЫЙ кортеж (не регэксп: «free» после любого слова
+# прошёл бы), регистр не учитывается. Код — аудит Супервайзора
+# AUDIT-2026-09-05-pricing-three-skus-prep.md §C3.
+FREE_OK = ("Seafarer &mdash; free",     # абзац Plans: «Skipi Seafarer &mdash; free.»
+           "Seafarer app is free",      # lede/meta/og после правки C1
+           "free tier", "free trial")
+html = read("pricing/index.html")
+rest = re.sub(r"<style\b.*?</style>", " ", html, flags=re.S | re.I)
+for ok in FREE_OK:
+    rest = re.sub(re.escape(ok), " ", rest, flags=re.I)
+stray = [re.sub(r"\s+", " ", rest[max(0, m.start()-35):m.end()+12])
+         for m in re.finditer(r"\bfree\b", rest, re.I)]
+check("PAY13 /pricing/: «free» только у Seafarer и в free tier/free trial "
+      f"(кортеж {FREE_OK}; полный html)", not stray, f"лишнее: {stray}")
+
+# 05.09-II (три SKU): PAY6 читает цену только в хвосте «Broker|Crewing …
+# $N» — «Skipi Assistant &mdash; $5 per month» проходил мимо (аудит §C4,
+# MUT5). Глобальный пин: любая сумма `$N` в видимом тексте /pricing/ равна
+# 10 и хотя бы одна есть (пустое множество — тоже красный).
+pricing_amounts = set(re.findall(r"\$(\d+)", pricing_text))
+check("PAY14 /pricing/ (видимый текст): все суммы $N на странице = только "
+      f"$10, у всех трёх SKU (факт {sorted(pricing_amounts)})",
+      pricing_amounts == {"10"}, f"суммы: {sorted(pricing_amounts)}")
 
 # ── Группа DL: страница загрузок англоязычная (owner 03.09) ────────
 # /downloads была последней русской страницей сайта; переведена целиком
