@@ -242,6 +242,70 @@ footer.legal-foot {
 .voyage-bar .brand .dot { color: var(--accent); }
 .cta.cta-bar { font-size: 0.88rem; padding: 0.55em 1.2em; }
 
+/* ── верхняя навигация (owner 06.09): «про загрузки нужно поставить на
+      сайте ссылку вверху downloads» + «я не хочу перегружать центральную
+      область». Ссылка живёт ТОЛЬКО в шапке: маленькая, но видимая —
+      не .quiet (служебный вид футера) и не .cta (инвариант I1 держит
+      .cta ровно на трёх SaaS-входах). Центр страниц не тронут. ── */
+
+.top-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.top-link {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.88rem;
+    padding: 0.55em 1.15em;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    color: var(--accent-dk);
+    transition: background 0.25s ease, color 0.25s ease,
+                border-color 0.25s ease;
+}
+.top-link:hover {
+    background: var(--accent-dk);
+    border-color: var(--accent-dk);
+    color: #fff;
+}
+
+/* на входной странице шапки не было: полоса без фона и без бренда —
+   гигантский вордмарк «Skipi.» стоит ниже, дублировать его нечем */
+.voyage-bar.entry-bar {
+    justify-content: flex-end;
+    background: none;            /* полоса поверх героя: ни фона, ни бренда —
+                                    гигантский вордмарк «Skipi.» стоит ниже */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+/* Полоса фиксированная, поэтому НИ ОДИН пиксель центра не сдвигается
+   (owner 06.09: «я не хочу перегружать центральную область»). Исключение —
+   узкий экран: замер 320x700 показал, что ссылка наезжает на кикер
+   «UNITED SEAFARERS» на 22px. Там и только там полоса уходит в поток и
+   встаёт над героем. Порог 380px выбран по замерам зазора между кикером и
+   ссылкой: 390px → 13px, 375px → 5px, 360px → -2px, 320px → -22px.
+   На 390x844 (обычный телефон) поток вместо fixed утопил бы нижнюю строку
+   героя под футер — поэтому шире порога полоса остаётся fixed. */
+@media (max-width: 380px) {
+    .voyage-bar.entry-bar { position: static; }
+    body.entry-page {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        min-height: 100svh;
+    }
+    body.entry-page .entry { flex: 1 1 auto; min-height: 0; }
+}
+
+@media (max-width: 480px) {
+    .voyage-bar { padding: 0.7rem 0.85rem; }
+    .top-nav { gap: 0.4rem; }
+    .top-link { font-size: 0.78rem; padding: 0.5em 0.9em; }
+    .cta.cta-bar { font-size: 0.78rem; padding: 0.5em 0.9em; }
+}
+
 .scene {
     min-height: 100vh;
     min-height: 100svh;
@@ -362,5 +426,5 @@ footer.legal-foot {
     html { scroll-behavior: auto; }
     .reveal { opacity: 1; transform: none; transition: none; }
     .hint { animation: none; }
-    .cta, .ghost { transition: none; }
+    .cta, .ghost, .top-link { transition: none; }
 }

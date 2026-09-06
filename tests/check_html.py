@@ -34,6 +34,8 @@
   X — англоязычность: переключателя нет, неанглийских hreflang нет,
       русских страниц не осталось.
   DL — страница загрузок и её заглушка англоязычные.
+  NAV — ссылка «Downloads» в верхней навигации (owner 06.09): вверху,
+      заметная, а центральная область страниц не тронута.
   LTD — юрблок SKIPI LTD (опубликован 03.09) на месте.
   G — щели, вскрытые мутациями (№200, 05.09): индексируемость и
       видимость витрины, нижний порог слов, Paddle в privacy, страны
@@ -45,6 +47,7 @@
 Запуск:  python3 tests/check_html.py   (exit 0 = все PASS)
 """
 
+import hashlib
 import re
 import sys
 from pathlib import Path
@@ -728,6 +731,102 @@ check("DL2 downloads: ссылки на артефакты релизов жив
       bool(dl)
       and dl.count("https://github.com/CaptTymur/") >= 10
       and "https://play.google.com/store/apps/details?id=app.skipi.seafarer" in dl)
+
+# ── Группа NAV: ссылка «Downloads» в верхней навигации (owner 06.09) ─
+# HARM: зрители видео («35 тыс. просмотров → 10+ установок») писали «как
+# скачать?», «не могу найти что скачать», «по ссылке кидает на разные
+# формы». Страница /downloads была и работала — но ссылка на неё стояла
+# ВНИЗУ, в служебном списке с Pricing/Terms/Privacy, классом .quiet:
+# зритель её не видел. Owner (дословно): «про загрузки нужно поставить
+# на сайте ссылку вверху downloads» и «я не хочу перегружать центральную
+# область» → ссылка живёт ТОЛЬКО в шапке, центр не трогаем.
+NAV_PAGES = ("index.html", "en/index.html",
+             "story/index.html", "en/story/index.html")
+DL_HREF = "/downloads"
+NAV_LABEL = "Downloads"
+
+
+def header_of(html: str) -> str:
+    """Разметка ДО основного содержимого: <header>…</header>, а если его
+    нет — всё, что стоит перед <main>. Так «вверху» проверяется по
+    положению в разметке, а не по CSS."""
+    if "</header>" in html:
+        return html.split("</header>", 1)[0]
+    m = re.search(r"<main\b", html)
+    return html[:m.start()] if m else ""
+
+
+for page in NAV_PAGES:
+    html = read(page)
+    head_html = header_of(html)
+    link = re.search(r'<a\b[^>]*\bhref="%s"[^>]*>([^<]*)</a>'
+                     % re.escape(DL_HREF), head_html)
+    check(f"NAV1 {page}: ссылка «{NAV_LABEL}» → {DL_HREF} стоит В ШАПКЕ "
+          "(до основного содержимого страницы)",
+          bool(link) and NAV_LABEL in link.group(1),
+          "в разметке до <main> нет ссылки на /downloads")
+
+    # не служебная: .quiet — вид футерных ссылок, из-за которого зритель
+    # её не видел; .cta запрещён инвариантом I1 (три SaaS-входа).
+    cls = re.search(r'class="([^"]*)"', link.group(0)) if link else None
+    cls = cls.group(1) if cls else ""
+    check(f"NAV2 {page}: ссылка в шапке заметная — класс «{cls}»: "
+          "не quiet и не cta",
+          bool(link) and "quiet" not in cls.split() and "cta" not in cls,
+          f"класс ссылки: {cls!r}")
+
+# Центральная область НЕ перегружается: owner 06.09 дословно «я не хочу
+# перегружать центральную область». <main> каждой из четырёх страниц —
+# БАЙТ В БАЙТ как до правки. Хеши сняты 06.09 с master dc06665; менять их
+# можно только вместе с осознанным решением по центру страницы.
+MAIN_SHA = {
+    "index.html":
+        "40dfa8b39691b1a4f5c935b1b63484bad93332e53d4d07ac8a538a07d2f4e962",
+    "en/index.html":
+        "12aecc005691887a3a5829ea63d43f67c418ed5e45d70e8f8312a8d7d5ee46a9",
+    "story/index.html":
+        "a73b801bb0caa6ba1028b02263598dd07c92ac9ead40dc2a1f223e814f2e2e66",
+    "en/story/index.html":
+        "c861add1824a435f2d4bed27d7d563d813f23ef411d3dad10701c84e339422cb",
+}
+for page, want in MAIN_SHA.items():
+    got = hashlib.sha256(main_of(read(page)).encode("utf-8")).hexdigest()
+    check(f"NAV3 {page}: центральная область <main> не тронута "
+          "(снимок региона байт-в-байт; ни кнопки, ни баннера, ни блока)",
+          got == want, f"sha256(<main>) стал {got}, ожидался {want}")
+
+# Ссылка на загрузки не просачивается в развилку домов: центр остаётся
+# ровно «Seafarer / Crewing manager / Broker».
+for page in ("index.html", "en/index.html"):
+    hero = main_of(read(page))
+    fork = hero.split('class="entry-fork"', 1)[-1].split("</nav>", 1)[0]
+    check(f"NAV4 {page}: внутри развилки домов ссылки на {DL_HREF} нет "
+          "(центр не перегружаем)",
+          bool(fork) and f'href="{DL_HREF}' not in fork)
+
+# Футер оставлен как есть: служебная ссылка внизу никуда не делась,
+# верхняя её не заменяет, а добавляет видимый путь.
+for page in ("index.html", "en/index.html"):
+    html = read(page)
+    foot = html.split("<footer", 1)[-1]
+    check(f"NAV5 {page}: футерная ссылка «{NAV_LABEL}» на месте "
+          "(верхняя добавлена, служебная не удалена)",
+          f'href="{DL_HREF}"' in foot and NAV_LABEL in foot)
+
+# Цель ссылки жива и ведёт в магазин ровно нашим app-id. На /downloads
+# ДВА адреса play.google.com, и это разные вещи: страница МАГАЗИНА
+# Skipi Seafarer (одна, пинится точным PLAY_URL) и testing-адрес
+# закрытого теста Crewing (play.google.com/apps/testing/…). Пин на
+# «ровно одну ссылку в магазин» ловит и лишний магазинный адрес, и
+# подмену app-id.
+dl_page = read("downloads/index.html")
+store_links = re.findall(r"https://play\.google\.com/store/apps/details[^\"']*",
+                         dl_page)
+check("NAV6 /downloads: РОВНО одна ссылка на страницу магазина "
+      f"play.google.com и это PLAY_URL с id=app.skipi.seafarer "
+      f"(факт {store_links})",
+      store_links == [PLAY_URL], f"магазинные ссылки: {store_links}")
+
 
 dl_stub = read("download.html")
 check("DL3 download.html: англоязычная заглушка-переход на /downloads "
