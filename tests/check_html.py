@@ -986,6 +986,14 @@ TOTALITY_BANNED = ("completely", "permanently", "forever", "everywhere",
                    "all systems", "all our systems", "every system",
                    "all copies", "without a trace", "no trace",
                    "erased from all", "wiped from",
+                   # 07.09: дрилл M17 показал побег — та же ложь, собранная
+                   # синонимами, ни одного слова из списка выше. Добавлены
+                   # ровно продемонстрированные идиомы; проверено, что ни одна
+                   # из 26 страниц сайта их сегодня не содержит.
+                   "not a single byte", "anywhere on our",
+                   "any place we operate", "nothing of yours",
+                   "nothing is left", "nothing remains", "no copies",
+                   "leaves nothing", "for good",
                    "полностью", "навсегда", "без следа")
 DELETE_PAGES = [f for f in HTML_FILES
                 if re.search(r"delete\w*\W{1,40}account|account\W{1,40}delet",
@@ -1041,6 +1049,62 @@ check("DA9 страница удаления статическая: нет <scr
       bool(delp) and "<script" not in delp.lower()
       and "<form" not in delp.lower() and not del_ext,
       f"внешние хосты: {del_ext}")
+
+# DA10 (07.09) — СРОКИ ХРАНЕНИЯ. Форма Data safety, в которую менеджер
+# вписывает этот URL, дословно требует, чтобы по ссылке содержалась
+# информация «о том, данные каких типов будут удалены или сохранены, И О
+# СРОКАХ ХРАНЕНИЯ». Без срока у сохраняемой категории ссылка не выполняет
+# требование, под которое её вписывают, — то есть это блокер декларации,
+# а не стилистика. Проверка не читает сам срок (число или критерий —
+# решение автора), она держит СТРУКТУРУ: у каждого пункта «что остаётся»
+# есть явная строка «How long:». Счёт по верхнеуровневым <li><strong> —
+# вложенные подпункты попадают в кусок своего родителя, поэтому пункт,
+# у которого срок стоит только в подпункте, всё равно засчитывается.
+m_kept = re.search(r"<h2>What is kept, and why</h2>(.*?)<h2>", delp, flags=re.S)
+kept_block = m_kept.group(1) if m_kept else ""
+kept_chunks = kept_block.split("<li><strong>")[1:]
+kept_no_term = [re.sub(r"\s+", " ", strip_text(c.split("</strong>")[0]))[:40]
+                for c in kept_chunks if "How long:" not in c]
+check("DA10 у КАЖДОЙ сохраняемой категории на странице удаления назван срок "
+      "хранения или критерий («How long:») — дословное требование формы "
+      f"Data safety (пунктов «что остаётся»: {len(kept_chunks)})",
+      bool(kept_block) and len(kept_chunks) >= 5 and not kept_no_term,
+      f"без срока: {kept_no_term}" if kept_block else "раздел «What is kept» не найден")
+
+# DA11 (07.09) — ДВЕ НЕПРАВДЫ, снятые по аудиту 07.09
+# (skipi-supervisor/audits/AUDIT-2026-09-07-play-datasafety-account-declaration.md).
+# Обе были правдоподобны и обе опровергаются кодом, поэтому держим их
+# исправленное состояние пином, а не памятью:
+#  (а) «Anything already delivered … is in their hands» перекладывало на
+#      получателя то, что физически лежит у НАС: crewing_bundles/<uid> ключуется
+#      ИЗВЛЕКАТЕЛЕМ, и распакованный плейнтекстовый CV моряка остаётся на нашем
+#      сервере под каталогом агентства (webapp/crewing_inbox.delete_user_bundles,
+#      skipi-ops DECISIONS (383), RISKS №233b);
+#  (б) «переписки удаляются» в одном разделе против «журналы ассистента не
+#      затрагиваются» в другом читалось как два взаимоисключающих утверждения;
+#      правда — ВТОРАЯ КОПИЯ тех же вопросов и ответов в журналах (RISKS №232b).
+# Каждая половина ищется В СВОЁМ разделе, а не «где-нибудь на странице»:
+# первая редакция искала «on our server» по всей странице и ловила его на
+# соседней фразе списка «что удаляется» («files kept for your account on our
+# serverS») — то есть мутация, вернувшая ложь «в его руках», оставляла чек
+# зелёным. Проверка, которую нельзя провалить мутацией, ничего не проверяет.
+m_del = re.search(r"<h2>What is deleted</h2>(.*?)<h2>", delp, flags=re.S)
+deleted_block = re.sub(r"\s+", " ", strip_text(m_del.group(1) if m_del else ""))
+kept_flat = re.sub(r"\s+", " ", strip_text(kept_block))
+honesty_missing = []
+if not re.search(r"working folder on our server", kept_flat, re.I):
+    honesty_missing.append(
+        "(а) в разделе «что остаётся» не сказано, что распакованная копия "
+        "лежит в рабочем каталоге получателя НА НАШЕМ СЕРВЕРЕ")
+if not re.search(r"second copy", deleted_block, re.I):
+    honesty_missing.append(
+        "(б) в разделе «что удаляется» не сказано, что у вопросов и ответов "
+        "есть ВТОРАЯ КОПИЯ в журналах сервиса")
+check("DA11 обе неправды, снятые аудитом 07.09, не вернулись: страница "
+      "говорит, что копия отправленного остаётся НА НАШЕМ СЕРВЕРЕ у "
+      "получателя, и что вопросы/ответы имеют ВТОРУЮ КОПИЮ в журналах "
+      "сервиса (RISKS №232b, №233b)",
+      not honesty_missing, "; ".join(honesty_missing))
 
 
 # ── Группа G: щели сьюта, вскрытые мутациями (BACKLOG №200; аудиты 05.09) ─

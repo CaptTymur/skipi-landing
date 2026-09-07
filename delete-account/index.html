@@ -71,7 +71,7 @@
     <li>your sign-in data: display name, email address and password;</li>
     <li>your seafarer profile as it is stored in your Skipi account;</li>
     <li>the files kept for your account on our servers &mdash; your account vault folder and the files attached to packages you have sent;</li>
-    <li>your assistant conversations stored for the account, including questions still waiting in the queue and the answers to them;</li>
+    <li>your assistant conversations as they are stored against your account &mdash; the history you see in the app, the questions still waiting in the queue and the answers to them. A second copy of the same questions and answers stays in the working logs of the assistant service, and this deletion does not reach it &mdash; see &ldquo;Working logs of the assistant service&rdquo; below;</li>
     <li>service emails to you that are still in our sending queue, and any sign-in links issued for your address;</li>
     <li>the remaining records tied to your account in the service: mailings, packages, messages and their attachments.</li>
 </ul>
@@ -80,12 +80,26 @@
 
 <h2>What is kept, and why</h2>
 
+<p>Each item below says how long it stays. Where there is no fixed period, we say what the period depends on instead of naming a number we cannot keep.</p>
+
 <ul>
-    <li><strong>Payment records, anonymised.</strong> The amount, date, reference code and status of each payment stay in our books, without your name or contact details. A seller has to keep records of what was sold and invoiced; UK GDPR Article 17(3)(b) is the ground for keeping them.</li>
-    <li><strong>An empty account row.</strong> The account itself stays as an anonymised marker &mdash; no name, no password, no working sign-in &mdash; because the payment records above refer to it. Nobody can log into it, and it holds nothing about you beyond that reference.</li>
-    <li><strong>Working logs of the assistant service.</strong> While the assistant answers questions it writes working logs, and account deletion does not reach them today. If you want the entries about you removed from those logs, say so in your email and we do it by hand. We would rather write this down than promise a clean sweep we cannot perform.</li>
-    <li><strong>Operational backups.</strong> We keep backups of our databases so the service can be restored after a failure. A backup taken before your deletion still holds what was in the database at that moment, until it is replaced by a newer one. Backups are not used to bring deleted accounts back.</li>
-    <li><strong>Anything already delivered to someone else.</strong> A CV, package or message that has reached an employer, a crewing company or another recipient is in their hands, and we cannot recall it.</li>
+    <li><strong>Payment records, anonymised.</strong> The amount, date, reference code and status of each payment stay in our books, without your name or contact details. A seller has to keep records of what was sold and invoiced; UK GDPR Article 17(3)(b) is the ground for keeping them.<br>
+        <em>How long:</em> for as long as UK company and tax law requires a seller to keep records of a sale. We have not set a shorter period of our own.</li>
+
+    <li><strong>An empty account row.</strong> The account itself stays as an anonymised marker &mdash; no name, no password, no working sign-in &mdash; because the payment records above refer to it. Nobody can log into it, and it holds nothing about you beyond that reference.<br>
+        <em>How long:</em> as long as the payment records that point to it. It goes when they go.</li>
+
+    <li><strong>Working logs of the assistant service.</strong> While the assistant answers questions it writes working logs, and those logs hold the text of the questions and the answers together with the display name that was on the account. Account deletion does not reach them today.<br>
+        <em>How long:</em> we have not set a retention period for these logs, so today nothing deletes them on a timer. If you want the entries about you taken out, say so in your email and we do it by hand. We would rather write this down than promise a sweep we do not perform.</li>
+
+    <li><strong>Operational backups.</strong> We keep copies of our databases so the service can be restored after a failure. A copy taken before your deletion still holds what was in the database at that moment. Backups are not used to bring deleted accounts back.<br>
+        <em>How long:</em> the routine copies roll over &mdash; 7 days on the server and 30 days in our off-site backup storage, after which they are deleted automatically. Copies outside that rotation live longer: snapshots we take by hand before a risky change, and an archive of older copies we keep as history. Those have no fixed expiry and are deleted when we no longer need them.</li>
+
+    <li><strong>Files you sent, unpacked in the recipient's folder on our server.</strong> Sending a CV, a package or a message means somebody receives it, and deleting your account does not take it back from them. When a crewing company opens a package you sent, the files are unpacked &mdash; decrypted &mdash; into that company's own working folder on our server. That folder is keyed to their account, not to yours: only they can reach it through the app, and deleting your account does not remove it.<br>
+        <em>How long:</em> unpacked copies are cleared on a 24-hour timer. The timer runs when a crewing user next opens a package, so a copy can sit longer than 24 hours if nobody opens one. If you want it gone sooner, say so in your email and we look for it and remove it by hand.</li>
+
+    <li><strong>What the recipient has taken away.</strong> Whatever the recipient has saved to their own computer, forwarded, or received by email is with them, outside Skipi.<br>
+        <em>How long:</em> we cannot say. It is their copy, kept under their own rules, and we have no way to reach it or to delete it for you.</li>
 </ul>
 
 <h2>Documents on your device</h2>
