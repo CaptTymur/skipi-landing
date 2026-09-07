@@ -1106,6 +1106,47 @@ check("DA11 обе неправды, снятые аудитом 07.09, не в�
       "сервиса (RISKS №232b, №233b)",
       not honesty_missing, "; ".join(honesty_missing))
 
+# DA12 (07.09) — ОТРИЦАТЕЛЬНАЯ половина DA11, заведена по мутации менеджера
+# на приёмке. DA11 держит, что правда ПРИСУТСТВУЕТ, и этого мало: менеджер
+# заменил предложение «That folder is keyed to their account, not to yours»
+# на старую ложь «Anything already delivered to someone else is in their
+# hands, and we cannot recall it» — и сьют остался ЗЕЛЁНЫМ, потому что
+# правда уцелела в соседних предложениях того же абзаца. Для комплайанс-
+# документа это ХУЖЕ отсутствия проверки: страница утверждает одновременно
+# и то и другое, и регулятор читает противоречие в одном абзаце.
+# Отсюда пара, как у DA8/DA5: положительная половина (правда есть) + эта
+# (лжи нет). Ловится КЛАСС утверждения «отправленное только у получателя,
+# мы до него не дотянемся» несколькими формулировками, а не одной строкой.
+# Опровергается кодом: crewing_bundles/<uid> ключуется ИЗВЛЕКАТЕЛЕМ, и
+# распакованный плейнтекстовый CV лежит на НАШЕМ сервере
+# (webapp/crewing_inbox.delete_user_bundles, DECISIONS (383), RISKS №233b).
+# Границы списка: «not on our servers» намеренно НЕ включён — эта строка
+# живо стоит в разделе «Documents on your device» («those files are not on
+# our servers unless you send them somewhere») и там она ПРАВДА про
+# локальный сейф. Проверено, что остальные 20 строк не встречаются ни на
+# одной из html-страниц сайта.
+DELIVERED_LIE = ("in their hands", "in his hands",
+                 "cannot recall", "can not recall", "can't recall",
+                 "out of our reach", "beyond our reach",
+                 "no longer on our server", "off our servers",
+                 "only with the recipient", "solely with the recipient",
+                 "entirely with the recipient", "the recipient alone",
+                 "we keep no copy", "keep no copy", "no copy of it",
+                 "we hold no copy", "cannot take it back",
+                 "gone from our side", "no access to it")
+delivered_hits = {}
+for f in DELETE_PAGES:
+    low = read(f).lower()
+    hits = [w for w in DELIVERED_LIE if w in low]
+    if hits:
+        delivered_hits[f] = hits
+check("DA12 ни одна страница про удаление аккаунта не утверждает, что "
+      "отправленное лежит ТОЛЬКО у получателя и мы до него не дотянемся "
+      f"(денилист {len(DELIVERED_LIE)} формулировок; страницы выведены из "
+      f"rglob: {DELETE_PAGES}): распакованный плейнтекстовый CV остаётся на "
+      "НАШЕМ сервере в каталоге агентства (RISKS №233b)",
+      bool(DELETE_PAGES) and not delivered_hits, f"утверждает: {delivered_hits}")
+
 
 # ── Группа G: щели сьюта, вскрытые мутациями (BACKLOG №200; аудиты 05.09) ─
 # Каждая проверка заведена под одну конкретную мутацию, на которой сьют
