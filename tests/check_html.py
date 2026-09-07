@@ -730,19 +730,22 @@ check("PAY14 /pricing/ (видимый текст): все суммы $N на с
 # документов, позитив — фраза о включённом налоге на каждом из них.
 TAX_BANNED = ("excluding VAT", "exclude VAT", "excludes VAT",
               "added at checkout", "excluding tax", "plus VAT")
-TAX_MUST = {"pricing/index.html": "include VAT and sales tax",
-            "terms.html": "include VAT and sales tax"}
-tax_bad, tax_silent = {}, []
-for page in ("pricing/index.html", "terms.html"):
-    txt = strip_text(read(page))
-    hits = [b for b in TAX_BANNED if b.lower() in txt.lower()]
+# Позитив требуется от двух документов, которые обязаны объяснить налог;
+# НЕГАТИВ — по ВСЕМУ сайту: аудит Супервайзора 06.09 показал, что та же
+# ложь, вставленная в /refunds/, оставляла сьют зелёным, пока денилист
+# смотрел ровно две страницы.
+TAX_MUST = "include VAT and sales tax"
+TAX_PAGES = ("pricing/index.html", "terms.html")
+tax_bad = {}
+for page in HTML_FILES:
+    hits = [b for b in TAX_BANNED
+            if b.lower() in strip_text(read(page)).lower()]
     if hits:
         tax_bad[page] = hits
-    if TAX_MUST[page] not in txt:
-        tax_silent.append(page)
-check("PAY15 /pricing/ и terms.html: цена ВКЛЮЧАЕТ налог — фраза "
-      f"«{TAX_MUST['pricing/index.html']}» есть, обещаний «налог сверху» "
-      f"нет {TAX_BANNED}",
+tax_silent = [page for page in TAX_PAGES
+              if TAX_MUST not in strip_text(read(page))]
+check(f"PAY15 цена ВКЛЮЧАЕТ налог: фраза «{TAX_MUST}» есть на {TAX_PAGES}, "
+      f"а обещания «налог сверху» нет НИ НА ОДНОЙ странице {TAX_BANNED}",
       not tax_bad and not tax_silent,
       f"обещает налог сверху: {tax_bad}; молчит о включённом: {tax_silent}")
 
@@ -764,43 +767,120 @@ check("PAY16 слова «seat/seats» нет ни в одном html сайта
 # Paddle верифицирует продавца сверкой сайта с каталогом, и цену печатает
 # не только /pricing/: «$10/mo» жил ещё в /invest/ (включая JSON-LD, его
 # читают роботы) и на /for-companies/. PAY6 сверял только две страницы и
-# только хвост «Broker|Crewing … $N». Здесь — любая месячная сумма в
-# ЛЮБОМ html сайта: она обязана быть ровно каталожной.
-MONTHLY_RE = re.compile(r"\$(\d+(?:\.\d+)?)\s*(?:/\s*mo\b|per month|"
-                        r"a month|/\s*month\b|per seat)", re.I)
-monthly = {}
+# только хвост «Broker|Crewing … $N».
+# Первая редакция этой проверки читала только «$N + месяц» и пропускала
+# три подмены (аудит Супервайзора 06.09): «USD 10 per month» (сумма без
+# знака), «€11.45» (чужая валюта при верной цифре) и «$120 per year»
+# (другой период — годовых позиций в каталоге Paddle нет). Теперь
+# разбирается ЛЮБАЯ пара «сумма + период»: валюта обязана быть долларом,
+# сумма — каталожной, период — месячным.
+PRICE_TOKEN = re.compile(
+    r"(?P<pre>[$\u20ac\u00a3]|\bUSD\b|\bEUR\b|\bGBP\b)?\s{0,2}"
+    r"(?P<amt>\d+(?:[.,]\d{1,2})?)\s{0,2}"
+    r"(?P<post>[$\u20ac\u00a3]|\bUSD\b|\bEUR\b|\bGBP\b"
+    r"|dollars?|euros?|pounds?)?\s{0,2}"
+    r"(?P<per>/\s?(?:mo|month|yr|year)\b|per\s(?:month|year|seat|user|person)"
+    r"|a\s(?:month|year)\b|monthly|annually|yearly)", re.I)
+MONTHLY_PER = re.compile(r"(?:/\s?mo|/\s?month|per\smonth|a\smonth|monthly)",
+                         re.I)
+money_bad, money_seen = {}, 0
 for f in HTML_FILES:
-    bad = sorted({a for a in MONTHLY_RE.findall(read(f)) if a != PRICE})
-    if bad:
-        monthly[f] = bad
+    for m in PRICE_TOKEN.finditer(strip_text(read(f))):
+        money_seen += 1
+        cur = (m.group("pre") or m.group("post") or "").upper()
+        amt = m.group("amt").replace(",", ".")
+        why = []
+        if cur not in ("$", "USD", "DOLLAR", "DOLLARS"):
+            why.append(f"валюта «{cur or '---'}»")
+        if amt != PRICE:
+            why.append(f"сумма {amt}")
+        if not MONTHLY_PER.fullmatch(m.group("per").strip()):
+            why.append(f"период «{m.group('per').strip()}»")
+        if why:
+            money_bad.setdefault(f, []).append(
+                f"{' '.join(m.group(0).split())} -> {', '.join(why)}")
+check(f"PAY17 любая пара «сумма + период» в любом html сайта = ${PRICE} в "
+      f"долларах и за МЕСЯЦ (найдено пар: {money_seen}; ловит «USD 10 per "
+      "month» без знака, «€11.45», «$120 per year» и JSON-LD)",
+      not money_bad and money_seen > 0, f"чужие цены: {money_bad}")
+
 # ── PAY18 (06.09): имя SKU стоит РЯДОМ со своей ценой ────────────
-# PAY2 держит имена и цену по отдельности, и этого мало: подмена
-# «Skipi Seafarer — Premium. $11.45» на «Skipi Assistant — $11.45»
-# оставляла сьют зелёным (имя «Skipi Seafarer» жило в бесплатной строке,
-# слово «Premium» — в lede). Каталог Paddle называет три позиции дословно;
-# витрина обязана называть их так же и рядом с ценой, иначе верификация
-# продавца видит расхождение. Плюс негатив: прежнее имя платного плана
-# «Skipi Assistant» на витрине не воскресает (как функция — «maritime AI
-# assistant» — слово живёт и проверкой не трогается).
-# Сверка идёт по ЗАГОЛОВКАМ планов (<strong> внутри раздела Plans), а не
-# по всей странице: иначе достаточно одной lede-строки «Crewing и Broker
-# по $11.45», и абзац плана мог бы остаться вовсе без цены.
-SKU_NAMES = ("Skipi Seafarer Premium", "Skipi Crewing", "Skipi Broker")
+# PAY2 держит имена и цену по отдельности, и этого мало: подмена имени
+# в заголовке плана оставляла сьют зелёным (имя жило в другой строке,
+# слово «Premium» — в lede). Сверка идёт по ЗАГОЛОВКАМ планов (<strong>),
+# а не по всей странице: иначе достаточно одной lede-строки «Crewing и
+# Broker по $11.45», и абзац плана мог бы остаться вовсе без цены.
+SKU_NAMES = ("Skipi Assistant Premium", "Skipi Crewing", "Skipi Broker")
 heads = [re.sub(r"\s+", " ", strip_text(h))
          for h in re.findall(r"<strong>(.*?)</strong>", pricing, re.S)]
 unpriced = [n for n in SKU_NAMES
             if not any(n in h and f"${PRICE}" in h for h in heads)]
-old_name = "Skipi Assistant" in re.sub(r"\s+", " ", pricing)
-check(f"PAY18 /pricing/: каждое имя из каталога Paddle {SKU_NAMES} стоит "
-      f"в заголовке своего плана вместе с ценой ${PRICE}, и прежнее имя "
-      "платного плана «Skipi Assistant» на странице не осталось",
-      not unpriced and not old_name,
-      f"без цены рядом: {unpriced}; старое имя: {old_name}")
+check(f"PAY18 /pricing/: каждое имя плана {SKU_NAMES} стоит в заголовке "
+      f"своего плана вместе с ценой ${PRICE}",
+      not unpriced, f"без цены рядом: {unpriced}")
 
-check(f"PAY17 любая месячная цена в любом html сайта = ${PRICE} "
-      "(каталог Paddle: три SKU по одной цене; сверяются и /invest/, и "
-      "/for-companies/, и JSON-LD)",
-      not monthly, f"другие суммы: {monthly}")
+# ── PAY19 (06.09): платный план НЕ назван именем приложения ───────
+# Строка «Skipi Seafarer — Premium. $11.45 per month» прямо под строкой
+# «Skipi Seafarer — free. The desktop and mobile app» читается как платный
+# тир САМОГО приложения, продаваемый мимо покупок App Store — Guideline
+# 3.1.1, ровно тот реджект, который дом прошёл четыре раза. Apple письменно
+# отвечено, что платных функций в приложении нет; покупается безлимит
+# ассистента в веб-кабинете, поэтому платный план называется «Skipi
+# Assistant — Premium» (это имя пережило три ревью на этой же странице).
+# Путь ревьюера до /pricing/ установлен: первый экран → Register →
+# assistant.skipi.app → skipi.app → цены, поэтому проверка глобальная:
+# (а) «Premium» не стоит вплотную к «Seafarer» ни в одном html,
+# (б) ни один заголовок плана со словом «Seafarer» не несёт цены
+# (бесплатная строка «Skipi Seafarer — free» цены не содержит и проходит).
+def _dash_norm(t: str) -> str:
+    return re.sub(r"\s+", " ", re.sub(r"&[mn]dash;", "\u2014", t))
+
+
+APP_TIER_RE = re.compile(
+    r"Seafarer[\s\u2013\u2014.,:;-]{0,4}Premium"
+    r"|Premium[\s\u2013\u2014.,:;-]{0,4}Seafarer", re.I)
+tier_hits = {f: APP_TIER_RE.findall(_dash_norm(read(f))) for f in HTML_FILES}
+tier_hits = {f: h for f, h in tier_hits.items() if h}
+priced_app = [re.sub(r"\s+", " ", strip_text(h))
+              for h in re.findall(r"<strong>(.*?)</strong>", pricing, re.S)
+              if "Seafarer" in h and "$" in h]
+check("PAY19 платный план не назван именем мобильного приложения: "
+      "«Seafarer» вплотную к «Premium» нет ни в одном html сайта, и ни "
+      "один заголовок плана с «Seafarer» не несёт цены (App Store 3.1.1)",
+      not tier_hits and not priced_app,
+      f"тир приложения: {tier_hits}; платный заголовок: {priced_app}")
+
+# ── PAY20 (06.09): триал не обещает списания по окончании ─────────
+# terms §13 обещал «If the trial is not cancelled before it ends, the paid
+# subscription begins and the first payment is taken», тогда как в каталоге
+# Paddle лежат три ПРОСТЫЕ recurring-подписки без триала: карты у продавца
+# в момент триала нет, списать физически нечего. /pricing/ и /refunds/ при
+# этом говорили обратное — два взаимоисключающих обещания на одном сайте,
+# и худшее стояло в юридическом документе (андеррайтинг Paddle + UK-правила
+# автопродления + прямой вред покупателю). Проверка: рядом со словом
+# «trial» (окно ±240 символов видимого текста) не должно быть обещания
+# списания. Денилист ЛИТЕРАЛЬНЫЙ: «you are not charged» и «you are never
+# charged» подстроку «you are charged» не содержат и проверку проходят.
+CHARGE_NEAR_TRIAL = ("payment is taken", "first payment", "will be charged",
+                     "you are charged", "we charge you", "card is charged",
+                     "converts to a paid", "automatically converts",
+                     "not cancelled before it ends",
+                     "not cancelled before the end",
+                     "unless you cancel before")
+trial_bad = {}
+for f in HTML_FILES:
+    low = re.sub(r"\s+", " ", strip_text(read(f))).lower()
+    for m in re.finditer(r"\btrials?\b", low):
+        win = low[max(0, m.start() - 240):m.end() + 240]
+        hits = [b for b in CHARGE_NEAR_TRIAL if b in win]
+        if hits:
+            trial_bad.setdefault(f, set()).update(hits)
+trial_bad = {f: sorted(h) for f, h in trial_bad.items()}
+check("PAY20 ни одна страница не обещает списание по окончании триала "
+      f"(окно ±240 симв. вокруг «trial», денилист {CHARGE_NEAR_TRIAL}): "
+      "триал даёт Skipi при регистрации, платная подписка начинается "
+      "только с покупкой",
+      not trial_bad, f"обещает списание: {trial_bad}")
 
 # ── Группа DL: страница загрузок англоязычная (owner 03.09) ────────
 # /downloads была последней русской страницей сайта; переведена целиком
