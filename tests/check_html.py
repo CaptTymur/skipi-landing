@@ -560,20 +560,27 @@ for page, url in PAY_PAGES.items():
 pricing_text = strip_text(pricing)
 refunds_text = strip_text(refunds)
 
-# 05.09-II (три SKU по $10, DECISIONS (248)/(269)): пины стали фразами,
-# а не словами — «$10» и «per seat» оставались зелёными при «Assistant —
-# $5» рядом с «Broker — $10». Merchant of record в обеих формах: §7 плана
-# вводит строчную в подписи о биллинге, раздел «Who you buy from» держит
-# прописную; уронить любую — красный. «free tier» — обещание бесплатного
-# уровня Assistant с дневным лимитом (владелец: платный = без лимита).
-PRICING_MUST = ("$10 per month", "$10 per seat, per month",
+# 05.09-II (три SKU): пины стали фразами, а не словами — «$10» и «per
+# seat» оставались зелёными при «Assistant — $5» рядом с «Broker — $10».
+# 06.09 (живой каталог Paddle): цена всех трёх позиций = $11.45/мес,
+# налог ВКЛЮЧЁН, слово «seat» из названий убрано владельцем (зарезервировано
+# под будущий групповой тариф), а платная позиция ассистента называется в
+# каталоге «Skipi Seafarer — Premium», не «Skipi Assistant». Paddle требует
+# совпадения витрины с каталогом — поэтому имена SKU пинятся тоже.
+# Merchant of record в обеих формах: §7 плана вводит строчную в подписи о
+# биллинге, раздел «Who you buy from» держит прописную; уронить любую —
+# красный. «free tier» — обещание бесплатного уровня с дневным лимитом
+# (владелец: платный = без лимита).
+PRICING_MUST = ("$11.45 per month", "Skipi Seafarer", "Premium",
+                "Skipi Crewing", "Skipi Broker",
                 "14-day free trial", "merchant of record",
                 "Merchant of Record", "Paddle", "Cancel anytime",
                 "free tier")
 missing = [t for t in PRICING_MUST if t not in pricing_text]
-check("PAY2 /pricing/ (видимый текст): Assistant $10 per month, Broker/"
-      "Crewing $10 per seat, per month, триал, merchant of record (обе "
-      f"формы), Paddle, Cancel anytime, free tier {PRICING_MUST}",
+check("PAY2 /pricing/ (видимый текст): $11.45 per month, три имени SKU как "
+      "в каталоге Paddle (Seafarer/Premium, Crewing, Broker), триал, "
+      "merchant of record (обе формы), Paddle, Cancel anytime, free tier "
+      f"{PRICING_MUST}",
       bool(pricing) and not missing, f"нет: {missing}")
 
 REFUNDS_MUST = ("14 days", "full refund", "Paddle", "info@skipi.app")
@@ -607,13 +614,16 @@ check("PAY5 /pricing/ и /refunds/: обе в sitemap.xml и обе слинко
 # витрина и инвесторская страница не должны называть разные цены за
 # одно и то же место — расхождение ловится механически, не глазами
 invest = read("invest/index.html")
-PRICE_RE = re.compile(r"(?:Broker|Crewing)[^.<]{0,80}?\$(\d+)")
+# 06.09: цена дробная ($11.45) — регэксп читает и копейки, иначе «$11.45»
+# схлопывалось бы в «11» и пин прошёл бы при любой копеечной подмене.
+PRICE = "11.45"
+PRICE_RE = re.compile(r"(?:Broker|Crewing)[^.<]{0,80}?\$(\d+(?:\.\d+)?)")
 pricing_prices = set(PRICE_RE.findall(pricing))
 invest_prices = set(PRICE_RE.findall(invest))
 check("PAY6 цена Broker/Crewing на /pricing/ и в /invest/ совпадает "
-      f"(обе $10; факт pricing={sorted(pricing_prices)} "
+      f"(обе ${PRICE}; факт pricing={sorted(pricing_prices)} "
       f"invest={sorted(invest_prices)})",
-      pricing_prices == {"10"} and invest_prices == {"10"})
+      pricing_prices == {PRICE} and invest_prices == {PRICE})
 
 check("PAY8 /support/ — настоящая поддержка: info@skipi.app + ссылки "
       "на /pricing/ и /refunds/",
@@ -706,10 +716,91 @@ check("PAY13 /pricing/: «free» только у Seafarer и в free tier/free t
 # $N» — «Skipi Assistant &mdash; $5 per month» проходил мимо (аудит §C4,
 # MUT5). Глобальный пин: любая сумма `$N` в видимом тексте /pricing/ равна
 # 10 и хотя бы одна есть (пустое множество — тоже красный).
-pricing_amounts = set(re.findall(r"\$(\d+)", pricing_text))
+pricing_amounts = set(re.findall(r"\$(\d+(?:\.\d+)?)", pricing_text))
 check("PAY14 /pricing/ (видимый текст): все суммы $N на странице = только "
-      f"$10, у всех трёх SKU (факт {sorted(pricing_amounts)})",
-      pricing_amounts == {"10"}, f"суммы: {sorted(pricing_amounts)}")
+      f"${PRICE}, у всех трёх SKU (факт {sorted(pricing_amounts)})",
+      pricing_amounts == {PRICE}, f"суммы: {sorted(pricing_amounts)}")
+
+# ── PAY15 (06.09): налог ВКЛЮЧЁН в цену, и страница это говорит ───
+# Аккаунт Paddle настроен на «Price includes tax»: покупатель платит ровно
+# опубликованную сумму. Прежняя редакция витрины и terms §12 обещали
+# обратное («shown excluding VAT … added at checkout») — это прямая
+# неправда о налоге в платёжных документах, самый дорогой класс
+# расхождения для андеррайтинга. Негатив — по ВИДИМОМУ тексту обоих
+# документов, позитив — фраза о включённом налоге на каждом из них.
+TAX_BANNED = ("excluding VAT", "exclude VAT", "excludes VAT",
+              "added at checkout", "excluding tax", "plus VAT")
+TAX_MUST = {"pricing/index.html": "include VAT and sales tax",
+            "terms.html": "include VAT and sales tax"}
+tax_bad, tax_silent = {}, []
+for page in ("pricing/index.html", "terms.html"):
+    txt = strip_text(read(page))
+    hits = [b for b in TAX_BANNED if b.lower() in txt.lower()]
+    if hits:
+        tax_bad[page] = hits
+    if TAX_MUST[page] not in txt:
+        tax_silent.append(page)
+check("PAY15 /pricing/ и terms.html: цена ВКЛЮЧАЕТ налог — фраза "
+      f"«{TAX_MUST['pricing/index.html']}» есть, обещаний «налог сверху» "
+      f"нет {TAX_BANNED}",
+      not tax_bad and not tax_silent,
+      f"обещает налог сверху: {tax_bad}; молчит о включённом: {tax_silent}")
+
+# ── PAY16 (06.09): слова «seat» на сайте нет НИГДЕ ───────────────
+# OWNER 06.09: «место» снято из названий и текстов — сегодня продаётся
+# соло-подписка одному человеку, а слово «место» зарезервировано под
+# будущий групповой тариф с оплатой по числу людей. Пока такого тарифа
+# нет, «per seat» на витрине = обещание несуществующей модели продажи и
+# расхождение с каталогом Paddle. Негатив по ПОЛНОМУ html всех страниц
+# (meta/og/JSON-LD мимо strip_text), как PAY12.
+SEAT_RE = re.compile(r"\bseats?\b", re.I)
+seat_hits = {f: len(SEAT_RE.findall(read(f))) for f in HTML_FILES}
+seat_hits = {f: n for f, n in seat_hits.items() if n}
+check("PAY16 слова «seat/seats» нет ни в одном html сайта (owner 06.09: "
+      "продаётся соло-подписка, «место» зарезервировано под будущий "
+      "групповой тариф)", not seat_hits, f"найдено: {seat_hits}")
+
+# ── PAY17 (06.09): одна цена на ВСЁМ сайте, а не только на витрине ─
+# Paddle верифицирует продавца сверкой сайта с каталогом, и цену печатает
+# не только /pricing/: «$10/mo» жил ещё в /invest/ (включая JSON-LD, его
+# читают роботы) и на /for-companies/. PAY6 сверял только две страницы и
+# только хвост «Broker|Crewing … $N». Здесь — любая месячная сумма в
+# ЛЮБОМ html сайта: она обязана быть ровно каталожной.
+MONTHLY_RE = re.compile(r"\$(\d+(?:\.\d+)?)\s*(?:/\s*mo\b|per month|"
+                        r"a month|/\s*month\b|per seat)", re.I)
+monthly = {}
+for f in HTML_FILES:
+    bad = sorted({a for a in MONTHLY_RE.findall(read(f)) if a != PRICE})
+    if bad:
+        monthly[f] = bad
+# ── PAY18 (06.09): имя SKU стоит РЯДОМ со своей ценой ────────────
+# PAY2 держит имена и цену по отдельности, и этого мало: подмена
+# «Skipi Seafarer — Premium. $11.45» на «Skipi Assistant — $11.45»
+# оставляла сьют зелёным (имя «Skipi Seafarer» жило в бесплатной строке,
+# слово «Premium» — в lede). Каталог Paddle называет три позиции дословно;
+# витрина обязана называть их так же и рядом с ценой, иначе верификация
+# продавца видит расхождение. Плюс негатив: прежнее имя платного плана
+# «Skipi Assistant» на витрине не воскресает (как функция — «maritime AI
+# assistant» — слово живёт и проверкой не трогается).
+# Сверка идёт по ЗАГОЛОВКАМ планов (<strong> внутри раздела Plans), а не
+# по всей странице: иначе достаточно одной lede-строки «Crewing и Broker
+# по $11.45», и абзац плана мог бы остаться вовсе без цены.
+SKU_NAMES = ("Skipi Seafarer Premium", "Skipi Crewing", "Skipi Broker")
+heads = [re.sub(r"\s+", " ", strip_text(h))
+         for h in re.findall(r"<strong>(.*?)</strong>", pricing, re.S)]
+unpriced = [n for n in SKU_NAMES
+            if not any(n in h and f"${PRICE}" in h for h in heads)]
+old_name = "Skipi Assistant" in re.sub(r"\s+", " ", pricing)
+check(f"PAY18 /pricing/: каждое имя из каталога Paddle {SKU_NAMES} стоит "
+      f"в заголовке своего плана вместе с ценой ${PRICE}, и прежнее имя "
+      "платного плана «Skipi Assistant» на странице не осталось",
+      not unpriced and not old_name,
+      f"без цены рядом: {unpriced}; старое имя: {old_name}")
+
+check(f"PAY17 любая месячная цена в любом html сайта = ${PRICE} "
+      "(каталог Paddle: три SKU по одной цене; сверяются и /invest/, и "
+      "/for-companies/, и JSON-LD)",
+      not monthly, f"другие суммы: {monthly}")
 
 # ── Группа DL: страница загрузок англоязычная (owner 03.09) ────────
 # /downloads была последней русской страницей сайта; переведена целиком
