@@ -34,6 +34,10 @@
   X — англоязычность: переключателя нет, неанглийских hreflang нет,
       русских страниц не осталось.
   DL — страница загрузок и её заглушка англоязычные.
+  DA — страница удаления аккаунта /delete-account/ (07.09, требование
+      Google Play и Apple 5.1.1(v)): путь в приложении, письмо, честный
+      перечень «что удаляется / что остаётся», привязка из privacy §12
+      и ОТРИЦАТЕЛЬНЫЙ чек на обещания тотального удаления.
   LTD — юрблок SKIPI LTD (опубликован 03.09) на месте.
   G — щели, вскрытые мутациями (№200, 05.09): индексируемость и
       видимость витрины, нижний порог слов, Paddle в privacy, страны
@@ -909,6 +913,134 @@ check("DL3 download.html: англоязычная заглушка-перехо
       and f'<link rel="canonical" href="{SITE}/downloads">' in dl_stub
       and '<a href="/downloads">' in dl_stub
       and not any(ord(ch) in CYRILLIC for ch in dl_stub))
+
+
+# ── Группа DA: страница удаления аккаунта (07.09) ─────────────────
+# Google Play (support.google.com/googleplay/android-developer/answer/13327111)
+# требует в декларации Data safety веб-URL, где пользователь может запросить
+# удаление аккаунта, и чтобы путь был «prominently featured and easily
+# discoverable» и называл приложение так, как оно называется в сторе.
+# Apple 5.1.1(v) требует того же изнутри приложения — путь в 0.4.190:
+# Settings → «Skipi account» → «Delete account…».
+# Главный инвариант группы — DA5: страница НЕ обещает удаление «везде».
+# Журналы мозга ассистента на проде удаление аккаунта не затрагивает
+# (skipi-ops RISKS №232b, открыт), поэтому обещание тотальности здесь —
+# не стилистика, а неправда в документе, который читает регулятор стора.
+DEL_PAGE = "delete-account/index.html"
+DEL_URL = "/delete-account/"
+delp = read(DEL_PAGE)
+delp_head = delp.split(">", 2)[1] + ">" if delp else ""
+delp_text = re.sub(r"\s+", " ", strip_text(delp))
+
+check(f"DA1 {DEL_PAGE}: содержательная страница на {DEL_URL} "
+      f"(lang=\"en\", <title>, canonical/og:url/hreflang → {DEL_URL}, "
+      "не заглушка-редирект)",
+      bool(delp)
+      and 'lang="en"' in delp_head
+      and re.search(r"<title>[^<]{5,}</title>", delp) is not None
+      and canonical_of(delp) == f"{SITE}{DEL_URL}"
+      and og_url_of(delp) == f"{SITE}{DEL_URL}"
+      and hreflangs_of(delp) == {"en": f"{SITE}{DEL_URL}",
+                                 "x-default": f"{SITE}{DEL_URL}"}
+      and 'http-equiv="refresh"' not in delp,
+      f"canonical={canonical_of(delp)} og:url={og_url_of(delp)} "
+      f"hreflang={hreflangs_of(delp)}")
+
+# DA2: Google требует назвать приложение ИМЕНЕМ ИЗ ЛИСТИНГА. Проверяем по
+# ВИДИМОМУ тексту (в <meta> имя ревьюер не увидит), плюс остальные
+# поверхности одного аккаунта.
+DEL_SURFACES = ("Skipi Seafarer", "Skipi Assistant", "Skipi Crewing",
+                "Skipi Broker")
+missing_surface = [n for n in DEL_SURFACES if n not in delp_text]
+check("DA2 страница удаления называет приложение именем из листинга "
+      f"«Skipi Seafarer» и остальные поверхности одного аккаунта "
+      f"{DEL_SURFACES} — в ВИДИМОМ тексте",
+      not missing_surface, f"нет в видимом тексте: {missing_surface}")
+
+# DA3: канал запроса = mailto с готовой темой. Отдельно href (кликабельно)
+# и отдельно тема письма в видимом тексте (её человек перепишет руками,
+# если почтовик не откроется).
+DEL_SUBJECT = "Delete my Skipi account"
+check("DA3 рабочий mailto:info@skipi.app на странице (href) и тема письма "
+      f"«{DEL_SUBJECT}» в видимом тексте",
+      'href="mailto:info@skipi.app' in delp and DEL_SUBJECT in delp_text,
+      f"mailto-href={'есть' if 'href=\"mailto:info@skipi.app' in delp else 'нет'}; "
+      f"тема={'есть' if DEL_SUBJECT in delp_text else 'нет'}")
+
+# DA4: путь внутри приложения — ТОЧНЫЙ, как он записан в заметках ревьюеру
+# ASC (skipi-ops DECISIONS 2026-09-07 (372)) и как он выглядит в 0.4.190.
+# Сверка по видимому тексту со схлопнутыми пробелами: &rarr;/&ldquo;/&hellip;
+# в strip_text становятся пробелами, поэтому пин — три метки подряд.
+DEL_PATH_RE = re.compile(r"Settings\s+Skipi account\s+Delete account", re.I)
+check("DA4 путь удаления В ПРИЛОЖЕНИИ указан точно: «Settings → Skipi "
+      "account → Delete account…» (видимый текст, метки подряд)",
+      bool(DEL_PATH_RE.search(delp_text)),
+      f"видимый текст: {delp_text[:200]}")
+
+# DA5 — ОТРИЦАТЕЛЬНЫЙ ЧЕК, главный в группе. Обещание тотальности запрещено
+# на ЛЮБОЙ странице, которая говорит про удаление аккаунта; множество таких
+# страниц ВЫВОДИТСЯ из rglob (урок G6: жёсткий кортеж молчит о новой
+# странице), а не перечисляется. Смотрим ПОЛНЫЙ html: meta/og проходят мимо
+# strip_text, а обещание в description видно в выдаче.
+TOTALITY_BANNED = ("completely", "permanently", "forever", "everywhere",
+                   "all systems", "all our systems", "every system",
+                   "all copies", "without a trace", "no trace",
+                   "erased from all", "wiped from",
+                   "полностью", "навсегда", "без следа")
+DELETE_PAGES = [f for f in HTML_FILES
+                if re.search(r"delete\w*\W{1,40}account|account\W{1,40}delet",
+                             re.sub(r"\s+", " ", strip_text(read(f))), re.I)]
+totality_hits = {}
+for f in DELETE_PAGES:
+    low = read(f).lower()
+    hits = [w for w in TOTALITY_BANNED if w in low]
+    if hits:
+        totality_hits[f] = hits
+check("DA5 ни одна страница про удаление аккаунта не обещает удаление "
+      f"«везде» (денилист {TOTALITY_BANNED}; страницы выведены из rglob: "
+      f"{DELETE_PAGES}): журналы мозга ассистента удаление НЕ затрагивает "
+      "(RISKS №232b)",
+      bool(DELETE_PAGES) and not totality_hits, f"обещает: {totality_hits}")
+
+# DA6: адрес в sitemap.xml — Google находит страницу не только по ссылке
+# из Play Console. (G6a держит то же для всех содержательных страниц;
+# здесь — именной пин, чтобы удаление строки читалось как «сломали
+# удаление аккаунта», а не как «сломали общий инвариант».)
+check(f"DA6 sitemap.xml содержит {SITE}{DEL_URL}",
+      f"<loc>{SITE}{DEL_URL}</loc>" in sitemap)
+
+# DA7: якорная ссылка из §12 privacy — дословное требование Google для
+# случая, когда путь удаления объясняется в политике: «the data deletion
+# section should be highlighted and reasonably prominent (for example,
+# through an anchor link)». Пин — именно §12, а не «где-нибудь в файле».
+privacy_html = read("privacy.html")
+m12 = re.search(r"<h2>12\..*?(?=<h2>13\.)", privacy_html, flags=re.S)
+sec12 = m12.group(0) if m12 else ""
+check("DA7 privacy.html §12: якорная ссылка на страницу удаления "
+      f"(href=\"{DEL_URL}\" внутри секции «Your Choices and Rights»)",
+      bool(sec12) and f'href="{DEL_URL}"' in sec12,
+      "секция 12 не найдена" if not sec12 else "ссылки в §12 нет")
+
+# DA8: честность — положительная половина DA5. Страница обязана НАЗВАТЬ то,
+# что переживает удаление: платёжные записи (GDPR 17(3)(b), обезличиваются)
+# и служебные журналы сервиса (RISKS №232b). Без этого блока страница
+# формально «не врёт», но умалчивает — а именно умолчание и разбирают
+# в споре с пользователем.
+DEL_KEPT_MUST = ("What is kept", "Payment records", "Working logs")
+kept_missing = [t for t in DEL_KEPT_MUST if t not in delp_text]
+check("DA8 страница честно перечисляет, что ОСТАЁТСЯ после удаления: "
+      f"{DEL_KEPT_MUST} (платёжные записи — GDPR 17(3)(b); служебные "
+      "журналы — RISKS №232b)",
+      not kept_missing, f"нет в видимом тексте: {kept_missing}")
+
+# DA9: страница статическая — ни JS, ни форм, ни сторонних ресурсов
+# (карточка 07.09: «без JS, без форм с отправкой, без сторонних скриптов»).
+del_ext = external_hosts(delp) - ALLOWED_HOSTS
+check("DA9 страница удаления статическая: нет <script>, нет <form>, "
+      "нет внешних хостов сверх разрешённых",
+      bool(delp) and "<script" not in delp.lower()
+      and "<form" not in delp.lower() and not del_ext,
+      f"внешние хосты: {del_ext}")
 
 
 # ── Группа G: щели сьюта, вскрытые мутациями (BACKLOG №200; аудиты 05.09) ─
