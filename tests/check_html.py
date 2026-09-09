@@ -133,7 +133,12 @@ ALLOWED_HOSTS = {
 # play.google.com в ALLOWED_HOSTS НЕ добавляется — чужой app-id и любой
 # <script src> с этого хоста по-прежнему краснеют по I2.
 PLAY_URL = "https://play.google.com/store/apps/details?id=app.skipi.seafarer"
-ALLOWED_LINKS = {PLAY_URL}
+# Вторая точечная ссылка (owner 09.09, после FACT публикации 0.4.190 в
+# App Store, DECISIONS (432)): страница Skipi Seafarer в App Store без
+# кода страны. Хост apps.apple.com в ALLOWED_HOSTS НЕ добавляется — чужой
+# id и любой <script src> с этого хоста краснеют по I2.
+APPSTORE_URL = "https://apps.apple.com/app/skipi-seafarer/id6782521461"
+ALLOWED_LINKS = {PLAY_URL, APPSTORE_URL}
 
 results = []
 
@@ -235,6 +240,16 @@ for loc, (entry_rel, story_rel, story_href, lang) in LOCALES.items():
           bool(play_a)
           and not re.search(r'class="[^"]*cta[^"]*"', play_a.group(0)),
           "в <main> нет ссылки «Google Play» на PLAY_URL, или у неё .cta")
+    # A8 (owner 09.09, iOS в App Store): та же тихая строка называет и
+    # App Store — ссылка на словах «App Store» ведёт на страницу магазина
+    # (exact-URL APPSTORE_URL), тоже НЕ .cta. Play-ссылка A7 остаётся.
+    appstore_a = re.search(r'<a\b[^>]*\bhref="%s"[^>]*>App Store</a>'
+                           % re.escape(APPSTORE_URL), entry_main)
+    check(f"A8[{loc}] App Store-строка в <main>: <a href=APPSTORE_URL>App Store</a> "
+          f"без класса cta",
+          bool(appstore_a)
+          and not re.search(r'class="[^"]*cta[^"]*"', appstore_a.group(0)),
+          "в <main> нет ссылки «App Store» на APPSTORE_URL, или у неё .cta")
 
     # ── Группа S: путешествие ──────────────────────────────────────
     check(f"S1[{loc}] story существует: {story_rel}", bool(story))
@@ -696,6 +711,17 @@ check("PAY12 слова «PRO» нет ни в одном html сайта (по�
       "JSON-LD; owner 05.09 — «PRO снимается совсем»)",
       not pro_hits, f"найдено: {pro_hits}")
 
+# PAY13 (owner 09.09, DECISIONS (432)): Seafarer опубликован в App Store —
+# формула «in App Store review» (/invest/: JSON-LD, абзац, таблица) стала
+# ложью. Сторож глобален и по ПОЛНОМУ html, как PAY12: JSON-LD читают
+# роботы. Регистр учитывается.
+REVIEW_PHRASE = "App Store review"
+review_hits = {f: read(f).count(REVIEW_PHRASE) for f in HTML_FILES}
+review_hits = {f: n for f, n in review_hits.items() if n}
+check("PAY13 «App Store review» нет ни в одном html сайта (полный html, "
+      "включая JSON-LD; Seafarer опубликован в App Store 09.09)",
+      not review_hits, f"найдено: {review_hits}")
+
 # 05.09-II (три SKU): Skipi Assistant стал платной подпиской ($10/мес без
 # дневного лимита), а страница называла его «free» и в lede/meta/og писала
 # «free for seafarers». Платный продукт, названный бесплатным, — то самое
@@ -899,10 +925,32 @@ check("DL1 downloads/index.html: англоязычная страница "
       and not any(ord(ch) in CYRILLIC for ch in dl))
 
 check("DL2 downloads: ссылки на артефакты релизов живы "
-      "(github releases + Google Play)",
+      "(github releases + Google Play + App Store)",
       bool(dl)
       and dl.count("https://github.com/CaptTymur/") >= 10
-      and "https://play.google.com/store/apps/details?id=app.skipi.seafarer" in dl)
+      and "https://play.google.com/store/apps/details?id=app.skipi.seafarer" in dl
+      and APPSTORE_URL in dl)
+
+# DL4 (owner 09.09): App Store-ссылка живёт РОВНО у Seafarer и РОВНО на
+# платформе ios — `products.seafarer.mobile.ios.storeUrl`. Сторож scoped:
+# сначала блок `seafarer: {` … `crewing: {` (следующий продукт), внутри него
+# под-блок `ios: { … }` без вложенных скобок, и уже в нём точный
+# `storeUrl: "APPSTORE_URL"`. Поиск по всему файлу или lazy-regex по всему
+# блоку пропустил бы мутации «ссылка уехала в crewing» и «android↔ios
+# поменяли местами». Вторая половина — кнопка шаблона.
+_sf_start = dl.find("seafarer: {")
+_sf_end = dl.find("crewing: {", _sf_start + 1) if _sf_start >= 0 else -1
+seafarer_block = dl[_sf_start:_sf_end] if 0 <= _sf_start < _sf_end else ""
+ios_block = re.search(r"\bios:\s*\{[^}]*\}", seafarer_block)
+check("DL4 downloads: App Store у Seafarer/ios — в блоке seafarer под-блок "
+      "ios: { … } содержит storeUrl: \"APPSTORE_URL\", и в шаблоне есть "
+      "кнопка «Download on the App Store»",
+      bool(ios_block)
+      and f'storeUrl: "{APPSTORE_URL}"' in ios_block.group(0)
+      and "Download on the App Store" in dl,
+      f"seafarer-блок {'найден' if seafarer_block else 'НЕ найден'}, "
+      f"ios-под-блок {'найден' if ios_block else 'НЕ найден'}, "
+      f"кнопка {'есть' if 'Download on the App Store' in dl else 'нет'}")
 
 dl_stub = read("download.html")
 check("DL3 download.html: англоязычная заглушка-переход на /downloads "
