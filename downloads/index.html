@@ -520,7 +520,7 @@
             <div>
                 <div class="eyebrow" id="eyebrow">Download center</div>
                 <h1 id="page-title">What would you like to download?</h1>
-                <p class="lead" id="page-lead">Desktop builds can be downloaded straight away. For the mobile version, choose a product and submit a request to join the Android or iPhone testing program.</p>
+                <p class="lead" id="page-lead">Desktop builds can be downloaded straight away. For the mobile version, choose a product: public releases link to the store, the rest take a request to join the testing program.</p>
             </div>
 
             <nav class="crumbs hidden" id="crumbs" aria-label="Step navigation"></nav>
@@ -565,9 +565,14 @@
             requestEmail: "seafarer@skipi.app",
             mobile: {
                 android: {
-                    version: "0.4.184 / 4184",
+                    version: "0.4.190 / 4190",
                     storeUrl: "https://play.google.com/store/apps/details?id=app.skipi.seafarer",
                     note: "Public release on Google Play. The app requires signing in to a Skipi account."
+                },
+                ios: {
+                    version: "0.4.190 / 4190",
+                    storeUrl: "https://apps.apple.com/app/skipi-seafarer/id6782521461",
+                    note: "Public release on the App Store. The app requires signing in to a Skipi account."
                 }
             },
             desktop: {
@@ -708,7 +713,7 @@
 
     const channelLabels = {
         desktop: ["Desktop", "▣", "Build for Windows, macOS or Linux."],
-        mobile: ["Mobile", "▥", "Android on Google Play; iPhone/iPad through testing programs."]
+        mobile: ["Mobile", "▥", "Google Play and the App Store; testing programs where a public release is not out yet."]
     };
 
     const platformLabels = {
@@ -838,7 +843,18 @@
                 return item.links.map(([label]) => label).join(", ");
             }
         }
+        if (channel === "mobile") {
+            const item = product.mobile && product.mobile[key];
+            if (item && item.storeUrl) {
+                return key === "android" ? "Google Play" : "App Store";
+            }
+        }
         return platformLabels[key][2];
+    }
+
+    function hasStoreRelease(product) {
+        return Boolean(product.mobile)
+            && Object.values(product.mobile).some((item) => item && item.storeUrl);
     }
 
     function renderPlatforms() {
@@ -1006,6 +1022,20 @@
             `;
         }
 
+        const iosItem = product.mobile && product.mobile.ios;
+        if (iosItem && iosItem.storeUrl) {
+            return `
+                <div class="download-card green">
+                    <h3>iPhone / iPad — available on the App Store</h3>
+                    <p><strong>Version:</strong> ${escapeHtml(iosItem.version)}.</p>
+                    <div class="actions">
+                        <a class="btn primary" href="${iosItem.storeUrl}" target="_blank" rel="noopener">Download on the App Store</a>
+                    </div>
+                    <p class="support-note">${escapeHtml(iosItem.note)}</p>
+                </div>
+            `;
+        }
+
         return `
             <div class="download-card purple">
                 <h3>iPhone / iPad through TestFlight</h3>
@@ -1075,19 +1105,23 @@
         eyebrow.textContent = "Download center";
         if (!state.product) {
             title.textContent = "What would you like to download?";
-            lead.textContent = "Desktop builds can be downloaded straight away. For the mobile version, choose a product and submit a request to join the Android or iPhone testing program.";
+            lead.textContent = "Desktop builds can be downloaded straight away. For the mobile version, choose a product: public releases link to the store, the rest take a request to join the testing program.";
             return;
         }
         if (!state.channel) {
             title.textContent = product.label;
-            lead.textContent = `${product.title}. The desktop build can be downloaded straight away; the mobile version is provided through a testing program.`;
+            lead.textContent = hasStoreRelease(product)
+                ? `${product.title}. The desktop build can be downloaded straight away; the mobile version is on Google Play and the App Store.`
+                : `${product.title}. The desktop build can be downloaded straight away; the mobile version is provided through a testing program.`;
             return;
         }
         if (!state.platform) {
             title.textContent = state.channel === "desktop" ? `${product.label}: desktop` : `${product.label}: mobile`;
             lead.textContent = state.channel === "desktop"
                 ? "Choose your computer's operating system."
-                : "Choose a mobile platform. The next step is a request form for Google Play testing or Apple TestFlight.";
+                : hasStoreRelease(product)
+                    ? "Choose a mobile platform. The next step is the store link for your platform."
+                    : "Choose a mobile platform. The next step is a request form for Google Play testing or Apple TestFlight.";
             return;
         }
         title.textContent = `${product.title}: ${platformLabels[state.platform][0]}`;
