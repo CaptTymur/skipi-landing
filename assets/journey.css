@@ -198,6 +198,42 @@ footer.legal-foot {
     color: var(--muted);
     letter-spacing: 0.01em;
 }
+
+/* Строка присутствия (owner 10.09): «нужно показать, что у приложения есть
+   линкедин страница, и есть аппстор приложение и гугл андройд плей маркет
+   аккаунт» + «хочу чтобы были значки аппстора, значок плей маркета и значок
+   линкед ин». Раньше здесь стояла фраза «Skipi Seafarer is available on the
+   App Store and Google Play» — теперь три официальных знака.
+   Знаки завендорены локально (assets/badges/, происхождение в SOURCES.txt):
+   свои версии чужих логотипов не рисуем, внешних хостов не заводим (I2).
+   Высоты подобраны по ВИДИМОЙ части: у бейджа Google в PNG заложены поля
+   по спецификации, поэтому его картинка выше, а глазом знаки одного роста. */
+.fork-lead.presence {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.55rem 0.9rem;
+}
+.fork-lead.presence .badge {
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
+    opacity: 0.92;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.fork-lead.presence .badge:hover { opacity: 1; transform: translateY(-1px); }
+.fork-lead.presence .badge img { display: block; width: auto; }
+.fork-lead.presence .badge-appstore img { height: 38px; }
+.fork-lead.presence .badge-play img    { height: 56px; }  /* поля внутри PNG */
+.fork-lead.presence .badge-linkedin img { height: 36px; }
+
+@media (max-width: 480px) {
+    .fork-lead.presence { gap: 0.4rem 0.6rem; }
+    .fork-lead.presence .badge-appstore img { height: 32px; }
+    .fork-lead.presence .badge-play img     { height: 47px; }
+    .fork-lead.presence .badge-linkedin img { height: 30px; }
+}
 .entry-fork {
     display: flex;
     flex-direction: column;

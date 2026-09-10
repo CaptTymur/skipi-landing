@@ -1,0 +1,17 @@
+Официальные знаки магазинов и LinkedIn. Скачаны 2026-09-10 с ресурсов
+самих правообладателей и завендорены локально — своих версий чужих
+логотипов не рисуем, внешних хостов на витрину не добавляем (инвариант I2).
+
+app-store-badge.svg
+    https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg
+    Apple Inc. Использование — только как ссылка на собственное приложение
+    в App Store, без перекраски и без изменения пропорций.
+
+google-play-badge.png
+    https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png
+    Google LLC. В изображение уже заложены поля по спецификации Google;
+    масштабировать целиком, поля не обрезать.
+
+linkedin-bug.svg
+    https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg
+    LinkedIn Corporation. Фирменный знак «in», без перекраски.

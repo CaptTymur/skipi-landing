@@ -34,6 +34,10 @@
   X — англоязычность: переключателя нет, неанглийских hreflang нет,
       русских страниц не осталось.
   DL — страница загрузок и её заглушка англоязычные.
+  PR — строка присутствия на входных страницах (owner 10.09): «нужно
+      показать, что у приложения есть линкедин страница, и есть аппстор
+      приложение и гугл андройд плей маркет аккаунт». Ровно места, где
+      Skipi есть, без обёртки из слов; RU и EN одинаково.
   DA — страница удаления аккаунта /delete-account/ (07.09, требование
       Google Play и Apple 5.1.1(v)): путь в приложении, письмо, честный
       перечень «что удаляется / что остаётся», привязка из privacy §12
@@ -138,7 +142,31 @@ PLAY_URL = "https://play.google.com/store/apps/details?id=app.skipi.seafarer"
 # кода страны. Хост apps.apple.com в ALLOWED_HOSTS НЕ добавляется — чужой
 # id и любой <script src> с этого хоста краснеют по I2.
 APPSTORE_URL = "https://apps.apple.com/app/skipi-seafarer/id6782521461"
-ALLOWED_LINKS = {PLAY_URL, APPSTORE_URL}
+# Третья точечная ссылка (owner 10.09): страница компании в LinkedIn.
+# Адрес получен ОТ ВЛАДЕЛЬЦА дословно и проверен живым запросом (200).
+# Хост www.linkedin.com в ALLOWED_HOSTS НЕ добавляется — только этот URL:
+# чужая страница LinkedIn на витрине уводит клиентов не туда.
+LINKEDIN_URL = "https://www.linkedin.com/company/skipi-maritime"
+ALLOWED_LINKS = {PLAY_URL, APPSTORE_URL, LINKEDIN_URL}
+
+
+def link_to(html: str, url: str):
+    """Ссылка на точный URL + её ДОСТУПНОЕ ИМЯ. Раньше A7/A8 проверяли
+    текст ссылки, но 10.09 владелец заменил надписи официальными значками
+    («хочу чтобы были значки»), и текста внутри <a> больше нет. Проверка
+    не ослаблена, а усилена: теперь требуется имя, которое прочитает
+    скринридер, — aria-label ссылки либо alt картинки внутри неё."""
+    m = re.search(r'<a\b([^>]*?)href="%s"([^>]*)>(.*?)</a>' % re.escape(url), html, re.S)
+    if not m:
+        return None
+    attrs = m.group(1) + m.group(2)
+    inner = m.group(3)
+    cls = re.search(r'class="([^"]*)"', attrs)
+    aria = re.search(r'aria-label="([^"]*)"', attrs)
+    alt = re.search(r'<img[^>]*\balt="([^"]*)"', inner)
+    text = re.sub(r'<[^>]+>', '', inner).strip()
+    name = (aria.group(1) if aria else "") or (alt.group(1) if alt else "") or text
+    return {"class": cls.group(1) if cls else "", "name": name.strip(), "inner": inner}
 
 results = []
 
@@ -233,23 +261,21 @@ for loc, (entry_rel, story_rel, story_href, lang) in LOCALES.items():
     # словах «Google Play» ведёт на живую страницу магазина (exact-URL
     # PLAY_URL). Это НЕ .cta (I1 держит ровно три SaaS-входа); издатель
     # не называется. A5 сторожит, чтобы строка осталась короткой.
-    play_a = re.search(r'<a\b[^>]*\bhref="%s"[^>]*>Google Play</a>'
-                       % re.escape(PLAY_URL), entry_main)
-    check(f"A7[{loc}] Play-строка в <main>: <a href=PLAY_URL>Google Play</a> "
-          f"без класса cta",
-          bool(play_a)
-          and not re.search(r'class="[^"]*cta[^"]*"', play_a.group(0)),
-          "в <main> нет ссылки «Google Play» на PLAY_URL, или у неё .cta")
+    _a7 = link_to(entry_main, PLAY_URL)
+    check(f"A7[{loc}] Google Play в <main>: ссылка на PLAY_URL, доступное имя "
+          "называет Google Play, класс не .cta",
+          bool(_a7) and "Google Play" in _a7["name"] and "cta" not in _a7["class"],
+          "нет ссылки на PLAY_URL, её имя не называет Google Play, или у неё .cta"
+          + (f" — имя: {_a7['name']!r}, класс: {_a7['class']!r}" if _a7 else ""))
     # A8 (owner 09.09, iOS в App Store): та же тихая строка называет и
     # App Store — ссылка на словах «App Store» ведёт на страницу магазина
     # (exact-URL APPSTORE_URL), тоже НЕ .cta. Play-ссылка A7 остаётся.
-    appstore_a = re.search(r'<a\b[^>]*\bhref="%s"[^>]*>App Store</a>'
-                           % re.escape(APPSTORE_URL), entry_main)
-    check(f"A8[{loc}] App Store-строка в <main>: <a href=APPSTORE_URL>App Store</a> "
-          f"без класса cta",
-          bool(appstore_a)
-          and not re.search(r'class="[^"]*cta[^"]*"', appstore_a.group(0)),
-          "в <main> нет ссылки «App Store» на APPSTORE_URL, или у неё .cta")
+    _a8 = link_to(entry_main, APPSTORE_URL)
+    check(f"A8[{loc}] App Store в <main>: ссылка на APPSTORE_URL, доступное имя "
+          "называет App Store, класс не .cta",
+          bool(_a8) and "App Store" in _a8["name"] and "cta" not in _a8["class"],
+          "нет ссылки на APPSTORE_URL, её имя не называет App Store, или у неё .cta"
+          + (f" — имя: {_a8['name']!r}, класс: {_a8['class']!r}" if _a8 else ""))
 
     # ── Группа S: путешествие ──────────────────────────────────────
     check(f"S1[{loc}] story существует: {story_rel}", bool(story))
@@ -1379,6 +1405,60 @@ for page in REDIRECTS:
           "17433479" not in read(page))
 
 
+
+# ── Группа PR: строка присутствия на входных страницах (owner 10.09) ──────
+# «нужно показать что у приложения есть линкедин страница, и есть аппстор
+# приложение и гугл андройд плей маркет аккаунт». Раньше в этой строке
+# стояла фраза «Skipi Seafarer is available on the App Store and Google
+# Play» — теперь перечисление мест присутствия. Ссылки остаются .quiet:
+# инвариант I1 держит .cta ровно на трёх SaaS-входах.
+PRESENCE_PAGES = ("index.html", "en/index.html")
+
+for page in PRESENCE_PAGES:
+    html = read(page)
+    line = re.search(r'<p class="fork-lead presence">(.*?)</p>', html, re.S)
+    check(f"PR1 {page}: строка присутствия есть и стоит в <main>",
+          bool(line) and bool(line.group(1)) and line.group(1) in main_of(html),
+          "нет <p class=\"fork-lead presence\"> внутри <main>")
+    inner = line.group(1) if line else ""
+
+    for name, url in (("App Store", APPSTORE_URL), ("Google Play", PLAY_URL),
+                      ("LinkedIn", LINKEDIN_URL)):
+        a = link_to(inner, url)
+        check(f"PR2 {page}: «{name}» в строке присутствия ведёт на {url}, "
+              "имеет доступное имя и НЕ .cta (I1: .cta ровно на трёх SaaS-входах)",
+              bool(a) and name.lower() in a["name"].lower() and "cta" not in a["class"],
+              f"нет ссылки на {url}, её имя не называет «{name}», или у неё .cta"
+              + (f" — имя: {a['name']!r}" if a else ""))
+
+    check(f"PR3 {page}: старой фразы-обёртки больше нет "
+          "(owner просил показать места присутствия, а не предложение)",
+          "is available on the" not in html,
+          "в разметке осталась фраза «is available on the»")
+
+    check(f"PR4 {page}: третье место — LinkedIn — показано",
+          bool(LINKEDIN_URL) and f'href="{LINKEDIN_URL}"' in inner,
+          "адрес страницы LinkedIn ещё не получен от владельца"
+          if not LINKEDIN_URL else "ссылки на LinkedIn нет в строке присутствия")
+
+# RU и EN показывают ОДИН И ТОТ ЖЕ набор мест: расхождение = разный продукт
+# для разных языков.
+_sets = []
+for page in PRESENCE_PAGES:
+    line = re.search(r'<p class="fork-lead presence">(.*?)</p>', read(page), re.S)
+    _sets.append(frozenset(re.findall(r'href="([^"]+)"', line.group(1) if line else "")))
+check("PR5 RU и EN показывают одинаковый набор мест присутствия",
+      len(set(_sets)) == 1, f"наборы разошлись: {[sorted(x) for x in _sets]}")
+
+# Отрицательная половина: строка присутствия ровно одна на страницу —
+# дубль означал бы, что блок вставлен дважды.
+for page in PRESENCE_PAGES:
+    check(f"PR6 {page}: строка присутствия ровно одна",
+          read(page).count('class="fork-lead presence"') == 1)
+
+# Счёт снимается РОВНО здесь. Ошибка 10.09: подсчёт стоял на 400 строк выше,
+# и всё, что дописывали ниже, не попадало ни в счёт, ни в код возврата —
+# суита печатала «158/158 passed» при двух красных и выходила с нулём.
 passed = sum(1 for _, ok in results if ok)
 total = len(results)
 print(f"\n{passed}/{total} checks passed")
