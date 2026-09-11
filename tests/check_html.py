@@ -137,17 +137,30 @@ ALLOWED_HOSTS = {
 # play.google.com в ALLOWED_HOSTS НЕ добавляется — чужой app-id и любой
 # <script src> с этого хоста по-прежнему краснеют по I2.
 PLAY_URL = "https://play.google.com/store/apps/details?id=app.skipi.seafarer"
+# Публичная витрина разработчика: ведёт со входной страницы не на один
+# продукт, а на все приложения аккаунта. Google пока обслуживает рабочий
+# URL под прежним публичным slug Tymur Rudov, хотя карточка Seafarer уже
+# показывает издателя SKIPI LTD.
+PLAY_DEVELOPER_URL = "https://play.google.com/store/apps/developer?id=Tymur+Rudov"
 # Вторая точечная ссылка (owner 09.09, после FACT публикации 0.4.190 в
 # App Store, DECISIONS (432)): страница Skipi Seafarer в App Store без
 # кода страны. Хост apps.apple.com в ALLOWED_HOSTS НЕ добавляется — чужой
 # id и любой <script src> с этого хоста краснеют по I2.
 APPSTORE_URL = "https://apps.apple.com/app/skipi-seafarer/id6782521461"
+# Публичная витрина разработчика Apple с Skipi Seafarer и BNWAS.
+APPSTORE_DEVELOPER_URL = "https://apps.apple.com/us/developer/tymur-rudov/id1890889225"
 # Третья точечная ссылка (owner 10.09): страница компании в LinkedIn.
 # Адрес получен ОТ ВЛАДЕЛЬЦА дословно и проверен живым запросом (200).
 # Хост www.linkedin.com в ALLOWED_HOSTS НЕ добавляется — только этот URL:
 # чужая страница LinkedIn на витрине уводит клиентов не туда.
 LINKEDIN_URL = "https://www.linkedin.com/company/skipi-maritime"
-ALLOWED_LINKS = {PLAY_URL, APPSTORE_URL, LINKEDIN_URL}
+ALLOWED_LINKS = {
+    PLAY_URL,
+    PLAY_DEVELOPER_URL,
+    APPSTORE_URL,
+    APPSTORE_DEVELOPER_URL,
+    LINKEDIN_URL,
+}
 
 
 def link_to(html: str, url: str):
@@ -256,25 +269,30 @@ for loc, (entry_rel, story_rel, story_href, lang) in LOCALES.items():
           f"(факт {wc})", 0 < wc <= ENTRY_WORD_BUDGET)
     check(f"A6[{loc}] вход подключает journey.css",
           "/assets/journey.css" in entry)
-    # A7 (owner 05.09, сигнал легитимности Android): в <main> одна тихая
-    # строка «Skipi Seafarer for Android is on Google Play.» — ссылка на
-    # словах «Google Play» ведёт на живую страницу магазина (exact-URL
-    # PLAY_URL). Это НЕ .cta (I1 держит ровно три SaaS-входа); издатель
-    # не называется. A5 сторожит, чтобы строка осталась короткой.
-    _a7 = link_to(entry_main, PLAY_URL)
-    check(f"A7[{loc}] Google Play в <main>: ссылка на PLAY_URL, доступное имя "
-          "называет Google Play, класс не .cta",
-          bool(_a7) and "Google Play" in _a7["name"] and "cta" not in _a7["class"],
-          "нет ссылки на PLAY_URL, её имя не называет Google Play, или у неё .cta"
+    # A7 (owner 11.09): значок Google Play на входной странице ведёт на
+    # публичную витрину разработчика со всеми приложениями аккаунта, а не
+    # на карточку одного приложения. Это НЕ .cta (I1 держит ровно три
+    # SaaS-входа). Точечный exact-URL не расширяет allowlist всего хоста.
+    _a7 = link_to(entry_main, PLAY_DEVELOPER_URL)
+    check(f"A7[{loc}] Google Play в <main>: ссылка на PLAY_DEVELOPER_URL, доступное имя "
+          "называет все приложения в Google Play, класс не .cta",
+          bool(_a7) and "Google Play" in _a7["name"]
+          and "all apps" in _a7["name"].lower()
+          and "cta" not in _a7["class"]
+          and PLAY_URL not in entry_main,
+          "нет ссылки на PLAY_DEVELOPER_URL, её имя не называет Google Play, или у неё .cta"
           + (f" — имя: {_a7['name']!r}, класс: {_a7['class']!r}" if _a7 else ""))
-    # A8 (owner 09.09, iOS в App Store): та же тихая строка называет и
-    # App Store — ссылка на словах «App Store» ведёт на страницу магазина
-    # (exact-URL APPSTORE_URL), тоже НЕ .cta. Play-ссылка A7 остаётся.
-    _a8 = link_to(entry_main, APPSTORE_URL)
-    check(f"A8[{loc}] App Store в <main>: ссылка на APPSTORE_URL, доступное имя "
-          "называет App Store, класс не .cta",
-          bool(_a8) and "App Store" in _a8["name"] and "cta" not in _a8["class"],
-          "нет ссылки на APPSTORE_URL, её имя не называет App Store, или у неё .cta"
+    # A8 (owner 11.09): значок App Store ведёт на публичную витрину
+    # разработчика со всеми приложениями аккаунта, а не на карточку
+    # Seafarer. Play-ссылка A7 остаётся.
+    _a8 = link_to(entry_main, APPSTORE_DEVELOPER_URL)
+    check(f"A8[{loc}] App Store в <main>: ссылка на APPSTORE_DEVELOPER_URL, доступное имя "
+          "называет все приложения в App Store, класс не .cta",
+          bool(_a8) and "App Store" in _a8["name"]
+          and "all apps" in _a8["name"].lower()
+          and "cta" not in _a8["class"]
+          and APPSTORE_URL not in entry_main,
+          "нет ссылки на APPSTORE_DEVELOPER_URL, её имя не называет App Store, или у неё .cta"
           + (f" — имя: {_a8['name']!r}, класс: {_a8['class']!r}" if _a8 else ""))
 
     # ── Группа S: путешествие ──────────────────────────────────────
@@ -1408,10 +1426,10 @@ for page in REDIRECTS:
 
 # ── Группа PR: строка присутствия на входных страницах (owner 10.09) ──────
 # «нужно показать что у приложения есть линкедин страница, и есть аппстор
-# приложение и гугл андройд плей маркет аккаунт». Раньше в этой строке
-# стояла фраза «Skipi Seafarer is available on the App Store and Google
-# Play» — теперь перечисление мест присутствия. Ссылки остаются .quiet:
-# инвариант I1 держит .cta ровно на трёх SaaS-входах.
+# приложение и гугл андройд плей маркет аккаунт». С 11.09 обе магазинные
+# ссылки ведут на витрины разработчика со всеми приложениями аккаунта, а
+# не на одну карточку Seafarer. Ссылки остаются .quiet: инвариант I1
+# держит .cta ровно на трёх SaaS-входах.
 PRESENCE_PAGES = ("index.html", "en/index.html")
 
 for page in PRESENCE_PAGES:
@@ -1422,12 +1440,15 @@ for page in PRESENCE_PAGES:
           "нет <p class=\"fork-lead presence\"> внутри <main>")
     inner = line.group(1) if line else ""
 
-    for name, url in (("App Store", APPSTORE_URL), ("Google Play", PLAY_URL),
+    for name, url in (("App Store", APPSTORE_DEVELOPER_URL),
+                      ("Google Play", PLAY_DEVELOPER_URL),
                       ("LinkedIn", LINKEDIN_URL)):
         a = link_to(inner, url)
         check(f"PR2 {page}: «{name}» в строке присутствия ведёт на {url}, "
               "имеет доступное имя и НЕ .cta (I1: .cta ровно на трёх SaaS-входах)",
-              bool(a) and name.lower() in a["name"].lower() and "cta" not in a["class"],
+              bool(a) and name.lower() in a["name"].lower()
+              and (name == "LinkedIn" or "all apps" in a["name"].lower())
+              and "cta" not in a["class"],
               f"нет ссылки на {url}, её имя не называет «{name}», или у неё .cta"
               + (f" — имя: {a['name']!r}" if a else ""))
 
