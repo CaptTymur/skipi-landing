@@ -138,10 +138,10 @@ ALLOWED_HOSTS = {
 # <script src> с этого хоста по-прежнему краснеют по I2.
 PLAY_URL = "https://play.google.com/store/apps/details?id=app.skipi.seafarer"
 # Публичная витрина разработчика: ведёт со входной страницы не на один
-# продукт, а на все приложения аккаунта. Google пока обслуживает рабочий
-# URL под прежним публичным slug Tymur Rudov, хотя карточка Seafarer уже
-# показывает издателя SKIPI LTD.
-PLAY_DEVELOPER_URL = "https://play.google.com/store/apps/developer?id=Tymur+Rudov"
+# продукт, а на все приложения аккаунта. Google обслуживает рабочий URL
+# под текущим публичным именем SKIPI LTD. Старый slug Tymur Rudov
+# после завершения переименования возвращает 404.
+PLAY_DEVELOPER_URL = "https://play.google.com/store/apps/developer?id=SKIPI+LTD"
 # Вторая точечная ссылка (owner 09.09, после FACT публикации 0.4.190 в
 # App Store, DECISIONS (432)): страница Skipi Seafarer в App Store без
 # кода страны. Хост apps.apple.com в ALLOWED_HOSTS НЕ добавляется — чужой
