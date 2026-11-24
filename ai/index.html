@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Skipi for Claude and ChatGPT — connect your Skipi account to your AI assistant</title>
+    <meta name="description" content="Connect Skipi to Claude or ChatGPT: search Skipi vacancies and let your assistant read your seafarer profile, document expiry dates and sea service. Read-only, you can disconnect at any time.">
+    <meta name="author" content="Skipi">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Skipi for Claude and ChatGPT">
+    <meta property="og:description" content="Connect Skipi to your AI assistant: vacancies, your profile, document expiry dates and sea service. Read-only.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://skipi.app/ai/">
+    <meta property="og:site_name" content="Skipi">
+    <meta property="og:image" content="https://skipi.app/presentation/img/slide-1.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Skipi for Claude and ChatGPT">
+    <meta name="twitter:description" content="Connect Skipi to your AI assistant: vacancies, your profile, document expiry dates and sea service. Read-only.">
+    <meta name="twitter:image" content="https://skipi.app/presentation/img/slide-1.jpg">
+
+    <link rel="canonical" href="https://skipi.app/ai/">
+    <link rel="alternate" hreflang="en" href="https://skipi.app/ai/">
+    <link rel="alternate" hreflang="x-default" href="https://skipi.app/ai/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --ink:       #0a1f33;
+            --ink-soft:  #2a3f55;
+            --body:      #475569;
+            --muted:     #7f8da0;
+            --accent:    #007a86;
+            --accent-dk: #005e68;
+            --bg:        #ffffff;
+            --bg-soft:   #f6f8fa;
+            --bg-deep:   #edf1f5;
+            --border:    #e3e8ee;
+        }
+        html { scroll-behavior: smooth; color-scheme: light; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--body); background: var(--bg);
+            line-height: 1.6; font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { color: var(--accent-dk); }
+        .container { width: min(880px, 100% - 2.5rem); margin: 0 auto; }
+
+        header.site {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: saturate(160%) blur(8px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav { display: flex; align-items: center; justify-content: space-between; padding: 0.95rem 0; }
+        .brand { font-weight: 800; font-size: 1.25rem; color: var(--ink); letter-spacing: -0.01em; }
+        .brand .dot { color: var(--accent); }
+        .nav-cta { display: flex; align-items: center; gap: 0.75rem; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.6rem 1.1rem; border-radius: 6px;
+            font-weight: 600; font-size: 0.92rem;
+            transition: background 0.15s, color 0.15s;
+            border: 1px solid transparent; white-space: nowrap;
+            cursor: pointer; font-family: inherit;
+        }
+        .btn-primary { background: var(--ink); color: #fff; }
+        .btn-primary:hover { background: var(--accent); color: #fff; }
+        .btn-ghost { background: transparent; color: var(--ink); border-color: var(--border); }
+        .btn-ghost:hover { background: var(--bg-soft); color: var(--ink); }
+        .btn .arrow { transition: transform 0.15s; }
+        .btn:hover .arrow { transform: translateX(2px); }
+
+        section.hero { padding: 4.5rem 0 2.5rem; }
+        .hero .kicker {
+            display: inline-block; font-size: 0.82rem; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--accent); margin-bottom: 1rem;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 2.9rem); font-weight: 800;
+            color: var(--ink); letter-spacing: -0.02em; line-height: 1.1;
+            margin-bottom: 1.1rem;
+        }
+        .hero .thesis-line {
+            font-size: clamp(1.1rem, 2.4vw, 1.35rem); font-style: italic;
+            color: var(--ink-soft); max-width: 720px;
+        }
+
+        section.copy { padding: 1.4rem 0; }
+        .copy h2 {
+            font-size: 1.45rem; font-weight: 800; color: var(--ink);
+            letter-spacing: -0.01em; margin-bottom: 0.7rem;
+        }
+        .copy p { font-size: 1.02rem; color: var(--body); margin-bottom: 0.9rem; }
+        .copy p strong { color: var(--ink); }
+        .copy p:last-child { margin-bottom: 0; }
+
+        .divider { border: none; border-top: 1px solid var(--border); margin: 1.6rem 0; }
+
+        @media (max-width: 620px) {
+            .foot-inner { flex-direction: column; align-items: flex-start; }
+        }
+
+        footer.site { background: #061a2c; color: rgba(255,255,255,0.65); padding: 2.5rem 0 1.8rem; }
+        .foot-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        .foot-inner .brand { color: #fff; }
+        .foot-inner nav { display: flex; gap: 1.1rem; flex-wrap: wrap; }
+        .foot-inner a { color: rgba(255,255,255,0.65); }
+        .foot-inner a:hover { color: #fff; }
+        .foot-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.4rem; margin-top: 1.8rem; font-size: 0.82rem; color: rgba(255,255,255,0.45); text-align: center; }
+        .foot-legal { line-height: 1.6; }
+        .foot-bottom a { color: rgba(255,255,255,0.6); }
+        .foot-bottom a:hover { color: #fff; }
+        .foot-note { display: block; margin-top: 0.85rem; }
+        .copy ul, .copy ol { padding-left: 1.4rem; margin: 0.4rem 0 1rem; }
+        .copy li { margin-bottom: 0.35rem; }
+        .copy code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.9em; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; padding: 0.1rem 0.35rem; word-break: break-all; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://skipi.app/#organization",
+                "name": "Skipi",
+                "legalName": "SKIPI LTD",
+                "description": "The AI assistant seafarers live in — and the data layer maritime decisions depend on.",
+                "url": "https://skipi.app/",
+                "logo": "https://skipi.app/assets/app-icons/skipi-seafarer.png",
+                "email": "info@skipi.app",
+                "telephone": "+442034320682",
+                "identifier": {
+                    "@type": "PropertyValue",
+                    "name": "UK company number",
+                    "value": "17433479"
+                },
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Office 20748, 182-184 High Street North, East Ham",
+                    "addressLocality": "London",
+                    "postalCode": "E6 2JA",
+                    "addressCountry": "GB"
+                },
+                "founder": { "@id": "https://skipi.app/#founder" }
+            },
+            {
+                "@type": "Person",
+                "@id": "https://skipi.app/#founder",
+                "name": "Tymur Rudov",
+                "jobTitle": "Founder & Director",
+                "worksFor": { "@id": "https://skipi.app/#organization" }
+            },
+            {
+                "@type": "WebPage",
+                "url": "https://skipi.app/ai/",
+                "name": "Skipi for Claude and ChatGPT",
+                "description": "Connect Skipi to your AI assistant: vacancies, your profile, document expiry dates and sea service. Read-only.",
+                "about": { "@id": "https://skipi.app/#organization" }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+
+<header class="site">
+    <div class="container nav">
+        <a href="/" class="brand">Skipi<span class="dot">.</span></a>
+        <div class="nav-cta">
+            <a href="mailto:info@skipi.app" class="btn btn-ghost">Contact</a>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <span class="kicker">Skipi connector</span>
+        <h1>Skipi for Claude and ChatGPT</h1>
+        <p class="thesis-line">Connect your Skipi account to the AI assistant you already use. It can search Skipi vacancies and read your own seafarer data. Read-only.</p>
+    </div>
+</section>
+
+<section class="copy">
+    <div class="container">
+        <h2>What the connector does</h2>
+        <p>The Skipi connector is a remote MCP server at <strong>https://mcp.skipi.app/mcp</strong>. Once you connect it and sign in with your Skipi account, your assistant gets four read-only tools:</p>
+        <ul>
+            <li><strong>Search Skipi</strong> &mdash; find vacancies and other public records on the Skipi board.</li>
+            <li><strong>Fetch</strong> &mdash; open one record from the search results in full.</li>
+            <li><strong>My Skipi profile, documents and sea service</strong> &mdash; your rank, availability, nationality, visas, languages, preferred vessel types and expected salary; the list of your documents with validity dates and expiry status; your sea service history.</li>
+            <li><strong>Connection status</strong> &mdash; how the connector is connected.</li>
+        </ul>
+        <p>The connector cannot change anything in your account. It never returns document numbers, phone numbers, your address, next-of-kin details or the document files themselves.</p>
+
+        <hr class="divider">
+
+        <h2>What you need</h2>
+        <p>A Skipi account with the seafarer role (free &mdash; register at <a href="https://assistant.skipi.app/register">assistant.skipi.app</a> or in the Skipi Seafarer app) and an account with Claude or ChatGPT.</p>
+
+        <hr class="divider">
+
+        <h2>Connect in Claude</h2>
+        <ol>
+            <li>In Claude open <strong>Customize &rarr; Connectors</strong>, press <strong>+</strong> and choose <strong>Add custom connector</strong>.</li>
+            <li>Enter the address <strong>https://mcp.skipi.app/mcp</strong> and press <strong>Add</strong>, then <strong>Connect</strong>.</li>
+            <li>A Skipi page opens: sign in with your Skipi email and password and press <strong>Allow</strong>.</li>
+        </ol>
+
+        <h2>Connect in ChatGPT</h2>
+        <ol>
+            <li>In ChatGPT open the apps section and choose <strong>Add custom MCP server</strong>.</li>
+            <li>Enter the address <strong>https://mcp.skipi.app/mcp</strong>, authentication: <strong>OAuth</strong>.</li>
+            <li>Sign in with your Skipi email and password and press <strong>Allow</strong>.</li>
+        </ol>
+        <p>In Claude Code: <code>claude mcp add --transport http skipi https://mcp.skipi.app/mcp</code>, then <code>/mcp</code> and sign in.</p>
+
+        <hr class="divider">
+
+        <h2>Things to ask</h2>
+        <ul>
+            <li>&ldquo;Which of my documents expire in the next six months?&rdquo;</li>
+            <li>&ldquo;Find vacancies on Skipi that match my rank and vessel type.&rdquo;</li>
+            <li>&ldquo;Summarise my sea service for a cover letter.&rdquo;</li>
+        </ul>
+
+        <hr class="divider">
+
+        <h2>Your data and how to disconnect</h2>
+        <p>When you press Allow, the data listed above is sent to the assistant service you chose (Anthropic for Claude, OpenAI for ChatGPT) each time the assistant uses a Skipi tool, and is handled by that service under its own terms. Skipi sends nothing until you connect, and only for your own account.</p>
+        <p>To disconnect, open your Skipi account at <a href="https://assistant.skipi.app/app/account">assistant.skipi.app</a> &rarr; <strong>Linked devices</strong> and revoke the entry marked &ldquo;AI assistant (read-only)&rdquo;, or remove the connector in your assistant. Access stops immediately. A connection that is not used for 90 days expires by itself.</p>
+        <p>Details: <a href="/privacy.html">Privacy Policy</a>, section 11.</p>
+
+        <hr class="divider">
+
+        <h2>Help</h2>
+        <p>Write to <a href="mailto:info@skipi.app">info@skipi.app</a> &mdash; we answer within two business days. See also the <a href="/support/">support page</a>.</p>
+    </div>
+</section>
+
+<footer class="site">
+    <div class="container">
+        <div class="foot-inner">
+            <a href="/" class="brand">Skipi<span class="dot">.</span></a>
+            <nav aria-label="Footer">
+                <a href="/story/">What is Skipi</a>
+                <a href="/downloads">Downloads</a>
+            </nav>
+        </div>
+        <div class="foot-bottom">
+            <p class="foot-legal">
+                SKIPI LTD &middot; Registered in England and Wales &middot; Company No. 17433479<br>
+                Registered office: Office 20748, 182-184 High Street North, East Ham, London, United Kingdom, E6 2JA<br>
+                Tymur Rudov &mdash; Founder &amp; Director &middot; <a href="mailto:info@skipi.app">info@skipi.app</a> &middot; <a href="tel:+442034320682">+44 20 3432 0682</a>
+            </p>
+            <span class="foot-note">Skipi &mdash; the maritime AI assistant and the apps around it.</span>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

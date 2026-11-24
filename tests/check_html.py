@@ -729,11 +729,19 @@ check("PAY10 terms.html и privacy.html: приоритетные рынки б�
 # в terms, Paddle в privacy §8, строка рынков в обоих). Протухшая
 # строка «Last updated» на политике — заметный дефект для платёжного
 # ревью, поэтому дата закреплена тестом, а не памятью.
-LAST_UPDATED = "Last updated: September 5, 2026"
-stale = [f for f in ("terms.html", "privacy.html")
-         if LAST_UPDATED not in read(f)]
+# 24.11.2026: в privacy §8/§11 добавлена передача данных ИИ-ассистенту,
+# которого подключает сам пользователь (страница /ai/) — дата политики
+# сдвинута; terms не менялись.
+LAST_UPDATED = {"terms.html": "Last updated: September 5, 2026",
+                "privacy.html": "Last updated: November 24, 2026"}
+stale = [f for f, line in LAST_UPDATED.items() if line not in read(f)]
 check(f"PAY11 terms.html и privacy.html: строка даты обновлена "
       f"(«{LAST_UPDATED}»)", not stale, f"протухло: {stale}")
+check("AI1 /ai/: страница коннектора называет адрес, вход и отключение, "
+      "а политика ссылается на неё",
+      all(s in read("ai/index.html") for s in (
+          "https://mcp.skipi.app/mcp", "Linked devices", "/privacy.html"))
+      and "/ai/" in read("privacy.html") and "/ai/" in read("sitemap.xml"))
 
 # Витрина называла Skipi Assistant просто «free» и не упоминала PRO,
 # тогда как PRO продавался тем же PayPal-флоу (флот: paid_price_usd=5
