@@ -80,9 +80,9 @@ START_LABEL = {
 # равноправные роль-кнопки прямо в hero (перенос секции .paths,
 # не дубль). hi/id/tl — не участвуют.
 FORK_LOCALES = ("root", "en")
-FORK_HREFS = (ASSISTANT,
-              f"{ASSISTANT}/app/crewing",
-              f"{ASSISTANT}/app/broker")
+# owner 28.11.2026 (дело № 298): роль-кнопки ведут не в SaaS, а на страницы-
+# презентации по типу профиля; в их конце — создать профиль или войти.
+FORK_HREFS = ("/seafarer/", "/crewing/", "/chartering/")
 FORK_LEAD = {
     "root": "Start using Skipi as",
     "en":   "Start using Skipi as",
@@ -90,12 +90,12 @@ FORK_LEAD = {
 # лейблы ролей проверяются как точный текст ссылки (">…<"), иначе
 # «Seafarer» ложно совпадает с kicker «United Seafarers»
 FORK_ROLES = {
-    "root": ("Seafarer", "Crewing manager", "Broker"),
-    "en":   ("Seafarer", "Crewing manager", "Broker"),
+    "root": ("Seafarer", "Crewing", "Chartering"),
+    "en":   ("Seafarer", "Crewing", "Chartering"),
 }
 # I1 (owner-решение 14.08): допустимые href для .cta — РОВНО эти три
 # SaaS-входа, не «любая ссылка».
-CTA_ALLOWED = set(FORK_HREFS)
+CTA_ALLOWED = set(FORK_HREFS) | {ASSISTANT}
 
 WHATIS_LABEL = {
     "root": "What is Skipi",
@@ -256,13 +256,13 @@ for loc, (entry_rel, story_rel, story_href, lang) in LOCALES.items():
     # ссылки), на остальных — прежняя одиночная CTA (№135, owner 14.08)
     if loc in FORK_LOCALES:
         act1_label = FORK_ROLES[loc][0]
-        act1_ok = (f'href="{ASSISTANT}"' in entry_main
+        act1_ok = (f'href="{FORK_HREFS[0]}"' in entry_main
                    and f">{act1_label}<" in entry_main)
     else:
         act1_label = START_LABEL[loc]
         act1_ok = (f'href="{ASSISTANT}"' in entry_main
                    and act1_label in entry_main)
-    check(f"A3[{loc}] действие 1: «{act1_label}» → assistant", act1_ok)
+    check(f"A3[{loc}] действие 1: «{act1_label}» → вход моряка", act1_ok)
     check(f"A4[{loc}] действие 2: «{WHATIS_LABEL[loc]}» → {story_href}",
           f'href="{story_href}"' in entry_main
           and WHATIS_LABEL[loc] in entry_main)
@@ -337,8 +337,8 @@ for loc, (entry_rel, story_rel, story_href, lang) in LOCALES.items():
                  for m in [re.search(r'href="([^"]+)"', c)] if m]
         cta_ok = (bool(ctas) and len(hrefs) == len(ctas)
                   and all(h in CTA_ALLOWED for h in hrefs))
-        check(f"I1[{loc}] {rel}: каждый .cta → один из трёх SaaS-входов "
-              f"(assistant / app/crewing / app/broker; {len(ctas)} шт.)",
+        check(f"I1[{loc}] {rel}: каждый .cta → страница профиля или "
+              f"assistant ({len(ctas)} шт.)",
               cta_ok)
         bad = external_hosts(html) - ALLOWED_HOSTS
         check(f"I2[{loc}] {rel}: без новых внешних CDN",
@@ -358,8 +358,7 @@ for loc in FORK_LOCALES:
           and FORK_LEAD[loc] in hero
           and all(f">{r}<" in hero for r in FORK_ROLES[loc]))
     check(f"P1[{loc}] {page}: hero-развилка — лид «{FORK_LEAD[loc]}» "
-          f"+ 3 роли → 3 SaaS-входа "
-          f"(assistant / app/crewing / app/broker)", ok)
+          f"+ 3 типа профиля → 3 страницы-презентации", ok)
     check(f"P2[{loc}] {page}: отдельной секции .paths ниже hero нет "
           f"(перенос, не дубль)", bool(html) and 'class="paths"' not in html)
 
@@ -1352,6 +1351,15 @@ for page, target in ENTRY_REDIRECTS.items():
     check(f"R3 {page}: meta-refresh + видимая ссылка → {target}, noindex",
           bool(html) and f'content="0; url={target}"' in html
           and f'href="{target}"' in html and 'content="noindex"' in html)
+# R5 (owner 28.11.2026, дело № 298): страница-презентация типа профиля
+# кончается «создать профиль» (регистрация с этим типом) и «войти».
+for slug in ("seafarer", "crewing", "chartering"):
+    html = read(f"{slug}/index.html")
+    finale = html.split('id="start"', 1)[1] if 'id="start"' in html else ""
+    check(f"R5 {slug}/index.html: в конце — создать профиль этого типа и войти",
+          f'href="https://account.skipi.app/register?profile={slug}"' in finale
+          and 'href="https://account.skipi.app/"' in finale
+          and html.count('class="scene"') == 5)
 check("R4 главная: кнопка входа ведёт на account.skipi.app",
       '<a class="ghost" href="https://account.skipi.app/">Log in</a>'
       in read("index.html"))
