@@ -112,11 +112,12 @@ IDENTITY = {
              "collective experience of seafarers"),
 }
 
-APPS = ("Seafarer", "Crewing", "Broker")
+# owner 28.11.2026: «брокер» на витрине заменён на chartering
+APPS = ("Seafarer", "Crewing", "Chartering")
 
 CONTOURS = {
-    "root": ("seafarer", "crewing", "broker"),
-    "en":   ("seafarer", "crewing", "broker"),
+    "root": ("seafarer", "crewing", "chartering"),
+    "en":   ("seafarer", "crewing", "chartering"),
 }
 
 SCENES = ("prologue", "assistant", "apps", "contours", "start")
@@ -311,7 +312,7 @@ for loc, (entry_rel, story_rel, story_href, lang) in LOCALES.items():
           bool(asec) and all(s in asec for s in IDENTITY[loc]))
 
     psec = section_of(story, "apps")
-    check(f"S4[{loc}] глава Приложения: Seafarer/Crewing/Broker "
+    check(f"S4[{loc}] глава Приложения: Seafarer/Crewing/Chartering "
           f"+ /downloads",
           bool(psec) and all(a in psec for a in APPS)
           and 'href="/downloads' in psec)
