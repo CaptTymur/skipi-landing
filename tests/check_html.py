@@ -128,6 +128,8 @@ SCENE_WORD_BUDGET = 60   # каждая сцена story
 # разрешённые внешние хосты (href/src). Новых CDN не появляется.
 ALLOWED_HOSTS = {
     "assistant.skipi.app",
+    # вход в Skipi веб и кабинет аккаунта (owner 27–28.11.2026, канон п.13)
+    "account.skipi.app",
     "skipi.app",
     "fonts.googleapis.com",
     "fonts.gstatic.com",
@@ -1339,7 +1341,22 @@ check(f"G5 ни один html сайта не называет страны {COU
 # их нет у части легитимных страниц.
 # G6b — юрблок: цикл LTD1 ниже обходит CONTENT_PAGES сверх именованного
 # LTD_PAGES (отдельной строки нет намеренно — она дублировала бы LTD1).
-NON_CONTENT = ("download.html", "google0dd040fd25f43a16.html")
+# ENTRY_REDIRECTS (owner 28.11.2026): короткие адреса входа skipi.app/login и
+# skipi.app/account — заглушки, ведущие на account.skipi.app.
+ENTRY_REDIRECTS = {
+    "login/index.html": "https://account.skipi.app/",
+    "account/index.html": "https://account.skipi.app/app/account",
+}
+for page, target in ENTRY_REDIRECTS.items():
+    html = read(page)
+    check(f"R3 {page}: meta-refresh + видимая ссылка → {target}, noindex",
+          bool(html) and f'content="0; url={target}"' in html
+          and f'href="{target}"' in html and 'content="noindex"' in html)
+check("R4 главная: кнопка входа ведёт на account.skipi.app",
+      '<a class="ghost" href="https://account.skipi.app/">Log in</a>'
+      in read("index.html"))
+NON_CONTENT = ("download.html", "google0dd040fd25f43a16.html",
+               *ENTRY_REDIRECTS)
 CONTENT_PAGES = [f for f in HTML_FILES
                  if f not in REDIRECTS and f not in NON_CONTENT]
 SITEMAP_EXEMPT = ("invest/index.html",)   # /invest/ — намеренно вне sitemap
