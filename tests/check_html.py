@@ -1359,7 +1359,8 @@ for slug in ("seafarer", "crewing", "chartering"):
     finale = html.split('id="start"', 1)[1] if 'id="start"' in html else ""
     check(f"R5 {slug}/index.html: в конце — создать профиль этого типа и войти",
           f'href="https://account.skipi.app/register?profile={slug}"' in finale
-          and 'href="https://account.skipi.app/"' in finale
+          and f'href="https://account.skipi.app/login?profile={slug}"' in finale
+          and html.count(f'href="https://account.skipi.app/login?profile={slug}"') == 2
           and html.count('class="scene"') == 5)
 check("R4 главная: кнопка входа ведёт на account.skipi.app",
       '<a class="ghost" href="https://account.skipi.app/">Log in</a>'
