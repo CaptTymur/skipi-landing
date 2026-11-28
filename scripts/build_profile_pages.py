@@ -73,6 +73,8 @@ LEGAL = '''<footer class="legal-foot">
 def page(slug, p):
     url = f"https://skipi.app/{slug}/"
     register = f"{ACCOUNT}/register?profile={slug}"
+    # вход с указанием типа: вошедшему с другим типом профиля сайт объяснит это, а не откроет чужой профиль
+    login = f"{ACCOUNT}/login?profile={slug}"
     ids = [s[0] for s in p["scenes"]] + ["start"]
     scenes = []
     for n, (sid, name, lines) in enumerate(p["scenes"]):
@@ -114,7 +116,7 @@ def page(slug, p):
 
 <header class="voyage-bar">
     <a class="brand" href="/">Skipi<span class="dot">.</span></a>
-    <a class="cta cta-bar" href="{ACCOUNT}/">Log in <span class="arr">→</span></a>
+    <a class="cta cta-bar" href="{login}">Log in <span class="arr">→</span></a>
 </header>
 
 <main>
@@ -133,7 +135,7 @@ def page(slug, p):
             <h2 class="reveal">{p["finale"][0]}</h2>
             <p class="line reveal">{p["finale"][1]}</p>
             <a class="cta cta-big reveal" href="{register}">Create a profile <span class="arr">→</span></a>
-            <p class="reveal"><a class="quiet" href="{ACCOUNT}/">I already have an account — log in</a></p>
+            <p class="reveal"><a class="quiet" href="{login}">I already have an account — log in</a></p>
             <p class="reveal"><a class="quiet" href="/">Back home</a></p>
         </div>
     </section>
